@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Ticket\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -57,17 +57,101 @@ class Ticket extends Model
     /**
      * @var array
      */
-    protected $fillable = [
-        'user_id', 'dept_id', 'team_id', 
-        'priority_id', 'sla', 'help_topic_id', 
-        'status', 'assigned_to', 'source', 'ticket_number', 
-        'rating', 'ratingreply', 'flags', 'ip_address', 
-        'lock_by', 'lock_at', 'isoverdue', 'reopened', 'isanswered', 
-        'html', 'is_deleted', 'closed', 'is_transferred', 
-        'transferred_at', 'reopened_at', 'duedate', 'closed_at', 
-        'last_message_at', 'last_response_at', 'approval', 'follow_up', 
-        'created_at', 'updated_at'
-    ];
+    protected $fillable = ['user_id', 'dept_id', 'team_id', 'priority_id', 'sla', 'help_topic_id', 'status', 'assigned_to', 'source', 'ticket_number', 'rating', 'ratingreply', 'flags', 'ip_address', 'lock_by', 'lock_at', 'isoverdue', 'reopened', 'isanswered', 'html', 'is_deleted', 'closed', 'is_transferred', 'transferred_at', 'reopened_at', 'duedate', 'closed_at', 'last_message_at', 'last_response_at', 'approval', 'follow_up', 'created_at', 'updated_at'];
 
- 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ticketCollaborators()
+    {
+        return $this->hasMany('App\Models\TicketCollaborator');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ticketFormDatas()
+    {
+        return $this->hasMany('App\Models\TicketFormData');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ticketThreads()
+    {
+        return $this->hasMany('App\Models\TicketThread');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'assigned_to');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function ticketPriority()
+    {
+        return $this->belongsTo('App\Models\TicketPriority', 'priority_id', 'priority_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function helpTopic()
+    {
+        return $this->belongsTo('App\Models\HelpTopic');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function ticketSource()
+    {
+        return $this->belongsTo('App\Models\TicketSource', 'source');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function team()
+    {
+        return $this->belongsTo('App\Models\Team');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function slaPlan()
+    {
+        return $this->belongsTo('App\Models\SlaPlan', 'sla');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function ticketStatus()
+    {
+        return $this->belongsTo('App\Models\TicketStatus', 'status');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function department()
+    {
+        return $this->belongsTo('App\Models\Department', 'dept_id');
+    }
 }

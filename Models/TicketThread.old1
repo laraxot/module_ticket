@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Ticket\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,8 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property TicketSource $ticketSource
  * @property User $user
  */
-class TicketThread extends Model
-{
+class TicketThread extends Model{
     /**
      * @var array
      */
