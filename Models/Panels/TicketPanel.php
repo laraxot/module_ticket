@@ -4,6 +4,7 @@ namespace Modules\Ticket\Models\Panels;
 
 use Illuminate\Http\Request;
 use Modules\Xot\Contracts\RowsContract;
+use Illuminate\Support\Facades\Auth;
 //--- Services --
 
 use Modules\Xot\Models\Panels\XotBasePanel;
@@ -81,8 +82,7 @@ class TicketPanel extends XotBasePanel {
      */
     public static function indexQuery(array $data, $query)
     {
-        //return $query->where('user_id', $request->user()->id);
-        return $query;
+        return $query->where('user_id', Auth::id());
     }
 
 

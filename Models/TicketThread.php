@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
+namespace Modules\Ticket\Models;
 
 /**
  * @property integer $id
@@ -24,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property TicketSource $ticketSource
  * @property User $user
  */
-class TicketThread extends Model
+class TicketThread extends BaseModelLang
 {
     /**
      * @var array
@@ -36,7 +34,7 @@ class TicketThread extends Model
      */
     public function ticketAttachments()
     {
-        return $this->hasMany('App\Models\TicketAttachment', 'thread_id');
+        return $this->hasMany(TicketAttachment::class, 'thread_id');
     }
 
     /**
@@ -44,7 +42,7 @@ class TicketThread extends Model
      */
     public function ticket()
     {
-        return $this->belongsTo('App\Models\Ticket');
+        return $this->belongsTo(Ticket::class);
     }
 
     /**
@@ -52,7 +50,7 @@ class TicketThread extends Model
      */
     public function ticketSource()
     {
-        return $this->belongsTo('App\Models\TicketSource', 'source');
+        return $this->belongsTo(TicketSource::class, 'source');
     }
 
     /**
@@ -60,6 +58,6 @@ class TicketThread extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 }

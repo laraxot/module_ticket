@@ -1,8 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Ticket\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Exception;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\LU\Models\PermUser;
+use Modules\LU\Models\User;
 
 /**
  * @property integer $id
@@ -52,8 +57,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property TicketStatus $ticketStatus
  * @property Department $department
  */
-class Ticket extends Model
+class Ticket extends BaseModel
 {
+
+    
     /**
      * @var array
      */
@@ -64,7 +71,7 @@ class Ticket extends Model
      */
     public function ticketCollaborators()
     {
-        return $this->hasMany('App\Models\TicketCollaborator');
+        return $this->hasMany(TicketCollaborator::class);
     }
 
     /**
@@ -72,7 +79,7 @@ class Ticket extends Model
      */
     public function ticketFormDatas()
     {
-        return $this->hasMany('App\Models\TicketFormData');
+        return $this->hasMany(TicketFormData::class);
     }
 
     /**
@@ -80,23 +87,23 @@ class Ticket extends Model
      */
     public function ticketThreads()
     {
-        return $this->hasMany('App\Models\TicketThread');
+        return $this->hasMany(TicketThread::class);
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    /**public function user()
     {
-        return $this->belongsTo('App\Models\User', 'assigned_to');
-    }
+        return $this->belongsTo(User::class, 'assigned_to');
+    }/
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function ticketPriority()
     {
-        return $this->belongsTo('App\Models\TicketPriority', 'priority_id', 'priority_id');
+        return $this->belongsTo(TicketPriority::class, 'priority_id', 'priority_id');
     }
 
     /**
@@ -104,23 +111,23 @@ class Ticket extends Model
      */
     public function helpTopic()
     {
-        return $this->belongsTo('App\Models\HelpTopic');
+        return $this->belongsTo(HelpTopic::class);
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    /*public function user()
     {
-        return $this->belongsTo('App\Models\User');
-    }
+        return $this->belongsTo(User::class);
+    }*/
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function ticketSource()
     {
-        return $this->belongsTo('App\Models\TicketSource', 'source');
+        return $this->belongsTo(TicketSource::class, 'source');
     }
 
     /**
@@ -128,7 +135,7 @@ class Ticket extends Model
      */
     public function team()
     {
-        return $this->belongsTo('App\Models\Team');
+        return $this->belongsTo(Team::class);
     }
 
     /**
@@ -136,7 +143,7 @@ class Ticket extends Model
      */
     public function slaPlan()
     {
-        return $this->belongsTo('App\Models\SlaPlan', 'sla');
+        return $this->belongsTo(SlaPlan::class, 'sla');
     }
 
     /**
@@ -144,7 +151,7 @@ class Ticket extends Model
      */
     public function ticketStatus()
     {
-        return $this->belongsTo('App\Models\TicketStatus', 'status');
+        return $this->belongsTo(TicketStatus::class, 'status');
     }
 
     /**
@@ -152,6 +159,26 @@ class Ticket extends Model
      */
     public function department()
     {
-        return $this->belongsTo('App\Models\Department', 'dept_id');
+        return $this->belongsTo(Department::class, 'dept_id');
     }
+
+     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    /*protected function user_id(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Auth::id(),
+            set: fn ($value) => Auth::id(),
+        );
+    }*/
+    
 }
