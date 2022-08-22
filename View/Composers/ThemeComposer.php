@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\LU\View\Composers;
+namespace Modules\Ticket\View\Composers;
 
 use Modules\LU\Models\User;
 use Modules\Mediamonitor\Models\Press;
