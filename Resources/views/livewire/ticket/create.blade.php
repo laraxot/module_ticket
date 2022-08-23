@@ -46,7 +46,7 @@
             
                     <h2 class="section-title h4 clearfix mb-0">
 
-                        <i class="line"></i>{!! Lang::get('lang.submit_a_ticket') !!}
+                        <i class="line"></i>{!! Lang::get('ticket::txt.submit_a_ticket') !!}
                     </h2>
 
                     <div class="row mt-4">
@@ -183,50 +183,5 @@
             </div>
         </article>
     </div>
-<!--
-|====================================================
-| SELECTED FORM STORED IN SCRIPT
-|====================================================
--->
-<script type="text/javascript">
-$(document).ready(function(){
-   var helpTopic = $("#selectid").val();
-   send(helpTopic);
-   $("#selectid").on("change",function(){
-       helpTopic = $("#selectid").val();
-       send(helpTopic);
-   });
-   function send(helpTopic){
-       $.ajax({
-           url:"{{url('/get-helptopic-form')}}",
-           data:{'helptopic':helpTopic},
-           type:"GET",
-           dataType:"html",
-           success:function(response){
-               $("#response").html(response);
-           },
-           error:function(response){
-              $("#response").html(response); 
-           }
-       });
-   }
-});
-
-$(function() {
-//Add text editor
-    $("textarea").summernote({
-        height: 300,
-        tabsize: 2,
-        toolbar: [
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['font', ['strikethrough', 'superscript', 'subscript']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']]
-      ]
-      });
-});
-</script>
 
 </div>
