@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  |============================================================================
  |  Faveo Spanish Translation
@@ -15,7 +17,6 @@
  */
 
 return [
-
     /*
       |--------------------------------------------------------------------------
       | Pagination Language Lines
@@ -28,5 +29,5 @@ return [
      */
 
     'previous' => '&laquo; Anterior',
-    'next'     => 'Siguiente &raquo;',
+    'next' => 'Siguiente &raquo;',
 ];

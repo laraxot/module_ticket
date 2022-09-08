@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'success' => 'Успех',
-    'failed'  => 'Ошибка',
-    'alert'   => 'Тревога',
+    'failed' => 'Ошибка',
+    'alert' => 'Тревога',
 ];

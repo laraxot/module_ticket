@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
   |--------------------------------------
   |   中文语言包
@@ -6,7 +8,6 @@
  */
 
 return [
-
     /*
       |--------------------------------------------------------------------------
       | Pagination Language Lines
@@ -19,5 +20,5 @@ return [
      */
 
     'previous' => '&laquo; Previous',
-    'next'     => 'Next &raquo;',
+    'next' => 'Next &raquo;',
 ];

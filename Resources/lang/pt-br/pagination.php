@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  |-------------------------------------------------------------------------------------
  |      Brazilian Portuguese translation [for version 1.10.6]
@@ -14,7 +16,6 @@
  |      Added on    :
  */
 return [
-
     /*
       |--------------------------------------------------------------------------
       | Pagination Language Lines
@@ -27,5 +28,5 @@ return [
      */
 
     'previous' => 'Anterior',
-    'next'     => 'Próximo',
+    'next' => 'Próximo',
 ];

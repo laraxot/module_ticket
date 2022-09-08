@@ -1,29 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Models;
 
 /**
- * @property integer $id
- * @property integer $ticket_id
- * @property integer $user_id
- * @property integer $source
- * @property string $poster
- * @property integer $reply_rating
- * @property integer $rating_count
- * @property boolean $is_internal
- * @property string $title
- * @property string $body
- * @property string $format
- * @property string $ip_address
- * @property string $created_at
- * @property string $updated_at
+ * @property int                $id
+ * @property int                $ticket_id
+ * @property int                $user_id
+ * @property int                $source
+ * @property string             $poster
+ * @property int                $reply_rating
+ * @property int                $rating_count
+ * @property bool               $is_internal
+ * @property string             $title
+ * @property string             $body
+ * @property string             $format
+ * @property string             $ip_address
+ * @property string             $created_at
+ * @property string             $updated_at
  * @property TicketAttachment[] $ticketAttachments
- * @property Ticket $ticket
- * @property TicketSource $ticketSource
- * @property User $user
+ * @property Ticket             $ticket
+ * @property TicketSource       $ticketSource
+ * @property User               $user
  */
-class TicketThread extends BaseModelLang
-{
+class TicketThread extends BaseModelLang {
     /**
      * @var array
      */
@@ -32,32 +33,28 @@ class TicketThread extends BaseModelLang
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function ticketAttachments()
-    {
+    public function ticketAttachments() {
         return $this->hasMany(TicketAttachment::class, 'thread_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function ticket()
-    {
+    public function ticket() {
         return $this->belongsTo(Ticket::class);
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function ticketSource()
-    {
+    public function ticketSource() {
         return $this->belongsTo(TicketSource::class, 'source');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
-    {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 }

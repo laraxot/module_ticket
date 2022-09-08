@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  |-------------------------------------------------------------------------------------
  |      Brazilian Portuguese translation [for version 1.10.6]
@@ -15,7 +17,6 @@
  */
 
 return [
-
     /*
       |--------------------------------------------------------------------------
       | Password Reminder Language Lines
@@ -28,8 +29,8 @@ return [
      */
 
     'password' => 'As senhas devem ter pelo menos seis caracteres e serem idênticas.',
-    'user'     => 'Nenhum usuário foi localizado com esse endereço de e-mail.',
-    'token'    => 'Chave de redefinição de senha é inválida.',
-    'sent'     => 'O link para redefinição de senha será enviado por e-mail!',
-    'reset'    => 'Sua senha foi redefinida!',
+    'user' => 'Nenhum usuário foi localizado com esse endereço de e-mail.',
+    'token' => 'Chave de redefinição de senha é inválida.',
+    'sent' => 'O link para redefinição de senha será enviado por e-mail!',
+    'reset' => 'Sua senha foi redefinida!',
 ];

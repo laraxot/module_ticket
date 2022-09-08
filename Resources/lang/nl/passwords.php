@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  |-------------------------------------------------------------------------------------
  |      Dutch translation [for version 1.0.8.0]
@@ -14,7 +16,6 @@
  |      Added on    :
  */
 return [
-
     /*
       |--------------------------------------------------------------------------
       | Password Reminder Language Lines
@@ -27,8 +28,8 @@ return [
      */
 
     'password' => 'Wachtwoorden moeten minimaal 6 karakters hebben en overeenkomen met de bevestiging.',
-    'user'     => 'We kunnen geen gebruiker vinden met dat e-mailadres.',
-    'token'    => 'Deze wachtwoord herstel token is ongeldig.',
-    'sent'     => 'We hebben een link naar je toegestuurd waarmee je je wachtwoord kunt resetten!',
-    'reset'    => 'Je wachtwoord is gereset!',
+    'user' => 'We kunnen geen gebruiker vinden met dat e-mailadres.',
+    'token' => 'Deze wachtwoord herstel token is ongeldig.',
+    'sent' => 'We hebben een link naar je toegestuurd waarmee je je wachtwoord kunt resetten!',
+    'reset' => 'Je wachtwoord is gereset!',
 ];

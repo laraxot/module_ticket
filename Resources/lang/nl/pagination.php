@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  |-------------------------------------------------------------------------------------
  |      Dutch translation [for version 1.0.8.0]
@@ -14,7 +16,6 @@
  |      Added on    :
  */
 return [
-
     /*
       |--------------------------------------------------------------------------
       | Pagination Language Lines
@@ -27,5 +28,5 @@ return [
      */
 
     'previous' => '&laquo; Vorige',
-    'next'     => 'Volgende &raquo;',
+    'next' => 'Volgende &raquo;',
 ];

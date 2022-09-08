@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Pagination Language Lines
@@ -13,14 +14,13 @@ return [
     |
     */
 
-    'filename'     => 'ISO CODE',
-    'language'     => 'Язык',
-    'Action'       => 'Действие',
-    'status'       => 'stature',
-    'not-active'   => 'Не Активный',
-    'active'       => 'Активный',
-    'hello'        => 'Привет',
-    'enable'       => 'Включен',
-    'disable'      => 'Выключен',
-
+    'filename' => 'ISO CODE',
+    'language' => 'Язык',
+    'Action' => 'Действие',
+    'status' => 'stature',
+    'not-active' => 'Не Активный',
+    'active' => 'Активный',
+    'hello' => 'Привет',
+    'enable' => 'Включен',
+    'disable' => 'Выключен',
 ];
