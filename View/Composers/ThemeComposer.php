@@ -31,23 +31,23 @@ class ThemeComposer {
         $str = '[
         {
           "name": "Indirizzo",
-          "description": "Via Solferino - 50100 Firenze (FI)"
+          "txt": "Via Solferino - 50100 Firenze (FI)"
         },
         {
           "name": "Tipo di disservizio",
-          "description": "Danneggiamento proprietà pubblica"
+          "txt": "Danneggiamento proprietà pubblica"
         },
         {
           "name": "Titolo",
-          "description": "Panchina danneggiata"
+          "txt": "Panchina danneggiata"
         },
         {
           "name": "Dettagli",
-          "description": "La seduta della panchina risulta inutilizzabile e pericolosa dato che ci sono molte schegge e parti appuntite"
+          "txt": "La seduta della panchina risulta inutilizzabile e pericolosa dato che ci sono molte schegge e parti appuntite"
         },
         {
           "name": "Immagini",
-          "description": "6yhakandsahm413d8da.jpg"
+          "txt": "6yhakandsahm413d8da.jpg"
         }
       ]';
 
@@ -83,6 +83,27 @@ class ThemeComposer {
         return collect([]);
     }
 
+    public function getDisservizioStep1(){
+      $str = '[
+        {
+          "title": "Autorizzazioni e condizioni",
+          "active": true,
+          "completed": false
+        },
+        {
+          "title": "Dati di segnalazione",
+          "active": false,
+          "completed": false
+        },
+        {
+          "title": "Riepilogo",
+          "active": false,
+          "completed": false
+        }
+      ]';
+      return collect(json_decode($str));
+    }
+
     public function getDisservizioStep2() {
         $str = '[
         {
@@ -104,6 +125,29 @@ class ThemeComposer {
 
         return collect(json_decode($str));
     }
+
+    public function getDisservizioStep3(){
+      $str = '[
+        {
+          "title": "Autorizzazioni e condizioni",
+          "active": false,
+          "completed": true
+        },
+        {
+          "title": "Dati di segnalazione",
+          "active": false,
+          "completed": true
+        },
+        {
+          "title": "Riepilogo",
+          "active": true,
+          "completed": false
+        }
+      ]';
+      return collect(json_decode($str));
+    }
+
+
 
     public function getDisservizioDatiSpecifici() {
         $str = '[
@@ -139,4 +183,50 @@ class ThemeComposer {
 
         return collect(json_decode($str));
     }
+
+
+
+    public function segnalazioniDisservizio1(){
+      $str = '[
+      {
+        "item": "A chi è rivolto",
+        "anchor": "who-needs"
+      },
+      {
+        "item": "Descrizione",
+        "anchor": "description"
+      },
+      {
+        "item": "Come fare",
+        "anchor": "how-to"
+      },
+      {
+        "item": "Cosa serve",
+        "anchor": "needed"
+      },
+      {
+        "item": "Cosa si ottiene",
+        "anchor": "obtain"
+      },
+      {
+        "item": "Costi",
+        "anchor": "costs"
+      },
+      {
+        "item": "Accedi al servizio",
+        "anchor": "service-access"
+      },
+      {
+        "item": "Condizioni di servizio",
+        "anchor": "conditions"
+      },
+      {
+        "item": "Contatti",
+        "anchor": "contacts"
+      }
+    ]';
+
+    return collect(json_decode($str));
+  }
+
 }
