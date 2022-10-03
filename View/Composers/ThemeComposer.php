@@ -123,4 +123,20 @@ class ThemeComposer {
 
         return collect(json_decode($str));
     }
+
+    public function getLinksBreadcrumbs() {
+        $str = '[
+          {
+            "title": "Home"
+          },
+          {
+            "title": "Servizi"
+          },
+          {
+            "title": "Segnalazione disservizio"
+          }
+        ]';
+
+        return collect(json_decode($str));
+    }
 }
