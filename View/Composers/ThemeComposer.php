@@ -53,4 +53,74 @@ class ThemeComposer {
 
         return collect(json_decode($str));
     }
+
+    public function getDisservizioInfoAuthor() {
+        $str = '[
+        {
+          "name": "Codice Fiscale",
+          "description": "GLABNC72H25H501Y"
+        }]';
+
+        return collect(json_decode($str));
+    }
+
+    public function getDisservizioInfoContacts() {
+        $str = '[
+        {
+          "name": "Telefono",
+          "description": "+39 331 1234567"
+        },
+        {
+          "name": "Email",
+          "description": "giulia.bianchi@gmail.com"
+        }
+      ]';
+
+        return collect(json_decode($str));
+    }
+
+    public function getBreads() {
+        return collect([]);
+    }
+
+    public function getDisservizioStep2() {
+        $str = '[
+        {
+          "title": "Informativa sulla privacy",
+          "active": false,
+          "completed": true
+        },
+        {
+          "title": "Dati di segnalazione",
+          "active": true,
+          "completed": false
+        },
+        {
+          "title": "Riepilogo",
+          "active": false,
+          "completed": false
+        }
+      ]';
+
+        return collect(json_decode($str));
+    }
+
+    public function getDisservizioDatiSpecifici() {
+        $str = '[
+        {
+          "item": "Luogo",
+          "anchor": "report-place"
+        },
+        {
+          "item": "Disservizio",
+          "anchor": "report-info"
+        },
+        {
+          "item": "Autore della segnalazione",
+          "anchor": "report-author"
+        }
+      ]';
+
+        return collect(json_decode($str));
+    }
 }
