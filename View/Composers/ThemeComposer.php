@@ -83,8 +83,8 @@ class ThemeComposer {
         return collect([]);
     }
 
-    public function getDisservizioStep1(){
-      $str = '[
+    public function getDisservizioStep1() {
+        $str = '[
         {
           "title": "Autorizzazioni e condizioni",
           "active": true,
@@ -101,7 +101,8 @@ class ThemeComposer {
           "completed": false
         }
       ]';
-      return collect(json_decode($str));
+
+        return collect(json_decode($str));
     }
 
     public function getDisservizioStep2() {
@@ -126,8 +127,8 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-    public function getDisservizioStep3(){
-      $str = '[
+    public function getDisservizioStep3() {
+        $str = '[
         {
           "title": "Autorizzazioni e condizioni",
           "active": false,
@@ -144,10 +145,9 @@ class ThemeComposer {
           "completed": false
         }
       ]';
-      return collect(json_decode($str));
+
+        return collect(json_decode($str));
     }
-
-
 
     public function getDisservizioDatiSpecifici() {
         $str = '[
@@ -184,10 +184,8 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-
-
-    public function segnalazioniDisservizio1(){
-      $str = '[
+    public function segnalazioniDisservizio1() {
+        $str = '[
       {
         "item": "A chi è rivolto",
         "anchor": "who-needs"
@@ -226,7 +224,18 @@ class ThemeComposer {
       }
     ]';
 
-    return collect(json_decode($str));
-  }
+        return collect(json_decode($str));
+    }
 
+  public function getServiziCorrelatiDisservizio() {
+      $str = '[
+        {
+          "icon": "it-settings",
+          "link": "Richiesta appuntamento",
+          "class": "shadow mb-4"
+        }
+      ]';
+
+      return collect(json_decode($str));
+  }
 }
