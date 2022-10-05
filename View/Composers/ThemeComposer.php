@@ -184,6 +184,19 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
+    public function getLinksBreadcrumbs2() {
+        $str = '[
+          {
+            "title": "Home"
+          },
+          {
+            "title": "Area Personale"
+          },
+        ]';
+
+        return collect(json_decode($str));
+    }
+
     public function segnalazioniDisservizio1() {
         $str = '[
       {
