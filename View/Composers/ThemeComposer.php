@@ -187,10 +187,10 @@ class ThemeComposer {
     public function getLinksBreadcrumbs2() {
         $str = '[
           {
-            "title": "Home"
+            "link2": "Home"
           },
           {
-            "title": "Area Personale"
+            "link3": "Area Personale"
           },
         ]';
 
@@ -246,6 +246,21 @@ class ThemeComposer {
           "icon": "it-settings",
           "link": "Richiesta appuntamento",
           "class": "shadow mb-4"
+        }
+      ]';
+
+      return collect(json_decode($str));
+  }
+
+  public function getSegnalazioneDisservizioAreaPersonaleNavscrollPage1() {
+      $str = '[
+        {
+          "item": "Ultimi messaggi",
+          "anchor": "latest-posts"
+        },
+        {
+          "item": "Ultime attività",
+          "anchor": "latest-activities"
         }
       ]';
 
