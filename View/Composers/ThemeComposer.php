@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\View\Composers;
 
+use Illuminate\Support\Arr;
+
 class ThemeComposer {
     public function getSteps() {
         $steps = collect([
@@ -343,5 +345,21 @@ class ThemeComposer {
     ]';
 
       return collect(json_decode($str));
+  }
+
+  public function getSelectOptionList(){
+    $str = '[{"text":"Abruzzo","link":"#"},{"text":"Basilicata","link":"#"},{"text":"Calabria","link":"#"},{"text":"Campania","link":"#"},{"text":"Emilia Romagna","link":"#"},{"text":"Friuli Venezia Giulia","link":"#"},{"text":"Lazio","link":"#"},{"text":"Liguria","link":"#"},{"text":"Lombardia","link":"#"},{"text":"Marche","link":"#"},{"text":"Molise","link":"#"},{"text":"Piemonte","link":"#"},{"text":"Puglia","link":"#"},{"text":"Sardegna","link":"#"},{"text":"Sicilia","link":"#"},{"text":"Toscana","link":"#"},{"text":"Trentino Alto Adige","link":"#"},{"text":"Umbria","link":"#"},{"text":"Valle d’Aosta","link":"#"},{"text":"Veneto","link":"#"}]';
+
+    return collect(json_decode($str));
+  }
+
+  public function readJson(string $name){
+    $tmp = explode('.', $name);
+    $content = file_get_contents(__DIR__.'/../../Resources/json/'.$tmp[0].'.json');
+    $json=json_decode($content,true);
+    $key=implode('.',array_slice($tmp,1));
+    
+    return Arr::get($json,$key);
+    
   }
 }

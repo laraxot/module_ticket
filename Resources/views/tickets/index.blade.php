@@ -62,6 +62,7 @@
                                         <x-button type="text" label="Segnala disservizio" modalId="modal-disservizio"
                                             class="btn btn-primary mobile-full py-3 mt-2 mb-4 mb-lg-0"></x-button>
                                     </x-button>
+                                <a class="btn btn-primary" href="?_act=create" role="button">Segnala disservizio</a>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +124,9 @@
                                     {{-- subtitle-class="mt-3" disservizioBtn=true --}}>
                                     <x-button type="text" label="Segnala disservizio" modalId="modal-disservizio"
                                         class="btn btn-primary mobile-full py-3 mt-2 mb-4 mb-lg-0"></x-button>
+                                    
                                 </x-button>
+                                
                             </div>
                         </div>
                     </div>
