@@ -68,7 +68,20 @@
                                         class="p-md-3 p-lg-4 pb-lg-0" label="Tipo di disservizio*" label_hidden=true
                                         id="inefficiency" selectClass="u-grey-dark" :options="['a'=>'b']"
                                     >
+                                    <x-slot name="name">category_id</x-slot>
+                                    <x-slot name="placeholder">Tipo di disservizio*</x-slot>
                                     </x-input>
+
+                                    {{-- {{>partials/select/select
+                                        placeholder="Tipo di disservizio*"
+                                        class="p-md-3 p-lg-4 pb-lg-0"
+                                        select-option-list=serv-1-disservizio.list
+                                        label-text="Tipo di disservizio*"
+                                        label-hidden=true
+                                        id="inefficiency"
+                                        selectClass="u-grey-dark"
+                                        }} --}}
+
                                     <div class="text-area-wrapper p-3 px-lg-4 pt-lg-5 pb-lg-0 bg-white">
                                         <x-input type="text" class="mb-0" placeholder="titolo" name="title">
                                             <x-slot name="id">title</x-slot>
