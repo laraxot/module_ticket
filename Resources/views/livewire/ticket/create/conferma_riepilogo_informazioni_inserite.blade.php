@@ -71,12 +71,15 @@
 
                     </x-card>
 
-                    <x-nav type="steps">
-                        <x-slot name="next">true</x-slot>
+                    <x-nav type="steps" next="true" modalId="modal-terms" saveBtn="true">
+                        {{-- <x-slot name="next">true</x-slot>
                         <x-slot name="modalId">modal-terms</x-slot>
-                        <x-slot name="saveBtn">true</x-slot>
+                        <x-slot name="saveBtn">true</x-slot> --}}
                         <x-slot name="aria-label-save">di segnalazione disservizio</x-slot>
                     </x-nav>
+                    <button type="button" wire:click="previous()" class="btn btn-primary">
+                        Indietro
+                    </button>
                 </div>
             </div>
         </div>

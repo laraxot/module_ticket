@@ -31,14 +31,20 @@
                     <div class="steppers-content" aria-live="polite">
                         <div class="it-page-sections-container">
                             <section class="it-page-section" id="report-place">
-                                <x-card type="content_box">
-                                    <x-slot name="class">p-big p-lg-4</x-slot>
+                                <x-card type="content_box" class="p-big mb-40" :bg_grey="true">
+                                    <x-slot name="header" class="m-0"></x-slot>
+                                    <x-slot name="title" class="title-xxlarge mb-1">Luogo</x-slot>
+                                    <x-slot name="subtitle">Indica il luogo del disservizio</x-slot>
+                                    
+
+                                    {{-- <x-slot name="class">p-big p-lg-4</x-slot>
                                     <x-slot name="bg_grey">true</x-slot>
                                     <x-slot name="h2_class">mb-1</x-slot>
                                     <x-slot name="header_m0">true</x-slot>
                                     <x-slot name="title">Luogo</x-slot>
                                     <x-slot name="subtitle">Indica il luogo del disservizio</x-slot>
-                                    <x-slot name="margin_class">mb-40</x-slot>
+                                    <x-slot name="margin_class">mb-40</x-slot> --}}
+
 
                                    {{--partials.input.autocomplete--}}
                                    {{-- {{> partials/input-autocomplete/input-autocomplete placeholder="Cerca un luogo*" link=true class="mt-3"}} --}}
@@ -48,15 +54,18 @@
                                 </x-card>
                             </section>
 
+
+                                
                             <section class="it-page-section" id="report-info">
-                                <x-card type="content_box">
-                                    <x-slot name="class">p-big</x-slot>
-                                    <x-slot name="bg_grey">true</x-slot>
-                                    <x-slot name="h2_class">mb-3</x-slot>
-                                    <x-slot name="header_m0">true</x-slot>
-                                    <x-slot name="required_icon">true</x-slot>
-                                    <x-slot name="title">Disservizio</x-slot>
-                                    <x-slot name="margin_class">mb-40</x-slot>
+                                <x-card type="content_box" class="p-big mb-40" :bg_grey="true" :required_icon="true">
+                                    <x-slot name="header" class="m-0"></x-slot>
+                                    {{-- <x-slot name="class">p-big</x-slot> --}}
+                                    {{-- <x-slot name="bg_grey">true</x-slot> --}}
+                                    {{-- <x-slot name="h2_class">mb-3</x-slot> --}}
+                                    {{-- <x-slot name="header_m0">true</x-slot> --}}
+                                    {{-- <x-slot name="required_icon">true</x-slot> --}}
+                                    <x-slot name="title" class="mb-3">Disservizio</x-slot>
+                                    {{-- <x-slot name="margin_class">mb-40</x-slot> --}}
     {{--
                                     <x-input type="select" name="category_id" placeholder="Tipo di disservizio*"
                                         class="p-md-3 p-lg-4 pb-lg-0" label="Tipo di disservizio*" label_hidden=true
@@ -126,11 +135,13 @@
                                 </x-card>
                             </section>
 
+
                             <section class="it-page-section" id="report-author">
-                                <x-card type="content_box">
-                                    <x-slot name="h2_class">mb-1</x-slot>
+                                <x-card type="content_box" :bg_grey="true">
+                                    <x-slot name="header" class="m-0"></x-slot>
+                                    {{-- <x-slot name="h2_class">mb-1</x-slot>
                                     <x-slot name="header_m0">true</x-slot>
-                                    <x-slot name="bg_grey">true</x-slot>
+                                    <x-slot name="bg_grey">true</x-slot> --}}
                                     <x-slot name="title">Autore della segnalazione</x-slot>
                                     <x-slot name="subtitle">Informazione su di te</x-slot>
 
@@ -150,11 +161,17 @@
                                 </x-card>
                             </section>
                         </div>
-                        <x-nav type="steps">
-                            <x-slot name="save">true</x-slot>
-                            <x-slot name="saveBtn">true</x-slot>
+                        <x-nav type="steps" :save="true" :saveBtn="true">
+                            {{-- <x-slot name="save">true</x-slot> --}}
+                            {{-- <x-slot name="saveBtn">true</x-slot> --}}
                             <x-slot name="aria_label_save">di segnalazione disservizio</x-slot>
-                        </x-nav-steps>
+                        </x-nav>
+                        <button type="button" wire:click="previous()" class="btn btn-primary">
+                            Indietro
+                        </button>
+                        <button type="button" wire:click="acconsento()" class="btn btn-primary">
+                            Avanti
+                        </button>
                     </div>
                 </div>
             </div>

@@ -48,17 +48,18 @@
 
                     <div class="form-check mt-4 mb-3 mt-md-40 mb-lg-40">
                         <div class="checkbox-body d-flex align-items-center">
-                            <input type="checkbox" id="privacy" name="privacy-field" value="privacy-field">
+                            {{-- <input type="checkbox" id="privacy" name="privacy-field" value="privacy-field"> --}}
+                            <input type="checkbox" id="privacy" name="privacy-field" value="" wire:model="form_data.accept">
                             <label class="title-small-semi-bold pt-1" for="privacy">Ho letto e compreso l’informativa sulla privacy</label>
                         </div>
                     </div>
 
-                    <x-button type="advanced">
-                        <x-slot name="label">Avanti</x-slot>
+                    <x-button type="advanced" primary="true" label="Avanti" class="mobile-full">
+                        {{-- <x-slot name="label">Avanti</x-slot>
                         <x-slot name="primary">true</x-slot>
-                        <x-slot name="class">mobile-full</x-slot>
+                        <x-slot name="class">mobile-full</x-slot> --}}
                     </x-button>
-                        <button type="button" wire:click="acconsento()">Acconsento</button>
+                        <button class="btn btn-primary" type="button" {{ $form_data['accept']?'':'disabled' }} wire:click="acconsento()">Acconsento</button>
 
                     {{-- <x-button type="advanced" label="Avanti" class="mobile-full" primary="true">
                     </x-button> --}}
