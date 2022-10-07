@@ -31,6 +31,7 @@
                     <div class="steppers-content" aria-live="polite">
                         <div class="it-page-sections-container">
                             <section class="it-page-section" id="report-place">
+
                                 <x-card type="content_box" class="p-big mb-40" :bg_grey="true">
                                     <x-slot name="header" class="m-0"></x-slot>
                                     <x-slot name="title" class="title-xxlarge mb-1">Luogo</x-slot>
@@ -66,20 +67,20 @@
                                     {{-- <x-slot name="required_icon">true</x-slot> --}}
                                     <x-slot name="title" class="mb-3">Disservizio</x-slot>
                                     {{-- <x-slot name="margin_class">mb-40</x-slot> --}}
-    {{--
+                                    {{--
                                     <x-input type="select" name="category_id" placeholder="Tipo di disservizio*"
                                         class="p-md-3 p-lg-4 pb-lg-0" label="Tipo di disservizio*" label_hidden=true
                                         id="inefficiency" selectClass="u-grey-dark" :options="$_theme->readJson('select-option-list.serv-1-disservizio.list')"
                                     >
                                     </x-input>
---}}
-                                    <x-input.group type="select" name="category_id" placeholder="Tipo di disservizio*"
+                                    --}}
+                                    {{-- <x-input.group type="select" name="category_id" placeholder="Tipo di disservizio*"
                                         class="p-md-3 p-lg-4 pb-lg-0" label="Tipo di disservizio*" label_hidden=true
                                         id="inefficiency" selectClass="u-grey-dark" :options="['a'=>'b']"
                                     >
                                     <x-slot name="name">category_id</x-slot>
                                     <x-slot name="placeholder">Tipo di disservizio*</x-slot>
-                                    </x-input>
+                                    </x-input> --}}
 
                                     {{-- {{>partials/select/select
                                         placeholder="Tipo di disservizio*"
@@ -92,46 +93,60 @@
                                         }} --}}
 
                                     <div class="text-area-wrapper p-3 px-lg-4 pt-lg-5 pb-lg-0 bg-white">
-                                        <x-input type="text" class="mb-0" placeholder="titolo" name="title">
-                                            <x-slot name="id">title</x-slot>
-                                            <x-slot name="label">Titolo</x-slot>
-                                            <x-slot name="required">true</x-slot>
-                                            <x-slot name="name">title</x-slot>
-                                            <x-slot name="formClass">mb-0</x-slot>
-                                        </x-input>
+                                        {{-- <x-input type="text" name="title" wire:model="form_data.post.title"></x-input>
+                                        @error('form_data.post.title') <span class="error">error</span> @enderror --}}
+        
+                                        {{-- <button type="submit" class="btn btn-primary" wire:click="prova()">
+                                            prova
+                                        </button> --}}
+
+
+                                        <x-input.group tpl="text" type="text" class="mb-0" name="title" id="title"
+                                            label="Titolo" :required="true" formClass="mb-0">
+                                        </x-input.group>
+                                        {{-- {{>partials/input/input type="text" id="title" label="Titolo" required=true name="title"
+                                        formClass="mb-0"}} --}}
+
                                     </div>
-                                    <x-input type="text" class="m-0 p-3 px-lg-4 pt-lg-5 pb-lg-4 bg-white" placeholder="dettagli" name="details">
+                                    {{-- <x-input type="text" class="m-0 p-3 px-lg-4 pt-lg-5 pb-lg-4 bg-white" placeholder="dettagli" name="details">
                                         <x-slot name="id">details</x-slot>
                                         <x-slot name="placeholder">Dettagli*</x-slot>
-                                            <x-slot name="label">pt-lg-5 pb-lg-4 bg-white</x-slot>
-                                            <x-slot name="num">2</x-slot>
-                                            <x-slot name="name">title</x-slot>
-                                            <x-slot name="visible">true</x-slot>
-                                        </x-input>
+                                        <x-slot name="label">pt-lg-5 pb-lg-4 bg-white</x-slot>
+                                        <x-slot name="num">2</x-slot>
+                                        <x-slot name="name">title</x-slot>
+                                        <x-slot name="visible">true</x-slot>
+                                    </x-input> --}}
 
-                                        <div class="btn-wrapper px-3 pt-2 pb-3 px-lg-4 pb-lg-4 pt-lg-0 bg-white">
-                                            <label class="title-xsmall-bold u-grey-dark pb-2 ms-2">Immagini</label>
-                                            <div class="upload-wrapper d-flex justify-content-between align-items-center">
-                                                <img src="../assets/images/img-disservizio-thumbnail.png" alt=""
-                                                    class=" img" />
-                                                <span class="t-primary fw-bold w-100 ms-2">6yhakandsahm413d8.jpg</span>
-                                                <a href="#" class="align-self-center"
-                                                    aria-label="elimina immagina caricata">
-                                                    <svg class="icon icon-primary icon-sm mb-1 ">
-                                                        <use
-                                                            href="../assets/bootstrap-italia/dist/svg/sprites.svg#it-close">
-                                                        </use>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                            <hr>
-                                            <x-button label="Carica file" primary=true iconBtn="it-upload" iconWhite=true
-                                                sm=true class="w-100 fw-bold" aria-label="Carica file per il disservizio">
-                                            </x-button>
-                                            <p class="title-xsmall u-grey-dark pt-10 mb-0">Seleziona una o più immagini da
-                                                allegare alla
-                                                segnalazione</p>
+                                    <x-input.group tpl="text.area" placeholder="Dettagli*" id="details" :visible="true" 
+                                        class="m-0 p-3 px-lg-4 pt-lg-5 pb-lg-4 bg-white" num="2" label="Inserire al massimo 200 caratteri">
+
+                                    </x-input.group>
+                                    {{-- {{>partials/text-area/text-area placeholder="Dettagli*" id="details" visible=true class="m-0 p-3 px-lg-4
+                                    pt-lg-5 pb-lg-4 bg-white" num="2" label="Inserire al massimo 200 caratteri"}} --}}
+
+                                    <div class="btn-wrapper px-3 pt-2 pb-3 px-lg-4 pb-lg-4 pt-lg-0 bg-white">
+                                        <label class="title-xsmall-bold u-grey-dark pb-2 ms-2">Immagini</label>
+                                        <div class="upload-wrapper d-flex justify-content-between align-items-center">
+                                            <img src="../assets/images/img-disservizio-thumbnail.png" alt=""
+                                                class=" img" />
+                                            <span class="t-primary fw-bold w-100 ms-2">6yhakandsahm413d8.jpg</span>
+                                            <a href="#" class="align-self-center"
+                                                aria-label="elimina immagina caricata">
+                                                <svg class="icon icon-primary icon-sm mb-1 ">
+                                                    <use
+                                                        href="../assets/bootstrap-italia/dist/svg/sprites.svg#it-close">
+                                                    </use>
+                                                </svg>
+                                            </a>
                                         </div>
+                                        <hr>
+                                        <x-button label="Carica file" primary=true iconBtn="it-upload" iconWhite=true
+                                            sm=true class="w-100 fw-bold" aria-label="Carica file per il disservizio">
+                                        </x-button>
+                                        <p class="title-xsmall u-grey-dark pt-10 mb-0">Seleziona una o più immagini da
+                                            allegare alla
+                                            segnalazione</p>
+                                    </div>
                                 </x-card>
                             </section>
 

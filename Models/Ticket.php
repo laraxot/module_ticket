@@ -56,7 +56,7 @@ use Modules\LU\Models\User;
  * @property TicketStatus         $ticketStatus
  * @property Department           $department
  */
-class Ticket extends BaseModel {
+class Ticket extends BaseModelLang {
     /**
      * @var array
      */

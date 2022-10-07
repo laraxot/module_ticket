@@ -20,6 +20,13 @@ class Create extends Component {
     ];
     public array $form_data = [
         'accept' => false,
+        'title' => '',
+    ];
+
+    protected $rules = [
+        'form_data.post.title' => 'required|min:6', // nel caso vogliamo usare post
+        // 'name' => 'required|min:6',
+        // 'email' => 'required|email',
     ];
 
     public function mount(?string $type = 'create') {
@@ -45,5 +52,10 @@ class Create extends Component {
 
     public function previous() {
         --$this->step;
+    }
+
+    public function prova() {
+        $this->validate();
+        dddx($this->form_data);
     }
 }
