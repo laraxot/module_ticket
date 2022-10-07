@@ -24,10 +24,29 @@
                     <div class="d-flex justify-content-between border-bottom border-light pb-3 mt-5">
                         <span class="search-results">645 Risultati</span>
 
-                        <x-button label="Filtra" label-class="t-primary title-xsmall-semi-bold ms-1" iconBtn="it-funnel"
+                        {{-- <x-button label="Filtra" label-class="t-primary title-xsmall-semi-bold ms-1" iconBtn="it-funnel"
                             class="p-0 pe-2 d-lg-none" xs=true modalId="modal-categories"></x-button>
                         <x-button label="Rimuovi tutti i filtri" label-class="title-xsmall-semi-bold ms-1"
-                            class="p-0 pe-2 d-none d-lg-block" xs=true></x-button>
+                            class="p-0 pe-2 d-none d-lg-block" xs=true></x-button> --}}
+
+                        {{-- {{>partials/button/button label="Filtra" label-class="t-primary title-xsmall-semi-bold ms-1"
+                        iconBtn="it-funnel" class="p-0 pe-2 d-lg-none" xs=true
+                        modalId="modal-categories"}} --}}
+                        <x-button type="advanced" 
+                            class="p-0 pe-2 d-lg-none" 
+                            :xs="true" 
+                            modalId="modal-categories">
+                            <x-slot name="label" class="t-primary title-xsmall-semi-bold ms-1">Filtra</x-slot>
+                        </x-button>
+
+
+
+
+                        {{-- {{>partials/button/button label="Rimuovi tutti i filtri" label-class="title-xsmall-semi-bold ms-1"
+                        class="p-0 pe-2 d-none d-lg-block" xs=true}} --}}
+
+
+
                     </div>
 
                     <ul class="nav nav-tabs w-100 flex-nowrap border-bottom border-light mb-40 mt-3 shadow-none"
@@ -51,7 +70,7 @@
                         <div class="tab-pane fade show active" id="data-ex-disservizio1" role="tabpanel">
                             <div class="row">
                                 <div class="col-12">
-                                    {{--                                    <x-map></x-map> --}}
+                                    {{-- <x-map></x-map> --}}
                                 </div>
                                 <div class="col-lg-6 mt-50 mb-4 mb-lg-0">
                                     <x-button>
@@ -116,16 +135,34 @@
 
                             </div>
                             <div class="col-lg-6 mt-50 mb-4 mb-lg-0">
-                                <x-button>
+                                {{-- <x-button>
                                     <x-slot name="title">Fai una segnalazione</x-slot>
                                     <x-slot name="txt">Se vuoi aggiungere una segnalazione, puoi farlo dopo esserti
                                         autenticato con le tue
                                         credenziali SPID o CIE.</x-slot>
-                                    {{-- subtitle-class="mt-3" disservizioBtn=true --}}>
+                                    
                                     <x-button type="text" label="Segnala disservizio" modalId="modal-disservizio"
                                         class="btn btn-primary mobile-full py-3 mt-2 mb-4 mb-lg-0"></x-button>
                                     
-                                </x-button>
+                                </x-button> --}}
+
+                                {{-- <x-button type="text" 
+                                    :disservizioBtn="true" 
+                                    cardTitle="Fai una segnalazione" 
+                                    cardDescription="Se vuoi aggiungere una segnalazione, puoi farlo dopo esserti autenticato con le tue
+                                    credenziali SPID o CIE." subtitle_class="mt-3" 
+                                    >
+                                    slot da fare
+                                </x-button> --}}
+
+                                {{-- {{#>cmp-text-button/cmp-text-button
+                                    cardTitle="Fai una segnalazione"
+                                    cardDescription="Se vuoi aggiungere una segnalazione, puoi farlo dopo esserti autenticato con le tue
+                                    credenziali SPID o CIE."
+                                    subtitle-class="mt-3"
+                                    disservizioBtn=true}}
+                                    {{>partials/button/button label="Segnala disservizio" modalId="modal-disservizio" class="btn btn-primary mobile-full py-3 mt-2 mb-4 mb-lg-0"}}
+                                {{/cmp-text-button/cmp-text-button}} --}}
                                 
                             </div>
                         </div>
