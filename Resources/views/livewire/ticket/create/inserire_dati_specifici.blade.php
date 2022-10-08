@@ -101,7 +101,7 @@
                                         </button> --}}
 
 
-                                        <x-input.group tpl="text" type="text" class="mb-0" name="title" id="title"
+                                        <x-input.group type="text" class="mb-0" name="post.title" id="title"
                                             label="Titolo" :required="true" formClass="mb-0">
                                         </x-input.group>
                                         {{-- {{>partials/input/input type="text" id="title" label="Titolo" required=true name="title"
@@ -117,14 +117,18 @@
                                         <x-slot name="visible">true</x-slot>
                                     </x-input> --}}
 
-                                    <x-input.group tpl="text.area" placeholder="Dettagli*" id="details" :visible="true" 
-                                        class="m-0 p-3 px-lg-4 pt-lg-5 pb-lg-4 bg-white" num="2" label="Inserire al massimo 200 caratteri">
-
+                                    <x-input.group type="textarea" placeholder="Inserire al massimo 200 caratteri" id="details" :visible="true" name="post.txt"
+                                        class="m-0 p-3 px-lg-4 pt-lg-5 pb-lg-4 bg-white" num="2" label="Dettagli*">
                                     </x-input.group>
                                     {{-- {{>partials/text-area/text-area placeholder="Dettagli*" id="details" visible=true class="m-0 p-3 px-lg-4
                                     pt-lg-5 pb-lg-4 bg-white" num="2" label="Inserire al massimo 200 caratteri"}} --}}
 
-                                    <div class="btn-wrapper px-3 pt-2 pb-3 px-lg-4 pb-lg-4 pt-lg-0 bg-white">
+
+                                    {{-- <x-input.group type="img" name="img_src" class="btn-wrapper px-3 pt-2 pb-3 px-lg-4 pb-lg-4 pt-lg-0 bg-white" placeholder="aaa">
+                                        <x-slot name="label" class="title-xsmall-bold u-grey-dark pb-2 ms-2">Immagini</x-slot>
+                                    </x-input.group> --}}
+
+                                    {{-- <div class="btn-wrapper px-3 pt-2 pb-3 px-lg-4 pb-lg-4 pt-lg-0 bg-white">
                                         <label class="title-xsmall-bold u-grey-dark pb-2 ms-2">Immagini</label>
                                         <div class="upload-wrapper d-flex justify-content-between align-items-center">
                                             <img src="../assets/images/img-disservizio-thumbnail.png" alt=""
@@ -146,7 +150,7 @@
                                         <p class="title-xsmall u-grey-dark pt-10 mb-0">Seleziona una o più immagini da
                                             allegare alla
                                             segnalazione</p>
-                                    </div>
+                                    </div> --}}
                                 </x-card>
                             </section>
 

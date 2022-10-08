@@ -6,8 +6,7 @@
                     <x-breadcrumb.rows :rows="$_theme->getLinksBreadcrumbs()">
                     </x-breadcrumb.rows>
 
-                    <x-heading type="heading" {{-- title="Segnalazionedisservizio" --}}>
-                        <x-slot name="title">Segnalazione disservizio</x-slot>
+                    <x-heading type="heading" title="Segnalazione disservizio">
                     </x-heading>
                 </div>
 
@@ -27,7 +26,7 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
 
-                    <x-callout type="cmp">
+                    {{-- <x-callout type="cmp">
                         <x-slot name="calloutType">warning</x-slot>
                         <x-slot name="icon">it-horn</x-slot>
                         <x-slot name="title">Attenzione</x-slot>
@@ -35,7 +34,7 @@
                                 class='d-lg-block'> Verifica
                                 che siano corrette.</span></x-slot>
                         <x-slot name="textClass">titillium text-paragraph</x-slot>
-                    </x-callout>
+                    </x-callout> --}}
 
                     {{-- <x-callout calloutType="warning" icon="it-horn" calloutTitle="Attenzione"
                         calloutText="Le informazioni che hai fornito hanno valore di dichiarazione.<span class='d-lg-block'> Verifica che siano corrette.</span>"
@@ -43,9 +42,10 @@
 
                     <h2 class="title-xxlarge mb-4 mt-40">Segnalazione</h2>
 
-                    <x-card type="content_box" class="mb-0" bg_grey=true header_m0=true h3_title=true h3_class="mb-4"
+                    <x-card type="content_box" class="mb-0" :bg_grey="true" :header_m0="true" :h3_title="true" h3_class="mb-4"
                         margin_class="mb-4">
                         <x-slot name="title">Disservizio</x-slot>
+                        <x-slot name="header"></x-slot>
 
                         <x-info.rows type="summary" :rows="$_theme->getDisservizioInfoList()" class="p-3 p-lg-4" info=true header_class="pb-2">
                         </x-info.rows>
@@ -57,9 +57,10 @@
 
                     <h2 class="title-xxlarge mb-4 mt-40">Dati Generali</h2>
 
-                    <x-card type="content_box" class="mb-0" bg_grey=true header_m0=true h3_title=true h3_class="mb-4"
+                    <x-card type="content_box" class="mb-0" :bg_grey="true" :header_m0="true" :h3_title="true" h3_class="mb-4"
                         margin_class="mb-4">
                         <x-slot name="title">Autore della segnalazione</x-slot>
+                        <x-slot name="header"></x-slot>
 
                         <x-info.rows type="summary-no-modify" :rows="$_theme->getDisservizioInfoAuthor()" class="mb-4 mb-lg-30 p-3 p-lg-4" info=true disservizio_page=true>
                             <x-slot name="title">Giulia Bianchi</x-slot>
@@ -79,6 +80,9 @@
                     </x-nav>
                     <button type="button" wire:click="previous()" class="btn btn-primary">
                         Indietro
+                    </button>
+                    <button type="button" wire:click="salva()" class="btn btn-primary">
+                        Salva
                     </button>
                 </div>
             </div>
