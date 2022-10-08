@@ -15,7 +15,7 @@ class Create extends Component {
     public string $type;
     public int $step = 0;
     public array $steps = [
-        'acconsentire_trattamento_dati_inseriti',
+        // 'acconsentire_trattamento_dati_inseriti',
         'inserire_dati_specifici',
         'conferma_riepilogo_informazioni_inserite',
     ];
@@ -48,6 +48,7 @@ class Create extends Component {
     }
 
     public function acconsento() {
+        // dddx($this->form_data);
         ++$this->step;
     }
 

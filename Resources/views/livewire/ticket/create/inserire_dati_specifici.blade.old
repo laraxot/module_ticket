@@ -37,19 +37,15 @@
                                     <x-slot name="title" class="title-xxlarge mb-1">Luogo</x-slot>
                                     <x-slot name="subtitle">Indica il luogo del disservizio</x-slot>
                                     
-                                    {{-- {{#>cmp-card/cmp-card-content-box
-                                        class="p-big p-lg-4"
-                                        bg-grey=true
-                                        h2-class="mb-1"
-                                        header-m0=true
-                                        card-title="Luogo"
-                                        subtitle="Indica il luogo del disservizio"
-                                        margin-class="mb-40"
-                                        }} --}}
 
-                                    <x-input.group type="text" name="post.address" id="address" class="p-big p-lg-4"
-                                        label="Indirizzo/Luogo">
-                                    </x-input.group>
+                                    {{-- <x-slot name="class">p-big p-lg-4</x-slot>
+                                    <x-slot name="bg_grey">true</x-slot>
+                                    <x-slot name="h2_class">mb-1</x-slot>
+                                    <x-slot name="header_m0">true</x-slot>
+                                    <x-slot name="title">Luogo</x-slot>
+                                    <x-slot name="subtitle">Indica il luogo del disservizio</x-slot>
+                                    <x-slot name="margin_class">mb-40</x-slot> --}}
+
 
                                    {{--partials.input.autocomplete--}}
                                    {{-- {{> partials/input-autocomplete/input-autocomplete placeholder="Cerca un luogo*" link=true class="mt-3"}} --}}
@@ -59,24 +55,67 @@
                                 </x-card>
                             </section>
 
+
+                                
                             <section class="it-page-section" id="report-info">
                                 <x-card type="content_box" class="p-big mb-40" :bg_grey="true" :required_icon="true">
                                     <x-slot name="header" class="m-0"></x-slot>
+                                    {{-- <x-slot name="class">p-big</x-slot> --}}
+                                    {{-- <x-slot name="bg_grey">true</x-slot> --}}
+                                    {{-- <x-slot name="h2_class">mb-3</x-slot> --}}
+                                    {{-- <x-slot name="header_m0">true</x-slot> --}}
+                                    {{-- <x-slot name="required_icon">true</x-slot> --}}
                                     <x-slot name="title" class="mb-3">Disservizio</x-slot>
+                                    {{-- <x-slot name="margin_class">mb-40</x-slot> --}}
+                                    {{--
+                                    <x-input type="select" name="category_id" placeholder="Tipo di disservizio*"
+                                        class="p-md-3 p-lg-4 pb-lg-0" label="Tipo di disservizio*" label_hidden=true
+                                        id="inefficiency" selectClass="u-grey-dark" :options="$_theme->readJson('select-option-list.serv-1-disservizio.list')"
+                                    >
+                                    </x-input>
+                                    --}}
+                                    {{-- <x-input.group type="select" name="category_id" placeholder="Tipo di disservizio*"
+                                        class="p-md-3 p-lg-4 pb-lg-0" label="Tipo di disservizio*" label_hidden=true
+                                        id="inefficiency" selectClass="u-grey-dark" :options="['a'=>'b']"
+                                    >
+                                    <x-slot name="name">category_id</x-slot>
+                                    <x-slot name="placeholder">Tipo di disservizio*</x-slot>
+                                    </x-input> --}}
+
+                                    {{-- {{>partials/select/select
+                                        placeholder="Tipo di disservizio*"
+                                        class="p-md-3 p-lg-4 pb-lg-0"
+                                        select-option-list=serv-1-disservizio.list
+                                        label-text="Tipo di disservizio*"
+                                        label-hidden=true
+                                        id="inefficiency"
+                                        selectClass="u-grey-dark"
+                                        }} --}}
+
+                                    <div class="text-area-wrapper p-3 px-lg-4 pt-lg-5 pb-lg-0 bg-white">
+                                        {{-- <x-input type="text" name="title" wire:model="form_data.post.title"></x-input>
+                                        @error('form_data.post.title') <span class="error">error</span> @enderror --}}
+        
+                                        {{-- <button type="submit" class="btn btn-primary" wire:click="prova()">
+                                            prova
+                                        </button> --}}
 
 
-                                    <x-input.group type="text" name="post.category" id="category" class="p-big p-lg-4"
-                                        label="Tipo di disservizio">
-                                    </x-input.group>
-
-                                    {{-- <div class="text-area-wrapper p-3 px-lg-4 pt-lg-5 pb-lg-0 bg-white"> --}}
-                                        <x-input.group type="text" name="post.title" id="title" class="mb-0"
-                                            label="Titolo">
+                                        <x-input.group type="text" class="mb-0" name="post.title" id="title"
+                                            label="Titolo" :required="true" formClass="mb-0">
                                         </x-input.group>
                                         {{-- {{>partials/input/input type="text" id="title" label="Titolo" required=true name="title"
                                         formClass="mb-0"}} --}}
 
-                                    {{-- </div> --}}
+                                    </div>
+                                    {{-- <x-input type="text" class="m-0 p-3 px-lg-4 pt-lg-5 pb-lg-4 bg-white" placeholder="dettagli" name="details">
+                                        <x-slot name="id">details</x-slot>
+                                        <x-slot name="placeholder">Dettagli*</x-slot>
+                                        <x-slot name="label">pt-lg-5 pb-lg-4 bg-white</x-slot>
+                                        <x-slot name="num">2</x-slot>
+                                        <x-slot name="name">title</x-slot>
+                                        <x-slot name="visible">true</x-slot>
+                                    </x-input> --}}
 
                                     <x-input.group type="textarea" placeholder="Inserire al massimo 200 caratteri" id="details" :visible="true" name="post.txt"
                                         class="m-0 p-3 px-lg-4 pt-lg-5 pb-lg-4 bg-white" num="2" label="Dettagli*">
@@ -89,9 +128,32 @@
                                         <x-slot name="label" class="title-xsmall-bold u-grey-dark pb-2 ms-2">Immagini</x-slot>
                                     </x-input.group> --}}
 
-
+                                    {{-- <div class="btn-wrapper px-3 pt-2 pb-3 px-lg-4 pb-lg-4 pt-lg-0 bg-white">
+                                        <label class="title-xsmall-bold u-grey-dark pb-2 ms-2">Immagini</label>
+                                        <div class="upload-wrapper d-flex justify-content-between align-items-center">
+                                            <img src="../assets/images/img-disservizio-thumbnail.png" alt=""
+                                                class=" img" />
+                                            <span class="t-primary fw-bold w-100 ms-2">6yhakandsahm413d8.jpg</span>
+                                            <a href="#" class="align-self-center"
+                                                aria-label="elimina immagina caricata">
+                                                <svg class="icon icon-primary icon-sm mb-1 ">
+                                                    <use
+                                                        href="../assets/bootstrap-italia/dist/svg/sprites.svg#it-close">
+                                                    </use>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <hr>
+                                        <x-button label="Carica file" primary=true iconBtn="it-upload" iconWhite=true
+                                            sm=true class="w-100 fw-bold" aria-label="Carica file per il disservizio">
+                                        </x-button>
+                                        <p class="title-xsmall u-grey-dark pt-10 mb-0">Seleziona una o più immagini da
+                                            allegare alla
+                                            segnalazione</p>
+                                    </div> --}}
                                 </x-card>
                             </section>
+
 
                             <section class="it-page-section" id="report-author">
                                 <x-card type="content_box" :bg_grey="true">
@@ -103,11 +165,10 @@
                                     <x-slot name="subtitle">Informazione su di te</x-slot>
 
                                     <x-card type="info_button">
-                                        <x-slot name="big_title">Giulia Bianchi</x-slot>
-                                        <x-slot name="label_2">
-                                            Codice Fiscale <br> 
-                                            <span>GLABNC72H25H501Y</span>
-                                        </x-slot>
+                                        <x-slot name="big_title">
+                                            big-title="Giulia Bianchi</x-slot>
+                                        <x-slot name="label_2">Codice
+                                            Fiscale <br> <span>GLABNC72H25H501Y</span></x-slot>
                                         <x-slot name="card-class">mt-3</x-slot>
                                         <x-slot name="onlyContact">true</x-slot>
                                         <x-slot name="no_header">true</x-slot>
@@ -118,10 +179,10 @@
                                     </x-card>
                                 </x-card>
                             </section>
-                                
-
                         </div>
                         <x-nav type="steps" :save="true" :saveBtn="true">
+                            {{-- <x-slot name="save">true</x-slot> --}}
+                            {{-- <x-slot name="saveBtn">true</x-slot> --}}
                             <x-slot name="aria_label_save">di segnalazione disservizio</x-slot>
                         </x-nav>
                         <button type="button" wire:click="previous()" class="btn btn-primary">
