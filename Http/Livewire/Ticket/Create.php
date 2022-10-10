@@ -8,6 +8,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Livewire\Component;
 use Modules\Geo\Models\Place;
 use Modules\Ticket\Models\Ticket;
+use Modules\Xot\Services\PanelService;
 
 /**
  * Class Create.
@@ -59,8 +60,12 @@ class Create extends Component {
 
     public function save() {
         $this->validate();
+        // $this->form_data['post']['lang'] = app()->getLocale();
         $ticket = new Ticket();
-        $ticket->create($this->form_data)->post()->firstOrCreate($this->form_data['post']);
+        // $ticket->create($this->form_data)->post()->firstOrCreate($this->form_data['post']);
+
+        $ticket_panel = PanelService::make()->get($ticket);
+        $ticket_panel->store($this->form_data);
 
         // $tmp = json_decode($this->form_data['places'], true);
         // dddx([
@@ -76,11 +81,11 @@ class Create extends Component {
 
         // dddx($place->toArray());
 
-        if (isset($this->form_data['places'])) {
-            $ticket->address()->create(json_decode($this->form_data['places'], true)); // funziona ma non mi salva post_id
-            // $ticket->address()->create($place->all());
-            // $ticket->address($this->form_data['places']);
-        }
+        // if (isset($this->form_data['places'])) {
+        //     $ticket->address()->create(json_decode($this->form_data['places'], true)); // funziona ma non mi salva post_id
+        //     // $ticket->address()->create($place->all());
+        //     // $ticket->address($this->form_data['places']);
+        // }
 
         dddx([$this->form_data, $ticket, $ticket->place]);
     }

@@ -6,9 +6,10 @@ namespace Modules\Ticket\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Modules\LU\Models\User;
+use Modules\Blog\Models\Traits\HasCategory;
 use Modules\Geo\Models\Traits\GeoTrait;
 use Modules\Geo\Models\Traits\HasPlaceTrait;
+use Modules\LU\Models\User;
 
 /**
  * @property int                  $id
@@ -61,11 +62,19 @@ use Modules\Geo\Models\Traits\HasPlaceTrait;
 class Ticket extends BaseModelLang {
     use HasPlaceTrait;
     use GeoTrait;
+    use HasCategory;
 
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'dept_id', 'team_id', 'priority_id', 'sla', 'help_topic_id', 'status', 'assigned_to', 'source', 'ticket_number', 'rating', 'ratingreply', 'flags', 'ip_address', 'lock_by', 'lock_at', 'isoverdue', 'reopened', 'isanswered', 'html', 'is_deleted', 'closed', 'is_transferred', 'transferred_at', 'reopened_at', 'duedate', 'closed_at', 'last_message_at', 'last_response_at', 'approval', 'follow_up', 'created_at', 'updated_at'];
+    protected $fillable = [
+        'user_id', 'dept_id', 'team_id', 'priority_id', 'sla', 'help_topic_id', 'status',
+        'assigned_to', 'source', 'ticket_number', 'rating', 'ratingreply', 'flags',
+        'ip_address', 'lock_by', 'lock_at', 'isoverdue', 'reopened', 'isanswered', 'html',
+        'is_deleted', 'closed', 'is_transferred', 'transferred_at', 'reopened_at', 'duedate',
+        'closed_at', 'last_message_at', 'last_response_at', 'approval', 'follow_up', 'created_at', 'updated_at',
+        'place',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -52,7 +52,7 @@
                                         margin-class="mb-40"
                                         }} --}}
 
-                                        <x-input.group type="address" name="places" id="address"
+                                        <x-input.group type="address" name="place" id="address"
                                             class="p-big p-lg-4" label="Indirizzo/Luogo">
                                         </x-input.group>
 
@@ -76,9 +76,9 @@
                                     <x-slot name="title" class="mb-3">Disservizio</x-slot>
 
 
-                                    {{-- <x-input.group type="text" name="post.category" id="category"
+                                    <x-input.group type="select" name="category" id="category"
                                         class="p-big p-lg-4" label="Tipo di disservizio">
-                                    </x-input.group> --}}
+                                    </x-input.group>
 
                                     {{-- <div class="text-area-wrapper p-3 px-lg-4 pt-lg-5 pb-lg-0 bg-white"> --}}
                                     <x-input.group type="text" name="post.title" id="title" class="mb-0"
@@ -105,7 +105,7 @@
 
                                 </x-card>
                             </section>
-
+                            {{-- {{ dddx([get_defined_vars(), $profile->getProfile()->cf]) }} --}}
                             <section class="it-page-section" id="report-author">
                                 <x-card type="content_box" :bg_grey="true">
                                     <x-slot name="header" class="m-0"></x-slot>
@@ -116,10 +116,12 @@
                                     <x-slot name="subtitle">Informazione su di te</x-slot>
 
                                     <x-card type="info_button">
-                                        <x-slot name="big_title">Giulia Bianchi</x-slot>
+                                        <x-slot name="big_title">{{ $profile->getProfile()->full_name }}</x-slot>
                                         <x-slot name="label_2">
-                                            Codice Fiscale <br>
-                                            <span>GLABNC72H25H501Y</span>
+                                            @if($profile->getProfile()->cf)
+                                                Codice Fiscale <br>
+                                                <span>{{ $profile->getProfile()->cf }}</span>
+                                            @endif
                                         </x-slot>
                                         <x-slot name="card-class">mt-3</x-slot>
                                         <x-slot name="onlyContact">true</x-slot>
