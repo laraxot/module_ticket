@@ -6,8 +6,8 @@ namespace Modules\Ticket\Http\Livewire\Ticket;
 
 use Illuminate\Contracts\Support\Renderable;
 use Livewire\Component;
-use Modules\Ticket\Models\Ticket;
 use Modules\Geo\Models\Place;
+use Modules\Ticket\Models\Ticket;
 
 /**
  * Class Create.
@@ -59,21 +59,27 @@ class Create extends Component {
 
     public function save() {
         $this->validate();
-        // $ticket = new Ticket();
-        // $ticket->create($this->form_data)->post()->firstOrCreate($this->form_data['post']);
+        $ticket = new Ticket();
+        $ticket->create($this->form_data)->post()->firstOrCreate($this->form_data['post']);
 
-        dddx(json_decode($this->form_data['places']));
+        // $tmp = json_decode($this->form_data['places'], true);
+        // dddx([
+        //     json_decode($this->form_data['places']),
+        //     gettype($tmp),
+        //     $tmp,
+        //     // $tmp->toArray(),
+        // ]);
 
-        $place = new Place();
-        $place->create(json_decode($this->form_data['places']));
+        // $place = new Place();
+        // $place->firstOrCreate(json_decode($this->form_data['places'], true));
 
-        dddx($place);
+        // dddx($place);
 
-        if(isset($this->form_data['places'])){
-            $ticket->address()->save(json_decode($this->form_data['places']));
-            //$ticket->address($this->form_data['places']);
+        if (isset($this->form_data['places'])) {
+            $ticket->address()->create(json_decode($this->form_data['places'], true));
+            // $ticket->address($this->form_data['places']);
         }
 
-        dddx([$this->$form_data,$ticket]);
+        dddx([$this->form_data, $ticket]);
     }
 }
