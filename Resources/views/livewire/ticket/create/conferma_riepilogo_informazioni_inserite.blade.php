@@ -81,7 +81,7 @@
                     <button type="button" wire:click="previous()" class="btn btn-primary">
                         Indietro
                     </button>
-                    <button type="button" wire:click="salva()" class="btn btn-primary">
+                    <button type="button" wire:click="save()" class="btn btn-primary">
                         Salva
                     </button>
                 </div>

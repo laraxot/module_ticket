@@ -7,6 +7,7 @@ namespace Modules\Ticket\Http\Livewire\Ticket;
 use Illuminate\Contracts\Support\Renderable;
 use Livewire\Component;
 use Modules\Ticket\Models\Ticket;
+use Modules\Geo\Models\Place;
 
 /**
  * Class Create.
@@ -56,10 +57,23 @@ class Create extends Component {
         --$this->step;
     }
 
-    public function salva() {
+    public function save() {
         $this->validate();
-        $ticket = new Ticket();
-        $ticket->create($this->form_data)->post()->firstOrCreate($this->form_data['post']);
-        dddx($this->form_data);
+        // $ticket = new Ticket();
+        // $ticket->create($this->form_data)->post()->firstOrCreate($this->form_data['post']);
+
+        dddx(json_decode($this->form_data['places']));
+
+        $place = new Place();
+        $place->create(json_decode($this->form_data['places']));
+
+        dddx($place);
+
+        if(isset($this->form_data['places'])){
+            $ticket->address()->save(json_decode($this->form_data['places']));
+            //$ticket->address($this->form_data['places']);
+        }
+
+        dddx([$this->$form_data,$ticket]);
     }
 }

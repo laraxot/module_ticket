@@ -7,6 +7,8 @@ namespace Modules\Ticket\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\LU\Models\User;
+use Modules\Geo\Models\Traits\GeoTrait;
+use Modules\Geo\Models\Traits\HasPlaceTrait;
 
 /**
  * @property int                  $id
@@ -57,6 +59,9 @@ use Modules\LU\Models\User;
  * @property Department           $department
  */
 class Ticket extends BaseModelLang {
+    use HasPlaceTrait;
+    use GeoTrait;
+
     /**
      * @var array
      */

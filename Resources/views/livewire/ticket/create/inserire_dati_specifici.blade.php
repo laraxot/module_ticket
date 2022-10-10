@@ -52,9 +52,13 @@
                                         margin-class="mb-40"
                                         }} --}}
 
-                                        <x-input.group type="text" name="post.address" id="address"
+                                        <x-input.group type="address" name="places" id="address"
                                             class="p-big p-lg-4" label="Indirizzo/Luogo">
                                         </x-input.group>
+
+                                        {{-- <x-input.group type="text" name="post.address" id="address"
+                                            class="p-big p-lg-4" label="Indirizzo/Luogo">
+                                        </x-input.group> --}}
 
                                         {{-- partials.input.autocomplete --}}
                                         {{-- {{> partials/input-autocomplete/input-autocomplete placeholder="Cerca un luogo*" link=true class="mt-3"}} --}}
@@ -72,9 +76,9 @@
                                     <x-slot name="title" class="mb-3">Disservizio</x-slot>
 
 
-                                    <x-input.group type="text" name="post.category" id="category"
+                                    {{-- <x-input.group type="text" name="post.category" id="category"
                                         class="p-big p-lg-4" label="Tipo di disservizio">
-                                    </x-input.group>
+                                    </x-input.group> --}}
 
                                     {{-- <div class="text-area-wrapper p-3 px-lg-4 pt-lg-5 pb-lg-0 bg-white"> --}}
                                     <x-input.group type="text" name="post.title" id="title" class="mb-0"
