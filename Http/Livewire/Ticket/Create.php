@@ -71,15 +71,17 @@ class Create extends Component {
         // ]);
 
         // $place = new Place();
-        // $place->firstOrCreate(json_decode($this->form_data['places'], true));
+        // $data = json_decode($this->form_data['places']);
+        // $place->create($data);
 
-        // dddx($place);
+        // dddx($place->toArray());
 
         if (isset($this->form_data['places'])) {
-            $ticket->address()->create(json_decode($this->form_data['places'], true));
+            $ticket->address()->create(json_decode($this->form_data['places'], true)); // funziona ma non mi salva post_id
+            // $ticket->address()->create($place->all());
             // $ticket->address($this->form_data['places']);
         }
 
-        dddx([$this->form_data, $ticket]);
+        dddx([$this->form_data, $ticket, $ticket->place]);
     }
 }
