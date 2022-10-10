@@ -20,4 +20,12 @@ class TicketPanelPolicy extends XotBasePanelPolicy {
 
         return true;
     }
+
+    public function geo(UserContract $user, PanelContract $panel): bool {
+        if (false === config('ticket.geo')) {
+            return false;
+        }
+
+        return true;
+    }
 }
