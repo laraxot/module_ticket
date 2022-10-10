@@ -32,8 +32,9 @@
                     <div class="steppers-content" aria-live="polite">
                         <div class="it-page-sections-container">
 
-                            {{-- dddx(false === config('ticket.geo'))--}}
-                            @can('geo', $_panel)
+                            {{-- dddx(false === config('ticket.geo')) --}}
+
+                            @if (false === !config('ticket.geo'))
                                 <section class="it-page-section" id="report-place">
 
                                     <x-card type="content_box" class="p-big mb-40" :bg_grey="true">
@@ -62,7 +63,8 @@
                                    </x-input.select> --}}
                                     </x-card>
                                 </section>
-                            @endcan
+                            @endif
+
 
                             <section class="it-page-section" id="report-info">
                                 <x-card type="content_box" class="p-big mb-40" :bg_grey="true" :required_icon="true">
