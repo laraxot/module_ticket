@@ -69,16 +69,16 @@
                                 </section>
                             @endif
 
-
+                            {{-- {{ dddx($_theme->getTicketCategories()) }} --}}
                             <section class="it-page-section" id="report-info">
                                 <x-card type="content_box" class="p-big mb-40" :bg_grey="true" :required_icon="true">
                                     <x-slot name="header" class="m-0"></x-slot>
                                     <x-slot name="title" class="mb-3">Disservizio</x-slot>
 
 
-                                    <x-input.group type="select" name="category" id="category"
+                                    {{-- <x-input.group type="select" name="category" id="category" :options="$_theme->getTicketCategories()"
                                         class="p-big p-lg-4" label="Tipo di disservizio">
-                                    </x-input.group>
+                                    </x-input.group> --}}
 
                                     {{-- <div class="text-area-wrapper p-3 px-lg-4 pt-lg-5 pb-lg-0 bg-white"> --}}
                                     <x-input.group type="text" name="post.title" id="title" class="mb-0"

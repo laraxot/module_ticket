@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Ticket\View\Composers;
 
 use Illuminate\Support\Arr;
+use Modules\Blog\Models\Category;
 use Modules\LU\Services\ProfileService;
 
 class ThemeComposer {
@@ -367,5 +368,11 @@ class ThemeComposer {
         $key = implode('.', array_slice($tmp, 1));
 
         return Arr::get($json, $key);
+    }
+
+    public function getTicketCategories(): array {
+        $res = Category::ofType('ticket')->get();
+
+        return $res;
     }
 }
