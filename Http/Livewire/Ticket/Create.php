@@ -59,11 +59,42 @@ class Create extends Component {
     }
 
     public function save() {
+<<<<<<< HEAD
         $data = $this->form_data;
         $rules = [
             'title' => 'required|min:6',
         ];
         $res = app(StoreAction::class)->execute(app(Ticket::class), $data, $rules);
+=======
+        $this->validate();
+        // dddx($this->form_data);
+        // $this->form_data['post']['lang'] = app()->getLocale();
+        $ticket = new Ticket();
+        // $ticket->create($this->form_data)->post()->firstOrCreate($this->form_data['post']);
+
+        $ticket_panel = PanelService::make()->get($ticket);
+        $ticket_panel->store($this->form_data);
+
+        // $tmp = json_decode($this->form_data['places'], true);
+        // dddx([
+        //     json_decode($this->form_data['places']),
+        //     gettype($tmp),
+        //     $tmp,
+        //     // $tmp->toArray(),
+        // ]);
+
+        // $place = new Place();
+        // $data = json_decode($this->form_data['places']);
+        // $place->create($data);
+
+        // dddx($place->toArray());
+
+        // if (isset($this->form_data['places'])) {
+        //     $ticket->address()->create(json_decode($this->form_data['places'], true)); // funziona ma non mi salva post_id
+        //     // $ticket->address()->create($place->all());
+        //     // $ticket->address($this->form_data['places']);
+        // }
+>>>>>>> 096fd1f (up)
 
         // dddx([$this->form_data, $ticket->all(), $ticket->get()->last()->place]);
     }

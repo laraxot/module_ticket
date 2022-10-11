@@ -47,11 +47,7 @@
                         <x-slot name="title">Disservizio</x-slot>
                         <x-slot name="header"></x-slot>
 
-<<<<<<< Updated upstream
                         <x-info.rows type="summary" :rows="$_theme->getDisservizioInfoList()" class="p-3 p-lg-4" :info="true" header_class="pb-2">
-=======
-                        <x-info.rows type="summary" :rows="$_theme->getDisservizioInfoList($form_data)" class="p-3 p-lg-4" info=true header_class="pb-2">
->>>>>>> Stashed changes
                         </x-info.rows>
 
 

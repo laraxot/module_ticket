@@ -143,19 +143,12 @@
                                     <x-slot name="subtitle">Informazione su di te</x-slot>
 
                                     <x-card type="info_button">
-<<<<<<< Updated upstream
                                         <x-slot name="big_title">{{ $profile->getProfile()->full_name }}</x-slot>
                                         <x-slot name="label_2">
                                             @if($profile->getProfile()->cf)
                                                 Codice Fiscale <br>
                                                 <span>{{ $profile->getProfile()->cf }}</span>
                                             @endif
-=======
-                                        <x-slot name="big_title">{{$_theme->getFullName()}}</x-slot>
-                                        <x-slot name="label_2">
-                                            Codice Fiscale <br>
-                                            <span>Codice Fiscale non presente</span>
->>>>>>> Stashed changes
                                         </x-slot>
                                         <x-slot name="card-class">mt-3</x-slot>
                                         <x-slot name="onlyContact">true</x-slot>
