@@ -50,7 +50,7 @@ class Create extends Component {
     }
 
     public function acconsento() {
-        // dddx($this->form_data);
+        // $this->validate();
         ++$this->step;
     }
 
@@ -59,6 +59,7 @@ class Create extends Component {
     }
 
     public function save() {
+<<<<<<< Updated upstream
         $this->validate();
         //dddx($this->form_data);
         // $this->form_data['post']['lang'] = app()->getLocale();
@@ -68,6 +69,15 @@ class Create extends Component {
         $ticket_panel = PanelService::make()->get($ticket);
         $ticket_panel->store($this->form_data);
         
+=======
+        // $this->validate();
+
+        $ticket = new Ticket();
+
+        // dddx($this->form_data);
+
+        $ticket->create($this->form_data)->post()->firstOrCreate($this->form_data['post']);
+>>>>>>> Stashed changes
 
         // $tmp = json_decode($this->form_data['places'], true);
         // dddx([
@@ -83,12 +93,20 @@ class Create extends Component {
 
         // dddx($place->toArray());
 
+<<<<<<< Updated upstream
         // if (isset($this->form_data['places'])) {
         //     $ticket->address()->create(json_decode($this->form_data['places'], true)); // funziona ma non mi salva post_id
         //     // $ticket->address()->create($place->all());
         //     // $ticket->address($this->form_data['places']);
         // }
+=======
+        if (isset($this->form_data['places'])) {
+            $ticket->linked()->address()->create(json_decode($this->form_data['places'], true)); // funziona ma non mi salva post_id
+            // $ticket->address()->create($place->all());
+            // $ticket->address($this->form_data['places']);
+        }
+>>>>>>> Stashed changes
 
-        dddx([$this->form_data, $ticket, $ticket->place]);
+        // dddx([$this->form_data, $ticket->all(), $ticket->get()->last()->place]);
     }
 }

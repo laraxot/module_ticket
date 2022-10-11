@@ -84,6 +84,7 @@
                                     <x-input.group type="text" name="post.title" id="title" class="mb-0"
                                         label="Titolo">
                                     </x-input.group>
+                                    @error('post.title') <span class="error">{{ $message }}</span> @enderror
                                     {{-- {{>partials/input/input type="text" id="title" label="Titolo" required=true name="title"
                                         formClass="mb-0"}} --}}
 
@@ -94,6 +95,7 @@
                                         class="m-0 p-3 px-lg-4 pt-lg-5 pb-lg-4 bg-white" num="2"
                                         label="Dettagli*">
                                     </x-input.group>
+                                    @error('post.txt') <span class="error">{{ $message }}</span> @enderror
                                     {{-- {{>partials/text-area/text-area placeholder="Dettagli*" id="details" visible=true class="m-0 p-3 px-lg-4
                                     pt-lg-5 pb-lg-4 bg-white" num="2" label="Inserire al massimo 200 caratteri"}} --}}
 
@@ -141,12 +143,19 @@
                                     <x-slot name="subtitle">Informazione su di te</x-slot>
 
                                     <x-card type="info_button">
+<<<<<<< Updated upstream
                                         <x-slot name="big_title">{{ $profile->getProfile()->full_name }}</x-slot>
                                         <x-slot name="label_2">
                                             @if($profile->getProfile()->cf)
                                                 Codice Fiscale <br>
                                                 <span>{{ $profile->getProfile()->cf }}</span>
                                             @endif
+=======
+                                        <x-slot name="big_title">{{$_theme->getFullName()}}</x-slot>
+                                        <x-slot name="label_2">
+                                            Codice Fiscale <br>
+                                            <span>Codice Fiscale non presente</span>
+>>>>>>> Stashed changes
                                         </x-slot>
                                         <x-slot name="card-class">mt-3</x-slot>
                                         <x-slot name="onlyContact">true</x-slot>
@@ -164,12 +173,13 @@
                         <x-nav type="steps" :save="true" :saveBtn="true">
                             <x-slot name="aria_label_save">di segnalazione disservizio</x-slot>
                         </x-nav>
+                        {{-- messo in nav/steps 
                         <button type="button" wire:click="previous()" class="btn btn-primary">
                             Indietro
                         </button>
                         <button type="button" wire:click="acconsento()" class="btn btn-primary">
                             Avanti
-                        </button>
+                        </button>--}}
                     </div>
                 </div>
             </div>

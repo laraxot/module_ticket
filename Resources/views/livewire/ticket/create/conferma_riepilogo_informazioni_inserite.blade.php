@@ -47,7 +47,11 @@
                         <x-slot name="title">Disservizio</x-slot>
                         <x-slot name="header"></x-slot>
 
+<<<<<<< Updated upstream
                         <x-info.rows type="summary" :rows="$_theme->getDisservizioInfoList()" class="p-3 p-lg-4" :info="true" header_class="pb-2">
+=======
+                        <x-info.rows type="summary" :rows="$_theme->getDisservizioInfoList($form_data)" class="p-3 p-lg-4" info=true header_class="pb-2">
+>>>>>>> Stashed changes
                         </x-info.rows>
 
 
@@ -63,7 +67,7 @@
                         <x-slot name="header"></x-slot>
 
                         <x-info.rows type="summary-no-modify" :rows="$_theme->getDisservizioInfoAuthor()" class="mb-4 mb-lg-30 p-3 p-lg-4" info=true disservizio_page=true>
-                            <x-slot name="title">Giulia Bianchi</x-slot>
+                            <x-slot name="title">{{$_theme->getFullName()}}</x-slot>
                         </x-info.rows>
 
                         <x-info.rows type="summary-no-modify" :rows="$_theme->getDisservizioInfoContacts()" class="p-3 p-lg-4" info=true disservizio_page=true>
@@ -78,12 +82,6 @@
                         <x-slot name="saveBtn">true</x-slot> --}}
                         <x-slot name="aria-label-save">di segnalazione disservizio</x-slot>
                     </x-nav>
-                    <button type="button" wire:click="previous()" class="btn btn-primary">
-                        Indietro
-                    </button>
-                    <button type="button" wire:click="save()" class="btn btn-primary">
-                        Salva
-                    </button>
                 </div>
             </div>
         </div>

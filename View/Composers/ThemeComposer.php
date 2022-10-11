@@ -5,88 +5,95 @@ declare(strict_types=1);
 namespace Modules\Ticket\View\Composers;
 
 use Illuminate\Support\Arr;
+use Modules\LU\Services\ProfileService;
 
 class ThemeComposer {
-    public function getSteps() {
-        $steps = collect([
-            (object) [
-                'title' => 'Primo step',
-                'completed' => true,
-                'active' => true,
-            ],
-            (object) [
-                'title' => 'Secondo step',
-                'completed' => false,
-                'active' => false,
-            ],
-            (object) [
-                'title' => 'Terzo step',
-                'completed' => false,
-                'active' => false,
-            ],
-        ]);
-
-        return $steps;
+    public function getFullName() {
+        return ProfileService::make()->getUser()->full_name;
     }
 
-    public function getDisservizioInfoList() {
-        $str = '[
+      public function getSteps() {
+          $steps = collect([
+              (object) [
+                  'title' => 'Primo step',
+                  'completed' => true,
+                  'active' => true,
+              ],
+              (object) [
+                  'title' => 'Secondo step',
+                  'completed' => false,
+                  'active' => false,
+              ],
+              (object) [
+                  'title' => 'Terzo step',
+                  'completed' => false,
+                  'active' => false,
+              ],
+          ]);
+
+          return $steps;
+      }
+
+      public function getDisservizioInfoList($form_data) {
+          $str = '[
         {
           "name": "Indirizzo",
-          "txt": "Via Solferino - 50100 Firenze (FI)"
+          "txt": "Macante"
         },
         {
           "name": "Tipo di disservizio",
-          "txt": "Danneggiamento proprietà pubblica"
+          "txt": "Problema con Mediamonitor"
         },
         {
           "name": "Titolo",
-          "txt": "Panchina danneggiata"
+          "txt": "'.$form_data['post']['title'].'"
         },
         {
           "name": "Dettagli",
-          "txt": "La seduta della panchina risulta inutilizzabile e pericolosa dato che ci sono molte schegge e parti appuntite"
+          "txt": "'.$form_data['post']['txt'].'"
         },
         {
           "name": "Immagini",
-          "txt": "6yhakandsahm413d8da.jpg"
+          "txt": "Immagini non presenti"
         }
       ]';
 
-        return collect(json_decode($str));
-    }
+          return collect(json_decode($str));
+      }
 
-    public function getDisservizioInfoAuthor() {
-        $str = '[
+      public function getDisservizioInfoAuthor() {
+          $str = '[
         {
           "name": "Codice Fiscale",
           "description": "GLABNC72H25H501Y"
         }]';
 
-        return collect(json_decode($str));
-    }
+          return collect(json_decode($str));
+      }
 
-    public function getDisservizioInfoContacts() {
-        $str = '[
+      public function getDisservizioInfoContacts() {
+          $authorInfo = ProfileService::make()->getProfile();
+
+          $str = '[
         {
           "name": "Telefono",
-          "description": "+39 331 1234567"
+          "description": "'.$authorInfo->phone.'"
         },
         {
           "name": "Email",
-          "description": "giulia.bianchi@gmail.com"
+          "description": "'.$authorInfo->email.'"
         }
       ]';
 
-        return collect(json_decode($str));
-    }
+          return collect(json_decode($str));
+      }
 
-    public function getBreads() {
-        return collect([]);
-    }
+      public function getBreads() {
+          return collect([]);
+      }
 
-    public function getDisservizioStep1() {
-        $str = '[
+      public function getDisservizioStep1() {
+          $str = '[
         {
           "title": "Autorizzazioni e condizioni",
           "active": true,
@@ -104,11 +111,11 @@ class ThemeComposer {
         }
       ]';
 
-        return collect(json_decode($str));
-    }
+          return collect(json_decode($str));
+      }
 
-    public function getDisservizioStep2() {
-        $str = '[
+      public function getDisservizioStep2() {
+          $str = '[
         {
           "title": "Informativa sulla privacy",
           "active": false,
@@ -126,11 +133,11 @@ class ThemeComposer {
         }
       ]';
 
-        return collect(json_decode($str));
-    }
+          return collect(json_decode($str));
+      }
 
-    public function getDisservizioStep3() {
-        $str = '[
+      public function getDisservizioStep3() {
+          $str = '[
         {
           "title": "Autorizzazioni e condizioni",
           "active": false,
@@ -148,11 +155,11 @@ class ThemeComposer {
         }
       ]';
 
-        return collect(json_decode($str));
-    }
+          return collect(json_decode($str));
+      }
 
-    public function getDisservizioDatiSpecifici() {
-        $str = '[
+      public function getDisservizioDatiSpecifici() {
+          $str = '[
         {
           "item": "Luogo",
           "anchor": "report-place"
@@ -167,11 +174,11 @@ class ThemeComposer {
         }
       ]';
 
-        return collect(json_decode($str));
-    }
+          return collect(json_decode($str));
+      }
 
-    public function getLinksBreadcrumbs() {
-        $str = '[
+      public function getLinksBreadcrumbs() {
+          $str = '[
           {
             "title": "Home"
           },
@@ -183,11 +190,11 @@ class ThemeComposer {
           }
         ]';
 
-        return collect(json_decode($str));
-    }
+          return collect(json_decode($str));
+      }
 
-    public function getLinksBreadcrumbs2() {
-        $str = '[
+      public function getLinksBreadcrumbs2() {
+          $str = '[
           {
             "link2": "Home"
           },
@@ -196,11 +203,11 @@ class ThemeComposer {
           },
         ]';
 
-        return collect(json_decode($str));
-    }
+          return collect(json_decode($str));
+      }
 
-    public function segnalazioniDisservizio1() {
-        $str = '[
+      public function segnalazioniDisservizio1() {
+          $str = '[
       {
         "item": "A chi è rivolto",
         "anchor": "who-needs"
@@ -239,11 +246,11 @@ class ThemeComposer {
       }
     ]';
 
-        return collect(json_decode($str));
-    }
+          return collect(json_decode($str));
+      }
 
-  public function getServiziCorrelatiDisservizio() {
-      $str = '[
+    public function getServiziCorrelatiDisservizio() {
+        $str = '[
         {
           "icon": "it-settings",
           "link": "Richiesta appuntamento",
@@ -251,11 +258,11 @@ class ThemeComposer {
         }
       ]';
 
-      return collect(json_decode($str));
-  }
+        return collect(json_decode($str));
+    }
 
-  public function getSegnalazioneDisservizioAreaPersonaleNavscrollPage1() {
-      $str = '[
+    public function getSegnalazioneDisservizioAreaPersonaleNavscrollPage1() {
+        $str = '[
         {
           "item": "Ultimi messaggi",
           "anchor": "latest-posts"
@@ -266,11 +273,11 @@ class ThemeComposer {
         }
       ]';
 
-      return collect(json_decode($str));
-  }
+        return collect(json_decode($str));
+    }
 
-  public function getDisserviziCategories() {
-      $str = '[
+    public function getDisserviziCategories() {
+        $str = '[
       {
         "title": "categoria",
         "list": [
@@ -344,22 +351,21 @@ class ThemeComposer {
       }
     ]';
 
-      return collect(json_decode($str));
-  }
+        return collect(json_decode($str));
+    }
 
-  public function getSelectOptionList(){
-    $str = '[{"text":"Abruzzo","link":"#"},{"text":"Basilicata","link":"#"},{"text":"Calabria","link":"#"},{"text":"Campania","link":"#"},{"text":"Emilia Romagna","link":"#"},{"text":"Friuli Venezia Giulia","link":"#"},{"text":"Lazio","link":"#"},{"text":"Liguria","link":"#"},{"text":"Lombardia","link":"#"},{"text":"Marche","link":"#"},{"text":"Molise","link":"#"},{"text":"Piemonte","link":"#"},{"text":"Puglia","link":"#"},{"text":"Sardegna","link":"#"},{"text":"Sicilia","link":"#"},{"text":"Toscana","link":"#"},{"text":"Trentino Alto Adige","link":"#"},{"text":"Umbria","link":"#"},{"text":"Valle d’Aosta","link":"#"},{"text":"Veneto","link":"#"}]';
+    public function getSelectOptionList() {
+        $str = '[{"text":"Abruzzo","link":"#"},{"text":"Basilicata","link":"#"},{"text":"Calabria","link":"#"},{"text":"Campania","link":"#"},{"text":"Emilia Romagna","link":"#"},{"text":"Friuli Venezia Giulia","link":"#"},{"text":"Lazio","link":"#"},{"text":"Liguria","link":"#"},{"text":"Lombardia","link":"#"},{"text":"Marche","link":"#"},{"text":"Molise","link":"#"},{"text":"Piemonte","link":"#"},{"text":"Puglia","link":"#"},{"text":"Sardegna","link":"#"},{"text":"Sicilia","link":"#"},{"text":"Toscana","link":"#"},{"text":"Trentino Alto Adige","link":"#"},{"text":"Umbria","link":"#"},{"text":"Valle d’Aosta","link":"#"},{"text":"Veneto","link":"#"}]';
 
-    return collect(json_decode($str));
-  }
+        return collect(json_decode($str));
+    }
 
-  public function readJson(string $name){
-    $tmp = explode('.', $name);
-    $content = file_get_contents(__DIR__.'/../../Resources/json/'.$tmp[0].'.json');
-    $json=json_decode($content,true);
-    $key=implode('.',array_slice($tmp,1));
-    
-    return Arr::get($json,$key);
-    
-  }
+    public function readJson(string $name) {
+        $tmp = explode('.', $name);
+        $content = file_get_contents(__DIR__.'/../../Resources/json/'.$tmp[0].'.json');
+        $json = json_decode($content, true);
+        $key = implode('.', array_slice($tmp, 1));
+
+        return Arr::get($json, $key);
+    }
 }
