@@ -1,1 +1,1 @@
-[{"class_name":"Ticket\\Create","comp_name":"ticket.create","comp_ns":"Modules\\Ticket\\Http\\Livewire\\Ticket\\Create"}]
+[{"class_name":"Ticket\\Create","comp_name":"ticket.create","comp_ns":"Modules\\Ticket\\Http\\Livewire\\Ticket\\Create"},{"class_name":"Ticket\\Test","comp_name":"ticket.test","comp_ns":"Modules\\Ticket\\Http\\Livewire\\Ticket\\Test"}]
