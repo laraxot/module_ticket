@@ -103,6 +103,31 @@
                                     </x-input.group> --}}
 
 
+                                    {{-- prova inserimento immagine, con js inserito sotto --}}
+                                    {{-- <label class="col-sm-2 col-form-label">{{ __('Picture') }}</label>
+                                    <div class="btn-wrapper px-3 pt-2 pb-3 px-lg-4 pb-lg-4 pt-lg-0 bg-white">
+                                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                            <div class="fileinput-new thumbnail">
+                                                <img src="{{ asset('material') }}/img/image_placeholder.jpg" alt="...">
+                                            </div>
+                                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                            <div>
+                                                <span class="btn btn-rose btn-file">
+                                                    <span class="fileinput-new">{{ __('Select image') }}</span>
+                                                    <span class="fileinput-exists">{{ __('Change') }}</span>
+                                                    <input type="file" name="photo" id="input-picture" require />
+                                                </span>
+                                                <a href="#pablo" class="btn btn-danger fileinput-exists"
+                                                    data-dismiss="fileinput"><i class="fa fa-times"></i>
+                                                    {{ __('Remove') }}</a>
+                                            </div>
+                                            
+                                            @include('theme::components.alert.feedback', ['field' => 'photo'])
+                                            
+                                        </div>
+                                    </div> --}}
+
+
                                 </x-card>
                             </section>
                             {{-- {{ dddx([get_defined_vars(), $profile->getProfile()->cf]) }} --}}
@@ -164,3 +189,18 @@
 
     </main>
 </div>
+@push('scripts')
+    
+{{-- <script src="{{ Theme::asset('pub_theme::js/plugins/jquery.min.js') }}" type="text/javascript"></script>
+<!--	Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+<script src="{{ Theme::asset('pub_theme::js/plugins/jasny-bootstrap.min.js') }}" type="text/javascript"></script> --}}
+    
+@php
+Theme::add('pub_theme::js/plugins/jquery.min.js');
+Theme::add('pub_theme::js/plugins/jasny-bootstrap.min.js');
+
+ 
+@endphp
+
+
+@endpush
