@@ -370,7 +370,7 @@ class ThemeComposer {
         return Arr::get($json, $key);
     }
 
-    public function getTicketCategories(): array {
+    public function getTicketCategories() {
         $res = Category::ofType('ticket')->get();
 
         return $res;
