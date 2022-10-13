@@ -43,14 +43,14 @@
                     </p>
                     <p class="text-paragraph mb-0">
                         Per i dettagli sul trattamento dei dati personali consulta l’
-                        <a href="#" class="t-primary">informativa sulla privacy.</a>
+                        <a href="#" class="t-primary">informativa sulla privacy1.</a>
                     </p>
 
                     <div class="form-check mt-4 mb-3 mt-md-40 mb-lg-40">
                         <div class="checkbox-body d-flex align-items-center">
                             <input type="checkbox" id="privacy" name="privacy-field" value="privacy-field">
                             <label class="title-small-semi-bold pt-1" for="privacy">Ho letto e compreso l’informativa sulla
-                                privacy</label>
+                                privacy3</label>
                         </div>
                     </div>
 

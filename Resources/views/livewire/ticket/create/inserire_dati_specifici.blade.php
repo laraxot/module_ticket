@@ -1,4 +1,5 @@
 <div>
+    <br/><br/><br/><br/><br/>
     <main>
         <div class="container" id="main-container">
             <div class="row justify-content-center">
@@ -24,17 +25,19 @@
 
 
             <div class="row">
+                {{--
                 <div class="col-12 col-lg-3 d-lg-block mb-4 d-none ">
                     <x-nav.rows type="scroll" :rows="$_theme->getDisservizioDatiSpecifici()" id="one" label="INFORMAZIONI RICHIESTE">
                     </x-nav.rows>
                 </div>
+                --}}
                 <div class="col-12 col-lg-8 offset-lg-1">
                     <div class="steppers-content" aria-live="polite">
                         <div class="it-page-sections-container">
 
-                            {{-- dddx(false === config('ticket.geo')) --}}
+                            
 
-                            @if (false === !config('ticket.geo'))
+                            @if ($hasGeo)
                                 <section class="it-page-section" id="report-place">
 
                                     <x-card type="content_box" class="p-big mb-40" :bg_grey="true">
@@ -76,9 +79,9 @@
                                     <x-slot name="title" class="mb-3">Disservizio</x-slot>
 
 
-                                    {{-- <x-input.group type="select" name="category" id="category" :options="$_theme->getTicketCategories()"
+                                    <x-input.group type="select" name="category" id="category" :options="$_theme->getTicketCategories()->pluck('name','name')->all()"
                                         class="p-big p-lg-4" label="Tipo di disservizio">
-                                    </x-input.group> --}}
+                                    </x-input.group> 
 
                                     {{-- <div class="text-area-wrapper p-3 px-lg-4 pt-lg-5 pb-lg-0 bg-white"> --}}
                                     <x-input.group type="text" name="post.title" id="title" class="mb-0"
@@ -133,12 +136,10 @@
                                 </x-card>
                             </section>
                             {{-- {{ dddx([get_defined_vars(), $profile->getProfile()->cf]) }} --}}
+                            {{--
                             <section class="it-page-section" id="report-author">
                                 <x-card type="content_box" :bg_grey="true">
                                     <x-slot name="header" class="m-0"></x-slot>
-                                    {{-- <x-slot name="h2_class">mb-1</x-slot>
-                                    <x-slot name="header_m0">true</x-slot>
-                                    <x-slot name="bg_grey">true</x-slot> --}}
                                     <x-slot name="title">Autore della segnalazione</x-slot>
                                     <x-slot name="subtitle">Informazione su di te</x-slot>
 
@@ -160,6 +161,7 @@
                                     </x-card>
                                 </x-card>
                             </section>
+                            --}}
 
 
                         </div>
@@ -178,7 +180,7 @@
             </div>
         </div>
 
-
+        {{--
         <div class="bg-grey-card shadow-contacts">
             <div class="container">
                 <div class="row d-flex justify-content-center p-contacts">
@@ -189,7 +191,7 @@
                 </div>
             </div>
         </div>
-
+        --}}
     </main>
 </div>
 @push('scripts')
@@ -199,9 +201,10 @@
 <script src="{{ Theme::asset('pub_theme::js/plugins/jasny-bootstrap.min.js') }}" type="text/javascript"></script> --}}
     
 @php
+/* --- ??????? 
 Theme::add('pub_theme::js/plugins/jquery.min.js');
 Theme::add('pub_theme::js/plugins/jasny-bootstrap.min.js');
-
+*/
  
 @endphp
 

@@ -16,6 +16,7 @@ use Modules\Xot\Actions\Model\StoreAction;
 class Create extends Component {
     public string $type;
     public int $step = 0;
+    public bool $hasGeo;
     public array $steps = [
         // 'acconsentire_trattamento_dati_inseriti',
         'inserire_dati_specifici',
@@ -34,6 +35,7 @@ class Create extends Component {
 
     public function mount(?string $type = 'create') {
         $this->type = $type;
+        $this->hasGeo = config('ticket.geo');
     }
 
     /**

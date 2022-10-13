@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Ticket\View\Composers;
 
 use Illuminate\Support\Arr;
+use Modules\Blog\Models\Categorizable;
 use Modules\Blog\Models\Category;
 use Modules\LU\Services\ProfileService;
 
@@ -118,7 +119,7 @@ class ThemeComposer {
       public function getDisservizioStep2() {
           $str = '[
         {
-          "title": "Informativa sulla privacy",
+          "title": "Informativa sulla privacy4",
           "active": false,
           "completed": true
         },
@@ -372,6 +373,14 @@ class ThemeComposer {
 
     public function getTicketCategories() {
         $res = Category::ofType('ticket')->get();
+        if (0 == $res->count()) {
+            $ticketCategories = config('ticket.categories');
+
+            foreach ($ticketCategories as $v) {
+                $cat = Category::firstOrCreate($v);
+                Categorizable::firstOrCreate(['category_id' => $cat->id, 'categorizable_type' => 'ticket']);
+            }
+        }
 
         return $res;
     }
