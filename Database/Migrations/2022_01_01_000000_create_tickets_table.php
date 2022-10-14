@@ -57,6 +57,9 @@ class CreateTicketsTable extends XotBaseMigration {
                     $table->string('created_by')->nullable();
                     $table->string('updated_by')->nullable();
                 }
+                if (! $this->hasColumn('url')) {
+                    $table->string('url')->nullable();
+                }
             }
         );
     }

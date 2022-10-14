@@ -73,8 +73,9 @@ class Ticket extends BaseModelLang {
         'ip_address', 'lock_by', 'lock_at', 'isoverdue', 'reopened', 'isanswered', 'html',
         'is_deleted', 'closed', 'is_transferred', 'transferred_at', 'reopened_at', 'duedate',
         'closed_at', 'last_message_at', 'last_response_at', 'approval', 'follow_up', 'created_at', 'updated_at',
-        //'place', // relazione
-        'title',// e' in post
+        // 'place', // relazione
+        'title', // e' in post
+        'url',
     ];
 
     /**
