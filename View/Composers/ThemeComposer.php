@@ -373,12 +373,13 @@ class ThemeComposer {
 
     public function getTicketCategories() {
         $res = Category::ofType('ticket')->get();
-        if (0 == $res->count()) {
+        $fillable=app(Category::class)->getFillable();
+        if ($res->count() < 1) {
             $ticketCategories = config('ticket.categories');
 
             foreach ($ticketCategories as $v) {
-                $cat = Category::firstOrCreate($v);
-                Categorizable::firstOrCreate(['category_id' => $cat->id, 'categorizable_type' => 'ticket']);
+                  $cat = Category::firstOrCreate($v);
+                  Categorizable::firstOrCreate(['category_id' => $cat->id, 'categorizable_type' => 'ticket']);
             }
         }
 
