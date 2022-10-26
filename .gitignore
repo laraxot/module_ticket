@@ -1,0 +1,7 @@
+*.lock
+*.stackdump
+*.cache
+*.lock
+*.stackdump
+*.cache
+.git-rewrite
