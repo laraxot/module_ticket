@@ -14,30 +14,30 @@ class ThemeComposer {
         return ProfileService::make()->getUser()->full_name;
     }
 
-      public function getSteps() {
-          $steps = collect([
-              (object) [
-                  'title' => 'Primo step',
-                  'completed' => true,
-                  'active' => true,
-              ],
-              (object) [
-                  'title' => 'Secondo step',
-                  'completed' => false,
-                  'active' => false,
-              ],
-              (object) [
-                  'title' => 'Terzo step',
-                  'completed' => false,
-                  'active' => false,
-              ],
-          ]);
+    public function getSteps() {
+        $steps = collect([
+            (object) [
+                'title' => 'Primo step',
+                'completed' => true,
+                'active' => true,
+            ],
+            (object) [
+                'title' => 'Secondo step',
+                'completed' => false,
+                'active' => false,
+            ],
+            (object) [
+                'title' => 'Terzo step',
+                'completed' => false,
+                'active' => false,
+            ],
+        ]);
 
-          return $steps;
-      }
+        return $steps;
+    }
 
-      public function getDisservizioInfoList($form_data) {
-          $str = '[
+    public function getDisservizioInfoList($form_data) {
+        $str = '[
         {
           "name": "Indirizzo",
           "txt": "Macante"
@@ -60,23 +60,23 @@ class ThemeComposer {
         }
       ]';
 
-          return collect(json_decode($str));
-      }
+        return collect(json_decode($str));
+    }
 
-      public function getDisservizioInfoAuthor() {
-          $str = '[
+    public function getDisservizioInfoAuthor() {
+        $str = '[
         {
           "name": "Codice Fiscale",
           "description": "GLABNC72H25H501Y"
         }]';
 
-          return collect(json_decode($str));
-      }
+        return collect(json_decode($str));
+    }
 
-      public function getDisservizioInfoContacts() {
-          $authorInfo = ProfileService::make()->getProfile();
+    public function getDisservizioInfoContacts() {
+        $authorInfo = ProfileService::make()->getProfile();
 
-          $str = '[
+        $str = '[
         {
           "name": "Telefono",
           "description": "'.$authorInfo->phone.'"
@@ -87,15 +87,15 @@ class ThemeComposer {
         }
       ]';
 
-          return collect(json_decode($str));
-      }
+        return collect(json_decode($str));
+    }
 
-      public function getBreads() {
-          return collect([]);
-      }
+    public function getBreads() {
+        return collect([]);
+    }
 
-      public function getDisservizioStep1() {
-          $str = '[
+    public function getDisservizioStep1() {
+        $str = '[
         {
           "title": "Autorizzazioni e condizioni",
           "active": true,
@@ -113,11 +113,11 @@ class ThemeComposer {
         }
       ]';
 
-          return collect(json_decode($str));
-      }
+        return collect(json_decode($str));
+    }
 
-      public function getDisservizioStep2() {
-          $str = '[
+    public function getDisservizioStep2() {
+        $str = '[
         {
           "title": "Informativa sulla privacy4",
           "active": false,
@@ -135,11 +135,11 @@ class ThemeComposer {
         }
       ]';
 
-          return collect(json_decode($str));
-      }
+        return collect(json_decode($str));
+    }
 
-      public function getDisservizioStep3() {
-          $str = '[
+    public function getDisservizioStep3() {
+        $str = '[
         {
           "title": "Autorizzazioni e condizioni",
           "active": false,
@@ -157,11 +157,11 @@ class ThemeComposer {
         }
       ]';
 
-          return collect(json_decode($str));
-      }
+        return collect(json_decode($str));
+    }
 
-      public function getDisservizioDatiSpecifici() {
-          $str = '[
+    public function getDisservizioDatiSpecifici() {
+        $str = '[
         {
           "item": "Luogo",
           "anchor": "report-place"
@@ -176,11 +176,11 @@ class ThemeComposer {
         }
       ]';
 
-          return collect(json_decode($str));
-      }
+        return collect(json_decode($str));
+    }
 
-      public function getLinksBreadcrumbs() {
-          $str = '[
+    public function getLinksBreadcrumbs() {
+        $str = '[
           {
             "title": "Home"
           },
@@ -192,11 +192,11 @@ class ThemeComposer {
           }
         ]';
 
-          return collect(json_decode($str));
-      }
+        return collect(json_decode($str));
+    }
 
-      public function getLinksBreadcrumbs2() {
-          $str = '[
+    public function getLinksBreadcrumbs2() {
+        $str = '[
           {
             "link2": "Home"
           },
@@ -205,11 +205,11 @@ class ThemeComposer {
           },
         ]';
 
-          return collect(json_decode($str));
-      }
+        return collect(json_decode($str));
+    }
 
-      public function segnalazioniDisservizio1() {
-          $str = '[
+    public function segnalazioniDisservizio1() {
+        $str = '[
       {
         "item": "A chi è rivolto",
         "anchor": "who-needs"
@@ -248,8 +248,8 @@ class ThemeComposer {
       }
     ]';
 
-          return collect(json_decode($str));
-      }
+        return collect(json_decode($str));
+    }
 
     public function getServiziCorrelatiDisservizio() {
         $str = '[
