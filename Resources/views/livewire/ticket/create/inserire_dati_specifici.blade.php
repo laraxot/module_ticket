@@ -81,10 +81,11 @@
                                     <x-slot name="header" class="m-0"></x-slot>
                                     <x-slot name="title" class="mb-3">Disservizio</x-slot>
 
-
-                                    -----------------------------------------------------------------------------------
-                                    <x-form.builder disk="cache" filename="creazione_disservizio.json"></x-form.builder>
-                                    -----------------------------------------------------------------------------------
+                                    @if(Storage::disk('cache')->exists('creazione_disservizio.json'))
+                                        -----------------------------------------------------------------------------------
+                                        <x-form.builder disk="cache" filename="creazione_disservizio.json"></x-form.builder>
+                                        -----------------------------------------------------------------------------------
+                                    @endif
 
                                     <x-input.group type="select" name="category" id="category" :options="$_theme->getTicketCategories()->pluck('name','name')->all()"
                                         class="p-big p-lg-4" label="Tipo di disservizio">
