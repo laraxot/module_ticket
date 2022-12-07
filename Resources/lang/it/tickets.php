@@ -213,7 +213,7 @@ return [
         'label' => 'Nome completo',
         'placeholder' => 'Nome completo',
     ],
-    'firstname' => [
+    'first_name' => [
         'label' => 'Nome',
         'placeholder' => 'Nome',
     ],

@@ -86,7 +86,7 @@ return [
      */
     'registration' => 'Registratie',
     'full_name' => 'Volledige naam',
-    'firstname' => 'Voornaam',
+    'first_name' => 'Voornaam',
     'lastname' => 'Achternaam',
     'profilepicture' => 'Profielfoto',
     'oldpassword' => 'Oude wachtwoord',

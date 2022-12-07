@@ -75,7 +75,7 @@ return [
      */
     'registration' => 'Registrazione',
     'full_name' => 'Nome completo',
-    'firstname' => 'Nome',
+    'first_name' => 'Nome',
     'lastname' => 'Cognome',
     'profilepicture' => 'Foto del profilo',
     'oldpassword' => 'Vecchia password',

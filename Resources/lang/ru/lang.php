@@ -74,7 +74,7 @@ return [
      */
     'registration' => 'Регистрация',
     'full_name' => 'Полное имя',
-    'firstname' => 'Имя',
+    'first_name' => 'Имя',
     'lastname' => 'Фамилия',
     'profilepicture' => 'Аватар профиля',
     'oldpassword' => 'Старый пароль',

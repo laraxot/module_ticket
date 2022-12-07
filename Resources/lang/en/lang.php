@@ -74,7 +74,7 @@ return [
      */
     'registration' => 'Registration',
     'full_name' => 'Full name',
-    'firstname' => 'First name',
+    'first_name' => 'First name',
     'lastname' => 'Last name',
     'profilepicture' => 'Profile picture',
     'oldpassword' => 'Old password',

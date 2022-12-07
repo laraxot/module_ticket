@@ -56,7 +56,7 @@ return [
      */
     'registration' => 'Inscription',
     'full_name' => 'Nom complet',
-    'firstname' => 'Nom',
+    'first_name' => 'Nom',
     'lastname' => 'Prénom',
     'profilepicture' => 'Photo de profil',
     'oldpassword' => 'Ancien mot de passe',

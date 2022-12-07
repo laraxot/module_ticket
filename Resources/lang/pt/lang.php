@@ -1,5 +1,6 @@
-
 <?php
+
+declare(strict_types=1);
 /*
  |-------------------------------------------------------------------------------------
  |      Dutch translation [for version 1.0.8.0]
@@ -67,7 +68,7 @@ return [
      */
     'registration' => 'Cadastro',
     'full_name' => 'Nome completo',
-    'firstname' => 'Primeiro nome',
+    'first_name' => 'Primeiro nome',
     'lastname' => 'Último nome',
     'profilepicture' => 'Foto de perfil',
     'oldpassword' => 'Senha antiga',

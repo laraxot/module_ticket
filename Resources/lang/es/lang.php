@@ -89,7 +89,7 @@ return [
      */
     'registration' => 'Registro',
     'full_name' => 'Nombre completo',
-    'firstname' => 'Nombre',
+    'first_name' => 'Nombre',
     'lastname' => 'Apellido',
     'profilepicture' => 'Foto de perfil',
     'oldpassword' => 'Contraseña anterior',

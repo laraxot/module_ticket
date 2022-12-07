@@ -68,7 +68,7 @@ return [
      */
     'registration' => 'Cadastro',
     'full_name' => 'Nome completo',
-    'firstname' => 'Primeiro nome',
+    'first_name' => 'Primeiro nome',
     'lastname' => 'Último nome',
     'profilepicture' => 'Foto de perfil',
     'oldpassword' => 'Senha antiga',

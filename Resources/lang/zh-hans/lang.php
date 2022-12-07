@@ -81,7 +81,7 @@ return [
      */
     'registration' => '注册',
     'full_name' => '全名',
-    'firstname' => '名字',
+    'first_name' => '名字',
     'lastname' => '姓氏',
     'profilepicture' => '图像',
     'oldpassword' => '旧密码',
