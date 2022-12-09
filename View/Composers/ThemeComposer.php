@@ -63,6 +63,33 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
+    public function getDisservizioInfoList2() {
+      $str = '[
+      {
+        "name": "Indirizzo",
+        "txt": "Macante"
+      },
+      {
+        "name": "Tipo di disservizio",
+        "txt": "Problema con Mediamonitor"
+      },
+      {
+        "name": "Titolo",
+        "txt": "titolo del disservizio"
+      },
+      {
+        "name": "Dettagli",
+        "txt": "dettagli del disservizio"
+      },
+      {
+        "name": "Immagini",
+        "txt": "Immagini non presenti"
+      }
+    ]';
+
+      return collect(json_decode($str));
+  }
+
     public function getDisservizioInfoAuthor() {
         $str = '[
         {
