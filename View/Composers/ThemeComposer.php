@@ -64,7 +64,7 @@ class ThemeComposer {
     }
 
     public function getDisservizioInfoList2() {
-      $str = '[
+        $str = '[
       {
         "name": "Indirizzo",
         "txt": "Macante"
@@ -87,8 +87,8 @@ class ThemeComposer {
       }
     ]';
 
-      return collect(json_decode($str));
-  }
+        return collect(json_decode($str));
+    }
 
     public function getDisservizioInfoAuthor() {
         $str = '[
@@ -300,6 +300,256 @@ class ThemeComposer {
           "item": "Ultime attività",
           "anchor": "latest-activities"
         }
+      ]';
+
+        return collect(json_decode($str));
+    }
+
+    public function getSegnalazioneDisservizioAreaPersonaleNavscrollPage3() {
+        $str = '[
+          {
+            "item": "Pratiche",
+            "anchor": "practices"
+          },
+          {
+            "item": "Pagamenti",
+            "anchor": "payments"
+          }
+      ]';
+
+        return collect(json_decode($str));
+    }
+
+    public function getSegnalazioneDisservizioAreaPersonaleAccordionPratiche() {
+        $str = '[
+        {
+          "num": "1",
+          "title": "Iscrizione scuola d’infanzia",
+          "date": "15/02/2022",
+          "icon": "folder-incomplete.svg",
+          "icon_label": "Da completare",
+          "color": "u-main-alert",
+          "warning-icon": true,
+          "label-tag": "Servizio non digitale",
+          "practice": "Pratica:",
+          "practice_number": "AN4059281",
+          "btn-label": "Perfeziona la richiesta",
+          "collapse": [
+            {
+              "icon": "it-clip",
+              "aria-label": "Scarica la",
+              "link": "Ricevuta richiesta",
+              "class": "shadow p-0"
+            },
+            {
+              "icon": "it-clip",
+              "aria-label": "Scarica la",
+              "link": "Graduatoria",
+              "class": "shadow p-0"
+            }
+          ]
+        },
+        {
+          "num": "2",
+          "title": "Richiesta assegno maternità",
+          "date": "24/06/2021",
+          "icon": "folder-concluded.svg",
+          "icon_label": "Conclusa",
+          "label-tag": "Servizio non digitale",
+          "practice": "Pratica:",
+          "practice_number": "AN4059281",
+          "collapse": [
+            {
+              "icon": "it-clip",
+              "link": "Ricevuta richiesta",
+              "class": "shadow p-0"
+            },
+            {
+              "icon": "it-clip",
+              "aria-label": "Scarica la",
+              "link": "Graduatoria",
+              "class": "shadow p-0"
+            },
+            {
+              "icon": "it-clip",
+              "aria-label": "Scarica la",
+              "link": "Ricevuta richiesta",
+              "class": "shadow p-0"
+            }
+          ]
+        },
+        {
+          "num": "3",
+          "title": "Iscrizione corso di formazione",
+          "date": "24/06/2021",
+          "icon": "folder-concluded.svg",
+          "icon_label": "Conclusa",
+          "label-tag": "Servizio non digitale",
+          "practice": "Pratica:",
+          "practice_number": "AN4059281",
+          "collapse": [
+            {
+              "icon": "it-clip",
+              "link": "Ricevuta richiesta",
+              "class": "shadow p-0"
+            },
+            {
+              "icon": "it-clip",
+              "aria-label": "Scarica la",
+              "link": "Graduatoria",
+              "class": "shadow p-0"
+            },
+            {
+              "icon": "it-clip",
+              "aria-label": "Scarica la",
+              "link": "Ricevuta richiesta",
+              "class": "shadow p-0"
+            }
+          ]
+        },
+        {
+          "num": "4",
+          "title": "Richiesta permesso ZTL",
+          "date": "10/05/2021",
+          "icon": "folder-concluded.svg",
+          "icon_label": "Conclusa",
+          "label-tag": "Servizio non digitale",
+          "practice": "Pratica:",
+          "practice_number": "AN4059281",
+          "collapse": [
+            {
+              "icon": "it-clip",
+              "aria-label": "Scarica la",
+              "link": "Ricevuta richiesta",
+              "class": "shadow p-0"
+            },
+            {
+              "icon": "it-clip",
+              "aria-label": "Scarica la",
+              "link": "Graduatoria",
+              "class": "shadow p-0"
+            },
+            {
+              "icon": "it-clip",
+              "aria-label": "Scarica la",
+              "link": "Ricevuta richiesta",
+              "class": "shadow p-0"
+            }
+          ]
+        },
+        {
+          "num": "5",
+          "title": "Richiesta parcheggio residenti",
+          "date": "06/03/2021",
+          "icon": "folder-concluded.svg",
+          "icon_label": "Conclusa",
+          "label-tag": "Servizio non digitale",
+          "practice": "Pratica:",
+          "practice_number": "AN4059281",
+          "collapse": [
+            {
+              "icon": "it-clip",
+              "aria-label": "Scarica la",
+              "link": "Ricevuta richiesta",
+              "class": "shadow p-0"
+            },
+            {
+              "icon": "it-clip",
+              "aria-label": "Scarica la",
+              "link": "Graduatoria",
+              "class": "shadow p-0"
+            },
+            {
+              "icon": "it-clip",
+              "aria-label": "Scarica la",
+              "link": "Ricevuta richiesta",
+              "class": "shadow p-0"
+            }
+          ]
+        }
+      ]';
+
+        return collect(json_decode($str));
+    }
+
+    public function getSegnalazioneDisservizioAreaPersonaleAccordionPagamenti() {
+        $str = '[
+            {
+              "num": "5",
+              "title": "Pagamento contravvenzione",
+              "date": "01/10/2021",
+              "icon": "folder-pay.svg",
+              "icon_label": "Pagato",
+              "label-tag":"Servizio non digitale",
+              "btn-label":"Perfeziona la richiesta",
+              "practice":"Pratica:",
+              "practice_number":"AN4059281",
+              "collapse": [
+                {
+                  "icon": "it-clip",
+                  "link": "Ricevuta pagamento (PDF 80KB)",
+                  "aria-label":"Scarica la",
+                  "class": "shadow mt-3"
+                }
+              ]
+            },
+            {
+              "num": "6",
+              "title": "Pagamento contravvenzione",
+              "date": "24/06/2021",
+              "icon": "folder-pay.svg",
+              "icon_label": "Pagato",
+              "label-tag":"Servizio non digitale",
+              "btn-label":"Perfeziona la richiesta",
+              "practice":"Pratica:",
+              "practice_number":"AN4059281",
+              "collapse": [
+                {
+                  "icon": "it-clip",
+                  "link": "Ricevuta pagamento (PDF 80KB)",
+                  "aria-label":"Scarica la",
+                  "class": "shadow mt-3"
+                }
+              ]
+            },
+            {
+              "num": "7",
+              "title": "Pagamento contravvenzione",
+              "date": "10/05/2021",
+              "icon": "folder-pay.svg",
+              "icon_label": "Pagato",
+              "label-tag":"Servizio non digitale",
+              "btn-label":"Perfeziona la richiesta",
+              "practice":"Pratica:",
+              "practice_number":"AN4059281",
+              "collapse": [
+                {
+                  "icon": "it-clip",
+                  "link": "Ricevuta pagamento (PDF 80KB)",
+                  "aria-label":"Scarica la",
+                  "class": "shadow mt-3"
+                }
+              ]
+            },
+            {
+              "num": "8",
+              "title": "Pagamento contravvenzione",
+              "date": "06/03/2021",
+              "icon": "folder-pay.svg",
+              "icon_label": "Pagato",
+              "label-tag":"Servizio non digitale",
+              "btn-label":"Perfeziona la richiesta",
+              "practice":"Pratica:",
+              "practice_number":"AN4059281",
+              "collapse": [
+                {
+                  "icon": "it-clip",
+                  "link": "Ricevuta pagamento (PDF 80KB)",
+                  "aria-label":"Scarica la",
+                  "class": "shadow mt-3"
+                }
+              ]
+            }
       ]';
 
         return collect(json_decode($str));
