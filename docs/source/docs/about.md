@@ -1,3 +1,13 @@
+---
+title: Modulo Ticket
+description: Modulo Ticket
+extends: _layouts.documentation
+section: content
+---
+
+# Modulo Ticket {#modulo-ticket}
+
+
 The laraxot/module_ticket is a Laravel module that provides a ticket system for a Laravel-based application. It allows users to create, view, and manage tickets, as well as assign them to specific users and track their progress.
 
 To install the module_ticket module, you can use Composer by running the following command:
