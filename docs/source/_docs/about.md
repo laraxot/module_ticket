@@ -3,6 +3,8 @@ title: Modulo Ticket
 description: Modulo Ticket
 extends: _layouts.documentation
 section: content
+id: 1
+parent_id: 0
 ---
 
 # Modulo Ticket {#modulo-ticket}

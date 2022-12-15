@@ -3,6 +3,8 @@ title: Navigation
 description: Building a navigation menu for your site
 extends: _layouts.documentation
 section: content
+id: 6
+parent_id: 5
 ---
 
 # Navigation {#navigation}

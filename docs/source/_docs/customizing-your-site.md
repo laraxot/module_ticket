@@ -3,6 +3,8 @@ title: Customizing Your Site
 description: Customizing your Jigsaw docs site
 extends: _layouts.documentation
 section: content
+id: 4
+parent_id: 5
 ---
 # Customizing Your Site {#customizing}
 
