@@ -6,3 +6,5 @@
 *.cache
 .git-rewrite
 /vendor
+vendor/
+node_modules/
