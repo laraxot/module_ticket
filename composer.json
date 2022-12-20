@@ -1,19 +1,12 @@
 {
     "name": "laraxot/module_ticket",
     "description": "",
-<<<<<<< HEAD
-    "authors": [{
-        "name": "Marco Sottana",
-        "email": "marco.sottana@gmail.com"
-    }],
-=======
     "authors": [
         {
             "name": "Marco Sottana",
             "email": "marco.sottana@gmail.com"
         }
     ],
->>>>>>> b7de64d67dcbf603959adedc52b76dc9fc60dc1a
     "extra": {
         "laravel": {
             "providers": [
@@ -30,9 +23,6 @@
         }
     },
     "require": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         "calebporzio/sushi": "^2.4",
         "illuminate/contracts": "^8.83|^9.30",
         "kalnoy/nestedset": "^6.0",
@@ -43,15 +33,6 @@
         "spatie/laravel-package-tools": "^1.9.0",
         "spatie/laravel-sluggable": "^3.4",
         "spatie/laravel-translatable": "^6.1"
-=======
-        "laraxot/module_xot": "dev-master",
->>>>>>> b7de64d67dcbf603959adedc52b76dc9fc60dc1a
-=======
-        "laraxot/module_xot": "dev-master",
->>>>>>> b7de64d67dcbf603959adedc52b76dc9fc60dc1a
-=======
-        "laraxot/module_xot": "dev-master",
->>>>>>> b7de64d67dcbf603959adedc52b76dc9fc60dc1a
     },
     "require-dev": {
         "nunomaduro/larastan": "^2.2",
