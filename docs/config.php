@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Str;
 
 return [
@@ -16,12 +18,12 @@ return [
     'collections' => [
         'posts' => [
             'path' => function ($page) {
-                return $page->lang . '/posts/' . Str::slug($page->getFilename());
+                return $page->lang.'/posts/'.Str::slug($page->getFilename());
             },
         ],
         'docs' => [
             'path' => function ($page) {
-                return $page->lang . '/docs/' . Str::slug($page->getFilename());
+                return $page->lang.'/docs/'.Str::slug($page->getFilename());
             },
         ],
     ],
@@ -51,10 +53,10 @@ return [
             return $path;
         }
         // return Str::startsWith($path, 'http') ? $path : '/' . trimPath($path);
-        return url('/' . $page->lang . '/' . trimPath($path));
+        return url('/'.$page->lang.'/'.trimPath($path));
     },
 
-    'children' => function ($page,$docs) {
+    'children' => function ($page, $docs) {
         return $docs->where('parent_id', $page->id);
     },
 ];

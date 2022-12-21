@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Modules\Ticket\Models\Panels;
 
 use Illuminate\Http\Request;
-use Modules\Xot\Contracts\RowsContract;
+use Modules\Cms\Models\Panels\XotBasePanel;
 // --- Services --
 
-use Modules\Xot\Models\Panels\XotBasePanel;
+use Modules\Xot\Contracts\RowsContract;
 
 class TicketThreadPanel extends XotBasePanel {
     /**

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Modules\Ticket\Models\Panels\Policies;
 
 use Illuminate\Support\Facades\Auth;
+use Modules\Cms\Models\Panels\Policies\XotBasePanelPolicy;
 use Modules\Xot\Contracts\PanelContract;
 use Modules\Xot\Contracts\UserContract;
-use Modules\Xot\Models\Panels\Policies\XotBasePanelPolicy;
 
 class TicketPanelPolicy extends XotBasePanelPolicy {
     /**
