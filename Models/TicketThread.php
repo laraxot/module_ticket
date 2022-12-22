@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 /**
  * @property int                $id
  * @property int                $ticket_id
@@ -28,33 +31,24 @@ class TicketThread extends BaseModelLang {
     /**
      * @var array
      */
-    protected $fillable = ['ticket_id', 'user_id', 'source', 'poster', 'reply_rating', 'rating_count', 'is_internal', 'title', 'body', 'format', 'ip_address', 'created_at', 'updated_at'];
+    protected $fillable = ['ticket_id',
+    'user_id', 'source', 'poster', 'reply_rating',
+    'rating_count', 'is_internal', 'title', 'body',
+    'format', 'ip_address', 'created_at', 'updated_at'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function ticketAttachments() {
+    public function ticketAttachments():HasMany {
         return $this->hasMany(TicketAttachment::class, 'thread_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function ticket() {
+    public function ticket():BelongsTo {
         return $this->belongsTo(Ticket::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function ticketSource() {
+    public function ticketSource():BelongsTo {
         return $this->belongsTo(TicketSource::class, 'source');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user() {
+    public function user():BelongsTo {
         return $this->belongsTo(User::class);
     }
 }
