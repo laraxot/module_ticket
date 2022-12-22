@@ -79,6 +79,7 @@ class Ticket extends BaseModelLang {
         'url',
     ];
 
+    /*
     public function ticketCollaborators():HasMany{
         return $this->hasMany(TicketCollaborator::class);
     }
@@ -86,7 +87,7 @@ class Ticket extends BaseModelLang {
 
     public function ticketFormDatas():HasMany {
         return $this->hasMany(TicketFormData::class);
-    }
+    }*/
 
 
     public function ticketThreads():HasMany {
@@ -101,7 +102,7 @@ class Ticket extends BaseModelLang {
     }
     */
 
-
+    /*
     public function ticketPriority():BelongsTo {
         return $this->belongsTo(TicketPriority::class, 'priority_id', 'priority_id');
     }
@@ -109,32 +110,37 @@ class Ticket extends BaseModelLang {
     public function helpTopic():BelongsTo {
         return $this->belongsTo(HelpTopic::class);
     }
-
+    */
     /*public function user():BelongsTo
     {
         return $this->belongsTo(User::class);
     }*/
 
+    /*
     public function ticketSource():BelongsTo {
         return $this->belongsTo(TicketSource::class, 'source');
     }
-
+    */
+    /*
     public function team():BelongsTo {
         return $this->belongsTo(Team::class);
     }
-
+    */
+    /*
     public function slaPlan():BelongsTo {
         return $this->belongsTo(SlaPlan::class, 'sla');
     }
-
+    */
+    /*
     public function ticketStatus():BelongsTo {
         return $this->belongsTo(TicketStatus::class, 'status');
     }
-
+    */
+    /*
     public function department() :BelongsTo{
         return $this->belongsTo(Department::class, 'dept_id');
     }
-
+    */
     public function user():BelongsTo {
         return $this->belongsTo(User::class);
     }

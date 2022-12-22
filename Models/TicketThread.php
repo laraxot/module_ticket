@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
+use Modules\LU\Models\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -45,9 +46,11 @@ class TicketThread extends BaseModelLang {
         return $this->belongsTo(Ticket::class);
     }
 
+    /*
     public function ticketSource():BelongsTo {
         return $this->belongsTo(TicketSource::class, 'source');
     }
+    */
 
     public function user():BelongsTo {
         return $this->belongsTo(User::class);
