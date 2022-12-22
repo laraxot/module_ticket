@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Modules\Blog\Models\Traits\HasCategory;
-use Modules\Geo\Models\Traits\GeoTrait;
-use Modules\Geo\Models\Traits\HasPlaceTrait;
 use Modules\LU\Models\User;
+use Modules\Geo\Models\Traits\GeoTrait;
+use Modules\Blog\Models\Traits\HasCategory;
+use Modules\Geo\Models\Traits\HasPlaceTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int                  $id
@@ -78,96 +79,63 @@ class Ticket extends BaseModelLang {
         'url',
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function ticketCollaborators() {
+    public function ticketCollaborators():HasMany{
         return $this->hasMany(TicketCollaborator::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function ticketFormDatas() {
+
+    public function ticketFormDatas():HasMany {
         return $this->hasMany(TicketFormData::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function ticketThreads() {
+
+    public function ticketThreads():HasMany {
         return $this->hasMany(TicketThread::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    /**public function user()
+
+    /*
+    public function user():BelongsTo
     {
         return $this->belongsTo(User::class, 'assigned_to');
-    }/
+    }
+    */
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function ticketPriority() {
+
+    public function ticketPriority():BelongsTo {
         return $this->belongsTo(TicketPriority::class, 'priority_id', 'priority_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function helpTopic() {
+    public function helpTopic():BelongsTo {
         return $this->belongsTo(HelpTopic::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    /*public function user()
+    /*public function user():BelongsTo
     {
         return $this->belongsTo(User::class);
     }*/
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function ticketSource() {
+    public function ticketSource():BelongsTo {
         return $this->belongsTo(TicketSource::class, 'source');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function team() {
+    public function team():BelongsTo {
         return $this->belongsTo(Team::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function slaPlan() {
+    public function slaPlan():BelongsTo {
         return $this->belongsTo(SlaPlan::class, 'sla');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function ticketStatus() {
+    public function ticketStatus():BelongsTo {
         return $this->belongsTo(TicketStatus::class, 'status');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function department() {
+    public function department() :BelongsTo{
         return $this->belongsTo(Department::class, 'dept_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user() {
+    public function user():BelongsTo {
         return $this->belongsTo(User::class);
     }
 

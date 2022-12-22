@@ -36,9 +36,10 @@ class TicketThread extends BaseModelLang {
     'rating_count', 'is_internal', 'title', 'body',
     'format', 'ip_address', 'created_at', 'updated_at'];
 
+    /*
     public function ticketAttachments():HasMany {
         return $this->hasMany(TicketAttachment::class, 'thread_id');
-    }
+    }*/
 
     public function ticket():BelongsTo {
         return $this->belongsTo(Ticket::class);
