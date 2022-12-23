@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Modules\Ticket\Models\Panels;
 
 use Illuminate\Http\Request;
+use Modules\Ticket\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
-use Modules\Cms\Models\Panels\XotBasePanel;
 // --- Services --
 
 use Modules\Xot\Contracts\RowsContract;
+use Modules\Cms\Models\Panels\XotBasePanel;
 
 class TicketPanel extends XotBasePanel {
     /**

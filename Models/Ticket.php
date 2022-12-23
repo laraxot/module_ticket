@@ -66,7 +66,7 @@ class Ticket extends BaseModelLang {
     use HasCategory;
 
     /**
-     * @var array
+     * @var array<string> 
      */
     protected $fillable = [
         'user_id', 'dept_id', 'team_id', 'priority_id', 'sla', 'help_topic_id', 'status',

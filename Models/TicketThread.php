@@ -30,7 +30,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class TicketThread extends BaseModelLang {
     /**
-     * @var array
+     * @var array<string> 
      */
     protected $fillable = ['ticket_id',
     'user_id', 'source', 'poster', 'reply_rating',
