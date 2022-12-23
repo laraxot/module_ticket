@@ -46,8 +46,6 @@ return [
       |--------------------------------------
      */
     'registration' => 'Registrierung',
-    'full_name' => 'Vollständiger Name',
-    'first_name' => 'Vorname',
     'lastname' => 'Familienname',
     'profilepicture' => 'Profilbild',
     'oldpassword' => 'Altes Passwort',
@@ -94,7 +92,6 @@ return [
     'reuired_authentication' => 'Erforderliche Authentifizierung',
     'fetching_email_via_imap' => 'Abrufen von E-Mail über IMAP',
     'create_email' => 'E-Mail erstellen',
-    'email_address' => 'E-Mail-Addresse',
     'email_name' => 'E-Mail-Name',
     'help_topic' => 'Hilfethema',
     'auto_response' => 'Automatische Antwort',
@@ -156,7 +153,6 @@ return [
       |--------------------------------------
      */
     'template_set_to_clone' => 'Vorlage zum Klonen',
-    'language' => 'Sprache',
     /*
       |--------------------------------------
       |  Diagnostics Page
@@ -189,10 +185,8 @@ return [
     'phone' => 'Telefon',
     'address' => 'Adresse',
     'landing' => 'Landing Seite',
-    'offline' => 'Offline Seite',
     'thank' => 'Danke Seite',
     'logo' => 'Logo',
-    'save' => 'Speichern',
     'delete-logo' => 'Logo löschen',
     'click-delete' => 'Hier klicken, um zu löschen',
     /*
@@ -212,15 +206,11 @@ return [
     'nameformat' => 'Namensformatierung',
     'timeformat' => 'Zeitformat',
     'date' => 'Datum',
-    'dateformat' => 'Datumsformat',
     'date_time' => 'Datum und Zeit Format',
     'day_date_time' => 'Tag, Datum und Uhrzeit Format',
     'timezone' => 'Standardzeitzone',
-    'api' => 'Api',
-    'api_key' => 'API-Schlüssel',
     'api_key_mandatory' => 'Api-Schlüssel obligatorisch',
     'api_configurations' => 'API-Konfigurationen',
-    'generate_key' => 'Schlüssel generieren',
     /*
       |--------------------------------------
       |   Email Settings Page
@@ -241,11 +231,9 @@ return [
     'accept_email_unknown' => 'Akzeptiere E-Mail von unbekannten Benutzern',
     'accept_email_collab' => 'E-Mail-Mitarbeiter akzeptieren',
     'automatically_and_collab_from_email' => 'Fügen Sie Mitarbeiter automatisch aus E-Mail-Feldern hinzu',
-    'default_alert_email' => 'Standard-Benachrichtigungs-E-Mail',
     'attachments' => 'Anlagen',
     'email_attahment_user' => 'E-Mail-Anhänge an den Benutzer',
     'cron_notification' => 'Benachrichtigungscron aktivieren',
-    'cron' => 'Job Scheduler',
     'crone-url-message' => "These are Faveo's Job Scheduler(cron job) url for your system.",
     'clipboard-copy-message' => 'In die Zwischenablage kopiert.',
     'click' => 'Klick hier',
@@ -327,7 +315,6 @@ return [
     'assigned_agent_team' => 'Assigned Agent / Team',
     'new_internal_note_alert' => 'New Internal Note Alert',
     'ticket_assignment_alert' => 'Ticket Assignment Alert',
-    'team_lead' => 'Team Lead',
     'team_members' => 'Team Members',
     'ticket_transfer_alert' => 'Ticket Transfer Alert',
     'overdue_ticket_alert' => 'Overdue Ticket Alert ',
@@ -383,8 +370,6 @@ return [
      */
     'help_topics' => 'Help Topics',
     'topic' => 'Topic',
-    'type' => 'Type',
-    'priority' => 'Priority',
     'last_updated' => 'Last Updated',
     'create_help_topic' => 'Create Help topic',
     'action' => 'Action',
@@ -394,7 +379,6 @@ return [
       |--------------------------------------
      */
     'active' => 'Active',
-    'disabled' => 'Disabled',
     'public' => 'Public',
     'private' => 'Private',
     'parent_topic' => 'Parent Topic',
@@ -434,7 +418,6 @@ return [
     'edit_workflow' => 'Edit Workflow',
     'updated' => 'Updated',
     'target' => 'Target',
-    'target_channel' => 'Target Channel',
     'exceution_order' => 'Exceution Order',
     'target_channel' => 'Target Channel',
     'workflow_rules' => 'Workflow Rules',
@@ -449,7 +432,6 @@ return [
       |  Form Create Page
       |--------------------------------------
      */
-    'title' => 'Title',
     'instruction' => 'Anweisung',
     'label' => 'Beschriftung',
     'visibility' => 'Sichtbarkeit',
@@ -491,10 +473,6 @@ return [
       |--------------------------------------
      */
     'footer' => 'Footer',
-    'footer1' => 'Footer1',
-    'footer2' => 'Footer2',
-    'footer3' => 'Footer3',
-    'footer4' => 'Footer4',
     /*
       |--------------------------------------
       |  Custom alert box
@@ -520,7 +498,6 @@ return [
      */
     'are_you_sure' => 'Bist du sicher',
     'staffs' => 'Mitarbeiter',
-    'name' => 'Name',
     'user_name' => 'Nutzername',
     'status' => 'Status',
     'group' => 'Gruppe',
@@ -569,7 +546,6 @@ return [
     'restrict_ticket_assignment_to_department_members' => 'Beschränken Sie die Ticketzuordnung auf Abteilungsmitglieder',
     'outgoing_emails' => 'Ausgehende E-Mails',
     'outgoing_email' => 'Ausgehende E-Mail',
-    'template_set' => 'Vorlagensatz',
     'auto_responding_settings' => 'Automatisch reagierende Einstellungen',
     'disable_for_this_department' => 'Deaktivieren Sie für diese Abteilung',
     'auto_response_email' => 'Automatische Antwort-E-Mail',
@@ -630,7 +606,6 @@ return [
      */
     'agent_panel' => 'Agenten Panel',
     'profile' => 'Profil',
-    'change_password' => 'Passwort ändern',
     'sign_out' => 'Ausloggen',
     'Tickets' => 'TICKETS',
     'inbox' => 'Posteingang',
@@ -640,7 +615,6 @@ return [
     'Updates' => 'UPDATES',
     'no_new_updates' => 'Keine neuen Updates',
     'check_for_updates' => 'Auf Updates prüfen',
-    'open' => 'öffnen',
     'inprogress' => 'In Bearbeitung',
     'closed' => 'Geschlossen',
     'Departments' => 'ABTEILUNGEN',
@@ -670,7 +644,6 @@ return [
     'statistics' => 'Statistiken',
     'opened' => 'geöffnet',
     'resolved' => 'gelöste',
-    'closed' => 'geschlossen',
     'deleted' => 'gelöscht',
     /*
       |------------------------------------------------
@@ -711,10 +684,8 @@ return [
       |  Ticket page
       |----------------------------------------------
      */
-    'subject' => 'Thema',
     'ticket_id' => 'Ticket ID',
     'priority' => 'Priorität',
-    'from' => 'Von',
     'last_replier' => 'Letzter Berichterstatter',
     'assigned_to' => 'Zugewiesen an',
     'last_activity' => 'Letzte Aktivität',
@@ -883,7 +854,6 @@ return [
     // ======================================
     'language' => 'Sprache',
     'save' => 'Speichern',
-    'create' => 'Erstellen',
     'dateformat' => 'Datumsformat',
     'slug' => 'Slug',
     'read_more' => 'Weiterlesen',
@@ -930,7 +900,6 @@ return [
     'please_fill_all_required_feilds' => 'Bitte alle notwendigen Felder ausfüllen.',
     'successfully_replied' => 'Erfolgreich geantwortet',
     'please_fill_some_data' => 'Bitte füllen Sie einige Daten aus!',
-    'profile_updated_sucessfully' => 'Profil erfolgreich aktualisiert',
     'password_updated_sucessfully' => 'Passwort wurde erfolgreich aktualisiert',
     'password_was_not_updated_incorrect_old_password' => 'Das Passwort wurde nicht aktualisiert. Falsches altes Passwort',
     'there_is_no_such_ticket_number' => 'Es gibt keine solche Ticketnummer',
@@ -960,8 +929,6 @@ return [
     'enter_url_to_send_ticket_details' => 'Geben Sie die URL ein, um die Ticketdetails zu senden',
     'api' => 'API',
     'api_key' => 'API Schlüssel',
-    'api_key_mandatory' => 'API key mandatory',
-    'api_configurations' => 'API configurations',
     'generate_key' => 'Generiere Schlüssel',
     'api_settings' => 'API Einstellungen',
     /*
@@ -1044,7 +1011,6 @@ return [
      * -----------------------------------------------------------------------------------
      */
     'ticket_priority' => 'Ticketpriorität',
-    'priority' => 'Priorität',
     'priority_desc' => 'Prioritätsbeschreibung',
     'priority_urgency' => 'Priorität der Priorität',
     'priority_id' => 'Prioritätskennung',
@@ -1055,7 +1021,6 @@ return [
     'agent_notes' => 'Agenten Notizen',
     'select_priority' => 'Wählen Sie die Priorität aus',
     'normal' => 'Normal',
-    'ispublic' => 'Sichtweite',
     'make-default-priority' => 'Mache Standardpriorität',
     'priority_successfully_created' => 'Die Priorität wurde erfolgreich erstellt',
     'priority_successfully_updated' => 'Priorität erfolgreich aktualisiert',

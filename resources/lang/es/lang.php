@@ -58,7 +58,6 @@ return [
       |--------------------------------------
      */
     'login_to_start_your_session' => 'Ingrese para iniciar su sesión',
-    'login' => 'Iniciar sesión',
     'remember' => 'Recuérdame',
     'signmein' => 'Regístrame',
     'iforgot' => 'Olvidé mi contraseña',
@@ -89,7 +88,6 @@ return [
      */
     'registration' => 'Registro',
     'full_name' => 'Nombre completo',
-    'first_name' => 'Nombre',
     'lastname' => 'Apellido',
     'profilepicture' => 'Foto de perfil',
     'oldpassword' => 'Contraseña anterior',
@@ -147,7 +145,6 @@ return [
     'reuired_authentication' => 'Autenticación requerida',
     'fetching_email_via_imap' => 'Obtener correo electrónico a través de IMAP',
     'create_email' => 'Crear correo electrónico',
-    'email_address' => 'Dirección de correo electrónico',
     'email_name' => 'Nombre de correo electrónico',
     'help_topic' => 'Tema de ayuda',
     'auto_response' => 'Respuesta automática',
@@ -205,7 +202,6 @@ return [
     'templates' => 'Plantillas',
     'template_set' => 'Conjuntos de plantillas',
     'create_template' => 'Crear plantilla',
-    'edit_template' => 'Editar plantilla',
     'list_of_templates_sets' => 'Lista de plantillas',
     'create_set' => 'Crear conjunto',
     'template_name' => 'Nombre de la plantilla',
@@ -234,7 +230,6 @@ return [
       |--------------------------------------
      */
     'template_set_to_clone' => 'Template set to clone',
-    'language' => 'Language',
     /*
       |--------------------------------------
       | Página de diagnóstico
@@ -275,7 +270,6 @@ return [
     'phone' => 'Teléfono',
     'address' => 'Dirección',
     'landing' => 'Página de destino',
-    'offline' => 'Página sin conexión',
     'thank' => 'Página de agradecimiento',
     'logo' => 'Logo',
     'save' => 'Salvar',
@@ -312,7 +306,6 @@ return [
     'Ticket-created-successfully2' => 'Se ha creado el ticket pero no se ha verificado. Se mostrará en la bandeja de entrada una vez que el usuario verifique su cuenta.',
     'system_updated_successfully' => 'Sistema actualizado con éxito',
     'system_can_not_updated' => 'El sistema no se puede actualizar',
-    'ticket_updated_successfully' => 'Ticket actualizado con éxito',
     'ticket_can_not_updated' => 'El ticket no se puede actualizar',
     'email_updated_successfully' => 'Dirección de correo electrónico actualizada con éxito',
     'email_can_not_updated' => 'Dirección de correo electrónico no se puede actualizar',
@@ -353,11 +346,9 @@ return [
     'accept_email_unknown' => 'Aceptar correo electrónico de usuarios desconocidos',
     'accept_email_collab' => 'Aceptar colaboradores de correo electrónico',
     'automatically_and_collab_from_email' => 'Agregar colaboradores automáticamente desde campos de correo electrónico',
-    'default_alert_email' => 'Correo de alerta predeterminado',
     'attachments' => 'Archivos adjuntos',
     'email_attahment_user' => 'Dirección de correo electrónico adjuntos al usuario',
     'cron_notification' => 'Habilitar la notificación cron',
-    'cron' => 'Planificador de trabajos',
     'cron-jobs' => 'Cron jobs',
     'crone-url-message' => 'Éstas son la URL del planificador de tareas de Faveo (trabajo cron) para su sistema.',
     'clipboard-copy-message' => 'Copiado al portapapeles.',
@@ -558,7 +549,6 @@ return [
       |--------------------------------------
      */
     'active' => 'Activo',
-    'disabled' => 'Desabilitado',
     'public' => 'Público',
     'private' => 'Privado',
     'parent_topic' => 'Tema principal',
@@ -585,7 +575,6 @@ return [
     'helptopic_can_not_create' => 'No se puede crear el tema de ayuda',
     'helptopic_updated_successfully' => 'Tema de ayuda actualizado correctamente',
     'helptopic_can_not_update' => 'No se puede actualizar el tema de la Ayuda',
-    'you_cannot_delete_default_department' => 'No se puede eliminar el departamento predeterminado',
     'have_been_moved_to_default_help_topic' => 'Se han movido al tema de ayuda predeterminado',
     'helptopic_deleted_successfully' => 'Helptopic eliminado correctamente',
     'make-default-helptopic' => 'Hacer tema de ayuda predeterminado del sistema ',
@@ -594,7 +583,6 @@ return [
       |  SLA plan Página de inicio
       |--------------------------------------
      */
-    'sla_plans' => 'SLA plans',
     'create_SLA' => 'Crear un SLA',
     'grace_period' => 'periodo de gracia',
     'added_date' => 'Fecha añadida',
@@ -609,7 +597,6 @@ return [
     'sla_plan_can_not_create' => 'No se puede crear el plan SLA',
     'sla_plan_updated_successfully' => 'Plan de SLA actualizado con éxito',
     'sla_plan_can_not_update' => 'No se puede actualizar el plan SLA',
-    'you_cannot_delete_default_department' => 'No se puede eliminar el departamento predeterminado',
     'have_been_moved_to_default_sla' => 'Se han trasladado al SLA predeterminado',
     'associated_department_have_been_moved_to_default_sla' => 'El departamento asociado se ha trasladado al SLA predeterminado',
     'associated_help_topic_have_been_moved_to_default_sla' => 'El tema de ayuda asociado se ha trasladado al SLA predeterminado',
@@ -627,7 +614,6 @@ return [
     'edit_workflow' => 'Editar flujo de trabajo',
     'updated' => 'Actualizado',
     'target' => 'Objetivo',
-    'target_channel' => 'Canal de destino',
     'execution_order' => 'Orden de ejecución',
     'target_channel' => 'Canal de destino',
     'workflow_rules' => 'Reglas del flujo de trabajo',
@@ -663,9 +649,7 @@ return [
       |  Form Crear página
       |--------------------------------------
      */
-    'title' => 'Título',
     'instruction' => 'Instrucción',
-    'label' => 'Etiqueta',
     'visibility' => 'Visibilidad',
     'variable' => 'Variable',
     'create_form' => 'Crear formulario',
@@ -683,8 +667,6 @@ return [
     'add_fields' => 'Agregar campos',
     'save_form' => 'Guardar formulario',
     'label' => 'Etiqueta',
-    'name' => 'Nombre',
-    'type' => 'Tipo',
     'values(selected_fields)' => 'Valores (Campos seleccionados)',
     'required' => 'Requirido',
     'Acción' => 'Acción',
@@ -731,10 +713,6 @@ return [
       |--------------------------------------
      */
     'footer' => 'Footer',
-    'footer1' => 'Footer1',
-    'footer2' => 'Footer2',
-    'footer3' => 'Footer3',
-    'footer4' => 'Footer4',
     /*
       |--------------------------------------
       |  Custom alert box
@@ -769,11 +747,8 @@ return [
     'createagent' => 'Crear un agente',
     'delete' => 'Borrar',
     'agents' => 'Agentes',
-    'create' => 'Creado',
     'edit' => 'Editar',
-    'departments' => 'Departmentos',
     'groups' => 'Gruposoups',
-    'select_a_time_zone' => 'Seleccione una zona horaria',
     'time_zones' => 'Zonas horarias',
     /*
       |--------------------------------------
@@ -822,7 +797,6 @@ return [
     'restrict_ticket_assignment_to_department_members' => 'Restringir la asignación de entradas a los miembros del departamento',
     'outgoing_emails' => 'Mensajes salientes',
     'outgoing_email' => 'Correo saliente',
-    'template_set' => 'Conjunto de plantillas',
     'auto_responding_settings' => 'Ajustes de respuesta automática',
     'disable_for_this_department' => 'Desabilitado para este departamento',
     'auto_response_email' => 'Desabilitado para este departamento',
@@ -844,7 +818,6 @@ return [
     'the_associated_helptopic_has_been_deactivated' => 'El helptopic asociado ha sido desactivado',
     'department_deleted_sucessfully' => 'Departamento eliminado correctamente',
     'department_can_not_delete' => 'No se puede eliminar el departamento',
-    'select_a_department' => 'Seleccione un departamento',
     'make-default-department' => 'Hacer predeterminado para el sistema',
     /*
       |--------------------------------------
@@ -852,7 +825,6 @@ return [
       |--------------------------------------
      */
     'create_team' => 'Crear equipo',
-    'team_lead' => 'Jefe de equipo',
     'assignment_alert' => 'Alerta de asignación',
     'disable_for_this_team' => 'Desabilitado para este equipo',
     'teams' => 'Teams',
@@ -898,7 +870,6 @@ return [
     'group_updated_successfully' => 'Grupo actualizado con éxito',
     'group_can_not_update' => 'Grupo no se puede actualizar',
     'there_are_agents_assigned_to_this_group_please_unassign_them_from_this_group_to_delete' => 'Hay agentes asignados a este grupo. Desasignarlos de este grupo para eliminarlos.',
-    'group_cannot_delete' => 'Grupo no se puede eliminar',
     'group_deleted_successfully' => 'Grupo eliminado correctamente',
     'group_cannot_delete' => 'El grupo no puede eliminar',
     'failed_to_load_the_page' => 'Error al cargar la página',
@@ -924,7 +895,6 @@ return [
      */
     'agent_panel' => 'Panel de agentes',
     'profile' => 'Perfil',
-    'change_password' => 'Cambia la contraseña',
     'sign_out' => 'desconectar',
     'Tickets' => 'TICKETS',
     'ticket-details' => 'Detalles del ticket',
@@ -936,10 +906,8 @@ return [
     'no_new_updates' => 'No hay nuevas actualizaciones',
     'check_for_updates' => 'Buscar actualizaciones',
     'update-version' => 'Versión actualizada',
-    'open' => 'Abierto',
     'inprogress' => 'En progreso',
     'inprogress_tickets' => 'Ticket en progreso',
-    'closed' => 'Cerrado',
     'Departments' => 'DEPARTAMENTOS',
     'tools' => 'Herramientas',
     'canned' => 'Enlatado',
@@ -1000,12 +968,8 @@ return [
     'statistics' => 'Estadística',
     'opened' => 'Abierto',
     'resolved' => 'Resuelto',
-    'closed' => 'Cerrado',
     'deleted' => 'Eliminado',
-    'start_date' => 'Fecha de inicio',
-    'end_date' => 'Fecha final',
     'filter' => 'Filtrar',
-    'report' => 'Informe',
     'Legend' => 'Leyendas',
     'total' => 'Total',
     'dashboard_reports' => 'Informes del tablero',
@@ -1021,7 +985,6 @@ return [
     'users' => 'Usuarios',
     'create_user' => 'Crear usuario',
     'edit_user' => 'Editar usuario',
-    'full_name' => 'Nombre completo',
     'mobile' => 'Móvil',
     'last_login' => 'Último acceso',
     'user_profile' => 'Perfil del usuario',
@@ -1031,9 +994,6 @@ return [
     'deleted_tickets' => 'tickets Eliminados',
     'user_created_successfully' => 'Usuario creado correctamente',
     'user_updated_successfully' => 'Usuario actualizado con éxito',
-    'profile_updated_sucessfully' => 'perfil actualizado con éxito',
-    'password_updated_sucessfully' => 'Contraseña actualizada exitosamente',
-    'password_was_not_updated_incorrect_old_password' => 'La contraseña no se actualizó. Contraseña antigua incorrecta',
     'the_user_has_been_removed_from_this_organization' => 'El usuario ha sido removido de esta organización',
     'user_report' => 'Informe de usuario',
     'send_password_via_email' => 'Enviar contraseña por correo electrónico',
@@ -1070,10 +1030,7 @@ return [
       |  Página de entradas
       |----------------------------------------------
      */
-    'subject' => 'Tema',
     'ticket_id' => 'Ticket ID',
-    'priority' => 'Prioridad',
-    'from' => 'De',
     'last_replier' => 'Última respuesta',
     'assigned_to' => 'Asignado a',
     'last_activity' => 'Última actividad',
@@ -1204,7 +1161,6 @@ return [
     'ticket_number' => 'Numero de ticket',
     'content' => 'Contenido',
     'edit_template' => 'Editar plantilla',
-    'edit_status' => 'Editar estado',
     'create_status' => 'Crear estado',
     'edit_details' => 'Editar detalles',
     'edit_templates' => 'Editar plantillas',
@@ -1340,9 +1296,7 @@ Puede ingresar el número de días de registros de base de datos que se eliminar
     'numberofelementstodisplay' => 'Número de elementos a mostrar',
     // ======================================
     'language' => 'Idioma',
-    'save' => 'Salvar',
     'create' => 'Crear',
-    'dateformat' => 'Formato de fecha',
     'slug' => 'Postear',
     'read_more' => 'Lee mas',
     'view_all' => 'Ver todo',
@@ -1350,7 +1304,6 @@ Puede ingresar el número de días de registros de base de datos que se eliminar
     'need_more_support' => 'Necesita más soporte',
     'if_you_did_not_find_an_answer_please_raise_a_ticket_describing_the_issue' => 'Si no encontró una respuesta, por favor levante un ticket describiendo el problema',
     'have_a_question?_type_your_search_term_here' => '¿Tiene una pregunta? escriba su búsqueda aquí ...',
-    'search' => 'Búsqueda',
     'frequently_asked_questions' => 'preguntas frecuentes',
     'leave_a_reply' => 'Deja una respuesta',
     'post_message' => 'Mensaje anterior',
@@ -1384,7 +1337,6 @@ Puede ingresar el número de días de registros de base de datos que se eliminar
     'please_fill_all_required_feilds' => 'por favor llene todos los campos requeridos.',
     'successfully_replied' => 'Respondió correctamente',
     'please_fill_some_data' => 'Por favor, llene algunos datos!',
-    'profile_updated_sucessfully' => 'perfil actualizado con éxito',
     'password_updated_sucessfully' => 'Contraseña actualizada exitosamente',
     'password_was_not_updated_incorrect_old_password' => 'La contraseña no se actualizó. Contraseña antigua incorrecta',
     'there_is_no_such_ticket_number' => 'No hay tal número de ticket',
@@ -1503,7 +1455,6 @@ Puede ingresar el número de días de registros de base de datos que se eliminar
     'priority_urgency' => 'Prioridad urgencia',
     'priority_id' => 'Prioridad Id',
     'priority_color' => 'Prioridad color',
-    'ispublic' => 'Es Público',
     'is_default' => 'Por defecto',
     'create_ticket_priority' => 'Crear prioridad de ticket',
     'agent_notes' => 'Notas del agente',
@@ -1585,7 +1536,6 @@ Puede ingresar el número de días de registros de base de datos que se eliminar
     'created-at' => 'Creado en',
     'or' => 'OR',
     'activate' => 'Activar',
-    'system-email-not-configured' => 'No podemos procesar la solicitud de correo electrónico porque el sistema no tiene correo configurado para enviar correos. Comuníquese con el administrador del sistema.',
     'assign-ticket' => 'Asignar tickets',
     'can-not-inactive-group' => 'No se puede hacer que el grupo inactivo, ya que tiene agentes asignados en él. Asigne estos agentes a otro grupo e inténtelo de nuevo.',
     'internal-note-has-been-added' => 'Nota interna añadida al ticket',
