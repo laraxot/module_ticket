@@ -608,9 +608,7 @@ return [
       |  Form Create Page
       |--------------------------------------
      */
-    'title' => 'Titre',
     'instruction' => 'Instruction',
-    'label' => 'Libellé',
     'visibility' => 'Visibilité',
     'variable' => 'Variable',
     'create_form' => 'Créer formulaire',
@@ -628,7 +626,6 @@ return [
     'add_fields' => 'Ajouter des champs',
     'save_form' => 'enregistrer formulaire',
     'label' => 'Libellé',
-    'name' => 'Nom',
     'type' => 'Type',
     'values(selected_fields)' => 'Valeurs (Champs sélectionnés)',
     'required' => 'Obligatoire',
@@ -676,10 +673,6 @@ return [
       |--------------------------------------
      */
     'footer' => 'Footer',
-    'footer1' => 'Footer1',
-    'footer2' => 'Footer2',
-    'footer3' => 'Footer3',
-    'footer4' => 'Footer4',
     /*
       |--------------------------------------
       |  Custom alert box
@@ -715,7 +708,6 @@ return [
     'createagent' => 'Créer un agent',
     'delete' => 'Supprimer',
     'agents' => 'Agents',
-    'create' => 'Créer',
     'edit' => 'Modifier',
     'departments' => 'Départements',
     'groups' => 'Groupes',
@@ -869,7 +861,6 @@ return [
      */
     'agent_panel' => 'Panneau Agent',
     'profile' => 'Profil',
-    'change_password' => 'Changer le mot de passe',
     'sign_out' => 'Déconnexion',
     'Tickets' => 'TICKETS',
     'ticket-details' => 'Détails des tickets',
@@ -881,10 +872,8 @@ return [
     'no_new_updates' => 'Pas de nouvelle MAJ',
     'check_for_updates' => 'Rechercher des MAJ',
     'update-version' => 'Version MAJ',
-    'open' => 'Ouvrir',
     'inprogress' => 'En progrès',
     'inprogress_tickets' => 'ITickets en progrès',
-    'closed' => 'Fermés',
     'Departments' => 'DEPARTEMENTS',
     'tools' => 'Outils',
     'canned' => 'En boîte',
@@ -947,10 +936,7 @@ return [
     'resolved' => 'Résolu',
     'closed' => 'Fermé',
     'deleted' => 'Supprimé',
-    'start_date' => 'Date de début',
-    'end_date' => 'date de fin',
     'filter' => 'Filtre',
-    'report' => 'Rapport',
     'Legend' => 'LEGENDES',
     'total' => 'Total',
     'dashboard_reports' => 'Rapports dashboard',
@@ -976,9 +962,6 @@ return [
     'deleted_tickets' => 'Tickets supprimés',
     'user_created_successfully' => 'Utilisateur créé avec succès',
     'user_updated_successfully' => 'Utilisateur mis à jour avec succès',
-    'profile_updated_sucessfully' => 'Profil mis à jour avec succès',
-    'password_updated_sucessfully' => 'Mot de passe mis à jour avec succès',
-    'password_was_not_updated_incorrect_old_password' => 'Le mot de passe n\'a pas été mis à jour. L\'ancien mot de passe est incorrect',
     'the_user_has_been_removed_from_this_organization' => 'L\'utilisateur a été retiré de cette organisation',
     'user_report' => 'Rapport utilisateur',
     'send_password_via_email' => 'Envoyer le mot de passe via email',
@@ -1150,7 +1133,6 @@ return [
     'ticket_number' => 'Numéro de ticket',
     'content' => 'Contenu',
     'edit_template' => 'Modifier le modèle',
-    'edit_status' => 'Modifier le statut',
     'create_status' => 'Créer statut',
     'edit_details' => 'Modifier les détails',
     'edit_templates' => 'Modifier les modèles',
@@ -1456,7 +1438,6 @@ return [
     'priority_urgency' => 'Urgence de la priorité',
     'priority_id' => 'Ìdentifiant de la priorité',
     'priority_color' => 'Couleur de la priorité',
-    'ispublic' => 'Publique',
     'is_default' => 'Par défaut',
     'create_ticket_priority' => 'Créer une priorité de ticket',
     'agent_notes' => 'Notes d\'agent',
