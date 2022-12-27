@@ -98,10 +98,10 @@ class ThemeComposer {
         }
       ]';
 
-        return collect(json_decode($str));
+        return collect((array) json_decode($str));
     }
 
-    public function getBreads() {
+    public function getBreads(): Collection {
         return collect([]);
     }
 
@@ -216,7 +216,7 @@ class ThemeComposer {
           },
         ]';
 
-        return collect(json_decode($str));
+        return collect((array) json_decode($str));
     }
 
     public function segnalazioniDisservizio1(): Collection {
@@ -626,10 +626,10 @@ class ThemeComposer {
     public function readJson(string $name): array {
         $tmp = explode('.', $name);
         $content = file_get_contents(__DIR__.'/../../Resources/json/'.$tmp[0].'.json');
-        $json = json_decode($content, true);
+        $json = (array) json_decode((string) $content, true);
         $key = implode('.', array_slice($tmp, 1));
 
-        return Arr::get($json, $key);
+        return (array) Arr::get($json, $key);
     }
 
     public function getTicketCategories(): Collection {
