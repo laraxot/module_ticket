@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace Modules\Ticket\View\Composers;
 
 use Illuminate\Support\Arr;
-use Modules\Blog\Models\Categorizable;
 use Modules\Blog\Models\Category;
+use Illuminate\Support\Collection;
+use Modules\Blog\Models\Categorizable;
 use Modules\LU\Services\ProfileService;
 
 class ThemeComposer {
-    public function getFullName() {
+    public function getFullName():?string {
         return ProfileService::make()->getUser()->full_name;
     }
 
-    public function getSteps() {
+    public function getSteps():Collection {
         $steps = collect([
             (object) [
                 'title' => 'Primo step',
