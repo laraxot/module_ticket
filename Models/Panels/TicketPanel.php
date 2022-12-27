@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Modules\Ticket\Models\Panels;
 
 use Illuminate\Http\Request;
-use Modules\Ticket\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
+use Modules\Cms\Models\Panels\XotBasePanel;
 // --- Services --
 
+use Modules\Ticket\Models\Ticket;
 use Modules\Xot\Contracts\RowsContract;
-use Modules\Cms\Models\Panels\XotBasePanel;
 
 class TicketPanel extends XotBasePanel {
     /**
@@ -50,7 +50,7 @@ class TicketPanel extends XotBasePanel {
      *
      * @param Ticket $row
      *
-     * @return int|string|null
+     * @return int|string|mixed|null
      */
     public function optionId($row) {
         return $row->getKey();
@@ -58,6 +58,8 @@ class TicketPanel extends XotBasePanel {
 
     /**
      * on select the option label.
+     *
+     * @param Ticket $row
      */
     public function optionLabel($row): string {
         return (string) $row->title;

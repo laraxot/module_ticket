@@ -14,7 +14,7 @@ use Modules\Xot\Actions\Model\StoreAction;
  * Class Create.
  */
 class Create extends Component {
-    public string $type;
+    public ?string $type;
     public int $step = 0;
     public bool $hasGeo;
     public array $steps = [
@@ -27,15 +27,18 @@ class Create extends Component {
         'title' => '',
     ];
 
+    /**
+     * @var array
+     */
     protected $rules = [
         'form_data.post.title' => 'required|min:6', // nel caso vogliamo usare post
         // 'name' => 'required|min:6',
         // 'email' => 'required|email',
     ];
 
-    public function mount(?string $type = 'create') {
+    public function mount(?string $type = 'create'): void {
         $this->type = $type;
-        $this->hasGeo = config('ticket.geo');
+        $this->hasGeo = (bool) config('ticket.geo');
     }
 
     /**
@@ -51,16 +54,16 @@ class Create extends Component {
         return view()->make($view, $view_params);
     }
 
-    public function acconsento() {
+    public function acconsento(): void {
         // $this->validate();
         ++$this->step;
     }
 
-    public function previous() {
+    public function previous(): void {
         --$this->step;
     }
 
-    public function save() {
+    public function save(): void {
         $data = $this->form_data;
         $rules = [
             'title' => 'required|min:6',

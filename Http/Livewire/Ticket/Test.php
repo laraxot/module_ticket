@@ -11,10 +11,10 @@ use Modules\Ticket\Models\Ticket;
 use Modules\Xot\Actions\Model\StoreAction as ModelStoreAction;
 
 class Test extends Component {
-    public string $type;
+    public ?string $type;
     public array $form_data = [];
 
-    public function mount(?string $type = 'create') {
+    public function mount(?string $type = 'create'): void {
         $this->type = $type;
     }
 
@@ -30,7 +30,7 @@ class Test extends Component {
         return view($view, $view_params);
     }
 
-    public function store() {
+    public function store(): void {
         $rules = [
             'place' => '',
         ];
