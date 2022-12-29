@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int                  $assigned_to
  * @property int                  $source
  * @property string               $ticket_number
+ * @property string|null               $address
  * @property bool                 $rating
  * @property bool                 $ratingreply
  * @property int                  $flags
