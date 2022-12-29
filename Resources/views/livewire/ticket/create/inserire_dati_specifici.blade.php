@@ -204,14 +204,14 @@
 </div>
 @push('scripts')
     
-{{-- <script src="{{ Theme::asset('pub_theme::js/plugins/jquery.min.js') }}" type="text/javascript"></script>
+{{-- <script src="{{ Theme::asset('pub_ui::js/plugins/jquery.min.js') }}" type="text/javascript"></script>
 <!--	Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-<script src="{{ Theme::asset('pub_theme::js/plugins/jasny-bootstrap.min.js') }}" type="text/javascript"></script> --}}
+<script src="{{ Theme::asset('pub_ui::js/plugins/jasny-bootstrap.min.js') }}" type="text/javascript"></script> --}}
     
 @php
 /* --- ??????? 
-Theme::add('pub_theme::js/plugins/jquery.min.js');
-Theme::add('pub_theme::js/plugins/jasny-bootstrap.min.js');
+Theme::add('pub_ui::js/plugins/jquery.min.js');
+Theme::add('pub_ui::js/plugins/jasny-bootstrap.min.js');
 */
  
 @endphp
