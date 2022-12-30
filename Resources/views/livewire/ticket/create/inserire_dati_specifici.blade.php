@@ -1,5 +1,5 @@
 <div>
-    <br/><br/><br/><br/><br/>
+    <br /><br /><br /><br /><br />
     <main>
         <div class="container" id="main-container">
             <div class="row justify-content-center">
@@ -35,7 +35,7 @@
                     <div class="steppers-content" aria-live="polite">
                         <div class="it-page-sections-container">
 
-                            
+
 
                             @if ($hasGeo)
                                 <section class="it-page-section" id="report-place">
@@ -55,8 +55,8 @@
                                         margin-class="mb-40"
                                         }} --}}
 
-                                        <x-input.group type="address" name="place" id="address"
-                                            class="p-big p-lg-4" label="Indirizzo/Luogo">
+                                        <x-input.group type="address" name="place" id="address" class="p-big p-lg-4"
+                                            label="Indirizzo/Luogo">
                                         </x-input.group>
 
                                         {{-- <x-input.group type="text" name="post.address" id="address"
@@ -73,7 +73,7 @@
                             @endif
 
 
-                            
+
 
                             {{-- {{ dddx($_theme->getTicketCategories()) }} --}}
                             <section class="it-page-section" id="report-info">
@@ -81,21 +81,27 @@
                                     <x-slot name="header" class="m-0"></x-slot>
                                     <x-slot name="title" class="mb-3">Disservizio</x-slot>
 
-                                    @if(Storage::disk('cache')->exists('creazione_disservizio.json'))
+                                    @if (Storage::disk('cache')->exists('creazione_disservizio.json'))
                                         -----------------------------------------------------------------------------------
-                                        <x-form.builder disk="cache" filename="creazione_disservizio.json"></x-form.builder>
+                                        <x-form.builder disk="cache" filename="creazione_disservizio.json">
+                                        </x-form.builder>
                                         -----------------------------------------------------------------------------------
                                     @endif
 
-                                    <x-input.group type="select" name="category" id="category" :options="$_theme->getTicketCategories()->pluck('name','name')->all()"
+                                    <x-input.group type="select" name="category" id="category" :options="$_theme
+                                        ->getTicketCategories()
+                                        ->pluck('name', 'name')
+                                        ->all()"
                                         class="p-big p-lg-4" label="Tipo di disservizio">
-                                    </x-input.group> 
+                                    </x-input.group>
 
                                     {{-- <div class="text-area-wrapper p-3 px-lg-4 pt-lg-5 pb-lg-0 bg-white"> --}}
                                     <x-input.group type="text" name="post.title" id="title" class="mb-0"
                                         label="Titolo">
                                     </x-input.group>
-                                    @error('post.title') <span class="error">{{ $message }}</span> @enderror
+                                    @error('post.title')
+                                        <span class="error">{{ $message }}</span>
+                                    @enderror
                                     {{-- {{>partials/input/input type="text" id="title" label="Titolo" required=true name="title"
                                         formClass="mb-0"}} --}}
 
@@ -106,7 +112,9 @@
                                         class="m-0 p-3 px-lg-4 pt-lg-5 pb-lg-4 bg-white" num="2"
                                         label="Dettagli*">
                                     </x-input.group>
-                                    @error('post.txt') <span class="error">{{ $message }}</span> @enderror
+                                    @error('post.txt')
+                                        <span class="error">{{ $message }}</span>
+                                    @enderror
                                     {{-- {{>partials/text-area/text-area placeholder="Dettagli*" id="details" visible=true class="m-0 p-3 px-lg-4
                                     pt-lg-5 pb-lg-4 bg-white" num="2" label="Inserire al massimo 200 caratteri"}} --}}
 
@@ -135,7 +143,7 @@
                                                     {{ __('Remove') }}</a>
                                             </div>
                                             
-                                            @include('theme::components.alert.feedback', ['field' => 'photo'])
+                                            @include('ui::components.alert.feedback', ['field' => 'photo'])
                                             
                                         </div>
                                     </div> --}}
@@ -154,7 +162,7 @@
                                     <x-card type="info_button">
                                         <x-slot name="big_title">{{ $profile->getProfile()->full_name }}</x-slot>
                                         <x-slot name="label_2">
-                                            @if($profile->getProfile()->cf)
+                                            @if ($profile->getProfile()->cf)
                                                 Codice Fiscale <br>
                                                 <span>{{ $profile->getProfile()->cf }}</span>
                                             @endif
@@ -182,7 +190,7 @@
                         </button>
                         <button type="button" wire:click="acconsento()" class="btn btn-primary">
                             Avanti
-                        </button>--}}
+                        </button> --}}
                     </div>
                 </div>
             </div>
@@ -203,18 +211,14 @@
     </main>
 </div>
 @push('scripts')
-    
-{{-- <script src="{{ Theme::asset('pub_ui::js/plugins/jquery.min.js') }}" type="text/javascript"></script>
+    {{-- <script src="{{ Theme::asset('pub_ui::js/plugins/jquery.min.js') }}" type="text/javascript"></script>
 <!--	Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
 <script src="{{ Theme::asset('pub_ui::js/plugins/jasny-bootstrap.min.js') }}" type="text/javascript"></script> --}}
-    
-@php
-/* --- ??????? 
+
+    @php
+        /* --- ???????
 Theme::add('pub_ui::js/plugins/jquery.min.js');
 Theme::add('pub_ui::js/plugins/jasny-bootstrap.min.js');
 */
- 
-@endphp
-
-
+    @endphp
 @endpush
