@@ -140,10 +140,6 @@ return [
         'label' => 'Ci sono problemi con ciò che hai inserito.',
         'placeholder' => 'Ci sono problemi con ciò che hai inserito.',
     ],
-    'login' => [
-        'label' => 'Accedi',
-        'placeholder' => 'Accedi',
-    ],
     'e-mail' => [
         'label' => 'E-mail',
         'placeholder' => 'E-mail',
@@ -366,10 +362,6 @@ return [
     'create_email' => [
         'label' => 'Crea email',
         'placeholder' => 'Crea email',
-    ],
-    'email_address' => [
-        'label' => 'Indirizzo email',
-        'placeholder' => 'Indirizzo email',
     ],
     'email_name' => [
         'label' => 'Nome email',
@@ -853,10 +845,6 @@ return [
         'label' => 'Online',
         'placeholder' => 'Online',
     ],
-    'offline' => [
-        'label' => 'Manutenzione',
-        'placeholder' => 'Manutenzione',
-    ],
     'name/title' => [
         'label' => 'Nome/Titolo',
         'placeholder' => 'Nome/Titolo',
@@ -1074,10 +1062,6 @@ return [
         'label' => 'Aggiungi automaticamente collaboratori dai campi email',
         'placeholder' => 'Aggiungi automaticamente collaboratori dai campi email',
     ],
-    'default_alert_email' => [
-        'label' => 'Allerta email di default',
-        'placeholder' => 'Allerta email di default',
-    ],
     'attachments' => [
         'label' => 'Allegati',
         'placeholder' => 'Allegati',
@@ -1283,10 +1267,6 @@ return [
     'client_quick_access' => [
         'label' => 'Accesso rapido cliente',
         'placeholder' => 'Accesso rapido cliente',
-    ],
-    'cron' => [
-        'label' => 'Cron',
-        'placeholder' => 'Cron',
     ],
     'cron_settings' => [
         'label' => 'Impostazioni Cron',
@@ -1828,10 +1808,6 @@ return [
       |  SLA plan Index Page
       |--------------------------------------
      */
-    'sla_plans' => [
-        'label' => 'Piani SLA',
-        'placeholder' => 'Piani SLA',
-    ],
     'create_SLA' => [
         'label' => 'Crea SLA',
         'placeholder' => 'Crea SLA',
@@ -2118,17 +2094,9 @@ return [
         'label' => 'Salva modulo',
         'placeholder' => 'Salva modulo',
     ],
-    'label' => [
-        'label' => 'Etichetta',
-        'placeholder' => 'Etichetta',
-    ],
     'name' => [
         'label' => 'Nome',
         'placeholder' => 'Nome',
-    ],
-    'type' => [
-        'label' => 'Tipo',
-        'placeholder' => 'Tipo',
     ],
     'values(selected_fields)' => [
         'label' => 'Valori(campi selezionati)',
@@ -2336,10 +2304,6 @@ return [
         'label' => 'Organico',
         'placeholder' => 'Organico',
     ],
-    'name' => [
-        'label' => 'Nome',
-        'placeholder' => 'Nome',
-    ],
     'user_name' => [
         'label' => 'Nome utente',
         'placeholder' => 'Nome utente',
@@ -2384,17 +2348,9 @@ return [
         'label' => 'Modifica',
         'placeholder' => 'Modifica',
     ],
-    'departments' => [
-        'label' => 'Dipartimenti',
-        'placeholder' => 'Dipartimenti',
-    ],
     'groups' => [
         'label' => 'Gruppi',
         'placeholder' => 'Gruppi',
-    ],
-    'select_a_time_zone' => [
-        'label' => 'Seleziona un fuso orario',
-        'placeholder' => 'Seleziona un fuso orario',
     ],
     'time_zones' => [
         'label' => 'Fusi orari',
@@ -2408,10 +2364,6 @@ return [
     'create_agent' => [
         'label' => 'Crea agente',
         'placeholder' => 'Crea agente',
-    ],
-    'first_name' => [
-        'label' => 'Nome',
-        'placeholder' => 'Nome',
     ],
     'last_name' => [
         'label' => 'Cognome',
@@ -2555,10 +2507,6 @@ return [
         'label' => 'Email da usare',
         'placeholder' => 'Email da usare',
     ],
-    'template_set' => [
-        'label' => 'Set modelli',
-        'placeholder' => 'Set modelli',
-    ],
     'auto_responding_settings' => [
         'label' => 'Impostazioni auto-risposta',
         'placeholder' => 'Impostazioni auto-risposta',
@@ -2623,10 +2571,6 @@ return [
         'label' => 'Dipartimento non aggiornato',
         'placeholder' => 'Dipartimento non aggiornato',
     ],
-    'you_cannot_delete_default_department' => [
-        'label' => 'Non puoi cancellare il dipartimento predefinito',
-        'placeholder' => 'Non puoi cancellare il dipartimento predefinito',
-    ],
     'have_been_moved_to_default_department' => [
         'label' => 'è stato assegnato al dipartimento predefinito',
         'placeholder' => 'è stato assegnato al dipartimento predefinito',
@@ -2643,10 +2587,6 @@ return [
         'label' => 'Impossibile cancellare dipartimento',
         'placeholder' => 'Impossibile cancellare dipartimento',
     ],
-    'select_a_department' => [
-        'label' => 'Seleziona un dipartimento',
-        'placeholder' => 'Seleziona un dipartimento',
-    ],
     'make-default-department' => [
         'label' => 'Rendi il dipartimento predefinito',
         'placeholder' => 'Rendi il dipartimento predefinito',
@@ -2659,10 +2599,6 @@ return [
     'create_team' => [
         'label' => 'Crea team',
         'placeholder' => 'Crea team',
-    ],
-    'team_lead' => [
-        'label' => 'Team leader',
-        'placeholder' => 'Team leader',
     ],
     'assignment_alert' => [
         'label' => 'Avviso assegnamento',
@@ -2840,10 +2776,6 @@ return [
     'group_deleted_successfully' => [
         'label' => 'Gruppo cancellato correttamente',
         'placeholder' => 'Gruppo cancellato correttamente',
-    ],
-    'group_cannot_delete' => [
-        'label' => 'Impossibile cancellare il gruppo',
-        'placeholder' => 'Impossibile cancellare il gruppo',
     ],
     'failed_to_load_the_page' => [
         'label' => 'Impossibile caricare la pagina',
@@ -3025,10 +2957,6 @@ return [
         'label' => 'Questa mail è stata bannata',
         'placeholder' => 'Questa mail è stata bannata',
     ],
-    'ticket_updated_successfully' => [
-        'label' => 'Ticket aggiornato correttamente',
-        'placeholder' => 'Ticket aggiornato correttamente',
-    ],
     'you_have_successfully_replied_to_your_ticket' => [
         'label' => 'Hai risposto al tuo ticket con successo',
         'placeholder' => 'Hai risposto al tuo ticket con successo',
@@ -3148,10 +3076,6 @@ return [
         'label' => 'Risolto',
         'placeholder' => 'Risolto',
     ],
-    'closed' => [
-        'label' => 'Chiusi',
-        'placeholder' => 'Chiusi',
-    ],
     'deleted' => [
         'label' => 'Cancellato',
         'placeholder' => 'Cancellato',
@@ -3216,10 +3140,6 @@ return [
     'edit_user' => [
         'label' => 'Modifica utente',
         'placeholder' => 'Modifica utente',
-    ],
-    'full_name' => [
-        'label' => 'Nome completo',
-        'placeholder' => 'Nome completo',
     ],
     'mobile' => [
         'label' => 'Cellulare',
@@ -3380,21 +3300,9 @@ return [
       |  Ticket page
       |----------------------------------------------
      */
-    'subject' => [
-        'label' => 'Oggetto',
-        'placeholder' => 'Oggetto',
-    ],
     'ticket_id' => [
         'label' => 'Ticket ID',
         'placeholder' => 'Ticket ID',
-    ],
-    'priority' => [
-        'label' => 'Priorità',
-        'placeholder' => 'Priorità',
-    ],
-    'from' => [
-        'label' => 'Da',
-        'placeholder' => 'Da',
     ],
     'last_replier' => [
         'label' => 'Ultimo a rispondere',
@@ -3423,10 +3331,6 @@ return [
     'tickets' => [
         'label' => 'Ticket',
         'placeholder' => 'Ticket',
-    ],
-    'open' => [
-        'label' => 'Aperti',
-        'placeholder' => 'Aperti',
     ],
     'Ticket_Information' => [
         'label' => 'INFORMAZIONE TICKET',
@@ -3660,10 +3564,6 @@ return [
         'label' => 'Unisci ticket',
         'placeholder' => 'Unisci ticket',
     ],
-    'title' => [
-        'label' => 'Titolo',
-        'placeholder' => 'Titolo',
-    ],
     'merge' => [
         'label' => 'Unisci',
         'placeholder' => 'Unisci',
@@ -3864,10 +3764,6 @@ return [
         'label' => 'Contenuto',
         'placeholder' => 'Contenuto',
     ],
-    'edit_template' => [
-        'label' => 'Modifica modello',
-        'placeholder' => 'Modifica modello',
-    ],
     'edit_status' => [
         'label' => 'Modifica stato',
         'placeholder' => 'Modifica stato',
@@ -3925,10 +3821,6 @@ return [
     'close-msg4' => [
         'label' => 'Inviare email di auto chiusura del ticket all\'utente?',
         'placeholder' => 'Inviare email di auto chiusura del ticket all\'utente?',
-    ],
-    'edit_status' => [
-        'label' => 'Modifica stato',
-        'placeholder' => 'Modifica stato',
     ],
     'list_of_status' => [
         'label' => 'Lista degli stati',
@@ -4255,22 +4147,6 @@ return [
         'label' => 'Impostazioni widget',
         'placeholder' => 'Impostazioni widget',
     ],
-    'footer1' => [
-        'label' => 'Footer 1',
-        'placeholder' => 'Footer 1',
-    ],
-    'footer2' => [
-        'label' => 'Footer 2',
-        'placeholder' => 'Footer 2',
-    ],
-    'footer3' => [
-        'label' => 'Footer 3',
-        'placeholder' => 'Footer 3',
-    ],
-    'footer4' => [
-        'label' => 'Footer 4',
-        'placeholder' => 'Footer 4',
-    ],
     'sidewidget1' => [
         'label' => 'Widget laterale 1',
         'placeholder' => 'Widget laterale 1',
@@ -4348,22 +4224,6 @@ return [
         'placeholder' => 'Numero elementi da visualizzare',
     ],
     // ======================================
-    'language' => [
-        'label' => 'Lingua',
-        'placeholder' => 'Lingua',
-    ],
-    'save' => [
-        'label' => 'Salva',
-        'placeholder' => 'Salva',
-    ],
-    'create' => [
-        'label' => 'Crea',
-        'placeholder' => 'Crea',
-    ],
-    'dateformat' => [
-        'label' => 'Formato data',
-        'placeholder' => 'Formato data',
-    ],
     'slug' => [
         'label' => 'Slug',
         'placeholder' => 'Slug',
@@ -4497,18 +4357,6 @@ return [
         'label' => 'Per favore inserisci qualche dato!',
         'placeholder' => 'Per favore inserisci qualche dato!',
     ],
-    'profile_updated_sucessfully' => [
-        'label' => 'Profilo aggiornato con successo',
-        'placeholder' => 'Profilo aggiornato con successo',
-    ],
-    'password_updated_sucessfully' => [
-        'label' => 'Password aggiornata',
-        'placeholder' => 'Password aggiornata',
-    ],
-    'password_was_not_updated_incorrect_old_password' => [
-        'label' => 'Password non aggiornata, "Vecchia password" errata',
-        'placeholder' => 'Password non aggiornata, "Vecchia password" errata',
-    ],
     'there_is_no_such_ticket_number' => [
         'label' => 'Numero ticket non trovato',
         'placeholder' => 'Numero ticket non trovato',
@@ -4540,10 +4388,6 @@ return [
     'sorry_not_processed' => [
         'label' => 'Non processato',
         'placeholder' => 'Non processato',
-    ],
-    'profile_updated_sucessfully' => [
-        'label' => 'Profilo aggiornato con successo',
-        'placeholder' => 'Profilo aggiornato con successo',
     ],
     'password_was_not_updated' => [
         'label' => 'Password non aggiornata',
@@ -4584,26 +4428,6 @@ return [
     'enter_url_to_send_ticket_details' => [
         'label' => 'Inserisci l\'URL per inviare i dettagli del ticket',
         'placeholder' => 'Inserisci l\'URL per inviare i dettagli del ticket',
-    ],
-    'api' => [
-        'label' => 'API',
-        'placeholder' => 'API',
-    ],
-    'api_key' => [
-        'label' => 'Chiave API',
-        'placeholder' => 'Chiave API',
-    ],
-    'api_key_mandatory' => [
-        'label' => 'Chiave API obbligatoria',
-        'placeholder' => 'Chiave API obbligatoria',
-    ],
-    'api_configurations' => [
-        'label' => 'Configurazione API',
-        'placeholder' => 'Configurazione API',
-    ],
-    'generate_key' => [
-        'label' => 'Genera chiave',
-        'placeholder' => 'Genera chiave',
     ],
     'api_settings' => [
         'label' => 'Impostazioni API',
@@ -4750,21 +4574,9 @@ return [
      * Report
      * ----------------------------------------------------------------------------------------------
      */
-    'report' => [
-        'label' => 'Resoconto',
-        'placeholder' => 'Resoconto',
-    ],
     'Report' => [
         'label' => 'RESOCONTO',
         'placeholder' => 'RESOCONTO',
-    ],
-    'start_date' => [
-        'label' => 'Data inizio',
-        'placeholder' => 'Data inizio',
-    ],
-    'end_date' => [
-        'label' => 'Data fine',
-        'placeholder' => 'Data fine',
     ],
     'select' => [
         'label' => 'Seleziona',
@@ -4818,10 +4630,6 @@ return [
         'label' => 'Priorità ticket',
         'placeholder' => 'Priorità ticket',
     ],
-    'priority' => [
-        'label' => 'Priorità',
-        'placeholder' => 'Priorità',
-    ],
     'priority_desc' => [
         'label' => 'Descrizione',
         'placeholder' => 'Descrizione',
@@ -4861,10 +4669,6 @@ return [
     'normal' => [
         'label' => 'Normale',
         'placeholder' => 'Normale',
-    ],
-    'ispublic' => [
-        'label' => 'Visibilità',
-        'placeholder' => 'Visibilità',
     ],
     'make-default-priority' => [
         'label' => 'Rendi priorità predefinita',
@@ -5002,10 +4806,6 @@ return [
         'label' => 'Cambia ruolo in agente',
         'placeholder' => 'Cambia ruolo in agente',
     ],
-    'change_password' => [
-        'label' => 'Cambia password',
-        'placeholder' => 'Cambia password',
-    ],
     'role_change' => [
         'label' => 'Cambio ruolo',
         'placeholder' => 'Cambio ruolo',
@@ -5090,10 +4890,6 @@ return [
         'label' => 'Attiva',
         'placeholder' => 'Attiva',
     ],
-    'system-email-not-configured' => [
-        'label' => 'Non possiamo processare la richiesta in quanto il sistema non ha configurato alcuna mail per le notifiche. Per favore contatta l\'amministratore.',
-        'placeholder' => 'Non possiamo processare la richiesta in quanto il sistema non ha configurato alcuna mail per le notifiche. Per favore contatta l\'amministratore.',
-    ],
     'assign-ticket' => [
         'label' => 'Assegna ticket',
         'placeholder' => 'Assegna ticket',
@@ -5125,10 +4921,6 @@ return [
     'enabled' => [
         'label' => 'Abilitato',
         'placeholder' => 'Abilitato',
-    ],
-    'disabled' => [
-        'label' => 'Disabilitato',
-        'placeholder' => 'Disabilitato',
     ],
     'user-account-is-deleted' => [
         'label' => 'Questo account è stato cancellato.',
