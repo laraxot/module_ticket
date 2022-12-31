@@ -53,7 +53,6 @@ return [
     'password_confirmation' => 'Conferma password',
     'woops' => 'Whoops!',
     'theirisproblem' => 'Ci sono problemi con ciò che hai inserito.',
-    'login' => 'Accedi',
     'e-mail' => 'E-mail',
     'reg_new_member' => 'Registra un nuovo membro',
     'this_account_is_currently_inactive' => 'Questo account non è attualmente attivo!',
@@ -133,7 +132,6 @@ return [
     'reuired_authentication' => 'Autenticazione richiesta',
     'fetching_email_via_imap' => 'Caricamento email via IMAP',
     'create_email' => 'Crea email',
-    'email_address' => 'Indirizzo email',
     'email_name' => 'Nome email',
     'help_topic' => 'Area di supporto',
     'auto_response' => 'Auto risponditore',
@@ -286,7 +284,6 @@ return [
     'generate_key' => 'Genera chiave',
     'system' => 'Sistema',
     'online' => 'Online',
-    'offline' => 'Manutenzione',
     'name/title' => 'Nome/Titolo',
     'pagesize' => 'Grandezza pagina',
     'url' => 'URL',
@@ -345,7 +342,6 @@ return [
     'accept_email_unknown' => 'Accetta email da utenti sconosciuti',
     'accept_email_collab' => 'Accetta email da collaboratori',
     'automatically_and_collab_from_email' => 'Aggiungi automaticamente collaboratori dai campi email',
-    'default_alert_email' => 'Allerta email di default',
     'attachments' => 'Allegati',
     'email_attahment_user' => 'Allegati email per l\'utente',
     'cron_notification' => 'Attiva notifica cron',
@@ -405,7 +401,6 @@ return [
     'registration_method' => 'Metodo di registrazione',
     'user_session_timeout' => 'Timeout sessione ttente',
     'client_quick_access' => 'Accesso rapido cliente',
-    'cron' => 'Cron',
     'cron_settings' => 'Impostazioni Cron',
     'system-settings' => 'Impostazioni di sistema',
     'settings-2' => 'Impostazioni',
@@ -586,7 +581,6 @@ return [
       |  SLA plan Index Page
       |--------------------------------------
      */
-    'sla_plans' => 'Piani SLA',
     'create_SLA' => 'Crea SLA',
     'grace_period' => 'Periodo di validità',
     'added_date' => 'Data aggiunta',
@@ -672,9 +666,7 @@ return [
     'click_add_fields_button_to_add_fields' => "Clicca il pulsante <b>'Aggiungi campi'</b> per aggiungere campi",
     'add_fields' => 'Aggiungi campo',
     'save_form' => 'Salva modulo',
-    'label' => 'Etichetta',
     'name' => 'Nome',
-    'type' => 'Tipo',
     'values(selected_fields)' => 'Valori(campi selezionati)',
     'required' => 'Richiesto',
     'Action' => 'Azione',
@@ -749,7 +741,6 @@ return [
      */
     'are_you_sure' => 'Sei sicuro',
     'staffs' => 'Organico',
-    'name' => 'Nome',
     'user_name' => 'Nome utente',
     'status' => 'Stato',
     'group' => 'Gruppo',
@@ -761,9 +752,7 @@ return [
     'agents' => 'Agenti',
     'create' => 'Crea',
     'edit' => 'Modifica',
-    'departments' => 'Dipartimenti',
     'groups' => 'Gruppi',
-    'select_a_time_zone' => 'Seleziona un fuso orario',
     'time_zones' => 'Fusi orari',
     /*
       |--------------------------------------
@@ -771,7 +760,6 @@ return [
       |--------------------------------------
      */
     'create_agent' => 'Crea agente',
-    'first_name' => 'Nome',
     'last_name' => 'Cognome',
     'mobile_number' => 'Cellulare',
     'agent_signature' => 'Firma agente',
@@ -812,7 +800,6 @@ return [
     'restrict_ticket_assignment_to_department_members' => 'Limita assegnamento ticket a membri del dipartimento',
     'outgoing_emails' => 'Emails in uscita',
     'outgoing_email' => 'Email da usare',
-    'template_set' => 'Set modelli',
     'auto_responding_settings' => 'Impostazioni auto-risposta',
     'disable_for_this_department' => 'Disattiva per questo dipartimento',
     'auto_response_email' => 'Email auto-risposta',
@@ -829,12 +816,10 @@ return [
     'failed_to_create_department' => 'Impossibile creare il dipartimento',
     'department_updated_sucessfully' => 'Dipartimento aggiornato correttamente',
     'department_not_updated' => 'Dipartimento non aggiornato',
-    'you_cannot_delete_default_department' => 'Non puoi cancellare il dipartimento predefinito',
     'have_been_moved_to_default_department' => 'è stato assegnato al dipartimento predefinito',
     'the_associated_helptopic_has_been_deactivated' => 'L\'area di supporto associata è stata disattivata',
     'department_deleted_sucessfully' => 'Dipartimento cancellato con successo',
     'department_can_not_delete' => 'Impossibile cancellare dipartimento',
-    'select_a_department' => 'Seleziona un dipartimento',
     'make-default-department' => 'Rendi il dipartimento predefinito',
     /*
       |--------------------------------------
@@ -842,7 +827,6 @@ return [
       |--------------------------------------
      */
     'create_team' => 'Crea team',
-    'team_lead' => 'Team leader',
     'assignment_alert' => 'Avviso assegnamento',
     'disable_for_this_team' => 'Disattiva per questo team',
     'teams' => 'Teams',
@@ -891,7 +875,6 @@ return [
     'there_are_agents_assigned_to_this_group_please_unassign_them_from_this_group_to_delete' => 'Esistono agenti assegnati a questo gruppo, rimuovili per poterlo cancellare',
     'group_cannot_delete' => 'Impossibile cancellare il gruppo',
     'group_deleted_successfully' => 'Gruppo cancellato correttamente',
-    'group_cannot_delete' => 'Impossibile cancellare il gruppo',
     'failed_to_load_the_page' => 'Impossibile caricare la pagina',
     /*
       |--------------------------------------
@@ -952,7 +935,6 @@ return [
     'your_ticket_have_been_opened' => 'Il ticket è stato aperto',
     'your_ticket_have_been_moved_to_trash' => 'Il ticket è stato spostato nel cestino',
     'this_email_have_been_banned' => 'Questa mail è stata bannata',
-    'ticket_updated_successfully' => 'Ticket aggiornato correttamente',
     'you_have_successfully_replied_to_your_ticket' => 'Hai risposto al tuo ticket con successo',
     'for_some_reason_your_message_was_not_posted_please_try_again_later' => 'Per qualche ragione il tuo messaggio non è stato pubblicato, per favore prova più tardi',
     'for_some_reason_your_reply_was_not_posted_please_try_again_later' => 'Per qualche ragione la tua risposta non è stata pubblicata, per favore prova più tardi',
@@ -991,7 +973,6 @@ return [
     'statistics' => 'Statistiche',
     'opened' => 'Aperti',
     'resolved' => 'Risolto',
-    'closed' => 'Chiusi',
     'deleted' => 'Cancellato',
     'start_date' => 'Data inizio',
     'end_date' => 'Data fine',
@@ -1012,7 +993,6 @@ return [
     'users' => 'Utenti',
     'create_user' => 'Crea utente',
     'edit_user' => 'Modifica utente',
-    'full_name' => 'Nome completo',
     'mobile' => 'Cellulare',
     'last_login' => 'Ultimo accesso',
     'user_profile' => 'Profilo utente',
@@ -1061,10 +1041,7 @@ return [
       |  Ticket page
       |----------------------------------------------
      */
-    'subject' => 'Oggetto',
     'ticket_id' => 'Ticket ID',
-    'priority' => 'Priorità',
-    'from' => 'Da',
     'last_replier' => 'Ultimo a rispondere',
     'assigned_to' => 'Assegnato a',
     'last_activity' => 'Ultima attività',
@@ -1072,7 +1049,6 @@ return [
     'assigned' => 'Assegnati',
     'create_ticket' => 'Crea Ticket',
     'tickets' => 'Ticket',
-    'open' => 'Aperti',
     'Ticket_Information' => 'INFORMAZIONE TICKET',
     'Ticket_Id' => 'ID TICKET',
     'User' => 'UTENTE',
@@ -1131,7 +1107,6 @@ return [
     'valid-email' => 'Inserisci un indirizzo email valido.',
     'search_user' => 'Cerca utente',
     'merge-ticket' => 'Unisci ticket',
-    'title' => 'Titolo',
     'merge' => 'Unisci',
     'select_tickets' => 'Seleziona ticket da unire',
     'select-pparent-ticket' => 'Seleziona un ticket padre',
@@ -1194,7 +1169,6 @@ return [
     'gender' => 'Sesso',
     'ticket_number' => 'Numero ticket',
     'content' => 'Contenuto',
-    'edit_template' => 'Modifica modello',
     'edit_status' => 'Modifica stato',
     'create_status' => 'Crea stato',
     'edit_details' => 'Modifica dettagli',
@@ -1211,7 +1185,6 @@ return [
     'send_email_to_user' => 'Invia email all\'utente',
     'close-msg3' => 'Seleziona stato da assegnare alla chiusura del ticket.',
     'close-msg4' => 'Inviare email di auto chiusura del ticket all\'utente?',
-    'edit_status' => 'Modifica stato',
     'list_of_status' => 'Lista degli stati',
     'status_settings' => 'Impostazioni stati',
     'icon_class' => 'Icona',
@@ -1303,10 +1276,6 @@ return [
     'allpages' => 'Tutte le pagine',
     'widgets' => 'Widgets',
     'widget-settings' => 'Impostazioni widget',
-    'footer1' => 'Footer 1',
-    'footer2' => 'Footer 2',
-    'footer3' => 'Footer 3',
-    'footer4' => 'Footer 4',
     'sidewidget1' => 'Widget laterale 1',
     'sidewidget2' => 'Widget laterale 2',
     'comments' => 'Commenti',
@@ -1327,10 +1296,6 @@ return [
     'not_published' => 'Non pubblicato',
     'numberofelementstodisplay' => 'Numero elementi da visualizzare',
     // ======================================
-    'language' => 'Lingua',
-    'save' => 'Salva',
-    'create' => 'Crea',
-    'dateformat' => 'Formato data',
     'slug' => 'Slug',
     'read_more' => 'Continua a leggere',
     'view_all' => 'Vedi tutto',
@@ -1371,9 +1336,6 @@ return [
     'please_fill_all_required_feilds' => 'Per favore compila tutti i campi richiesti.',
     'successfully_replied' => 'Replicato con successo',
     'please_fill_some_data' => 'Per favore inserisci qualche dato!',
-    'profile_updated_sucessfully' => 'Profilo aggiornato con successo',
-    'password_updated_sucessfully' => 'Password aggiornata',
-    'password_was_not_updated_incorrect_old_password' => 'Password non aggiornata, "Vecchia password" errata',
     'there_is_no_such_ticket_number' => 'Numero ticket non trovato',
     "email_didn't_match_with_ticket_number" => 'Email non corrispondente al numero di ticket',
     'we_have_sent_you_a_link_by_email_please_click_on_that_link_to_view_ticket' => 'Ti abbiamo inviato un link per mail, per favore cliccaci per visualizzare il ticket',
@@ -1382,7 +1344,6 @@ return [
     'your_details_can_not_send_to_system' => 'I tuoi dettagli non sono stati inviati al sistema',
     'your_comment_posted' => 'Commento pubblicato',
     'sorry_not_processed' => 'Non processato',
-    'profile_updated_sucessfully' => 'Profilo aggiornato con successo',
     'password_was_not_updated' => 'Password non aggiornata',
     'sorry_your_ticket_token_has_expired_please_try_to_resend_the_ticket_link_request' => 'Token del ticket scaduto! Per favore prova ad inviare nuovamente il link di richiesta ticket',
     'sorry_you_are_not_allowed_token_expired' => 'Non sei autorizzato. Token scaduto!',
@@ -1399,11 +1360,6 @@ return [
      */
     'webhooks' => 'Webhooks',
     'enter_url_to_send_ticket_details' => 'Inserisci l\'URL per inviare i dettagli del ticket',
-    'api' => 'API',
-    'api_key' => 'Chiave API',
-    'api_key_mandatory' => 'Chiave API obbligatoria',
-    'api_configurations' => 'Configurazione API',
-    'generate_key' => 'Genera chiave',
     'api_settings' => 'Impostazioni API',
     /*
      * -----------------------------------------------------------------------------
@@ -1465,10 +1421,7 @@ return [
      * Report
      * ----------------------------------------------------------------------------------------------
      */
-    'report' => 'Resoconto',
     'Report' => 'RESOCONTO',
-    'start_date' => 'Data inizio',
-    'end_date' => 'Data fine',
     'select' => 'Seleziona',
     'generate' => 'Genera',
     'day' => 'Giorno',
@@ -1485,7 +1438,6 @@ return [
      * -----------------------------------------------------------------------------------
      */
     'ticket_priority' => 'Priorità ticket',
-    'priority' => 'Priorità',
     'priority_desc' => 'Descrizione',
     'priority_urgency' => 'Urgenza priorità',
     'priority_id' => 'ID priorità',
@@ -1496,7 +1448,6 @@ return [
     'agent_notes' => 'Note agente',
     'select_priority' => 'Seleziona priorità',
     'normal' => 'Normale',
-    'ispublic' => 'Visibilità',
     'make-default-priority' => 'Rendi priorità predefinita',
     'priority_successfully_created' => 'Priorità creata con successo',
     'priority_successfully_updated' => 'Priorità aggiornata con successo',
@@ -1546,7 +1497,6 @@ return [
     'change_role_to_admin' => 'Cambia ruolo in admin',
     'change_role_to_user' => 'Cambia ruolo in utente',
     'change_role_to_agent' => 'Cambia ruolo in agente',
-    'change_password' => 'Cambia password',
     'role_change' => 'Cambio ruolo',
     'password_generator' => 'Genera password',
     'depertment' => 'Dipartimento',
@@ -1571,7 +1521,6 @@ return [
     'created-at' => 'Creato a',
     'or' => 'o',
     'activate' => 'Attiva',
-    'system-email-not-configured' => 'Non possiamo processare la richiesta in quanto il sistema non ha configurato alcuna mail per le notifiche. Per favore contatta l\'amministratore.',
     'assign-ticket' => 'Assegna ticket',
     'can-not-inactive-group' => 'Impossibile disattivare il gruppo con agenti assegnati. Per favore riassegna gli agenti ad un altro gruppo e riprova.',
     'internal-note-has-been-added' => 'Note interne aggiunte al ticket',
@@ -1580,7 +1529,6 @@ return [
     'view-option' => 'Visualizza opzioni',
     'accoutn-not-verified' => 'Account non verificato',
     'enabled' => 'Abilitato',
-    'disabled' => 'Disabilitato',
     'user-account-is-deleted' => 'Questo account è stato cancellato.',
     'restore-user' => 'Ripristina account utente',
     'delete-account-caution-info' => 'Questo account potrebbe avere ancora ticket aperti nel sistema.',

@@ -144,7 +144,6 @@ return [
     'reuired_authentication' => 'Vereist authenticatie',
     'fetching_email_via_imap' => 'E-mail via IMAP binnenhalen',
     'create_email' => 'Maak e-mailbericht',
-    'email_address' => 'E-mailadres',
     'email_name' => 'E-mail naam',
     'help_topic' => 'Help Onderwerp',
     'auto_response' => 'Automatisch beantwoorden',
@@ -289,7 +288,6 @@ return [
      */
     'system' => 'Systeem',
     'online' => 'Online',
-    'offline' => 'Offline',
     'name/title' => 'Naam / Titel',
     'pagesize' => 'Pagina grootte ',
     'url' => 'URL',
@@ -348,7 +346,6 @@ return [
     'accept_email_unknown' => 'Accepteer e-mailberichten van onbekende gebruikers',
     'accept_email_collab' => 'Accepteer e-mail medewerkers',
     'automatically_and_collab_from_email' => 'Medewekers automatisch toevoegen van e-mailvelden',
-    'default_alert_email' => 'Standaard e-mail melding',
     'attachments' => 'Bijlagen',
     'email_attahment_user' => 'E-mail bijlagen naar de gebruiker',
     'cron_notification' => 'Inschakelen meldingstaak',
@@ -414,7 +411,6 @@ return [
     'registration_method' => 'Registratie methode',
     'user_session_timeout' => 'Gebruikers sessie time-out',
     'client_quick_access' => 'Gebruiker snelle toegang',
-    'cron' => 'Taak',
     'cron_settings' => 'Taak instellingen',
     'system-settings' => 'Systeem Instellingen',
     'settings-2' => 'Instellingen',
@@ -605,7 +601,6 @@ return [
       |  SLA plan Index Page
       |--------------------------------------
      */
-    'sla_plans' => 'SLA plannen',
     'create_SLA' => 'Maak een SLA',
     'grace_period' => 'Tijdsduur',
     'added_date' => 'Datum toegevoegd',
@@ -620,7 +615,6 @@ return [
     'sla_plan_can_not_create' => 'SLA plan kan niet worden aangemaakt',
     'sla_plan_updated_successfully' => 'SLA plan succesvol bijgewerkt',
     'sla_plan_can_not_update' => 'SLA plan kan niet bijgewerkt worden',
-    'you_cannot_delete_default_department' => 'Je kan de standaard afdeling niet verwijderen',
     'have_been_moved_to_default_sla' => 'Is verplaatst naar de standaard SLA',
     'associated_department_have_been_moved_to_default_sla' => 'Gerelateerde afdeling is verplaatst naar standaard SLA',
     'associated_help_topic_have_been_moved_to_default_sla' => 'Gerelateerd help-onderwerp is verplaatst naar standaard SLA',
@@ -640,7 +634,6 @@ return [
     'target' => 'Doel',
     'target_channel' => 'Doelkanaal',
     'execution_order' => 'Uitvoer volgorde',
-    'target_channel' => 'Doelkanaal',
     'workflow_rules' => 'Werkstroom regels',
     'workflow_action' => 'Werkstroom actie',
     'rules' => 'Regels',
@@ -692,9 +685,7 @@ return [
     'click_add_fields_button_to_add_fields' => "Klik op de knop <b>'Velden toevoegen'</b> om een veld toe te voegen",
     'add_fields' => 'Velden toevoegen',
     'save_form' => 'Formulier opslaan',
-    'label' => 'Label',
     'name' => 'Naam',
-    'type' => 'Type',
     'values(selected_fields)' => 'Waarden(geselecteerde velden)',
     'required' => 'Vereist',
     'Action' => 'Actie',
@@ -769,7 +760,6 @@ return [
      */
     'are_you_sure' => 'Weet je het zeker',
     'staffs' => 'Medewerkers',
-    'name' => 'Naam',
     'user_name' => 'Gebruikersnaam',
     'status' => 'Status',
     'group' => 'Groep',
@@ -781,9 +771,7 @@ return [
     'agents' => 'Medewerkers',
     'create' => 'Maken',
     'edit' => 'Bewerken',
-    'departments' => 'Afdelingen',
     'groups' => 'Groepen',
-    'select_a_time_zone' => 'Selecteer een tijdzone',
     'time_zones' => 'Tijdzones',
     /*
       |--------------------------------------
@@ -791,7 +779,6 @@ return [
       |--------------------------------------
      */
     'create_agent' => 'Maak medeweker',
-    'first_name' => 'Voornaam',
     'last_name' => 'Achternaam',
     'mobile_number' => 'Mobiele telefoonnummer',
     'agent_signature' => 'Handtekening medewerker',
@@ -831,7 +818,6 @@ return [
     'restrict_ticket_assignment_to_department_members' => 'Beperk ticket toewijzing tot afdeling medewerkers',
     'outgoing_emails' => 'Uitgaande e-mail',
     'outgoing_email' => 'Binnenkomende e-mail',
-    'template_set' => 'Sjabloon groep',
     'auto_responding_settings' => 'Automatisch antwoord instellingen',
     'disable_for_this_department' => 'Uitschakelen voor deze afdeling',
     'auto_response_email' => 'Automatisch antwoord e-mail',
@@ -848,7 +834,6 @@ return [
     'failed_to_create_department' => 'Niet gelukt om afdeling aan te maken',
     'department_updated_sucessfully' => 'Afdeling succesvol bijgewerkt',
     'department_not_updated' => 'Afdeling niet bijgewerkt',
-    'you_cannot_delete_default_department' => 'Je kan de standaard afdeling niet verwijderen',
     'have_been_moved_to_default_department' => 'is verplaatst naar de standaard afdeling',
     'the_associated_helptopic_has_been_deactivated' => 'Het gerelateerde help-onderwerp is uitgeschakeld',
     'department_deleted_sucessfully' => 'Afdeling succesvol verwijderd',
@@ -860,7 +845,6 @@ return [
       |--------------------------------------
      */
     'create_team' => 'Maak team',
-    'team_lead' => 'Teamleider',
     'assignment_alert' => 'Opdracht melding',
     'disable_for_this_team' => 'Uitschakelen voor dit team',
     'teams' => 'Teams',
@@ -908,7 +892,6 @@ return [
     'there_are_agents_assigned_to_this_group_please_unassign_them_from_this_group_to_delete' => 'Er zijn medewekers toegewezen aan deze groep. Verwijder deze eerst van de groep om de groep te kunnen verwijderen',
     'group_cannot_delete' => 'Groep kan niet verwijderd worden',
     'group_deleted_successfully' => 'Groep succesvol verwijderd',
-    'group_cannot_delete' => 'Groep kan niet verwijderd worden',
     'failed_to_load_the_page' => 'Niet gelukt om de pagina te laden',
     /*
       |--------------------------------------
@@ -969,7 +952,6 @@ return [
     'your_ticket_have_been_opened' => 'Je ticket is geopend',
     'your_ticket_have_been_moved_to_trash' => 'Je ticket is verplaatst naar de prullenbak',
     'this_email_have_been_banned' => 'Dit e-mailadres is geblokkeerd',
-    'ticket_updated_successfully' => 'Ticket succesvol bijgewerkt',
     'you_have_successfully_replied_to_your_ticket' => 'Je hebt succesvol op dit ticket geantwoord',
     'for_some_reason_your_message_was_not_posted_please_try_again_later' => 'Er heeft zich een fout voor gedaan, je bericht is niet verstuurd. Probeer het later nog eens',
     'for_some_reason_your_reply_was_not_posted_please_try_again_later' => 'Er heeft zich een fout voor gedaan, je bericht is niet verstuurd. Probeer het later nog eens',
@@ -1007,7 +989,6 @@ return [
     'statistics' => 'Statistieken',
     'opened' => 'Geopend',
     'resolved' => 'Opgelost',
-    'closed' => 'Gesloten',
     'deleted' => 'Verwijderd',
     'start_date' => 'Startdatum',
     'end_date' => 'Einddatum',
@@ -1028,7 +1009,6 @@ return [
     'users' => 'Gebruikers',
     'create_user' => 'Maak gebruiker',
     'edit_user' => 'Bewerk gebruiker',
-    'full_name' => 'Volledige naam',
     'mobile' => 'Mobiele telefoonnummer',
     'last_login' => 'Laatste Login',
     'user_profile' => 'Gebruikersprofiel',
@@ -1077,10 +1057,7 @@ return [
       |  Ticket page
       |----------------------------------------------
      */
-    'subject' => 'Onderwerp',
     'ticket_id' => 'Ticket ID',
-    'priority' => 'Prioriteit',
-    'from' => 'Formulier',
     'last_replier' => 'Laatste beantwoorder',
     'assigned_to' => 'Toegewezen aan',
     'last_activity' => 'Laatste activiteit',
@@ -1088,7 +1065,6 @@ return [
     'assigned' => 'Toegewezen',
     'create_ticket' => 'Maak ticket',
     'tickets' => 'Tickets',
-    'open' => 'Open',
     'Ticket_Information' => 'TICKET INFORMATIE',
     'Ticket_Id' => 'TICKET ID',
     'User' => 'GEBRUIKER',
@@ -1147,7 +1123,6 @@ return [
     'valid-email' => 'Voer een geldig e-mailadres in.',
     'search_user' => 'Zoek gebruiker',
     'merge-ticket' => 'Ticket samenvoegen',
-    'title' => 'Titel',
     'merge' => 'Samenvoegen',
     'select_tickets' => 'Selecteer tickets om samen te voegen',
     'select-pparent-ticket' => 'Select hoofd ticket',
@@ -1210,7 +1185,6 @@ return [
     'gender' => 'Geslacht',
     'ticket_number' => 'Ticket nummer',
     'content' => 'Inhoud',
-    'edit_template' => 'Bewerk sjabloon',
     'edit_status' => 'Bewerk status',
     'create_status' => 'Maak status',
     'edit_details' => 'Bewerk details',
@@ -1226,7 +1200,6 @@ return [
     'send_email_to_user' => 'Verstuur e-mail naar gebruiker',
     'close-msg3' => 'Selecteer een status voor het automatisch sluiten van een ticket.',
     'close-msg4' => 'Verstuur e-mail naar de gebruiker bij het automatisch sluiten van een ticket?.',
-    'edit_status' => 'Bewerk status',
     'list_of_status' => 'Lijst met statussen',
     'status_settings' => 'Status Instellingen',
     'icon_class' => 'Icoon class',
@@ -1316,10 +1289,6 @@ return [
     'allpages' => "Alle pagina's",
     'widgets' => 'Widgets',
     'widget-settings' => 'Widget Instellingen',
-    'footer1' => 'Footer 1',
-    'footer2' => 'Footer 2',
-    'footer3' => 'Footer 3',
-    'footer4' => 'Footer 4',
     'sidewidget1' => 'Side Widget 1',
     'sidewidget2' => 'Side Widget 2',
     'comments' => 'Reacties',
@@ -1340,10 +1309,6 @@ return [
     'not_published' => 'Niet gepubliceerd',
     'numberofelementstodisplay' => 'Aantal elementen om weer te geven',
     // ======================================
-    'language' => 'Taal',
-    'save' => 'Opslaan',
-    'create' => 'Maken',
-    'dateformat' => 'Datum formaat',
     'slug' => 'Slug',
     'read_more' => 'Lees meer',
     'view_all' => 'Bekijk alles',
@@ -1384,9 +1349,6 @@ return [
     'please_fill_all_required_feilds' => 'Vul alle vereiste velden in.',
     'successfully_replied' => 'Succesvol geantwoord',
     'please_fill_some_data' => 'Voer de velden in!',
-    'profile_updated_sucessfully' => 'Profiel succesvol bijgewerkt',
-    'password_updated_sucessfully' => 'Wachtwoord succesvol bijgewerkt',
-    'password_was_not_updated_incorrect_old_password' => 'Wachtwoord niet bijgewerkt. Het oude wachtwoord klopt niet',
     'there_is_no_such_ticket_number' => 'Dit ticket nummer bestaat niet',
     "email_didn't_match_with_ticket_number" => 'E-mail adres hoort niet bij dit ticket nummer',
     'we_have_sent_you_a_link_by_email_please_click_on_that_link_to_view_ticket' => 'We hebben een link naar je e-mailadres gestuurd. Klik op de link in het bericht om je ticket te bekijken',
@@ -1395,7 +1357,6 @@ return [
     'your_details_can_not_send_to_system' => 'Je informatie kan niet naar het systeem worden verstuurd',
     'your_comment_posted' => 'Je reactie is geplaatst',
     'sorry_not_processed' => 'Sorry, niet verwerkt',
-    'profile_updated_sucessfully' => 'Profiel succcesvol bijgewerkt',
     'password_was_not_updated' => 'Wachtwoord is niet bijgewerkt',
     'sorry_your_ticket_token_has_expired_please_try_to_resend_the_ticket_link_request' => 'Sorry, je ticket token is verlopen! Vraag de link om het ticket te bekijken opnieuw aan',
     'sorry_you_are_not_allowed_token_expired' => 'Sorry, niet toegestaan. Token verlopen!',
@@ -1478,10 +1439,7 @@ return [
      * Report
      * ----------------------------------------------------------------------------------------------
      */
-    'report' => 'Rapportage',
     'Report' => 'RAPPORTAGE',
-    'start_date' => 'Startdatum',
-    'end_date' => 'Einddatum',
     'select' => 'Selecteer',
     'generate' => 'Genereer',
     'day' => 'Dag',
@@ -1498,7 +1456,6 @@ return [
      * -----------------------------------------------------------------------------------
      */
     'ticket_priority' => 'Ticket prioriteit',
-    'priority' => 'Prioriteit',
     'priority_desc' => 'Prioriteits beschrijving',
     'priority_urgency' => 'Prioriteits urgentie',
     'priority_id' => 'Prioriteits ID',
@@ -1509,7 +1466,6 @@ return [
     'agent_notes' => 'Medewerker notities',
     'select_priority' => 'Selecteer prioriteit',
     'normal' => 'Normaal',
-    'ispublic' => 'Zichtbaarheid',
     'make-default-priority' => 'Maak standaard prioriteit',
     'priority_successfully_created' => 'Prioriteit succesvol gemaakt',
     'priority_successfully_updated' => 'Prioriteit succesvol bijgewerkt',
@@ -1554,7 +1510,6 @@ return [
     'change_role_to_admin' => 'Verander naar beheerder',
     'change_role_to_user' => 'Verander naar gebruiker',
     'change_role_to_agent' => 'Verander naar medewerker',
-    'change_password' => 'Verander wachtwoord',
     'role_change' => 'Rol aanpassen',
     'password_generator' => 'Wachtwoord generator',
     'depertment' => 'Afdeling',
@@ -1592,7 +1547,6 @@ return [
     'view-option' => 'View options',
     'accoutn-not-verified' => 'User account is not verified',
     'enabled' => 'Enabled',
-    'disabled' => 'Disabled',
     'user-account-is-deleted' => 'This user account has been deleted.',
     'restore-user' => 'Restore user account',
     'delete-account-caution-info' => 'Please note this account may still have  open tickets in the system.',

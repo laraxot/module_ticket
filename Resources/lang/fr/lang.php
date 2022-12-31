@@ -110,7 +110,6 @@ return [
     'reuired_authentication' => 'Authentification requise',
     'fetching_email_via_imap' => 'Retrouver les emails via IMAP',
     'create_email' => 'Créer un email',
-    'email_address' => 'Adresse email',
     'email_name' => 'Nom d\'email',
     'email_to' => 'Email to',
     'help_topic' => 'Rubrique d\'aide',
@@ -258,7 +257,6 @@ return [
 
     'system' => 'Système',
     'online' => 'En ligne',
-    'offline' => 'Hors ligne',
     'name/title' => 'Nom/Titre',
     'pagesize' => 'Taille de la page',
     'url' => 'URL',
@@ -307,7 +305,6 @@ return [
     'accept_email_unknown' => 'Accepter les Emails d\'utilisateurs non identifiés',
     'accept_email_collab' => 'Accepter les collaborateurs de collaborateurs',
     'automatically_and_collab_from_email' => 'Ajouter automatiquement des collaborateurs depuis des champs d\'Email',
-    'default_alert_email' => 'Email d\'alerte par défaut',
     'attachments' => 'Pièces jointes',
     'email_attahment_user' => 'Pièces jointes des Emails à l\'utilisateur',
     'cron_notification' => 'Activer le cron de notification',
@@ -366,7 +363,6 @@ return [
     'registration_method' => 'Méthode d\'inscription',
     'user_session_timeout' => 'Expiration de la session d\'utilisateur',
     'client_quick_access' => 'Accès rapide client',
-    'cron' => 'Cron',
     'cron_settings' => 'Paramètres Cron',
     'system-settings' => 'Paramètres Système',
     'settings-2' => 'Paramètres',
@@ -539,7 +535,6 @@ return [
       |  SLA plan Index Page
       |--------------------------------------
      */
-    'sla_plans' => 'Plans SLA',
     'create_SLA' => 'Créer un SLA',
     'grace_period' => 'Période de grâce',
     'added_date' => 'Date d\'ajout',
@@ -554,7 +549,6 @@ return [
     'sla_plan_can_not_create' => 'Le SLA ne peut pas être créé',
     'sla_plan_updated_successfully' => 'Le SLA a été mis à jour avec succès',
     'sla_plan_can_not_update' => 'Le Sla ne peut pas être mis à jour',
-    'you_cannot_delete_default_department' => 'Vous ne pouvez pas supprimer le département par défaut',
     'have_been_moved_to_default_sla' => 'a été déplacé vers le SLA par défaut',
     'associated_department_have_been_moved_to_default_sla' => 'Le département associé a été déplacé vers le SLA par défaut',
     'associated_help_topic_have_been_moved_to_default_sla' => 'La branche de support a été déplacée vers le SLA par défaut',
@@ -574,7 +568,6 @@ return [
     'target' => 'Cible',
     'target_channel' => 'Canal cible',
     'execution_order' => 'Ordre d\'exécution',
-    'target_channel' => 'Canal cible',
     'workflow_rules' => 'règles de Workflow',
     'workflow_action' => 'Action de Workflow',
     'rules' => 'Règles',
@@ -626,7 +619,6 @@ return [
     'add_fields' => 'Ajouter des champs',
     'save_form' => 'enregistrer formulaire',
     'label' => 'Libellé',
-    'type' => 'Type',
     'values(selected_fields)' => 'Valeurs (Champs sélectionnés)',
     'required' => 'Obligatoire',
     'Action' => 'Action',
@@ -709,9 +701,7 @@ return [
     'delete' => 'Supprimer',
     'agents' => 'Agents',
     'edit' => 'Modifier',
-    'departments' => 'Départements',
     'groups' => 'Groupes',
-    'select_a_time_zone' => 'Sélectionner un fuseau horaire',
     'time_zones' => 'Fuseaux horaires',
     /*
       |--------------------------------------
@@ -719,7 +709,6 @@ return [
       |--------------------------------------
      */
     'create_agent' => 'Créer agent',
-    'first_name' => 'Nom',
     'last_name' => 'Prénom',
     'mobile_number' => 'Téléphone mobile',
     'agent_signature' => 'Signature de l\'agent',
@@ -760,7 +749,6 @@ return [
     'restrict_ticket_assignment_to_department_members' => 'Restriendre l\'assignation des tickets aux membres du département',
     'outgoing_emails' => 'Emails sortants',
     'outgoing_email' => 'Email sortant',
-    'template_set' => 'Jeu de Modèles',
     'auto_responding_settings' => 'Paramètres de réponse automatique',
     'disable_for_this_department' => 'Désactiver pour ce département',
     'auto_response_email' => 'Email de réponse automatique',
@@ -777,7 +765,6 @@ return [
     'failed_to_create_department' => 'Echec de la création du département',
     'department_updated_sucessfully' => 'Département mis à jour avec succès',
     'department_not_updated' => 'Département non mis à jour',
-    'you_cannot_delete_default_department' => 'Vous ne pouvez pas supprimer le département par défaut',
     'have_been_moved_to_default_department' => 'a été déplacé vers le département par défaut',
     'the_associated_helptopic_has_been_deactivated' => 'La branche de support associée a été désactivée',
     'department_deleted_sucessfully' => 'Département supprimé avec succès',
@@ -789,7 +776,6 @@ return [
       |--------------------------------------
      */
     'create_team' => 'Créer équipe',
-    'team_lead' => 'Chef d\'équipe',
     'assignment_alert' => 'Alerte d\'assignation',
     'disable_for_this_team' => 'Désactiver pour cette équipe',
     'teams' => 'Equipes',
@@ -895,7 +881,6 @@ return [
     'your_ticket_have_been_opened' => 'Votre ticket a été ouvert',
     'your_ticket_have_been_moved_to_trash' => 'YVotre ticket a été déplacé dans la corbeille',
     'this_email_have_been_banned' => 'Cet email a été banni',
-    'ticket_updated_successfully' => 'Ticket mis à jour avec succès',
     'you_have_successfully_replied_to_your_ticket' => 'Vous avez répondu à votre ticket',
     'for_some_reason_your_message_was_not_posted_please_try_again_later' => 'Pour une raison inconnue, votre message n\'a pas été posté. Merci de réesayer ultérieurement',
     'for_some_reason_your_reply_was_not_posted_please_try_again_later' => 'Pour une raison inconnue, votre réponse n\'a pas été postée. Merci de réesayer ultérieurement',
@@ -952,7 +937,6 @@ return [
     'users' => 'Utilisateurs',
     'create_user' => 'Créer utilisateur',
     'edit_user' => 'Modifier utilisateur',
-    'full_name' => 'Nom complet',
     'mobile' => 'Mobile',
     'last_login' => 'Dernière connexion',
     'user_profile' => 'Profil utilisateur',
@@ -998,10 +982,7 @@ return [
       |  Ticket page
       |----------------------------------------------
      */
-    'subject' => 'Sujet',
     'ticket_id' => 'ID Ticket',
-    'priority' => 'Priorité',
-    'from' => 'De',
     'last_replier' => 'Dernier répondant',
     'assigned_to' => 'Assigné à',
     'last_activity' => 'Dernière activité',
@@ -1132,7 +1113,6 @@ return [
     'gender' => 'Genre',
     'ticket_number' => 'Numéro de ticket',
     'content' => 'Contenu',
-    'edit_template' => 'Modifier le modèle',
     'create_status' => 'Créer statut',
     'edit_details' => 'Modifier les détails',
     'edit_templates' => 'Modifier les modèles',
@@ -1266,10 +1246,7 @@ return [
     'not_published' => 'Non publié',
     'numberofelementstodisplay' => 'Nombre d\'éléments à afficher',
     // ======================================
-    'language' => 'Langue',
-    'save' => 'Enregistrer',
     'create' => 'Créer',
-    'dateformat' => 'Format de date',
     'slug' => 'Slug',
     'read_more' => 'Savoir plus',
     'view_all' => 'Voir tout',
@@ -1321,7 +1298,6 @@ return [
     'your_details_can_not_send_to_system' => 'Vos détails ne peuvent pas être envoyés dans le système',
     'your_comment_posted' => 'Votre commentaire a été posté',
     'sorry_not_processed' => 'Désolé, non traité',
-    'profile_updated_sucessfully' => 'Profil mis à jour avec succès',
     'password_was_not_updated' => 'Le mot de passe n\'a pas été mis à jour',
     'sorry_your_ticket_token_has_expired_please_try_to_resend_the_ticket_link_request' => 'Désolé, le jeton de votre ticket a expiré! Essayez de renvoyer une demande de lien',
     'sorry_you_are_not_allowed_token_expired' => 'Désolé, vous n\'êtes pas autorisé. Le jeton a expiré!',
@@ -1433,7 +1409,6 @@ return [
      * -----------------------------------------------------------------------------------
      */
     'ticket_priority' => 'Priorité du ticket',
-    'priority' => 'Priorité',
     'priority_desc' => 'Description de la priorité',
     'priority_urgency' => 'Urgence de la priorité',
     'priority_id' => 'Ìdentifiant de la priorité',
@@ -1528,7 +1503,6 @@ return [
     'view-option' => 'Voir les options',
     'accoutn-not-verified' => 'Le compote utilisateur n\'est pas vérifié',
     'enabled' => 'Activé',
-    'disabled' => 'Désactivé',
     'user-account-is-deleted' => 'Ce compte utilisateur a été supprimé.',
     'restore-user' => 'Restaurer le compte utilisateur',
     'delete-account-caution-info' => 'Veuillez noter que ce compte peut toujours contenir des billets ouverts dans le système.',
