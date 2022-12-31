@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use Modules\LU\Models\User;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\LU\Models\User;
 
 /**
  * @property int                $id
@@ -30,19 +30,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class TicketThread extends BaseModelLang {
     /**
-     * @var array<string> 
+     * @var array<string>
      */
     protected $fillable = ['ticket_id',
-    'user_id', 'source', 'poster', 'reply_rating',
-    'rating_count', 'is_internal', 'title', 'body',
-    'format', 'ip_address', 'created_at', 'updated_at'];
+        'user_id', 'source', 'poster', 'reply_rating',
+        'rating_count', 'is_internal', 'title', 'body',
+        'format', 'ip_address', 'created_at', 'updated_at', ];
 
     /*
     public function ticketAttachments():HasMany {
         return $this->hasMany(TicketAttachment::class, 'thread_id');
     }*/
 
-    public function ticket():BelongsTo {
+    public function ticket(): BelongsTo {
         return $this->belongsTo(Ticket::class);
     }
 
@@ -52,7 +52,7 @@ class TicketThread extends BaseModelLang {
     }
     */
 
-    public function user():BelongsTo {
+    public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 }

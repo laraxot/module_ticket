@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use Modules\LU\Models\User;
-use Modules\Geo\Models\Traits\GeoTrait;
-use Modules\Blog\Models\Traits\HasCategory;
-use Modules\Geo\Models\Traits\HasPlaceTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Blog\Models\Traits\HasCategory;
+use Modules\Geo\Models\Traits\GeoTrait;
+use Modules\Geo\Models\Traits\HasPlaceTrait;
+use Modules\LU\Models\User;
 
 /**
  * @property int                  $id
@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int                  $assigned_to
  * @property int                  $source
  * @property string               $ticket_number
- * @property string|null               $address
+ * @property string|null          $address
  * @property bool                 $rating
  * @property bool                 $ratingreply
  * @property int                  $flags
@@ -67,7 +67,7 @@ class Ticket extends BaseModelLang {
     use HasCategory;
 
     /**
-     * @var array<string> 
+     * @var array<string>
      */
     protected $fillable = [
         'user_id', 'dept_id', 'team_id', 'priority_id', 'sla', 'help_topic_id', 'status',
@@ -90,11 +90,9 @@ class Ticket extends BaseModelLang {
         return $this->hasMany(TicketFormData::class);
     }*/
 
-
-    public function ticketThreads():HasMany {
+    public function ticketThreads(): HasMany {
         return $this->hasMany(TicketThread::class);
     }
-
 
     /*
     public function user():BelongsTo
@@ -142,7 +140,7 @@ class Ticket extends BaseModelLang {
         return $this->belongsTo(Department::class, 'dept_id');
     }
     */
-    public function user():BelongsTo {
+    public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 
