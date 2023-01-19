@@ -69,5 +69,6 @@ class Create extends Component {
             'title' => 'required|min:6',
         ];
         app(StoreAction::class)->execute(app(Ticket::class), $data, $rules);
+        session()->flash('Saved');
     }
 }
