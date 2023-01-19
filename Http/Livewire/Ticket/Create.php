@@ -68,8 +68,6 @@ class Create extends Component {
         $rules = [
             'title' => 'required|min:6',
         ];
-        $res = app(StoreAction::class)->execute(app(Ticket::class), $data, $rules);
-
-        // dddx([$this->form_data, $ticket->all(), $ticket->get()->last()->place]);
+        app(StoreAction::class)->execute(app(Ticket::class), $data, $rules);
     }
 }

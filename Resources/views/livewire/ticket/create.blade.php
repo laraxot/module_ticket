@@ -1,1 +1,1 @@
-<x-form.builder id="1" ></x-form.builder>
+<x-form.builder id="1"></x-form.builder>
