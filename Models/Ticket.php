@@ -61,7 +61,7 @@ use Modules\LU\Models\User;
  * @property TicketStatus         $ticketStatus
  * @property Department           $department
  */
-class Ticket extends BaseModelLang {
+class Ticket extends BaseModel {
     use HasPlaceTrait;
     use GeoTrait;
     use HasCategory;
@@ -76,9 +76,10 @@ class Ticket extends BaseModelLang {
         'is_deleted', 'closed', 'is_transferred', 'transferred_at', 'reopened_at', 'duedate',
         'closed_at', 'last_message_at', 'last_response_at', 'approval', 'follow_up', 'created_at', 'updated_at',
         // 'place', // relazione
-        'title', // e' in post
+        //'title', // e' in post
         'url',
     ];
+
 
     /*
     public function ticketCollaborators():HasMany{

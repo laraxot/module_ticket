@@ -89,170 +89,10 @@ class TicketPanel extends XotBasePanel {
      */
     public function fields(): array {
         return [
-            0 => (object) [
+            (object) [
                 'type' => 'Text',
-                'name' => 'user_id',
-                'comment' => 'not in Doctrine',
-            ],
-            1 => (object) [
-                'type' => 'Text',
-                'name' => 'dept_id',
-                'comment' => 'not in Doctrine',
-            ],
-            2 => (object) [
-                'type' => 'Text',
-                'name' => 'team_id',
-                'comment' => 'not in Doctrine',
-            ],
-            3 => (object) [
-                'type' => 'Text',
-                'name' => 'priority_id',
-                'comment' => 'not in Doctrine',
-            ],
-            4 => (object) [
-                'type' => 'Text',
-                'name' => 'sla',
-                'comment' => 'not in Doctrine',
-            ],
-            5 => (object) [
-                'type' => 'Text',
-                'name' => 'help_topic_id',
-                'comment' => 'not in Doctrine',
-            ],
-            6 => (object) [
-                'type' => 'Text',
-                'name' => 'status',
-                'comment' => 'not in Doctrine',
-            ],
-            7 => (object) [
-                'type' => 'Text',
-                'name' => 'assigned_to',
-                'comment' => 'not in Doctrine',
-            ],
-            8 => (object) [
-                'type' => 'Text',
-                'name' => 'source',
-                'comment' => 'not in Doctrine',
-            ],
-            9 => (object) [
-                'type' => 'Text',
-                'name' => 'ticket_number',
-                'comment' => 'not in Doctrine',
-            ],
-            10 => (object) [
-                'type' => 'Text',
-                'name' => 'rating',
-                'comment' => 'not in Doctrine',
-            ],
-            11 => (object) [
-                'type' => 'Text',
-                'name' => 'ratingreply',
-                'comment' => 'not in Doctrine',
-            ],
-            12 => (object) [
-                'type' => 'Text',
-                'name' => 'flags',
-                'comment' => 'not in Doctrine',
-            ],
-            13 => (object) [
-                'type' => 'Text',
-                'name' => 'ip_address',
-                'comment' => 'not in Doctrine',
-            ],
-            14 => (object) [
-                'type' => 'Text',
-                'name' => 'lock_by',
-                'comment' => 'not in Doctrine',
-            ],
-            15 => (object) [
-                'type' => 'Text',
-                'name' => 'lock_at',
-                'comment' => 'not in Doctrine',
-            ],
-            16 => (object) [
-                'type' => 'Text',
-                'name' => 'isoverdue',
-                'comment' => 'not in Doctrine',
-            ],
-            17 => (object) [
-                'type' => 'Text',
-                'name' => 'reopened',
-                'comment' => 'not in Doctrine',
-            ],
-            18 => (object) [
-                'type' => 'Text',
-                'name' => 'isanswered',
-                'comment' => 'not in Doctrine',
-            ],
-            19 => (object) [
-                'type' => 'Text',
-                'name' => 'html',
-                'comment' => 'not in Doctrine',
-            ],
-            20 => (object) [
-                'type' => 'Text',
-                'name' => 'is_deleted',
-                'comment' => 'not in Doctrine',
-            ],
-            21 => (object) [
-                'type' => 'Text',
-                'name' => 'closed',
-                'comment' => 'not in Doctrine',
-            ],
-            22 => (object) [
-                'type' => 'Text',
-                'name' => 'is_transferred',
-                'comment' => 'not in Doctrine',
-            ],
-            23 => (object) [
-                'type' => 'Text',
-                'name' => 'transferred_at',
-                'comment' => 'not in Doctrine',
-            ],
-            24 => (object) [
-                'type' => 'Text',
-                'name' => 'reopened_at',
-                'comment' => 'not in Doctrine',
-            ],
-            25 => (object) [
-                'type' => 'Text',
-                'name' => 'duedate',
-                'comment' => 'not in Doctrine',
-            ],
-            26 => (object) [
-                'type' => 'Text',
-                'name' => 'closed_at',
-                'comment' => 'not in Doctrine',
-            ],
-            27 => (object) [
-                'type' => 'Text',
-                'name' => 'last_message_at',
-                'comment' => 'not in Doctrine',
-            ],
-            28 => (object) [
-                'type' => 'Text',
-                'name' => 'last_response_at',
-                'comment' => 'not in Doctrine',
-            ],
-            29 => (object) [
-                'type' => 'Text',
-                'name' => 'approval',
-                'comment' => 'not in Doctrine',
-            ],
-            30 => (object) [
-                'type' => 'Text',
-                'name' => 'follow_up',
-                'comment' => 'not in Doctrine',
-            ],
-            31 => (object) [
-                'type' => 'Text',
-                'name' => 'created_at',
-                'comment' => 'not in Doctrine',
-            ],
-            32 => (object) [
-                'type' => 'Text',
-                'name' => 'updated_at',
-                'comment' => 'not in Doctrine',
+                'name' => 'url',
+                'comment' => 'Title',
             ],
         ];
     }
@@ -261,7 +101,7 @@ class TicketPanel extends XotBasePanel {
      * Get the tabs available.
      */
     public function tabs(): array {
-        $tabs_name = [];
+        $tabs_name = ['ticket_threads'];
 
         return $tabs_name;
     }

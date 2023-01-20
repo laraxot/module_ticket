@@ -28,7 +28,7 @@ use Modules\LU\Models\User;
  * @property TicketSource       $ticketSource
  * @property User               $user
  */
-class TicketThread extends BaseModelLang {
+class TicketThread extends BaseModel {
     /**
      * @var array<string>
      */
