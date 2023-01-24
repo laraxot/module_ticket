@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Modules\Blog\Models\Traits\HasCategory;
-use Modules\Geo\Models\Traits\GeoTrait;
-use Modules\Geo\Models\Traits\HasPlaceTrait;
 use Modules\LU\Models\User;
+use Modules\Geo\Models\Traits\GeoTrait;
+use Modules\Blog\Models\Traits\HasCategory;
+use Modules\Geo\Models\Traits\HasPlaceTrait;
+use Modules\Comment\Models\Concerns\HasComments;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int                  $id
@@ -65,6 +66,7 @@ class Ticket extends BaseModel {
     use HasPlaceTrait;
     use GeoTrait;
     use HasCategory;
+    use HasComments;
 
     /**
      * @var array<string>
@@ -155,4 +157,22 @@ class Ticket extends BaseModel {
             set: fn ($value) => Auth::id(),
         );
     }*/
+
+    /** 
+    * This string will be used in notifications on what a new comment
+    * was made.
+    */
+    public function commentableName(): string {
+    //
+     return '---commentableName--';
+    }
+
+    /**
+    * This URL will be used in notifications to let the user know
+    * where the comment itself can be read.
+    */
+    public function commentUrl(): string {
+        return '---commentUrl--';
+    }
+
 }
