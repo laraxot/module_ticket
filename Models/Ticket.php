@@ -6,6 +6,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Modules\Ticket\Traits\Auditable;
 use Modules\Ticket\Scopes\AgentScope;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Blog\Models\Traits\HasCategory;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,6 +18,7 @@ class Ticket extends Model implements HasMedia
 {
     use SoftDeletes, InteractsWithMedia, Auditable;
     use HasComments;
+    use HasCategory;
 
     public $table = 'tickets';
 
@@ -48,7 +50,7 @@ class Ticket extends Model implements HasMedia
     {
         parent::boot();
 
-        Ticket::observe(new \Modules\Ticket\Observers\TicketActionObserver);
+        //Ticket::observe(new \Modules\Ticket\Observers\TicketActionObserver);
 
         static::addGlobalScope(new AgentScope);
     }
