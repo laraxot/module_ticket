@@ -1,178 +1,162 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Models;
 
-use Modules\LU\Models\User;
-use Modules\Geo\Models\Traits\GeoTrait;
-use Modules\Blog\Models\Traits\HasCategory;
-use Modules\Geo\Models\Traits\HasPlaceTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Modules\Ticket\Traits\Auditable;
+use Modules\Ticket\Scopes\AgentScope;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Comment\Models\Concerns\HasComments;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Modules\Ticket\Notifications\CommentEmailNotification;
 
-/**
- * @property int                  $id
- * @property int                  $user_id
- * @property int                  $dept_id
- * @property int                  $team_id
- * @property int                  $priority_id
- * @property int                  $sla
- * @property int                  $help_topic_id
- * @property int                  $status
- * @property int                  $assigned_to
- * @property int                  $source
- * @property string               $ticket_number
- * @property string|null          $address
- * @property bool                 $rating
- * @property bool                 $ratingreply
- * @property int                  $flags
- * @property int                  $ip_address
- * @property int                  $lock_by
- * @property string               $lock_at
- * @property int                  $isoverdue
- * @property int                  $reopened
- * @property int                  $isanswered
- * @property int                  $html
- * @property int                  $is_deleted
- * @property int                  $closed
- * @property bool                 $is_transferred
- * @property string               $transferred_at
- * @property string               $reopened_at
- * @property string               $duedate
- * @property string               $closed_at
- * @property string               $last_message_at
- * @property string               $last_response_at
- * @property int                  $approval
- * @property int                  $follow_up
- * @property string               $created_at
- * @property string               $updated_at
- * @property TicketCollaborator[] $ticketCollaborators
- * @property TicketFormData[]     $ticketFormDatas
- * @property TicketThread[]       $ticketThreads
- * @property User                 $user
- * @property TicketPriority       $ticketPriority
- * @property HelpTopic            $helpTopic
- * @property User                 $user
- * @property TicketSource         $ticketSource
- * @property Team                 $team
- * @property SlaPlan              $slaPlan
- * @property TicketStatus         $ticketStatus
- * @property Department           $department
- */
-class Ticket extends BaseModel {
-    use HasPlaceTrait;
-    use GeoTrait;
-    use HasCategory;
+class Ticket extends Model implements HasMedia
+{
+    use SoftDeletes, InteractsWithMedia, Auditable;
     use HasComments;
 
-    /**
-     * @var array<string>
-     */
-    protected $fillable = [
-        'user_id', 'dept_id', 'team_id', 'priority_id', 'sla', 'help_topic_id', 'status',
-        'assigned_to', 'source', 'ticket_number', 'rating', 'ratingreply', 'flags',
-        'ip_address', 'lock_by', 'lock_at', 'isoverdue', 'reopened', 'isanswered', 'html',
-        'is_deleted', 'closed', 'is_transferred', 'transferred_at', 'reopened_at', 'duedate',
-        'closed_at', 'last_message_at', 'last_response_at', 'approval', 'follow_up', 'created_at', 'updated_at',
-        // 'place', // relazione
-        //'title', // e' in post
-        'url',
+    public $table = 'tickets';
+
+    protected $appends = [
+        'attachments',
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
 
-    /*
-    public function ticketCollaborators():HasMany{
-        return $this->hasMany(TicketCollaborator::class);
-    }
+    protected $fillable = [
+        'title',
+        'content',
+        'status_id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'priority_id',
+        'category_id',
+        'author_name',
+        'author_email',
+        'assigned_to_user_id',
+    ];
 
-
-    public function ticketFormDatas():HasMany {
-        return $this->hasMany(TicketFormData::class);
-    }*/
-
-    public function ticketThreads(): HasMany {
-        return $this->hasMany(TicketThread::class);
-    }
-
-    /*
-    public function user():BelongsTo
+    public static function boot()
     {
-        return $this->belongsTo(User::class, 'assigned_to');
-    }
-    */
+        parent::boot();
 
-    /*
-    public function ticketPriority():BelongsTo {
-        return $this->belongsTo(TicketPriority::class, 'priority_id', 'priority_id');
+        Ticket::observe(new \Modules\Ticket\Observers\TicketActionObserver);
+
+        static::addGlobalScope(new AgentScope);
     }
 
-    public function helpTopic():BelongsTo {
-        return $this->belongsTo(HelpTopic::class);
-    }
-    */
-    /*public function user():BelongsTo
+    public function registerMediaConversions(Media $media = null): void
     {
-        return $this->belongsTo(User::class);
-    }*/
-
-    /*
-    public function ticketSource():BelongsTo {
-        return $this->belongsTo(TicketSource::class, 'source');
+        $this->addMediaConversion('thumb')->width(50)->height(50);
     }
-    */
     /*
-    public function team():BelongsTo {
-        return $this->belongsTo(Team::class);
-    }
-    */
-    /*
-    public function slaPlan():BelongsTo {
-        return $this->belongsTo(SlaPlan::class, 'sla');
-    }
-    */
-    /*
-    public function ticketStatus():BelongsTo {
-        return $this->belongsTo(TicketStatus::class, 'status');
-    }
-    */
-    /*
-    public function department() :BelongsTo{
-        return $this->belongsTo(Department::class, 'dept_id');
-    }
-    */
-    public function user(): BelongsTo {
-        return $this->belongsTo(User::class);
-    }
-
-    /*
-     * @return Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    /*protected function user_id(): Attribute
+    public function comments()
     {
-        return Attribute::make(
-            get: fn ($value) => Auth::id(),
-            set: fn ($value) => Auth::id(),
-        );
-    }*/
+        return $this->hasMany(Comment::class, 'ticket_id', 'id');
+    }
+    */
 
-    /** 
+    public function getAttachmentsAttribute()
+    {
+        return $this->getMedia('attachments');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
+
+    public function priority()
+    {
+        return $this->belongsTo(Priority::class, 'priority_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function assigned_to_user()
+    {
+        return $this->belongsTo(User::class, 'assigned_to_user_id');
+    }
+
+    public function scopeFilterTickets($query)
+    {
+        $query->when(request()->input('priority'), function($query) {
+                $query->whereHas('priority', function($query) {
+                    $query->whereId(request()->input('priority'));
+                });
+            })
+            ->when(request()->input('category'), function($query) {
+                $query->whereHas('category', function($query) {
+                    $query->whereId(request()->input('category'));
+                });
+            })
+            ->when(request()->input('status'), function($query) {
+                $query->whereHas('status', function($query) {
+                    $query->whereId(request()->input('status'));
+                });
+            });
+    }
+
+    public function sendCommentNotification($comment)
+    {
+        $users = \App\User::where(function ($q) {
+                $q->whereHas('roles', function ($q) {
+                    return $q->where('title', 'Agent');
+                })
+                ->where(function ($q) {
+                    $q->whereHas('comments', function ($q) {
+                        return $q->whereTicketId($this->id);
+                    })
+                    ->orWhereHas('tickets', function ($q) {
+                        return $q->whereId($this->id);
+                    });
+                });
+            })
+            ->when(!$comment->user_id && !$this->assigned_to_user_id, function ($q) {
+                $q->orWhereHas('roles', function ($q) {
+                    return $q->where('title', 'Admin');
+                });
+            })
+            ->when($comment->user, function ($q) use ($comment) {
+                $q->where('id', '!=', $comment->user_id);
+            })
+            ->get();
+        $notification = new CommentEmailNotification($comment);
+
+        Notification::send($users, $notification);
+        if($comment->user_id && $this->author_email)
+        {
+            Notification::route('mail', $this->author_email)->notify($notification);
+        }
+    }
+
+
+
+     /**
     * This string will be used in notifications on what a new comment
     * was made.
     */
     public function commentableName(): string {
-    //
-     return '---commentableName--';
-    }
+        //
+         return '---commentableName--';
+        }
 
-    /**
-    * This URL will be used in notifications to let the user know
-    * where the comment itself can be read.
-    */
-    public function commentUrl(): string {
-        return '---commentUrl--';
-    }
-
+        /**
+        * This URL will be used in notifications to let the user know
+        * where the comment itself can be read.
+        */
+        public function commentUrl(): string {
+            return '---commentUrl--';
+        }
 }
