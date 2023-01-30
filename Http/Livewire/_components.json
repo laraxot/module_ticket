@@ -1,1 +1,5 @@
+<<<<<<< Updated upstream
 [{"class_name":"Modal\\Ticket\\Create","comp_name":"modal.ticket.create","comp_ns":"Modules\\Ticket\\Http\\Livewire\\Modal\\Ticket\\Create"},{"class_name":"Ticket\\Create","comp_name":"ticket.create","comp_ns":"Modules\\Ticket\\Http\\Livewire\\Ticket\\Create"},{"class_name":"Ticket\\Test","comp_name":"ticket.test","comp_ns":"Modules\\Ticket\\Http\\Livewire\\Ticket\\Test"}]
+=======
+[{"class_name":"Ticket\\Create","comp_name":"ticket.create","comp_ns":"Modules\\Ticket\\Http\\Livewire\\Ticket\\Create"},{"class_name":"Ticket\\Modal\\Test2","comp_name":"ticket.modal.test2","comp_ns":"Modules\\Ticket\\Http\\Livewire\\Ticket\\Modal\\Test2"},{"class_name":"Ticket\\Test","comp_name":"ticket.test","comp_ns":"Modules\\Ticket\\Http\\Livewire\\Ticket\\Test"}]
+>>>>>>> Stashed changes

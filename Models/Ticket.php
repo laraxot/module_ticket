@@ -2,6 +2,7 @@
 
 namespace Modules\Ticket\Models;
 
+<<<<<<< Updated upstream
 use Spatie\MediaLibrary\HasMedia;
 use Modules\Ticket\Traits\Auditable;
 use Modules\Ticket\Scopes\AgentScope;
@@ -18,8 +19,18 @@ class Ticket extends Model implements HasMedia
 {
     use SoftDeletes, InteractsWithMedia, Auditable;
     use HasComments;
-    use HasCategory;
+=======
+use Modules\Blog\Models\Traits\HasCategory;
+use Spatie\ModelStatus\HasStatuses;
+use Spatie\Tags\HasTags;
 
+class Ticket extends BaseModel {
+>>>>>>> Stashed changes
+    use HasCategory;
+    // use HasTags;
+    // use HasStatuses;
+
+<<<<<<< Updated upstream
     public $table = 'tickets';
 
     protected $appends = [
@@ -162,3 +173,12 @@ class Ticket extends Model implements HasMedia
             return '---commentUrl--';
         }
 }
+=======
+    /**
+     * @var array<string>
+     */
+    protected $fillable = [
+        'title', 'txt', 'parent_id',
+    ];
+}
+>>>>>>> Stashed changes

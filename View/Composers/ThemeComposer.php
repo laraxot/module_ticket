@@ -634,6 +634,7 @@ class ThemeComposer {
 
     public function getTicketCategories(): Collection {
         $res = Category::ofType('ticket')->get();
+
         $fillable = app(Category::class)->getFillable();
         if ($res->count() < 1) {
             $ticketCategories = config('ticket.categories');
