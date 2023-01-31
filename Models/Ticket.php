@@ -2,7 +2,6 @@
 
 namespace Modules\Ticket\Models;
 
-<<<<<<< Updated upstream
 use Spatie\MediaLibrary\HasMedia;
 use Modules\Ticket\Traits\Auditable;
 use Modules\Ticket\Scopes\AgentScope;
@@ -17,20 +16,14 @@ use Modules\Ticket\Notifications\CommentEmailNotification;
 
 class Ticket extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia, Auditable;
+    use SoftDeletes;
+    use InteractsWithMedia;
+    use Auditable;
     use HasComments;
-=======
-use Modules\Blog\Models\Traits\HasCategory;
-use Spatie\ModelStatus\HasStatuses;
-use Spatie\Tags\HasTags;
-
-class Ticket extends BaseModel {
->>>>>>> Stashed changes
     use HasCategory;
     // use HasTags;
     // use HasStatuses;
 
-<<<<<<< Updated upstream
     public $table = 'tickets';
 
     protected $appends = [
@@ -63,7 +56,7 @@ class Ticket extends BaseModel {
 
         //Ticket::observe(new \Modules\Ticket\Observers\TicketActionObserver);
 
-        static::addGlobalScope(new AgentScope);
+        static::addGlobalScope(new AgentScope());
     }
 
     public function registerMediaConversions(Media $media = null): void
@@ -104,18 +97,18 @@ class Ticket extends BaseModel {
 
     public function scopeFilterTickets($query)
     {
-        $query->when(request()->input('priority'), function($query) {
-                $query->whereHas('priority', function($query) {
-                    $query->whereId(request()->input('priority'));
-                });
-            })
-            ->when(request()->input('category'), function($query) {
-                $query->whereHas('category', function($query) {
+        $query->when(request()->input('priority'), function ($query) {
+            $query->whereHas('priority', function ($query) {
+                $query->whereId(request()->input('priority'));
+            });
+        })
+            ->when(request()->input('category'), function ($query) {
+                $query->whereHas('category', function ($query) {
                     $query->whereId(request()->input('category'));
                 });
             })
-            ->when(request()->input('status'), function($query) {
-                $query->whereHas('status', function($query) {
+            ->when(request()->input('status'), function ($query) {
+                $query->whereHas('status', function ($query) {
                     $query->whereId(request()->input('status'));
                 });
             });
@@ -124,18 +117,18 @@ class Ticket extends BaseModel {
     public function sendCommentNotification($comment)
     {
         $users = \App\User::where(function ($q) {
-                $q->whereHas('roles', function ($q) {
-                    return $q->where('title', 'Agent');
-                })
-                ->where(function ($q) {
-                    $q->whereHas('comments', function ($q) {
-                        return $q->whereTicketId($this->id);
-                    })
-                    ->orWhereHas('tickets', function ($q) {
-                        return $q->whereId($this->id);
-                    });
-                });
+            $q->whereHas('roles', function ($q) {
+                return $q->where('title', 'Agent');
             })
+            ->where(function ($q) {
+                $q->whereHas('comments', function ($q) {
+                    return $q->whereTicketId($this->id);
+                })
+                ->orWhereHas('tickets', function ($q) {
+                    return $q->whereId($this->id);
+                });
+            });
+        })
             ->when(!$comment->user_id && !$this->assigned_to_user_id, function ($q) {
                 $q->orWhereHas('roles', function ($q) {
                     return $q->where('title', 'Admin');
@@ -148,8 +141,7 @@ class Ticket extends BaseModel {
         $notification = new CommentEmailNotification($comment);
 
         Notification::send($users, $notification);
-        if($comment->user_id && $this->author_email)
-        {
+        if ($comment->user_id && $this->author_email) {
             Notification::route('mail', $this->author_email)->notify($notification);
         }
     }
@@ -160,25 +152,18 @@ class Ticket extends BaseModel {
     * This string will be used in notifications on what a new comment
     * was made.
     */
-    public function commentableName(): string {
+    public function commentableName(): string
+    {
         //
-         return '---commentableName--';
-        }
+        return '---commentableName--';
+    }
 
         /**
-        * This URL will be used in notifications to let the user know
-        * where the comment itself can be read.
-        */
-        public function commentUrl(): string {
+    * This URL will be used in notifications to let the user know
+    * where the comment itself can be read.
+    */
+        public function commentUrl(): string
+        {
             return '---commentUrl--';
         }
 }
-=======
-    /**
-     * @var array<string>
-     */
-    protected $fillable = [
-        'title', 'txt', 'parent_id',
-    ];
-}
->>>>>>> Stashed changes
