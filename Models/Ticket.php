@@ -1,21 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Models;
 
-use Spatie\MediaLibrary\HasMedia;
-use Modules\Ticket\Traits\Auditable;
-use Modules\Ticket\Scopes\AgentScope;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Blog\Models\Traits\HasCategory;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Notification;
+use Modules\Blog\Models\Traits\HasCategory;
 use Modules\Comment\Models\Concerns\HasComments;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Modules\Media\Models\Media;
 use Modules\Ticket\Notifications\CommentEmailNotification;
+use Modules\Ticket\Scopes\AgentScope;
+use Modules\Ticket\Traits\Auditable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Ticket extends Model implements HasMedia
-{
+class Ticket extends Model implements HasMedia {
     use SoftDeletes;
     use InteractsWithMedia;
     use Auditable;
@@ -50,17 +51,15 @@ class Ticket extends Model implements HasMedia
         'assigned_to_user_id',
     ];
 
-    public static function boot()
-    {
+    public static function boot() {
         parent::boot();
 
-        //Ticket::observe(new \Modules\Ticket\Observers\TicketActionObserver);
+        // Ticket::observe(new \Modules\Ticket\Observers\TicketActionObserver);
 
         static::addGlobalScope(new AgentScope());
     }
 
-    public function registerMediaConversions(Media $media = null): void
-    {
+    public function registerMediaConversions(Media $media = null): void {
         $this->addMediaConversion('thumb')->width(50)->height(50);
     }
     /*
@@ -70,33 +69,27 @@ class Ticket extends Model implements HasMedia
     }
     */
 
-    public function getAttachmentsAttribute()
-    {
+    public function getAttachmentsAttribute() {
         return $this->getMedia('attachments');
     }
 
-    public function status()
-    {
+    public function status() {
         return $this->belongsTo(Status::class, 'status_id');
     }
 
-    public function priority()
-    {
+    public function priority() {
         return $this->belongsTo(Priority::class, 'priority_id');
     }
 
-    public function category()
-    {
+    public function category() {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function assigned_to_user()
-    {
+    public function assigned_to_user() {
         return $this->belongsTo(User::class, 'assigned_to_user_id');
     }
 
-    public function scopeFilterTickets($query)
-    {
+    public function scopeFilterTickets($query) {
         $query->when(request()->input('priority'), function ($query) {
             $query->whereHas('priority', function ($query) {
                 $query->whereId(request()->input('priority'));
@@ -114,8 +107,7 @@ class Ticket extends Model implements HasMedia
             });
     }
 
-    public function sendCommentNotification($comment)
-    {
+    public function sendCommentNotification($comment) {
         $users = \App\User::where(function ($q) {
             $q->whereHas('roles', function ($q) {
                 return $q->where('title', 'Agent');
@@ -129,7 +121,7 @@ class Ticket extends Model implements HasMedia
                 });
             });
         })
-            ->when(!$comment->user_id && !$this->assigned_to_user_id, function ($q) {
+            ->when(! $comment->user_id && ! $this->assigned_to_user_id, function ($q) {
                 $q->orWhereHas('roles', function ($q) {
                     return $q->where('title', 'Admin');
                 });
@@ -146,24 +138,19 @@ class Ticket extends Model implements HasMedia
         }
     }
 
-
-
-     /**
-    * This string will be used in notifications on what a new comment
-    * was made.
-    */
-    public function commentableName(): string
-    {
-        //
+    /**
+     * This string will be used in notifications on what a new comment
+     * was made.
+     */
+    public function commentableName(): string {
         return '---commentableName--';
     }
 
         /**
-    * This URL will be used in notifications to let the user know
-    * where the comment itself can be read.
-    */
-        public function commentUrl(): string
-        {
+         * This URL will be used in notifications to let the user know
+         * where the comment itself can be read.
+         */
+        public function commentUrl(): string {
             return '---commentUrl--';
         }
 }
