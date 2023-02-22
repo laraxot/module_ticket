@@ -1,6 +1,10 @@
 <?php
 
-namespace Modules\Ticket;
+
+declare(strict_types=1);
+
+namespace Modules\Ticket\Models;
+
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
