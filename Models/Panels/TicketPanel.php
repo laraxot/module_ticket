@@ -80,7 +80,7 @@ class TicketPanel extends XotBasePanel {
      * @return RowsContract
      */
     public static function indexQuery(array $data, $query) {
-        return $query->where('user_id', Auth::id());
+        return $query;//->where('user_id', Auth::id());
     }
 
     /**
@@ -89,10 +89,20 @@ class TicketPanel extends XotBasePanel {
      */
     public function fields(): array {
         return [
-            (object) [
+            /*(object) [
                 'type' => 'Text',
                 'name' => 'url',
+                'comment' => 'Url',
+            ],*/
+            (object) [
+                'type' => 'Text',
+                'name' => 'title',
                 'comment' => 'Title',
+            ],
+            (object) [
+                'type' => 'Text',
+                'name' => 'content',
+                'comment' => 'Content',
             ],
         ];
     }
@@ -101,7 +111,7 @@ class TicketPanel extends XotBasePanel {
      * Get the tabs available.
      */
     public function tabs(): array {
-        $tabs_name = ['ticket_threads'];
+        $tabs_name = ['comments'];
 
         return $tabs_name;
     }

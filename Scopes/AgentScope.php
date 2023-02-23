@@ -2,8 +2,9 @@
 
 namespace Modules\Ticket\Scopes;
 
-use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Builder;
 
 class AgentScope implements Scope
@@ -17,8 +18,8 @@ class AgentScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $user = auth()->user();
-        if(auth()->check() && request()->is('admin/*') && $user->roles->contains(2))
+        $user = Auth::user();
+        if(auth()->check() && request()->is('admin/*') && $user->hasRole(2) /*&& $user->roles->contains(2)*/)
         {
             $builder->where('assigned_to_user_id', $user->id);
         }

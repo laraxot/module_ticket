@@ -1,14 +1,23 @@
 <?php
 
+<<<<<<< HEAD
 
 declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
+=======
+declare(strict_types=1);
+
+namespace Modules\Ticket\Models;
+>>>>>>> 2bae9b4 (up)
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Priority.
+ */
 class Priority extends Model
 {
     use SoftDeletes;
@@ -29,8 +38,7 @@ class Priority extends Model
         'deleted_at',
     ];
 
-    public function tickets()
-    {
+    public function tickets() {
         return $this->hasMany(Ticket::class, 'priority_id', 'id');
     }
 }
