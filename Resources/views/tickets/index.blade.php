@@ -1,11 +1,11 @@
 @extends('pub_theme::layouts.app', ['title' => 'Elenco segnalazioni - Nome del Comune'])
 @section('content')
-<br/><br/><br/><br/>
+    <br /><br /><br /><br />
     <main>
         <div class="container" id="main-container">
             <div class="row justify-content-center mb-md-40 mb-lg-80">
                 <div class="col-12 col-lg-10">
-                    <x-breadcrumb type="v2" :rows="collect([])">
+                    <x-breadcrumb tpl="v2" :rows="collect([])">
                     </x-breadcrumb>
                     <x-heading type="heading">
                         <x-slot name="title">Elenco segnalazioni</x-slot>
@@ -24,21 +24,21 @@
                     {{--
                     <x-list.rows type="category" :rows="$_theme->getDisserviziCategories()"></x-list.rows>
                     --}}
-                    
+
                     {{--
                     dddx([
                         'getDisserviziCategories'=>$_theme->getDisserviziCategories(),
                         'getTicketCategories'=>$_theme->getTicketCategories(),
                     ])
                     --}}
-                    
-                    
+
+
                     <x-list.rows type="category" :rows="$_theme->getTicketCategories()">
                         {{--
                         <x-span name="title">Categoria</x-span>
                         --}}
                     </x-list.rows>
-                   
+
                 </div>
                 <div class="col-lg-8 offset-lg-1">
                     <div class="d-flex justify-content-between border-bottom border-light pb-3 mt-5">
@@ -52,10 +52,7 @@
                         {{-- {{>partials/button/button label="Filtra" label-class="t-primary title-xsmall-semi-bold ms-1"
                         iconBtn="it-funnel" class="p-0 pe-2 d-lg-none" xs=true
                         modalId="modal-categories"}} --}}
-                        <x-button type="advanced" 
-                            class="p-0 pe-2 d-lg-none" 
-                            :xs="true" 
-                            modalId="modal-categories">
+                        <x-button type="advanced" class="p-0 pe-2 d-lg-none" :xs="true" modalId="modal-categories">
                             <x-slot name="label" class="t-primary title-xsmall-semi-bold ms-1">Filtra</x-slot>
                         </x-button>
                         {{-- {{>partials/button/button label="Rimuovi tutti i filtri" label-class="title-xsmall-semi-bold ms-1"
@@ -104,28 +101,28 @@
                         --}}
                         <div class="tab-pane fade show active" id="data-ex-disservizio2" role="tabpanel">
                             <div class="row">
-                                @foreach($rows as $row)
-                                {{-- dddx($row->title) --}}
-                                <x-card type="content_box">
-                                    <x-slot name="bs_grey">true</x-slot>
-                                    <x-slot name="margin_class">mb-4 mb-lg-30</x-slot>
+                                @foreach ($rows as $row)
+                                    {{-- dddx($row->title) --}}
+                                    <x-card type="content_box">
+                                        <x-slot name="bs_grey">true</x-slot>
+                                        <x-slot name="margin_class">mb-4 mb-lg-30</x-slot>
 
-                                    <x-card type="info-button">
-                                        <x-slot name="medium_title">{{ $row->title ?? 'titolo di prova'}}</x-slot>
-                                        
-                                        <x-slot name="label_2">{{--Tipologia di segnalazione <br> --}}
-                                            @foreach($row->categories as $category)
-                                                <span>{{ $category->name }}</span>
-                                            @endforeach
-                                        </x-slot>
-                                        <x-slot name="show_more_disservizio">true</x-slot>
-                                        <x-slot name="collapse_class">pb-0</x-slot>
-                                        <x-slot name="collapse_id">collapse1</x-slot>
-                                        <x-slot name="info">true</x-slot>
+                                        <x-card type="info-button">
+                                            <x-slot name="medium_title">{{ $row->title ?? 'titolo di prova' }}</x-slot>
+
+                                            <x-slot name="label_2">{{-- Tipologia di segnalazione <br> --}}
+                                                @foreach ($row->categories as $category)
+                                                    <span>{{ $category->name }}</span>
+                                                @endforeach
+                                            </x-slot>
+                                            <x-slot name="show_more_disservizio">true</x-slot>
+                                            <x-slot name="collapse_class">pb-0</x-slot>
+                                            <x-slot name="collapse_id">collapse1</x-slot>
+                                            <x-slot name="info">true</x-slot>
+                                        </x-card>
                                     </x-card>
-                                </x-card>
                                 @endforeach
-                                
+
                             </div>
                             <div class="col-12 text-center">
                                 <x-button label="Carica altre segnalazioni"
@@ -173,7 +170,7 @@
                                     disservizioBtn=true}}
                                     {{>partials/button/button label="Segnala disservizio" modalId="modal-disservizio" class="btn btn-primary mobile-full py-3 mt-2 mb-4 mb-lg-0"}}
                                 {{/cmp-text-button/cmp-text-button}} --}}
-                                
+
                             </div>
                         </div>
                     </div>
@@ -203,6 +200,6 @@
         </div>
         --}}
 
-       {{-- <x-modal type="clickMap"></x-modal> --}}
+        {{-- <x-modal type="clickMap"></x-modal> --}}
     </main>
 @endsection
