@@ -4,8 +4,9 @@ namespace Modules\Ticket\Http\Livewire\Modal\Ticket;
 
 use Modules\Blog\Models\Category;
 use Modules\Ticket\Models\Ticket;
-use Illuminate\Contracts\Support\Renderable;
+use Modules\Cms\Actions\GetViewAction;
 use Modules\Xot\Actions\Model\StoreAction;
+use Illuminate\Contracts\Support\Renderable;
 use WireElements\Pro\Components\Modal\Modal;
 
  class Create extends Modal
@@ -14,7 +15,8 @@ use WireElements\Pro\Components\Modal\Modal;
      public function render():Renderable
      {
         /** @phpstan-var view-string */
-        $view = 'ticket::livewire.modal.ticket.create';
+        // $view = 'ticket::livewire.modal.ticket.create';
+        $view = app(GetViewAction::class)->execute();
 
         $category_opts=[];
         $categories=Category::ofType('ticket')->get();
