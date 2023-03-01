@@ -2340,10 +2340,11 @@ return [
         'label' => 'Agenti',
         'placeholder' => 'Agenti',
     ],
-    'create' => [
-        'label' => 'Crea',
-        'placeholder' => 'Crea',
-    ],
+    // 'create' => [
+    //     'label' => 'Crea',
+    //     'placeholder' => 'Crea',
+    // ],
+    'create' => '<i class="bi bi-plus-square-dotted"></i> Crea Ticket',
     'edit' => [
         'label' => 'Modifica',
         'placeholder' => 'Modifica',
@@ -4613,6 +4614,13 @@ return [
     'Total_Closed' => [
         'label' => 'TOTALE CHIUSI',
         'placeholder' => 'TOTALE CHIUSI',
+    ],
+    'tab' => [
+        'comments' => [
+            'icon' => 'bi bi-chat',
+            'label' => 'Commenti',
+            'placeholder' => 'Commenti',
+        ],
     ],
     'tabular' => [
         'label' => 'Tabulato',

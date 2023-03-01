@@ -32,6 +32,18 @@ class CreateTicketsTable extends XotBaseMigration {
                 // if (! $this->hasColumn('url')) {
                 //     $table->string('url')->nullable();
                 // }
+
+                if (! $this->hasColumn('deleted_at')) {
+                    $table->softDeletes();
+                }
+
+                if (! $this->hasColumn('category_id')) {
+                    $table->integer('category_id');
+                }
+
+                if (! $this->hasColumn('content')) {
+                    $table->string('content');
+                }
             }
         );
     }
