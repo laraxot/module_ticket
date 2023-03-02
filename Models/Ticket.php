@@ -7,8 +7,10 @@ namespace Modules\Ticket\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Notification;
+use Modules\Blog\Models\Category;
 use Modules\Blog\Models\Traits\HasCategory;
 use Modules\Comment\Models\Concerns\HasComments;
+use Modules\LU\Models\User;
 use Modules\Media\Models\Media;
 use Modules\Ticket\Notifications\CommentEmailNotification;
 use Modules\Ticket\Scopes\AgentScope;
@@ -74,21 +76,26 @@ class Ticket extends Model implements HasMedia {
         return $this->getMedia('attachments');
     }
 
-    public function status() {
+    // mi sa che bisognerà usare laravel-model-status. Quindi per ora commento (oggi 2021-03-02)
+    /*public function status() {
         return $this->belongsTo(Status::class, 'status_id');
-    }
+    }*/
 
     public function priority() {
         return $this->belongsTo(Priority::class, 'priority_id');
     }
 
-    public function category() {
+    // non so se vada fatta così perchè c'è il trait HasCategory.
+    // quindi per ora commento (oggi 2021-03-02)
+    /*public function category() {
         return $this->belongsTo(Category::class, 'category_id');
-    }
+    }*/
 
-    public function assigned_to_user() {
+    // non mi convince nemmeno questa. User dev'essere certamente quello di LU
+    // credo che comunque eventualmente vada assegnata al profilo (oggi 2021-03-02)
+    /*public function assigned_to_user() {
         return $this->belongsTo(User::class, 'assigned_to_user_id');
-    }
+    }*/
 
     public function scopeFilterTickets($query) {
         $query->when(request()->input('priority'), function ($query) {
@@ -109,10 +116,9 @@ class Ticket extends Model implements HasMedia {
     }
 
     public function sendCommentNotification($comment) {
-        $users = \App\User::where(function ($q) {
-            $q->whereHas('roles', function ($q) {
-                return $q->where('title', 'Agent');
-            })
+        // non può avere dipendenze da PFed su Profile quindi come lo faccio?
+        /*$users = User::where(function ($q) {
+            $q->role('roles', 'agent')
             ->where(function ($q) {
                 $q->whereHas('comments', function ($q) {
                     return $q->whereTicketId($this->id);
@@ -131,12 +137,14 @@ class Ticket extends Model implements HasMedia {
                 $q->where('id', '!=', $comment->user_id);
             })
             ->get();
-        $notification = new CommentEmailNotification($comment);
+*/
+        // bisogna cambiarla
+        /*$notification = new CommentEmailNotification($comment);
 
         Notification::send($users, $notification);
         if ($comment->user_id && $this->author_email) {
             Notification::route('mail', $this->author_email)->notify($notification);
-        }
+        }*/
     }
 
     /**
