@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Ticket\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -15,6 +16,9 @@ class Priority extends Model {
 
     public $table = 'priorities';
 
+    /**
+     * @var string[]
+     */
     protected $dates = [
         'created_at',
         'updated_at',
@@ -29,7 +33,7 @@ class Priority extends Model {
         'deleted_at',
     ];
 
-    public function tickets() {
+    public function tickets(): HasMany {
         return $this->hasMany(Ticket::class, 'priority_id', 'id');
     }
 }
