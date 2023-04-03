@@ -4,10 +4,11 @@ namespace Modules\Ticket\Models\Panels;
 
 use Illuminate\Http\Request;
 use Modules\Xot\Contracts\RowsContract;
-use Illuminate\Contracts\Support\Renderable;
-
-
 use Modules\Cms\Models\Panels\XotBasePanel;
+
+
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Cms\Models\Panels\Actions\ArtisanAction;
 
 class HomePanel extends XotBasePanel {
     /**
@@ -185,6 +186,13 @@ class HomePanel extends XotBasePanel {
      * @return array
      */
     public function actions():array {
-        return [];
+        /**
+         * @var string
+         */
+        $cmd = request('cmd', '');
+
+        return [
+            new ArtisanAction($cmd),
+        ];
     }
 }
