@@ -2,29 +2,21 @@
 
 namespace Modules\Ticket\Models\Panels;
 
+use Modules\LU\Models\User;
 use Illuminate\Http\Request;
 use Modules\Xot\Contracts\RowsContract;
-<<<<<<< HEAD
-use Illuminate\Contracts\Support\Renderable;
 
 
 use Modules\Cms\Models\Panels\XotBasePanel;
-
-=======
-use Modules\Cms\Models\Panels\XotBasePanel;
-
-
 use Illuminate\Contracts\Support\Renderable;
-use Modules\Cms\Models\Panels\Actions\ArtisanAction;
 
->>>>>>> b322c6ced1ef12d16f6127360ab75dba6ee51c49
-class HomePanel extends XotBasePanel {
+class ProfilePanel extends XotBasePanel {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static string $model = 'Home';
+    public static string $model = 'Profile';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -60,7 +52,7 @@ class HomePanel extends XotBasePanel {
      * quando aggiungi un campo select, è il numero della chiave
      * che viene messo come valore su value="id"
      *
-     * @param Home $row
+     * @param Profile $row
      *
      * @return int|string|null
      */
@@ -75,7 +67,7 @@ class HomePanel extends XotBasePanel {
     /**
      * on select the option label.
      *
-     * @param Home $row
+     * @param Profile $row
      */
     public function optionLabel($row):string {
         return 'To Set';
@@ -117,32 +109,32 @@ class HomePanel extends XotBasePanel {
         return array (
   0 => 
   (object) array(
-     'type' => 'String',
+     'type' => 'Id',
      'name' => 'id',
      'comment' => NULL,
   ),
   1 => 
   (object) array(
-     'type' => 'String',
-     'name' => 'name',
+     'type' => 'Integer',
+     'name' => 'user_id',
      'comment' => NULL,
   ),
   2 => 
   (object) array(
      'type' => 'String',
-     'name' => 'icon_src',
+     'name' => 'phone',
      'comment' => NULL,
   ),
   3 => 
   (object) array(
      'type' => 'String',
-     'name' => 'created_by',
+     'name' => 'email',
      'comment' => NULL,
   ),
   4 => 
   (object) array(
-     'type' => 'String',
-     'name' => 'updated_by',
+     'type' => 'Text',
+     'name' => 'bio',
      'comment' => NULL,
   ),
 );
@@ -194,17 +186,37 @@ class HomePanel extends XotBasePanel {
      * @return array
      */
     public function actions():array {
-<<<<<<< HEAD
         return [];
-=======
-        /**
-         * @var string
-         */
-        $cmd = request('cmd', '');
+    }
 
-        return [
-            new ArtisanAction($cmd),
-        ];
->>>>>>> b322c6ced1ef12d16f6127360ab75dba6ee51c49
+        public function isSuperAdmin(): bool {
+        if (isset($this->vars[__FUNCTION__])) {
+            return $this->vars[__FUNCTION__];
+        }
+
+        // 232 Access to an undefined property Illuminate\Database\Eloquent\Model::$user.
+        // $user = $this->row->user;
+        // $user = $this->row->getRelationValue('user');
+        // 89     Access to an undefined property object::$perm_type
+        $user_id = $this->row->getAttributeValue('user_id');
+        $user = User::where('id', $user_id)->first();
+        if (null == $user) {
+            throw new \Exception('['.__LINE__.']['.__FILE__.']');
+        }
+        try {
+            if (\is_object($user->perm) && $user->perm->perm_type >= 4) {  // superadmin
+                $this->vars[__FUNCTION__] = true;
+
+                return true;
+            }
+        } catch (\Exception $e) {
+            $this->vars[__FUNCTION__] = false;
+
+            return false;
+        }
+
+        $this->vars[__FUNCTION__] = false;
+
+        return false;
     }
 }

@@ -1,16 +1,26 @@
 <?php
+<<<<<<< HEAD
 
+=======
+/**
+ * ---.
+ */
+>>>>>>> b322c6ced1ef12d16f6127360ab75dba6ee51c49
 declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
+<<<<<<< HEAD
 // use Modules\Rating\Models\Traits\RatingTrait;
 // ------services---------
 // --- TRAITS ---
+=======
+>>>>>>> b322c6ced1ef12d16f6127360ab75dba6ee51c49
 use Modules\Xot\Models\Traits\WidgetTrait;
 use Sushi\Sushi;
 
 /**
+<<<<<<< HEAD
  * Modules\Blog\Models\Home.
  *
  * @property int|null                                                                  $id
@@ -55,6 +65,38 @@ class Home extends BaseModelLang {
     use WidgetTrait;
 
     // use RatingTrait; // non si vota la home
+=======
+ * @property int|null                                                              $id
+ * @property string|null                                                           $name
+ * @property string|null                                                           $icon_src
+ * @property string|null                                                           $created_by
+ * @property string|null                                                           $updated_by
+ * @property \Illuminate\Database\Eloquent\Collection|\Modules\Xot\Models\Widget[] $containerWidgets
+ * @property int|null                                                              $container_widgets_count
+ * @property \Illuminate\Database\Eloquent\Collection|\Modules\Xot\Models\Image[]  $images
+ * @property int|null                                                              $images_count
+ * @property \Illuminate\Database\Eloquent\Collection|\Modules\Xot\Models\Widget[] $widgets
+ * @property int|null                                                              $widgets_count
+ *
+ * @method static \Modules\Xot\Database\Factories\HomeFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Home  newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Home  newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Home  ofLayoutPosition($layout_position)
+ * @method static \Illuminate\Database\Eloquent\Builder|Home  query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Home  whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Home  whereIconSrc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Home  whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Home  whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Home  whereUpdatedBy($value)
+ *
+ * @mixin \Eloquent
+ */
+class Home extends BaseModel
+{
+    use Sushi;
+    use WidgetTrait;
+
+>>>>>>> b322c6ced1ef12d16f6127360ab75dba6ee51c49
     /**
      * @var string[]
      */
@@ -63,7 +105,11 @@ class Home extends BaseModelLang {
     /**
      * Undocumented variable.
      *
+<<<<<<< HEAD
      * @var array<int, array<string, string>>
+=======
+     * @var array
+>>>>>>> b322c6ced1ef12d16f6127360ab75dba6ee51c49
      */
     protected $rows = [
         [
@@ -74,8 +120,12 @@ class Home extends BaseModelLang {
             'updated_by' => 'xot',
         ],
     ];
+<<<<<<< HEAD
 
     // --------- relationship ---------------
 
     // ---------- mututars -----------
 }// end model
+=======
+}
+>>>>>>> b322c6ced1ef12d16f6127360ab75dba6ee51c49
