@@ -1,4 +1,4 @@
-<x-wire-elements-pro::bootstrap.modal on-submit="save()" :content-padding="false">
+<x-modal.skin on-submit="save()" :content-padding="false">
 	<x-slot name="title">Add Ticket</x-slot>
 	@if(session('status'))
 	<div class="alert alert-success" role="alert">
@@ -37,6 +37,6 @@
 		</button>
 	</x-slot>
 	--}}
-</x-wire-elements-pro::bootstrap.modal>
+</x-modal.skin>
 
 
