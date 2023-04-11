@@ -716,7 +716,7 @@ return [
       |--------------------------------------
      */
     'ok' => 'Ok',
-    'cancel' => 'Cancel',
+    'cancel' => 'Annulla',
     'select-ticket' => 'Please select tickets.',
     'confirm' => 'Are you sure?',
     'delete-tickets' => 'Delete tickets',
