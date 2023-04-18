@@ -11,7 +11,9 @@ use Modules\LU\Models\User;
 use Modules\Ticket\Models\Profile;
 use Modules\Xot\Contracts\RowsContract;
 
-class ProfilePanel extends XotBasePanel {
+class ProfilePanel extends XotBasePanel
+{
+    public array $vars = [];
     /**
      * The model the resource corresponds to.
      */
@@ -33,11 +35,13 @@ class ProfilePanel extends XotBasePanel {
     /**
      * The relationships that should be eager loaded on index queries.
      */
-    public function with(): array {
+    public function with(): array
+    {
         return [];
     }
 
-    public function search(): array {
+    public function search(): array
+    {
         return [];
     }
 
@@ -46,14 +50,16 @@ class ProfilePanel extends XotBasePanel {
      *
      * @param Profile $row
      */
-    public function optionLabel($row): string {
+    public function optionLabel($row): string
+    {
         return 'To Set';
     }
 
     /**
      * index navigation.
      */
-    public function indexNav(): ?Renderable {
+    public function indexNav(): ?Renderable
+    {
         return null;
     }
 
@@ -64,7 +70,8 @@ class ProfilePanel extends XotBasePanel {
      *
      * @return RowsContract
      */
-    public function indexQuery(array $data, $query) {
+    public function indexQuery(array $data, $query)
+    {
         // return $query->where('user_id', $request->user()->id);
         return $query;
     }
@@ -73,7 +80,8 @@ class ProfilePanel extends XotBasePanel {
      * Get the fields displayed by the resource.
         'value'=>'..',
      */
-    public function fields(): array {
+    public function fields(): array
+    {
         return [
             0 => (object) [
                 'type' => 'Id',
@@ -106,7 +114,8 @@ class ProfilePanel extends XotBasePanel {
     /**
      * Get the tabs available.
      */
-    public function tabs(): array {
+    public function tabs(): array
+    {
         $tabs_name = [];
 
         return $tabs_name;
@@ -115,7 +124,8 @@ class ProfilePanel extends XotBasePanel {
     /**
      * Get the cards available for the request.
      */
-    public function cards(Request $request): array {
+    public function cards(Request $request): array
+    {
         return [];
     }
 
@@ -124,25 +134,29 @@ class ProfilePanel extends XotBasePanel {
      *
      * @param \Illuminate\Http\Request $request
      */
-    public function filters(Request $request = null): array {
+    public function filters(Request $request = null): array
+    {
         return [];
     }
 
     /**
      * Get the lenses available for the resource.
      */
-    public function lenses(Request $request): array {
+    public function lenses(Request $request): array
+    {
         return [];
     }
 
     /**
      * Get the actions available for the resource.
      */
-    public function actions(): array {
+    public function actions(): array
+    {
         return [];
     }
 
-        public function isSuperAdmin(): bool {
+        public function isSuperAdmin(): bool
+        {
             if (isset($this->vars[__FUNCTION__])) {
                 return $this->vars[__FUNCTION__];
             }

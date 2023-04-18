@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Notification;
 use Modules\Blog\Models\Category;
 use Modules\Blog\Models\Traits\HasCategory;
@@ -22,8 +25,10 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * Undocumented class.
  *
  * @property string $title
+ * @property string $assigned_to_user
  */
-class Ticket extends Model implements HasMedia {
+class Ticket extends Model implements HasMedia
+{
     use SoftDeletes;
     use InteractsWithMedia;
     use Auditable;
@@ -73,7 +78,8 @@ class Ticket extends Model implements HasMedia {
         'assigned_to_user_id',
     ];
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
         // Ticket::observe(new \Modules\Ticket\Observers\TicketActionObserver);
@@ -92,7 +98,8 @@ class Ticket extends Model implements HasMedia {
     }
     */
 
-    public function getAttachmentsAttribute() {
+    public function getAttachmentsAttribute(): Collection
+    {
         return $this->getMedia('attachments');
     }
 
@@ -101,7 +108,8 @@ class Ticket extends Model implements HasMedia {
         return $this->belongsTo(Status::class, 'status_id');
     }*/
 
-    public function priority() {
+    public function priority(): BelongsTo
+    {
         return $this->belongsTo(Priority::class, 'priority_id');
     }
 
@@ -117,8 +125,9 @@ class Ticket extends Model implements HasMedia {
         return $this->belongsTo(User::class, 'assigned_to_user_id');
     }*/
 
-    public function scopeFilterTickets($query) {
-        $query->when(request()->input('priority'), function ($query) {
+    public function scopeFilterTickets(Builder $query): Builder
+    {
+        return $query->when(request()->input('priority'), function ($query) {
             $query->whereHas('priority', function ($query) {
                 $query->whereId(request()->input('priority'));
             });
@@ -135,7 +144,7 @@ class Ticket extends Model implements HasMedia {
             });
     }
 
-    public function sendCommentNotification($comment) {
+    // public function sendCommentNotification($comment) {
         // non può avere dipendenze da PFed su Profile quindi come lo faccio?
         /*$users = User::where(function ($q) {
             $q->role('roles', 'agent')
@@ -165,13 +174,14 @@ class Ticket extends Model implements HasMedia {
         if ($comment->user_id && $this->author_email) {
             Notification::route('mail', $this->author_email)->notify($notification);
         }*/
-    }
+    // }
 
     /**
      * This string will be used in notifications on what a new comment
      * was made.
      */
-    public function commentableName(): string {
+    public function commentableName(): string
+    {
         return '---commentableName--';
     }
 
@@ -179,7 +189,8 @@ class Ticket extends Model implements HasMedia {
          * This URL will be used in notifications to let the user know
          * where the comment itself can be read.
          */
-        public function commentUrl(): string {
+        public function commentUrl(): string
+        {
             return '---commentUrl--';
         }
 }

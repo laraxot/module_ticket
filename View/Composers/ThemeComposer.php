@@ -10,12 +10,15 @@ use Modules\Blog\Models\Categorizable;
 use Modules\Blog\Models\Category;
 use Modules\LU\Services\ProfileService;
 
-class ThemeComposer {
-    public function getFullName(): ?string {
+class ThemeComposer
+{
+    public function getFullName(): ?string
+    {
         return ProfileService::make()->getUser()->full_name;
     }
 
-    public function getSteps(): Collection {
+    public function getSteps(): Collection
+    {
         $steps = collect([
             (object) [
                 'title' => 'Primo step',
@@ -37,7 +40,8 @@ class ThemeComposer {
         return $steps;
     }
 
-    public function getDisservizioInfoList(array $form_data): Collection {
+    public function getDisservizioInfoList(array $form_data): Collection
+    {
         $str = '[
         {
           "name": "Indirizzo",
@@ -64,7 +68,8 @@ class ThemeComposer {
         return collect((array) json_decode($str));
     }
 
-    public function getDisservizioInfoAuthor(): Collection {
+    public function getDisservizioInfoAuthor(): Collection
+    {
         $str = '[
         {
           "name": "Codice Fiscale",
@@ -74,17 +79,17 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-    public function getDisservizioInfoContacts(): Collection {
+    public function getDisservizioInfoContacts(): Collection
+    {
         $authorInfo = ProfileService::make()->getProfile();
         $phone = '';
         $email = '';
-        if (! is_null($authorInfo)) {
-            if (property_exists($authorInfo, 'phone')) {
-                $phone = $authorInfo->phone;
-            }
-            if (property_exists($authorInfo, 'email')) {
-                $email = $authorInfo->email;
-            }
+
+        if (property_exists($authorInfo, 'phone')) {
+            $phone = $authorInfo->phone;
+        }
+        if (property_exists($authorInfo, 'email')) {
+            $email = $authorInfo->email;
         }
 
         $str = '[
@@ -101,11 +106,13 @@ class ThemeComposer {
         return collect((array) json_decode($str));
     }
 
-    public function getBreads(): Collection {
+    public function getBreads(): Collection
+    {
         return collect([]);
     }
 
-    public function getDisservizioStep1(): Collection {
+    public function getDisservizioStep1(): Collection
+    {
         $str = '[
         {
           "title": "Autorizzazioni e condizioni",
@@ -127,7 +134,8 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-    public function getDisservizioStep2(): Collection {
+    public function getDisservizioStep2(): Collection
+    {
         $str = '[
         {
           "title": "Informativa sulla privacy4",
@@ -149,7 +157,8 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-    public function getDisservizioStep3(): Collection {
+    public function getDisservizioStep3(): Collection
+    {
         $str = '[
         {
           "title": "Autorizzazioni e condizioni",
@@ -171,7 +180,8 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-    public function getDisservizioDatiSpecifici(): Collection {
+    public function getDisservizioDatiSpecifici(): Collection
+    {
         $str = '[
         {
           "item": "Luogo",
@@ -190,7 +200,8 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-    public function getLinksBreadcrumbs(): Collection {
+    public function getLinksBreadcrumbs(): Collection
+    {
         $str = '[
           {
             "title": "Home"
@@ -206,7 +217,8 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-    public function getLinksBreadcrumbs2(): Collection {
+    public function getLinksBreadcrumbs2(): Collection
+    {
         $str = '[
           {
             "link2": "Home"
@@ -219,7 +231,8 @@ class ThemeComposer {
         return collect((array) json_decode($str));
     }
 
-    public function segnalazioniDisservizio1(): Collection {
+    public function segnalazioniDisservizio1(): Collection
+    {
         $str = '[
       {
         "item": "A chi è rivolto",
@@ -262,7 +275,8 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-    public function getServiziCorrelatiDisservizio(): Collection {
+    public function getServiziCorrelatiDisservizio(): Collection
+    {
         $str = '[
         {
           "icon": "it-settings",
@@ -274,7 +288,8 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-    public function getSegnalazioneDisservizioAreaPersonaleNavscrollPage1(): Collection {
+    public function getSegnalazioneDisservizioAreaPersonaleNavscrollPage1(): Collection
+    {
         $str = '[
         {
           "item": "Ultimi messaggi",
@@ -289,7 +304,8 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-    public function getSegnalazioneDisservizioAreaPersonaleNavscrollPage3(): Collection {
+    public function getSegnalazioneDisservizioAreaPersonaleNavscrollPage3(): Collection
+    {
         $str = '[
           {
             "item": "Pratiche",
@@ -304,7 +320,8 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-    public function getSegnalazioneDisservizioAreaPersonaleAccordionPratiche(): Collection {
+    public function getSegnalazioneDisservizioAreaPersonaleAccordionPratiche(): Collection
+    {
         $str = '[
         {
           "num": "1",
@@ -456,7 +473,8 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-    public function getSegnalazioneDisservizioAreaPersonaleAccordionPagamenti(): Collection {
+    public function getSegnalazioneDisservizioAreaPersonaleAccordionPagamenti(): Collection
+    {
         $str = '[
             {
               "num": "5",
@@ -539,7 +557,8 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-    public function getDisserviziCategories(): Collection {
+    public function getDisserviziCategories(): Collection
+    {
         $str = '[
       {
         "title": "categoria",
@@ -617,13 +636,15 @@ class ThemeComposer {
         return collect(json_decode($str));
     }
 
-    public function getSelectOptionList(): Collection {
+    public function getSelectOptionList(): Collection
+    {
         $str = '[{"text":"Abruzzo","link":"#"},{"text":"Basilicata","link":"#"},{"text":"Calabria","link":"#"},{"text":"Campania","link":"#"},{"text":"Emilia Romagna","link":"#"},{"text":"Friuli Venezia Giulia","link":"#"},{"text":"Lazio","link":"#"},{"text":"Liguria","link":"#"},{"text":"Lombardia","link":"#"},{"text":"Marche","link":"#"},{"text":"Molise","link":"#"},{"text":"Piemonte","link":"#"},{"text":"Puglia","link":"#"},{"text":"Sardegna","link":"#"},{"text":"Sicilia","link":"#"},{"text":"Toscana","link":"#"},{"text":"Trentino Alto Adige","link":"#"},{"text":"Umbria","link":"#"},{"text":"Valle d’Aosta","link":"#"},{"text":"Veneto","link":"#"}]';
 
         return collect(json_decode($str));
     }
 
-    public function readJson(string $name): array {
+    public function readJson(string $name): array
+    {
         $tmp = explode('.', $name);
         $content = file_get_contents(__DIR__.'/../../Resources/json/'.$tmp[0].'.json');
         $json = (array) json_decode((string) $content, true);
@@ -632,7 +653,8 @@ class ThemeComposer {
         return (array) Arr::get($json, $key);
     }
 
-    public function getTicketCategories(): Collection {
+    public function getTicketCategories(): Collection
+    {
         $res = Category::ofType('ticket')->get();
 
         $fillable = app(Category::class)->getFillable();
