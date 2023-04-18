@@ -8,6 +8,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Modules\Cms\Models\Panels\Actions\ArtisanAction;
 use Modules\Cms\Models\Panels\XotBasePanel;
+use Modules\Ticket\Models\Home;
 use Modules\Xot\Contracts\RowsContract;
 
 class HomePanel extends XotBasePanel {
@@ -38,25 +39,6 @@ class HomePanel extends XotBasePanel {
 
     public function search(): array {
         return [];
-    }
-
-    /**
-     * on select the option id.
-     *
-     * quando aggiungi un campo select, è il numero della chiave
-     * che viene messo come valore su value="id"
-     *
-     * @param Home $row
-     *
-     * @return int|string|null
-     */
-    public function optionId($row) {
-        $key = $row->getKey();
-        if (null === $key || (! is_string($key) && ! is_int($key))) {
-            throw new \Exception('['.__LINE__.']['.class_basename(__CLASS__).']');
-        }
-
-        return $key;
     }
 
     /**

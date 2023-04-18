@@ -41,7 +41,7 @@ class Create extends Modal {
         return view($view, $view_params);
     }
 
-    public function save() {
+    public function save(): void {
         $model = app(Ticket::class);
         $data = $this->form_data;
         $res = app(StoreAction::class)->execute($model, $data, []);

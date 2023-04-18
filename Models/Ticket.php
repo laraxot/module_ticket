@@ -18,6 +18,11 @@ use Modules\Ticket\Traits\Auditable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ * Undocumented class.
+ *
+ * @property string $title
+ */
 class Ticket extends Model implements HasMedia {
     use SoftDeletes;
     use InteractsWithMedia;
@@ -27,12 +32,27 @@ class Ticket extends Model implements HasMedia {
     // use HasTags;
     // use HasStatuses;
 
+    /**
+     * Undocumented variable.
+     *
+     * @var string
+     */
     public $table = 'tickets';
 
+    /**
+     * Undocumented variable.
+     *
+     * @var array<string>
+     */
     protected $appends = [
         'attachments',
     ];
 
+    /**
+     * Undocumented variable.
+     *
+     * @var array<string>
+     */
     protected $dates = [
         'created_at',
         'updated_at',

@@ -26,9 +26,11 @@ trait Auditable {
         return AuditLog::create([
             'description' => $description,
             'subject_id' => $model->id ?? null,
-            'subject_type' => get_class($model) ?? null,
+            // Expression on left side of ?? is not nullable
+            'subject_type' => get_class($model),
             'user_id' => auth()->id() ?? null,
-            'properties' => $model ?? null,
+            // Variable $model on left side of ?? always exists and is not nullable.
+            'properties' => $model,
             'host' => request()->ip() ?? null,
         ]);
     }

@@ -42,20 +42,6 @@ class TicketThreadPanel extends XotBasePanel {
     }
 
     /**
-     * on select the option id.
-     *
-     * quando aggiungi un campo select, è il numero della chiave
-     * che viene messo come valore su value="id"
-     *
-     * @param TicketThread $row
-     *
-     * @return int|string|mixed|null
-     */
-    public function optionId($row) {
-        return $row->getKey();
-    }
-
-    /**
      * on select the option label.
      *
      * @param TicketThread $row

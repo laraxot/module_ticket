@@ -20,7 +20,7 @@ class AgentScope implements Scope {
         if (null == $user) {
             throw new \Exception('['.__LINE__.']['.__FILE__.']');
         }
-        if (auth()->check() && request()->is('admin/*') && $user->hasRole(2) /* && $user->roles->contains(2) */) {
+        if (auth()->check() && request()->is('admin/*') && $user->hasRole('2') /* && $user->roles->contains(2) */) {
             $builder->where('assigned_to_user_id', $user->id);
         }
     }
