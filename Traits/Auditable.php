@@ -22,8 +22,8 @@ trait Auditable {
         });
     }
 
-    protected static function audit(string $description, Model $model) {
-        AuditLog::create([
+    protected static function audit(string $description, Model $model): AuditLog {
+        return AuditLog::create([
             'description' => $description,
             'subject_id' => $model->id ?? null,
             'subject_type' => get_class($model) ?? null,
