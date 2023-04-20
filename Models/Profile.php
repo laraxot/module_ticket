@@ -14,35 +14,37 @@ use Modules\Xot\Models\Traits\WidgetTrait;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
- * Modules\Ticket\Models\Profile
+ * Modules\Ticket\Models\Profile.
  *
- * @property int $id
- * @property string|null $post_type
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $created_by
- * @property string|null $updated_by
- * @property string|null $deleted_by
- * @property string|null $first_name
- * @property string|null $last_name
- * @property string|null $email
- * @property string|null $phone
- * @property string|null $address
- * @property int|null $user_id
- * @property string|null $bio
- * @property string|null $emails
- * @property string|null $mobiles
- * @property string|null $envelope_id
- * @property int|null $is_signed
- * @property int $company_selected_id
- * @property string $company_data_requests
- * @property string|null $nexi_transaction_code
- * @property-read string|null $full_name
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\LU\Models\Permission> $permissions
- * @property-read int|null $permissions_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\LU\Models\Role> $roles
- * @property-read int|null $roles_count
- * @property-read \Modules\LU\Models\User|null $user
+ * @property int                                                                          $id
+ * @property string                                                                       $guid
+ * @property string|null                                                                  $post_type
+ * @property \Illuminate\Support\Carbon|null                                              $created_at
+ * @property \Illuminate\Support\Carbon|null                                              $updated_at
+ * @property string|null                                                                  $created_by
+ * @property string|null                                                                  $updated_by
+ * @property string|null                                                                  $deleted_by
+ * @property string|null                                                                  $first_name
+ * @property string|null                                                                  $last_name
+ * @property string|null                                                                  $email
+ * @property string|null                                                                  $phone
+ * @property string|null                                                                  $address
+ * @property int|null                                                                     $user_id
+ * @property string|null                                                                  $bio
+ * @property string|null                                                                  $emails
+ * @property string|null                                                                  $mobiles
+ * @property string|null                                                                  $envelope_id
+ * @property int|null                                                                     $is_signed
+ * @property int                                                                          $company_selected_id
+ * @property string                                                                       $company_data_requests
+ * @property string|null                                                                  $nexi_transaction_code
+ * @property string|null                                                                  $full_name
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\LU\Models\Permission> $permissions
+ * @property int|null                                                                     $permissions_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\LU\Models\Role>       $roles
+ * @property int|null                                                                     $roles_count
+ * @property \Modules\LU\Models\User|null                                                 $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Profile newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Profile newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Profile permission($permissions)
@@ -69,11 +71,14 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|Profile whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Profile whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Profile whereUserId($value)
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\LU\Models\Permission> $permissions
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\LU\Models\Role> $roles
+ *
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\LU\Models\Permission> $permissions
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\LU\Models\Role>       $roles
+ *
  * @mixin \Eloquent
  */
-class Profile extends BaseModel implements ModelProfileContract {
+class Profile extends BaseModel implements ModelProfileContract
+{
     // use PrivacyTrait;
     use HasFactory;
     // use GeoTrait;
