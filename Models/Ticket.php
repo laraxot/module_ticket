@@ -22,27 +22,28 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
- * Modules\Ticket\Models\Ticket
+ * Modules\Ticket\Models\Ticket.
  *
- * @property int $id
- * @property string $title
- * @property string $txt
- * @property int $parent_id
- * @property string|null $created_by
- * @property string|null $updated_by
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property int $category_id
- * @property string $content
- * @property \Kalnoy\Nestedset\Collection<int, Category> $categories
- * @property-read int|null $categories_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Comment\Models\Comment> $comments
- * @property-read int|null $comments_count
- * @property-read Collection $attachments
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
- * @property-read int|null $media_count
- * @property-read \Modules\Ticket\Models\Priority|null $priority
+ * @property int                                                                                  $id
+ * @property string                                                                               $title
+ * @property string                                                                               $txt
+ * @property int                                                                                  $parent_id
+ * @property string|null                                                                          $created_by
+ * @property string|null                                                                          $updated_by
+ * @property \Illuminate\Support\Carbon|null                                                      $created_at
+ * @property \Illuminate\Support\Carbon|null                                                      $updated_at
+ * @property \Illuminate\Support\Carbon|null                                                      $deleted_at
+ * @property int                                                                                  $category_id
+ * @property string                                                                               $content
+ * @property \Kalnoy\Nestedset\Collection<int, Category>                                          $categories
+ * @property int|null                                                                             $categories_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Comment\Models\Comment>       $comments
+ * @property int|null                                                                             $comments_count
+ * @property Collection                                                                           $attachments
+ * @property \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
+ * @property int|null                                                                             $media_count
+ * @property \Modules\Ticket\Models\Priority|null                                                 $priority
+ *
  * @method static Builder|Ticket filterTickets()
  * @method static Builder|Ticket newModelQuery()
  * @method static Builder|Ticket newQuery()
@@ -66,6 +67,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @method static Builder|Ticket withoutAnyCategories()
  * @method static Builder|Ticket withoutCategories($categories)
  * @method static Builder|Ticket withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Ticket extends Model implements HasMedia
@@ -116,7 +118,6 @@ class Ticket extends Model implements HasMedia
         'category_id',
         'author_name',
         'author_email',
-        'assigned_to_user_id',
     ];
 
     public static function boot()

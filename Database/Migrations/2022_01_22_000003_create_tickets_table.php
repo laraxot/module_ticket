@@ -5,13 +5,15 @@ declare(strict_types=1);
 use Illuminate\Database\Schema\Blueprint;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
-class CreateTicketsTable extends XotBaseMigration {
+class CreateTicketsTable extends XotBaseMigration
+{
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
+    public function up()
+    {
         $this->tableCreate(
             function (Blueprint $table) {
                 $table->increments('id');
@@ -43,6 +45,10 @@ class CreateTicketsTable extends XotBaseMigration {
 
                 if (! $this->hasColumn('content')) {
                     $table->string('content');
+                }
+
+                if (! $this->hasColumn('assigned_to_user')) {
+                    $table->integer('assigned_to_user');
                 }
             }
         );
