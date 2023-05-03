@@ -10,7 +10,8 @@ use Modules\Ticket\Models\Ticket;
 use Modules\Ticket\Notifications\AssignedTicketNotification;
 use Modules\Ticket\Notifications\DataChangeEmailNotification;
 
-class TicketActionObserver {
+class TicketActionObserver
+{
     // public function created(Ticket $model) {
     //    $data = ['action' => 'New ticket has been created!', 'model_name' => 'Ticket', 'ticket' => $model];
     // non so se sia giusto fatto così
@@ -29,12 +30,13 @@ class TicketActionObserver {
      *
      * @return void
      */
-    public function updated(Ticket $model) {
-        if ($model->isDirty('assigned_to_user_id')) {
-            $user = $model->assigned_to_user;
-            if ($user) {
-                // Notification::send($user, new AssignedTicketNotification($model));
-            }
-        }
+    public function updated(Ticket $model)
+    {
+        // if ($model->isDirty('assigned_to_user_id')) {
+        //     $user = $model->assigned_to_user;
+        //     if ($user) {
+        //         Notification::send($user, new AssignedTicketNotification($model));
+        //     }
+        // }
     }
 }
