@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Priority.
+ * Modules\Ticket\Models\Priority
  *
  * @property int $id
  * @property string $name
@@ -31,7 +31,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Priority whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Priority withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Priority withoutTrashed()
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\Ticket> $tickets
  * @mixin \Eloquent
  */
 class Priority extends Model {

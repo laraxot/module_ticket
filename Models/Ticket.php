@@ -22,10 +22,51 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
- * Undocumented class.
+ * Modules\Ticket\Models\Ticket
  *
+ * @property int $id
  * @property string $title
- * @property string $assigned_to_user
+ * @property string $txt
+ * @property int $parent_id
+ * @property string|null $created_by
+ * @property string|null $updated_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property int $category_id
+ * @property string $content
+ * @property \Kalnoy\Nestedset\Collection<int, Category> $categories
+ * @property-read int|null $categories_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Comment\Models\Comment> $comments
+ * @property-read int|null $comments_count
+ * @property-read Collection $attachments
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
+ * @property-read int|null $media_count
+ * @property-read \Modules\Ticket\Models\Priority|null $priority
+ * @method static Builder|Ticket filterTickets()
+ * @method static Builder|Ticket newModelQuery()
+ * @method static Builder|Ticket newQuery()
+ * @method static Builder|Ticket onlyTrashed()
+ * @method static Builder|Ticket query()
+ * @method static Builder|Ticket whereCategoryId($value)
+ * @method static Builder|Ticket whereContent($value)
+ * @method static Builder|Ticket whereCreatedAt($value)
+ * @method static Builder|Ticket whereCreatedBy($value)
+ * @method static Builder|Ticket whereDeletedAt($value)
+ * @method static Builder|Ticket whereId($value)
+ * @method static Builder|Ticket whereParentId($value)
+ * @method static Builder|Ticket whereTitle($value)
+ * @method static Builder|Ticket whereTxt($value)
+ * @method static Builder|Ticket whereUpdatedAt($value)
+ * @method static Builder|Ticket whereUpdatedBy($value)
+ * @method static Builder|Ticket withAllCategories($categories)
+ * @method static Builder|Ticket withAnyCategories($categories)
+ * @method static Builder|Ticket withCategories($categories)
+ * @method static Builder|Ticket withTrashed()
+ * @method static Builder|Ticket withoutAnyCategories()
+ * @method static Builder|Ticket withoutCategories($categories)
+ * @method static Builder|Ticket withoutTrashed()
+ * @mixin \Eloquent
  */
 class Ticket extends Model implements HasMedia
 {
