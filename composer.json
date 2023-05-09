@@ -22,7 +22,7 @@
     },
     "require": {
         "calebporzio/sushi": "^2.4",
-        "illuminate/contracts": "^8.83|^9.30",
+        "illuminate/contracts": "^8.83|^9.30|^10.0",
         "kalnoy/nestedset": "^6.0",
         "laraxot/module_xot": "dev-master",
         "laraxot/module_lang": "dev-master",
