@@ -7,14 +7,16 @@ namespace Modules\Ticket\Http\Livewire\Modal\Ticket;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Blog\Models\Category;
 use Modules\Cms\Actions\GetViewAction;
+use Modules\Modal\View\Components\Modal\Modal;
 use Modules\Ticket\Models\Ticket;
 use Modules\Xot\Actions\Model\StoreAction;
-use WireElements\Pro\Components\Modal\Modal;
 
-class Create extends Modal {
+class Create extends Modal
+{
     public array $form_data = [];
 
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /** @phpstan-var view-string */
         // $view = 'ticket::livewire.modal.ticket.create';
         $view = app(GetViewAction::class)->execute();
@@ -41,7 +43,8 @@ class Create extends Modal {
         return view($view, $view_params);
     }
 
-    public function save(): void {
+    public function save(): void
+    {
         $model = app(Ticket::class);
         $data = $this->form_data;
         $res = app(StoreAction::class)->execute($model, $data, []);
