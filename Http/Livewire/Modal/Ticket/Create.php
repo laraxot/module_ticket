@@ -7,8 +7,8 @@ namespace Modules\Ticket\Http\Livewire\Modal\Ticket;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Blog\Models\Category;
 use Modules\Cms\Actions\GetViewAction;
-use Modules\Modal\View\Components\Modal\Modal;
 use Modules\Ticket\Models\Ticket;
+use Modules\Wire\View\Components\Modal\Modal;
 use Modules\Xot\Actions\Model\StoreAction;
 
 class Create extends Modal
