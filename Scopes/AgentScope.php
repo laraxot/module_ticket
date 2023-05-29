@@ -16,12 +16,15 @@ class AgentScope implements Scope {
      * @return void
      */
     public function apply(Builder $builder, Model $model) {
+        /*-- NON e' user has role, ma profile hasrole
         $user = Auth::user();
         if (null == $user) {
             throw new \Exception('['.__LINE__.']['.__FILE__.']');
         }
-        if (auth()->check() && request()->is('admin/*') && $user->hasRole('2') /* && $user->roles->contains(2) */) {
+        if (auth()->check() && request()->is('admin/*') && $user->hasRole('2')  && $user->roles->contains(2) ) {
             $builder->where('assigned_to_user_id', $user->id);
         }
+        */
+        return $builder;
     }
 }
