@@ -82,15 +82,11 @@ class ThemeComposer
     public function getDisservizioInfoContacts(): Collection
     {
         $authorInfo = ProfileService::make()->getProfile();
-        $phone = '';
-        $email = '';
+        // $phone = '';
+        // $email = '';
 
-        if (property_exists($authorInfo, 'phone')) {
-            $phone = $authorInfo->phone;
-        }
-        if (property_exists($authorInfo, 'email')) {
-            $email = $authorInfo->email;
-        }
+        $phone = $authorInfo->phone;
+        $email = $authorInfo->email;
 
         $str = '[
         {
