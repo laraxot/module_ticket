@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /*
  |-------------------------------------------------------------------------------------
  |      Brazilian Portuguese translation [for version 1.10.6]

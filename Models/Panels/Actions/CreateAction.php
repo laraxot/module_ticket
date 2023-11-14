@@ -9,7 +9,8 @@ use Modules\Cms\Models\Panels\Actions\XotBasePanelAction;
 /**
  * Class CreateAction.
  */
-class CreateAction extends XotBasePanelAction {
+class CreateAction extends XotBasePanelAction
+{
     public bool $onContainer = true;
 
     public string $icon = '<i class="fa fa-plus"></i>';
@@ -17,7 +18,8 @@ class CreateAction extends XotBasePanelAction {
     /**
      * @return mixed
      */
-    public function handle() {
+    public function handle()
+    {
         return $this->panel->view();
     }
 }

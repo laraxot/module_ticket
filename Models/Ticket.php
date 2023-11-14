@@ -77,6 +77,7 @@ class Ticket extends Model implements HasMedia
     use Auditable;
     use HasComments;
     use HasCategory;
+
     // use HasTags;
     // use HasStatuses;
 
@@ -231,8 +232,8 @@ class Ticket extends Model implements HasMedia
          * This URL will be used in notifications to let the user know
          * where the comment itself can be read.
          */
-        public function commentUrl(): string
-        {
-            return '---commentUrl--';
-        }
+    public function commentUrl(): string
+    {
+        return '---commentUrl--';
+    }
 }

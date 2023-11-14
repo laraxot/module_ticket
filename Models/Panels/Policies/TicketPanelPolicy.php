@@ -9,11 +9,13 @@ use Modules\Cms\Contracts\PanelContract;
 use Modules\Cms\Models\Panels\Policies\XotBasePanelPolicy;
 use Modules\Xot\Contracts\UserContract;
 
-class TicketPanelPolicy extends XotBasePanelPolicy {
+class TicketPanelPolicy extends XotBasePanelPolicy
+{
     /**
      * Undocumented function.
      */
-    public function create(?UserContract $user, PanelContract $panel): bool {
+    public function create(?UserContract $user, PanelContract $panel): bool
+    {
         if (Auth::guest()) {
             return false;
         }
@@ -21,7 +23,8 @@ class TicketPanelPolicy extends XotBasePanelPolicy {
         return true;
     }
 
-    public function geo(UserContract $user, PanelContract $panel): bool {
+    public function geo(UserContract $user, PanelContract $panel): bool
+    {
         if (false === config('ticket.geo')) {
             return false;
         }

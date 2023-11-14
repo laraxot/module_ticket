@@ -1,7 +1,9 @@
 <?php
+
 /**
  * ---.
  */
+
 declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
@@ -33,16 +35,18 @@ use Sushi\Sushi;
  * @method static \Illuminate\Database\Eloquent\Builder|Home whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-class Home extends BaseModel {
+class Home extends BaseModel
+{
     use Sushi;
-    use WidgetTrait;
+      use WidgetTrait;
 
-    /**
+/**
      * @var string[]
      */
-    protected $fillable = ['id', 'name', 'icon_src', 'created_by', 'updated_by'];
 
-    /**
+
+    protected $fillable = ['id', 'name', 'icon_src', 'created_by', 'updated_by'];
+/**
      * Undocumented variable.
      *
      * @var array

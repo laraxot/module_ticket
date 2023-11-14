@@ -7,8 +7,10 @@ namespace Modules\Ticket\Traits;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Ticket\Models\AuditLog;
 
-trait Auditable {
-    public static function bootAuditable(): void {
+trait Auditable
+{
+    public static function bootAuditable(): void
+    {
         static::created(function (Model $model) {
             self::audit('created', $model);
         });
@@ -22,7 +24,8 @@ trait Auditable {
         });
     }
 
-    protected static function audit(string $description, Model $model): AuditLog {
+    protected static function audit(string $description, Model $model): AuditLog
+    {
         return AuditLog::create([
             'description' => $description,
             'subject_id' => $model->id ?? null,

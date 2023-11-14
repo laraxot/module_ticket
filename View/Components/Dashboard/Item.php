@@ -11,8 +11,10 @@ use Illuminate\View\Component;
 /**
  * Class Field.
  */
-class Item extends Component {
-    public function render() {
+class Item extends Component
+{
+    public function render()
+    {
         return '';
     }
 }

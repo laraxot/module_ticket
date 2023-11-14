@@ -9,13 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Support\Facades\Auth;
 
-class AgentScope implements Scope {
+class AgentScope implements Scope
+{
     /**
      * Apply the scope to a given Eloquent query builder.
      *
      * @return Builder
      */
-    public function apply(Builder $builder, Model $model) {
+    public function apply(Builder $builder, Model $model)
+    {
         /*-- NON e' user has role, ma profile hasrole
         $user = Auth::user();
         if (null == $user) {

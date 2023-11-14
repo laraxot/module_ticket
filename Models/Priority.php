@@ -33,7 +33,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Priority withoutTrashed()
  * @mixin \Eloquent
  */
-class Priority extends Model {
+class Priority extends Model
+{
     use SoftDeletes;
 
     public $table = 'priorities';
@@ -55,7 +56,8 @@ class Priority extends Model {
         'deleted_at',
     ];
 
-    public function tickets(): HasMany {
+    public function tickets(): HasMany
+    {
         return $this->hasMany(Ticket::class, 'priority_id', 'id');
     }
 }

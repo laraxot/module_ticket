@@ -155,35 +155,35 @@ class ProfilePanel extends XotBasePanel
         return [];
     }
 
-        public function isSuperAdmin(): bool
-        {
-            if (isset($this->vars[__FUNCTION__])) {
-                return $this->vars[__FUNCTION__];
+    public function isSuperAdmin(): bool
+    {
+        if (isset($this->vars[__FUNCTION__])) {
+            return $this->vars[__FUNCTION__];
+        }
+
+        // 232 Access to an undefined property Illuminate\Database\Eloquent\Model::$user.
+        // $user = $this->row->user;
+        // $user = $this->row->getRelationValue('user');
+        // 89     Access to an undefined property object::$perm_type
+        $user_id = $this->row->getAttributeValue('user_id');
+        $user = User::where('id', $user_id)->first();
+        if (null == $user) {
+            throw new \Exception('['.__LINE__.']['.__FILE__.']');
+        }
+        try {
+            if (\is_object($user->perm) && $user->perm->perm_type >= 4) {  // superadmin
+                $this->vars[__FUNCTION__] = true;
+
+                return true;
             }
-
-            // 232 Access to an undefined property Illuminate\Database\Eloquent\Model::$user.
-            // $user = $this->row->user;
-            // $user = $this->row->getRelationValue('user');
-            // 89     Access to an undefined property object::$perm_type
-            $user_id = $this->row->getAttributeValue('user_id');
-            $user = User::where('id', $user_id)->first();
-            if (null == $user) {
-                throw new \Exception('['.__LINE__.']['.__FILE__.']');
-            }
-            try {
-                if (\is_object($user->perm) && $user->perm->perm_type >= 4) {  // superadmin
-                    $this->vars[__FUNCTION__] = true;
-
-                    return true;
-                }
-            } catch (\Exception $e) {
-                $this->vars[__FUNCTION__] = false;
-
-                return false;
-            }
-
+        } catch (\Exception $e) {
             $this->vars[__FUNCTION__] = false;
 
             return false;
         }
+
+        $this->vars[__FUNCTION__] = false;
+
+        return false;
+    }
 }
