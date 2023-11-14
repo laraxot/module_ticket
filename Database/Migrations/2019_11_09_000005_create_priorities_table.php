@@ -12,18 +12,20 @@ class CreatePrioritiesTable extends XotBaseMigration
      *
      * @return void
      */
-    public function up() {
+    public function up()
+    {
         $this->tableCreate(
             function (Blueprint $table) {
-            $table->increments('id');
+                $table->increments('id');
 
-            $table->string('name');
+                $table->string('name');
 
-            $table->string('color')->nullable();
+                $table->string('color')->nullable();
 
-            $table->timestamps();
+                $table->timestamps();
 
-            $table->softDeletes();
-        });
+                $table->softDeletes();
+            }
+        );
     }
 }
