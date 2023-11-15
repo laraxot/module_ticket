@@ -8,13 +8,15 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Modules\Blog\Models\Categorizable;
 use Modules\Blog\Models\Category;
-use Modules\LU\Services\ProfileService;
+
+use function Safe\json_decode;
 
 class ThemeComposer
 {
     public function getFullName(): ?string
     {
-        return ProfileService::make()->getUser()->full_name;
+        // return ProfileService::make()->getUser()->full_name;
+        return 'WIP';
     }
 
     public function getSteps(): Collection
@@ -644,7 +646,7 @@ class ThemeComposer
         $tmp = explode('.', $name);
         $content = file_get_contents(__DIR__.'/../../Resources/json/'.$tmp[0].'.json');
         $json = (array) json_decode((string) $content, true);
-        $key = implode('.', array_slice($tmp, 1));
+        $key = implode('.', \array_slice($tmp, 1));
 
         return (array) Arr::get($json, $key);
     }
@@ -657,7 +659,7 @@ class ThemeComposer
         if ($res->count() < 1) {
             $ticketCategories = config('ticket.categories');
 
-            if (is_array($ticketCategories)) {
+            if (\is_array($ticketCategories)) {
                 foreach ($ticketCategories as $v) {
                     $cat = Category::firstOrCreate($v);
                     Categorizable::firstOrCreate(['category_id' => $cat->id, 'categorizable_type' => 'ticket']);
