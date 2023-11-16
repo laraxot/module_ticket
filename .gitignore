@@ -1,0 +1,14 @@
+*.lock
+package-lock.json
+*.stackdump
+*.cache
+*.lock
+package-lock.json
+*.stackdump
+*.cache
+.git-rewrite
+/vendor
+vendor/
+node_modules/
+/build
+/docs/cache
