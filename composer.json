@@ -1,0 +1,97 @@
+{
+    "name": "laraxot/module_ticket_fila3",
+    "description": "",
+    "homepage": "https://github.com/laraxot/module_ticket_fila3.git",
+    "license": "MIT",
+    "authors": [{
+        "name": "marco sottana",
+        "email": "marco.sottana@gmail.com",
+        "role": "Developer"
+    }],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Ticket\\Providers\\TicketServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Ticket\\": ""
+        }
+    },
+    "require": {
+        "calebporzio/sushi": "*",
+        "illuminate/contracts": "^9.0|^10.0",
+        "illuminate/support": "^9.12|^10.0",
+        "kalnoy/nestedset": "*",
+        "laraxot/module_xot_fila3": "dev-master",
+        "livewire/livewire": "^3.2",
+        "phpdocumentor/type-resolver": "*",
+        "spatie/laravel-package-tools": "*",
+        "spatie/laravel-sluggable": "*",
+        "spatie/laravel-translatable": "*",
+        "thecodingmachine/safe": "^2.5"
+    },
+    "require-dev": {
+        "driftingly/rector-laravel": "^0.26.2",
+        "enlightn/enlightn": "^2.7",
+        "fakerphp/faker": "*",
+        "friendsofphp/php-cs-fixer": "*",
+        "inertiajs/inertia-laravel": "*",
+        "larastan/larastan": "*",
+        "nesbot/carbon": "*",
+        "nette/php-generator": "*",
+        "orchestra/testbench": "*",
+        "pestphp/pest": "*",
+        "pestphp/pest-plugin-laravel": "*",
+        "phpstan/extension-installer": "*",
+        "phpunit/phpunit": "*",
+        "psalm/plugin-laravel": "^2.8",
+        "rector/phpstan-rules": "^0.7.1",
+        "rector/rector": "^0.18.12",
+        "spatie/invade": "*",
+        "spatie/laravel-typescript-transformer": "*",
+        "spatie/pest-plugin-snapshots": "*",
+        "spatie/phpunit-snapshot-assertions": "*",
+        "spatie/test-time": "*",
+        "symplify/phpstan-rules": "^12.4",
+        "thecodingmachine/phpstan-safe-rule": "^1.2"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../Xot"
+        },
+        {
+            "type": "path",
+            "url": "../Tenant"
+        },
+        {
+            "type": "path",
+            "url": "../UI"
+        },
+        {
+            "type": "path",
+            "url": "../Lang"
+        }
+    ],
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "./vendor/bin/pest --no-coverage",
+        "test-coverage": "vendor/bin/pest --coverage-html coverage",
+        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true,
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
