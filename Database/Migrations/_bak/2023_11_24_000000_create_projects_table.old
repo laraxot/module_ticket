@@ -1,0 +1,40 @@
+<?php
+
+declare(strict_types=1);
+
+use Illuminate\Database\Schema\Blueprint;
+use Modules\Xot\Database\Migrations\XotBaseMigration;
+
+class CreateProjectsTable extends XotBaseMigration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        $this->tableCreate(
+            function (Blueprint $table): void {
+                $table->id();
+                $table->string('name');
+                $table->longText('description')->nullable();
+                $table->foreignId('owner_id'); // ->constrained('users');
+                $table->foreignId('status_id'); // ->constrained('project_statuses');
+                $table->softDeletes();
+                $table->timestamps();
+                $table->string('type')->default('kanban');
+                $table->string('status_type')->default('default');
+                $table->string('ticket_prefix');
+            }
+        );
+
+        // -- UPDATE --
+        $this->tableUpdate(
+            function (Blueprint $table) {
+                // if (! $this->hasColumn('created_by')) {
+                //     $table->string('created_by')->nullable();
+                //     $table->string('updated_by')->nullable();
+                // }
+            }
+        );
+    }
+}
