@@ -16,7 +16,7 @@ class CreateTicketType extends CreateRecord
     protected function afterCreate(): void
     {
         Assert::isInstanceOf($this->record, TicketType::class);
-        if (0 !== $this->record->is_default) {
+        if ($this->record->is_default !== 0) {
             TicketType::where('id', '<>', $this->record->id)
                 ->where('is_default', true)
                 ->update(['is_default' => false]);

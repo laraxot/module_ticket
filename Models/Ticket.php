@@ -290,7 +290,7 @@ class Ticket extends BaseModel implements HasMedia
     public function estimationInSeconds(): Attribute
     {
         return new Attribute(
-            get: function (): null|float {
+            get: function (): ?float {
                 if (! $this->estimation) {
                     return null;
                 }

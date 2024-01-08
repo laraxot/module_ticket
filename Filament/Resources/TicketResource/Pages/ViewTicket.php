@@ -52,7 +52,7 @@ class ViewTicket extends ViewRecord implements HasForms
 
     protected function getHeaderActions(): array
     {
-        if (null == $this->record) {
+        if ($this->record == null) {
             return [];
         }
         Assert::isInstanceOf($this->record, Ticket::class);
@@ -214,9 +214,9 @@ class ViewTicket extends ViewRecord implements HasForms
         $this->cancelEditComment();
         // $this->notify('success', __('Comment saved'));
         Notification::make()
-                        ->title(__('Comment saved'))
-                        ->success()
-                        ->send();
+            ->title(__('Comment saved'))
+            ->success()
+            ->send();
     }
 
     public function isAdministrator(): bool
@@ -224,12 +224,12 @@ class ViewTicket extends ViewRecord implements HasForms
         Assert::isInstanceOf($this->record, Ticket::class);
         Assert::notNull($this->record->project);
 
-        return 0 !== $this->record
-                ->project
-                ->users()
-                ->where('users.id', auth()->id())
-                ->where('role', 'administrator')
-                ->count();
+        return $this->record
+            ->project
+            ->users()
+            ->where('users.id', auth()->id())
+            ->where('role', 'administrator')
+            ->count() !== 0;
     }
 
     public function editComment(int $commentId): void
@@ -269,9 +269,9 @@ class ViewTicket extends ViewRecord implements HasForms
         $this->record->refresh();
         // $this->notify('success', __('Comment deleted'));
         Notification::make()
-                        ->title(__('Comment deleted'))
-                        ->success()
-                        ->send();
+            ->title(__('Comment deleted'))
+            ->success()
+            ->send();
     }
 
     public function cancelEditComment(): void

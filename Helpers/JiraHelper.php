@@ -7,14 +7,13 @@ namespace Modules\Ticket\Helpers;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Log;
+use Webmozart\Assert\Assert;
 
 use function Safe\json_decode;
 
-use Webmozart\Assert\Assert;
-
 trait JiraHelper
 {
-    public function connectToJira(string $host, string $username, string $token): Client|null
+    public function connectToJira(string $host, string $username, string $token): ?Client
     {
         return new Client([
             'base_uri' => $host,
@@ -26,7 +25,7 @@ trait JiraHelper
         ]);
     }
 
-    public function getJiraProjects(Client $client): array|null
+    public function getJiraProjects(Client $client): ?array
     {
         try {
             $response = $client->get('/rest/api/2/project');
@@ -41,7 +40,7 @@ trait JiraHelper
         }
     }
 
-    public function getJiraTicketsByProject(Client $client, array $projectKeys): array|null
+    public function getJiraTicketsByProject(Client $client, array $projectKeys): ?array
     {
         try {
             $formatIssues = static function ($issues): array {

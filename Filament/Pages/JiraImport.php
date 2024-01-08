@@ -78,7 +78,7 @@ class JiraImport extends Page implements HasForms
     public static function shouldRegisterNavigation(): bool
     {
         $user = auth()->user();
-        if (null === $user) {
+        if ($user === null) {
             return false;
         }
 
@@ -268,16 +268,16 @@ class JiraImport extends Page implements HasForms
             dispatch(new ImportJiraTicketsJob($tickets, auth()->user()));
             // $this->notify('success', __('The importation job is started, when finished you will be notified'), true);
             Notification::make()
-            ->title(__('The importation job is started, when finished you will be notified'))
-            ->success()
-            ->send();
+                ->title(__('The importation job is started, when finished you will be notified'))
+                ->success()
+                ->send();
             $this->redirect(route('filament.pages.jira-import'));
         } else {
             // $this->notify('warning', __('Please choose at least a jira ticket to import'));
             Notification::make()
-            ->title(__('Please choose at least a jira ticket to import'))
-            ->warning()
-            ->send();
+                ->title(__('Please choose at least a jira ticket to import'))
+                ->warning()
+                ->send();
         }
     }
 

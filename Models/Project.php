@@ -214,7 +214,6 @@ class Project extends BaseModel implements HasMedia
                         ->first();
                 }
 
-                return null;
             }
         );
     }

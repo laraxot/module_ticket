@@ -51,19 +51,19 @@ class ProjectHoursExport implements FromCollection, WithHeadings
         $this->project->tickets
             ->filter(static fn ($ticket) => $ticket->hours()->count())
             ->each(static fn ($ticket) => $ticket->hours
-                    ->each(function (TicketHour $item) use ($collection) {
-                        Assert::notNull($item->created_at);
+                ->each(function (TicketHour $item) use ($collection) {
+                    Assert::notNull($item->created_at);
 
-                        return $collection->push([
-                            '#' => $item->ticket?->code,
-                            'ticket' => $item->ticket?->name,
-                            'user' => $item->user?->name,
-                            'time' => $item->forHumans,
-                            'hours' => number_format($item->value, 2, ',', ' '),
-                            'activity' => $item->activity instanceof Activity ? $item->activity->name : '-',
-                            'date' => $item->created_at->format(__('Y-m-d g:i A')),
-                        ]);
-                    })
+                    return $collection->push([
+                        '#' => $item->ticket?->code,
+                        'ticket' => $item->ticket?->name,
+                        'user' => $item->user?->name,
+                        'time' => $item->forHumans,
+                        'hours' => number_format($item->value, 2, ',', ' '),
+                        'activity' => $item->activity instanceof Activity ? $item->activity->name : '-',
+                        'date' => $item->created_at->format(__('Y-m-d g:i A')),
+                    ]);
+                })
             );
 
         return $collection;

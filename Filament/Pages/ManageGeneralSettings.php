@@ -26,7 +26,7 @@ class ManageGeneralSettings extends SettingsPage
     public static function shouldRegisterNavigation(): bool
     {
         $user = auth()->user();
-        if (null === $user) {
+        if ($user === null) {
             return false;
         }
 

@@ -25,7 +25,7 @@ trait KanbanScrumHelper
 {
     public bool $sortable = true;
 
-    public Project|null $project = null;
+    public ?Project $project = null;
 
     public array $users = [];
 
@@ -87,7 +87,7 @@ trait KanbanScrumHelper
     public function getStatuses(): Collection
     {
         $query = TicketStatus::query();
-        if ($this->project && 'custom' === $this->project->status_type) {
+        if ($this->project && $this->project->status_type === 'custom') {
             $query->where('project_id', $this->project->id);
         } else {
             $query->whereNull('project_id');
@@ -118,7 +118,7 @@ trait KanbanScrumHelper
     {
         $query = Ticket::query();
         Assert::notNull($this->project);
-        if ('scrum' === $this->project->type) {
+        if ($this->project->type === 'scrum') {
             Assert::notNull($this->project->currentSprint);
             $query->where('sprint_id', $this->project->currentSprint->id);
         }
@@ -185,15 +185,15 @@ trait KanbanScrumHelper
             $ticket->save();
             // Filament::notify('success', __('Ticket updated'));
             Notification::make()
-            ->title(__('Ticket updated'))
-            ->success()
-            ->send();
+                ->title(__('Ticket updated'))
+                ->success()
+                ->send();
         }
     }
 
     public function isMultiProject(): bool
     {
-        return null === $this->project;
+        return $this->project === null;
     }
 
     public function filter(): void

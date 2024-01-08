@@ -41,7 +41,7 @@ class SprintsRelationManager extends RelationManager
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
         // Access to an undefined property Illuminate\Database\Eloquent\Model::$type
-        return 'scrum' === $ownerRecord->type;
+        return $ownerRecord->type === 'scrum';
     }
 
     public function form(Form $form): Form
@@ -166,10 +166,10 @@ class SprintsRelationManager extends RelationManager
                                     ->color('gray')
                                     ->button()
                                     ->label(
-                                        static fn () => ('scrum' === $record->project->type ? __('Scrum board') : __('Kanban board'))
+                                        static fn () => ($record->project->type === 'scrum' ? __('Scrum board') : __('Kanban board'))
                                     )
                                     ->url(static function () use ($record) {
-                                        if ('scrum' === $record->project->type) {
+                                        if ($record->project->type === 'scrum') {
                                             return route('filament.pages.scrum/{project}', ['project' => $record->project->id]);
                                         }
 
@@ -244,9 +244,9 @@ class SprintsRelationManager extends RelationManager
                         Ticket::whereIn('id', $tickets)->update(['sprint_id' => $record->id]);
                         // Filament::notify('success', __('Tickets associated with sprint'));
                         Notification::make()
-                        ->title(__('Tickets associated with sprint'))
-                        ->success()
-                        ->send();
+                            ->title(__('Tickets associated with sprint'))
+                            ->success()
+                            ->send();
                     }),
 
                 EditAction::make(),

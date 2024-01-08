@@ -110,7 +110,7 @@ class MonthlyReport extends ChartWidget
     }
 
     /**
-     * @param DataCollection<TrendMonthData> $collection
+     * @param  DataCollection<TrendMonthData>  $collection
      */
     protected function buildRapport(DataCollection $collection): array
     {

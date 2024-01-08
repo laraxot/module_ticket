@@ -112,7 +112,7 @@ class Sprint extends BaseModel
     public function remaining(): Attribute
     {
         return new Attribute(
-            get: function (): int|null {
+            get: function (): ?int {
                 if (! $this->starts_at) {
                     return null;
                 }

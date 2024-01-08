@@ -71,7 +71,7 @@ class TicketStatus extends BaseModel
 
         static::saved(static function (TicketStatus $item): void {
             Assert::isInstanceOf($item, TicketStatus::class);
-            if (0 !== $item->is_default) {
+            if ($item->is_default !== 0) {
                 $query = TicketStatus::where('id', '<>', $item->id)
                     ->where('is_default', true);
                 Assert::notNull($item->project);
@@ -93,7 +93,7 @@ class TicketStatus extends BaseModel
             $order = $item->order;
             foreach ($toUpdate as $i) {
                 if ($i->order === $order || $i->order === ($order + 1)) {
-                    ++$i->order;
+                    $i->order++;
                     $i->save();
                     $order = $i->order;
                 }

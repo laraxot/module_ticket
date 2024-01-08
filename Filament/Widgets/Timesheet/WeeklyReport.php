@@ -80,7 +80,7 @@ class WeeklyReport extends ChartWidget
     }
 
     /**
-     * @param DataCollection<TrendDayData> $collection
+     * @param  DataCollection<TrendDayData>  $collection
      */
     protected function buildRapport(DataCollection $collection, array $dates): array
     {

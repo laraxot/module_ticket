@@ -50,7 +50,7 @@ class TicketCreated extends Notification implements ShouldQueue
         Assert::notNull($this->ticket->priority);
         Assert::notNull($this->ticket->status);
 
-        return (new MailMessage())
+        return (new MailMessage)
             ->line(__('A new ticket has just been created.'))
             ->line('- '.__('Ticket name:').' '.$this->ticket->name)
             ->line('- '.__('Project:').' '.$this->ticket->project->name)
