@@ -81,7 +81,7 @@ class Board extends Page implements HasForms
         $data = $this->form->getState();
         $project = Project::find($data['project']);
         Assert::isInstanceOf($project, Project::class);
-        if ($project->type === 'scrum') {
+        if ('scrum' === $project->type) {
             $this->redirect(route('filament.pages.scrum/{project}', ['project' => $project]));
         } else {
             $this->redirect(route('filament.pages.kanban/{project}', ['project' => $project]));

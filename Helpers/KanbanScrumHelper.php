@@ -87,7 +87,7 @@ trait KanbanScrumHelper
     public function getStatuses(): Collection
     {
         $query = TicketStatus::query();
-        if ($this->project && $this->project->status_type === 'custom') {
+        if ($this->project && 'custom' === $this->project->status_type) {
             $query->where('project_id', $this->project->id);
         } else {
             $query->whereNull('project_id');
@@ -118,7 +118,7 @@ trait KanbanScrumHelper
     {
         $query = Ticket::query();
         Assert::notNull($this->project);
-        if ($this->project->type === 'scrum') {
+        if ('scrum' === $this->project->type) {
             Assert::notNull($this->project->currentSprint);
             $query->where('sprint_id', $this->project->currentSprint->id);
         }
@@ -193,7 +193,7 @@ trait KanbanScrumHelper
 
     public function isMultiProject(): bool
     {
-        return $this->project === null;
+        return null === $this->project;
     }
 
     public function filter(): void

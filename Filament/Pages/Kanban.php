@@ -42,7 +42,7 @@ class Kanban extends Page implements HasForms
     public function mount(Project $project): void
     {
         $this->project = $project;
-        if ($this->project->type === 'scrum') {
+        if ('scrum' === $this->project->type) {
             $this->redirect(route('filament.pages.scrum/{project}', ['project' => $project]));
         } elseif (
             $this->project->owner_id !== auth()->id()

@@ -99,7 +99,7 @@ class ProjectResource extends Resource
                                                     ->columnSpan(2)
                                                     ->unique(Project::class, column: 'ticket_prefix', ignoreRecord: true)
                                                     ->disabled(
-                                                        static fn ($record): bool => $record && $record->tickets()->count() !== 0
+                                                        static fn ($record): bool => $record && 0 !== $record->tickets()->count()
                                                     )
                                                     ->required(),
                                             ]),
@@ -133,11 +133,11 @@ class ProjectResource extends Resource
                                     ->reactive()
                                     ->default(static fn (): string => 'kanban')
                                     ->helperText(static function ($state) {
-                                        if ($state === 'kanban') {
+                                        if ('kanban' === $state) {
                                             return __('Display and move your project forward with issues on a powerful board.');
                                         }
 
-                                        if ($state === 'scrum') {
+                                        if ('scrum' === $state) {
                                             return __('Achieve your project goals with a board, backlog, and roadmap.');
                                         }
 
@@ -272,12 +272,12 @@ class ProjectResource extends Resource
 
                     Action::make('kanban')
                         ->label(
-                            static fn ($record) => ($record->type === 'scrum' ? __('Scrum board') : __('Kanban board'))
+                            static fn ($record) => ('scrum' === $record->type ? __('Scrum board') : __('Kanban board'))
                         )
                         ->icon('heroicon-o-view-columns')
                         ->color('gray')
                         ->url(static function ($record) {
-                            if ($record->type === 'scrum') {
+                            if ('scrum' === $record->type) {
                                 return route('filament.pages.scrum/{project}', ['project' => $record->id]);
                             }
 

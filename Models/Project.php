@@ -213,7 +213,6 @@ class Project extends BaseModel implements HasMedia
                         ->orderBy('starts_at')
                         ->first();
                 }
-
             }
         );
     }

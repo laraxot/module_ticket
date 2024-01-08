@@ -45,7 +45,7 @@ class TicketCommented extends Notification implements ShouldQueue
         Assert::notNull($this->ticketComment->ticket);
         Assert::notNull($this->ticketComment->user);
 
-        return (new MailMessage)
+        return (new MailMessage())
             ->line(
                 __(
                     'A new comment has been added to the ticket :ticket by :name.',

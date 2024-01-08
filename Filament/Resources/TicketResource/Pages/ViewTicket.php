@@ -52,7 +52,7 @@ class ViewTicket extends ViewRecord implements HasForms
 
     protected function getHeaderActions(): array
     {
-        if ($this->record == null) {
+        if (null == $this->record) {
             return [];
         }
         Assert::isInstanceOf($this->record, Ticket::class);
@@ -224,12 +224,12 @@ class ViewTicket extends ViewRecord implements HasForms
         Assert::isInstanceOf($this->record, Ticket::class);
         Assert::notNull($this->record->project);
 
-        return $this->record
+        return 0 !== $this->record
             ->project
             ->users()
             ->where('users.id', auth()->id())
             ->where('role', 'administrator')
-            ->count() !== 0;
+            ->count();
     }
 
     public function editComment(int $commentId): void

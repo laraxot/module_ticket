@@ -7,10 +7,11 @@ namespace Modules\Ticket\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
-use Stichoza\GoogleTranslate\GoogleTranslate;
 
 use function Safe\json_decode;
 use function Safe\json_encode;
+
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class TranslateLangFile extends Command
 {

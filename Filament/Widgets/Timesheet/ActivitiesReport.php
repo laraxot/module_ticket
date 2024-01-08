@@ -70,7 +70,7 @@ class ActivitiesReport extends ChartWidget
     }
 
     /**
-     * @param  DataCollection<TrendActivityData>  $collection
+     * @param DataCollection<TrendActivityData> $collection
      */
     protected function getDatasets(DataCollection $collection): array
     {

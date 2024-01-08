@@ -29,7 +29,7 @@ class StatusesRelationManager extends RelationManager
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
         // Access to an undefined property Illuminate\Database\Eloquent\Model::$status_type.
-        return $ownerRecord->status_type === 'custom';
+        return 'custom' === $ownerRecord->status_type;
     }
 
     public function form(Form $form): Form

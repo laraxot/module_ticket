@@ -43,7 +43,7 @@ class Scrum extends Page implements HasForms
     public function mount(Project $project): void
     {
         $this->project = $project;
-        if ($this->project->type !== 'scrum') {
+        if ('scrum' !== $this->project->type) {
             $this->redirect(route('filament.pages.kanban/{project}', ['project' => $project]));
         } elseif (
             $this->project->owner_id !== auth()->id()
@@ -57,7 +57,7 @@ class Scrum extends Page implements HasForms
 
     protected function getHeaderActions(): array
     {
-        if ($this->project == null) {
+        if (null == $this->project) {
             return [];
         }
         Assert::notNull(auth()->user());

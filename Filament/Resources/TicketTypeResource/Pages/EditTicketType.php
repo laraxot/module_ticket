@@ -27,7 +27,7 @@ class EditTicketType extends EditRecord
     protected function afterSave(): void
     {
         Assert::isInstanceOf($this->record, TicketType::class);
-        if ($this->record->is_default !== 0) {
+        if (0 !== $this->record->is_default) {
             TicketStatus::where('id', '<>', $this->record->id)
                 ->where('is_default', true)
                 ->update(['is_default' => false]);

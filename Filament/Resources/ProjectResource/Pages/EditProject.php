@@ -23,12 +23,12 @@ class EditProject extends EditRecord
         return [
             Action::make('kanban')
                 ->label(
-                    fn () => ($this->record->type === 'scrum' ? __('Scrum board') : __('Kanban board'))
+                    fn () => ('scrum' === $this->record->type ? __('Scrum board') : __('Kanban board'))
                 )
                 ->icon('heroicon-o-view-columns')
                 ->color('gray')
                 ->url(function () {
-                    if ($this->record->type === 'scrum') {
+                    if ('scrum' === $this->record->type) {
                         return route('filament.pages.scrum/{project}', ['project' => $this->record->id]);
                     }
 

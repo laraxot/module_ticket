@@ -69,7 +69,7 @@ class RoadMap extends Page implements HasForms
             $this->project = $first_project;
         }
 
-        if ($this->project !== null) {
+        if (null !== $this->project) {
             $this->form->fill([
                 'selectedProject' => $this->project->id,
             ]);
@@ -119,7 +119,7 @@ class RoadMap extends Page implements HasForms
 
     public function createEpic(): void
     {
-        $this->epic = new Epic;
+        $this->epic = new Epic();
         $this->epic->project_id = $this->project->id;
     }
 

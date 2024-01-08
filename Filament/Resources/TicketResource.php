@@ -148,7 +148,7 @@ class TicketResource extends Resource
                                             ->searchable()
                                             ->options(static function ($get) {
                                                 $project = Project::where('id', $get('project_id'))->first();
-                                                if ($project?->status_type === 'custom') {
+                                                if ('custom' === $project?->status_type) {
                                                     return TicketStatus::where('project_id', $project->id)
                                                         ->get()
                                                         ->pluck('name', 'id')
@@ -162,7 +162,7 @@ class TicketResource extends Resource
                                             })
                                             ->default(static function ($get) {
                                                 $project = Project::where('id', $get('project_id'))->first();
-                                                if ($project?->status_type === 'custom') {
+                                                if ('custom' === $project?->status_type) {
                                                     return TicketStatus::where('project_id', $project->id)
                                                         ->where('is_default', true)
                                                         ->first()
