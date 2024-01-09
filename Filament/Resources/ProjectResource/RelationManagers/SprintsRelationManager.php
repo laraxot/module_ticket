@@ -244,9 +244,15 @@ class SprintsRelationManager extends RelationManager
                         Ticket::whereIn('id', $tickets)->update(['sprint_id' => $record->id]);
                         // Filament::notify('success', __('Tickets associated with sprint'));
                         Notification::make()
+<<<<<<< HEAD
                             ->title(__('Tickets associated with sprint'))
                             ->success()
                             ->send();
+=======
+                        ->title(__('Tickets associated with sprint'))
+                        ->success()
+                        ->send();
+>>>>>>> dev
                     }),
 
                 EditAction::make(),

@@ -14,7 +14,11 @@ use Webmozart\Assert\Assert;
 
 trait JiraHelper
 {
+<<<<<<< HEAD
     public function connectToJira(string $host, string $username, string $token): ?Client
+=======
+    public function connectToJira(string $host, string $username, string $token): Client|null
+>>>>>>> dev
     {
         return new Client([
             'base_uri' => $host,
@@ -26,7 +30,11 @@ trait JiraHelper
         ]);
     }
 
+<<<<<<< HEAD
     public function getJiraProjects(Client $client): ?array
+=======
+    public function getJiraProjects(Client $client): array|null
+>>>>>>> dev
     {
         try {
             $response = $client->get('/rest/api/2/project');
@@ -41,7 +49,11 @@ trait JiraHelper
         }
     }
 
+<<<<<<< HEAD
     public function getJiraTicketsByProject(Client $client, array $projectKeys): ?array
+=======
+    public function getJiraTicketsByProject(Client $client, array $projectKeys): array|null
+>>>>>>> dev
     {
         try {
             $formatIssues = static function ($issues): array {

@@ -214,9 +214,15 @@ class ViewTicket extends ViewRecord implements HasForms
         $this->cancelEditComment();
         // $this->notify('success', __('Comment saved'));
         Notification::make()
+<<<<<<< HEAD
             ->title(__('Comment saved'))
             ->success()
             ->send();
+=======
+                        ->title(__('Comment saved'))
+                        ->success()
+                        ->send();
+>>>>>>> dev
     }
 
     public function isAdministrator(): bool
@@ -225,11 +231,19 @@ class ViewTicket extends ViewRecord implements HasForms
         Assert::notNull($this->record->project);
 
         return 0 !== $this->record
+<<<<<<< HEAD
             ->project
             ->users()
             ->where('users.id', auth()->id())
             ->where('role', 'administrator')
             ->count();
+=======
+                ->project
+                ->users()
+                ->where('users.id', auth()->id())
+                ->where('role', 'administrator')
+                ->count();
+>>>>>>> dev
     }
 
     public function editComment(int $commentId): void
@@ -269,9 +283,15 @@ class ViewTicket extends ViewRecord implements HasForms
         $this->record->refresh();
         // $this->notify('success', __('Comment deleted'));
         Notification::make()
+<<<<<<< HEAD
             ->title(__('Comment deleted'))
             ->success()
             ->send();
+=======
+                        ->title(__('Comment deleted'))
+                        ->success()
+                        ->send();
+>>>>>>> dev
     }
 
     public function cancelEditComment(): void

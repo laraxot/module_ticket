@@ -10,6 +10,9 @@ https://italia.github.io/bootstrap-italia/docs/esempi/
 https://italia.github.io/bootstrap-italia/docs/esempi/template-comuni-vuoto/
 
 
+<<<<<<< HEAD
 https://italia.github.io/design-comuni-pagine-statiche/sito/novita.html
 
+=======
+>>>>>>> dev
 

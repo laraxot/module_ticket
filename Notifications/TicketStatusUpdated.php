@@ -18,7 +18,10 @@ use Webmozart\Assert\Assert;
 class TicketStatusUpdated extends Notification implements ShouldQueue
 {
     use Queueable;
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
     private readonly TicketActivity $activity;
 
     /**

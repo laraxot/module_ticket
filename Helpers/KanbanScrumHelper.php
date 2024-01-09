@@ -25,7 +25,11 @@ trait KanbanScrumHelper
 {
     public bool $sortable = true;
 
+<<<<<<< HEAD
     public ?Project $project = null;
+=======
+    public Project|null $project = null;
+>>>>>>> dev
 
     public array $users = [];
 
@@ -185,9 +189,15 @@ trait KanbanScrumHelper
             $ticket->save();
             // Filament::notify('success', __('Ticket updated'));
             Notification::make()
+<<<<<<< HEAD
                 ->title(__('Ticket updated'))
                 ->success()
                 ->send();
+=======
+            ->title(__('Ticket updated'))
+            ->success()
+            ->send();
+>>>>>>> dev
         }
     }
 
