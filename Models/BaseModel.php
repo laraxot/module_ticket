@@ -22,10 +22,6 @@ abstract class BaseModel extends Model
 {
     use HasFactory;
     use SoftDeletes;
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
     // use Searchable;
     // use Cachable;
     use Updater;

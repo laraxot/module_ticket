@@ -12,7 +12,6 @@ class GeneralSettings extends Settings
 
     public bool $enable_registration;
 
-<<<<<<< HEAD
     public ?string $site_logo = null;
 
     public ?string $enable_social_login = null;
@@ -24,19 +23,6 @@ class GeneralSettings extends Settings
     public ?string $enable_login_form = null;
 
     public ?string $enable_oidc_login = null;
-=======
-    public string|null $site_logo = null;
-
-    public string|null $enable_social_login = null;
-
-    public string|null $site_language = null;
-
-    public string|null $default_role = null;
-
-    public string|null $enable_login_form = null;
-
-    public string|null $enable_oidc_login = null;
->>>>>>> dev
 
     public static function group(): string
     {
