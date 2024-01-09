@@ -34,11 +34,7 @@ class RoadMap extends Page implements HasForms
 
     public Project $project;
 
-<<<<<<< HEAD
     public ?Epic $epic = null;
-=======
-    public Epic|null $epic = null;
->>>>>>> dev
 
     public bool $ticket = false;
 

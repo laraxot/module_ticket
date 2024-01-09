@@ -9,9 +9,5 @@ use Spatie\LaravelData\Data;
 class TrendDayData extends Data
 {
     public string $day;
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
     public int $value;
 }
