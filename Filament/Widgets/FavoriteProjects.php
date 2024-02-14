@@ -7,6 +7,7 @@ namespace Modules\Ticket\Filament\Widgets;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Card;
 use Illuminate\Support\HtmlString;
+use Modules\Ticket\Models\Profile;
 use Webmozart\Assert\Assert;
 
 class FavoriteProjects extends BaseWidget
@@ -26,15 +27,16 @@ class FavoriteProjects extends BaseWidget
 
     public static function canView(): bool
     {
-        Assert::notNull(auth()->user());
+        Assert::notNull($user=auth()->user());
 
-        return auth()->user()->can('List projects');
+        return $user->can('List projects');
     }
 
     protected function getCards(): array
     {
         Assert::notNull($user = auth()->user());
-        Assert::notNull($profile = $user->profile);
+        $profile=Profile::firstOrCreate(['user_id' => $user->id]);
+
         $favoriteProjects = $profile->favoriteProjects;
         $cards = [];
         foreach ($favoriteProjects as $project) {
