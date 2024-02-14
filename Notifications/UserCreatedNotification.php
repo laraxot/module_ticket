@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Modules\Ticket\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Modules\User\Models\User;
-use Modules\Xot\Datas\MetatagData;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
+use Modules\User\Models\User;
+use Modules\Xot\Datas\MetatagData;
 
 class UserCreatedNotification extends Notification implements ShouldQueue
 {
@@ -39,14 +39,12 @@ class UserCreatedNotification extends Notification implements ShouldQueue
      */
     public function toMail(User $notifiable)
     {
-
-
         return (new MailMessage())
             ->subject(__('Validate your account'))
             ->line(__('Welcome to :app platform.', ['app' => MetatagData::make()->sitename]))
             ->line(__('To complete the creation of your account, please use the below button to choose a password and verify your user account.'))
-            //->action(__('Verify my account'), route('validate-account', $this->user->creation_token))
-            ;
+            // ->action(__('Verify my account'), route('validate-account', $this->user->creation_token))
+        ;
     }
 
     /**
