@@ -6,6 +6,7 @@ namespace Modules\Ticket\Filament\Resources\ProjectResource\RelationManagers;
 
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Webmozart\Assert\Assert;
 use Modules\Ticket\Models\Project;
 use Filament\Forms\Components\Checkbox;
 use Filament\Tables\Actions\EditAction;
@@ -32,6 +33,7 @@ class StatusesRelationManager extends RelationManager
      */
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
+       // Assert::isInstanceOf($ownerRecord, Project::class);
         // Access to an undefined property Illuminate\Database\Eloquent\Model::$status_type.
         return 'custom' === $ownerRecord->status_type;
     }
