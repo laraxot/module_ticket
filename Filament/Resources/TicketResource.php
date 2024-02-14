@@ -209,7 +209,7 @@ class TicketResource extends Resource
 
                         Repeater::make('relations')
                             ->itemLabel(static function (array $state): ?string {
-                                $ticketRelation = TicketRelation::firstWhere(['id'=>$state['id'] ?? 0]);
+                                $ticketRelation = TicketRelation::firstWhere(['id' => $state['id'] ?? 0]);
                                 if ($ticketRelation) {
                                     Assert::notNull($ticketRelation->relation);
 

@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Resources\ProjectResource\RelationManagers;
 
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Modules\Ticket\Models\Project;
 use Filament\Forms\Components\Checkbox;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Model;
-use Modules\Ticket\Models\TicketStatus;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\ColorColumn;
+use Filament\Forms\Form;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
-use Filament\Forms\Components\ColorPicker;
 use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\ColorColumn;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+use Modules\Ticket\Models\Project;
+use Modules\Ticket\Models\TicketStatus;
 
 class StatusesRelationManager extends RelationManager
 {

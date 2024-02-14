@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Console\Commands;
 
-use Webmozart\Assert\Assert;
-use function Safe\json_decode;
-
-use function Safe\json_encode;
 use Illuminate\Console\Command;
-
 use Illuminate\Support\Facades\File;
+
+use function Safe\json_decode;
+use function Safe\json_encode;
+
 use Stichoza\GoogleTranslate\GoogleTranslate;
+use Webmozart\Assert\Assert;
 
 class TranslateMissing extends Command
 {
