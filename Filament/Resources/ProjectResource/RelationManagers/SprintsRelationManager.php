@@ -5,32 +5,33 @@ declare(strict_types=1);
 namespace Modules\Ticket\Filament\Resources\ProjectResource\RelationManagers;
 
 use Carbon\Carbon;
-use Filament\Facades\Filament;
-use Filament\Forms\ComponentContainer;
-use Filament\Forms\Components\CheckboxList;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
+use Filament\Tables;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
-use Filament\Notifications\Actions\Action;
-use Filament\Notifications\Notification;
-use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables;
-use Filament\Tables\Actions\CreateAction;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Facades\Filament;
+use Modules\Ticket\Models\Sprint;
+use Modules\Ticket\Models\Ticket;
+use Illuminate\Support\HtmlString;
+use Modules\Ticket\Models\Project;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\ComponentContainer;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\HtmlString;
-use Modules\Ticket\Models\Sprint;
-use Modules\Ticket\Models\Ticket;
+use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Forms\Components\Placeholder;
+use Filament\Notifications\Actions\Action;
+use Filament\Forms\Components\CheckboxList;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Resources\RelationManagers\RelationManager;
 
 class SprintsRelationManager extends RelationManager
 {
@@ -38,6 +39,9 @@ class SprintsRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    /**
+     * @param Project $ownerRecord
+     */
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
         // Access to an undefined property Illuminate\Database\Eloquent\Model::$type

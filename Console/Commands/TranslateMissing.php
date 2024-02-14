@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Console\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
-
+use Webmozart\Assert\Assert;
 use function Safe\json_decode;
-use function Safe\json_encode;
 
+use function Safe\json_encode;
+use Illuminate\Console\Command;
+
+use Illuminate\Support\Facades\File;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class TranslateMissing extends Command
@@ -34,7 +35,7 @@ class TranslateMissing extends Command
     public function handle(): int
     {
         $base = $this->argument('base');
-        $locales = config('system.locales.list');
+        Assert::isArray($locales = config('system.locales.list'));
         $baseTranslations = json_decode((string) File::get(lang_path($base.'.json')), true, 512, JSON_THROW_ON_ERROR);
         $this->info('Found '.(is_countable($locales) ? \count($locales) : 0).' locales. Performing, please wait...');
         $bar = $this->getOutput()->createProgressBar(is_countable($locales) ? \count($locales) : 0);

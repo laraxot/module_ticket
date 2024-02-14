@@ -31,6 +31,9 @@ abstract class BasePivot extends Pivot
      */
     public $incrementing = true;
 
+    /**
+     * @var int
+     */
     protected $perPage = 30;
 
     // use Searchable;

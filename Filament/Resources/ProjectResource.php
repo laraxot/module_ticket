@@ -229,6 +229,7 @@ class ProjectResource extends Resource
                     ->options(static fn () => ProjectStatus::all()->pluck('name', 'id')->toArray()),
             ])
             ->actions([
+                /*
                 Action::make('favorite')
                     ->label('')
                     ->icon('heroicon-o-star')
@@ -254,7 +255,7 @@ class ProjectResource extends Resource
                             ->success()
                             ->send();
                     }),
-
+                */
                 ViewAction::make(),
                 EditAction::make(),
 
