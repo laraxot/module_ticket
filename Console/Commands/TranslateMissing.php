@@ -36,7 +36,7 @@ class TranslateMissing extends Command
     {
         $base = $this->argument('base');
         Assert::isArray($locales = config('system.locales.list'));
-        $baseTranslations = json_decode((string) File::get(lang_path($base.'.json')), true, 512, JSON_THROW_ON_ERROR);
+        Assert::isArray($baseTranslations = json_decode((string) File::get(lang_path($base.'.json')), true, 512, JSON_THROW_ON_ERROR));
         $this->info('Found '.(is_countable($locales) ? \count($locales) : 0).' locales. Performing, please wait...');
         $bar = $this->getOutput()->createProgressBar(is_countable($locales) ? \count($locales) : 0);
         $bar->start();
@@ -44,7 +44,7 @@ class TranslateMissing extends Command
             if ($locale !== $base && $locale !== config('app.fallback_locale')) {
                 $filePath = lang_path($locale.'.json');
                 if (File::exists($filePath)) {
-                    $localeTranslations = json_decode((string) File::get(lang_path($locale.'.json')), true, 512, JSON_THROW_ON_ERROR);
+                    Assert::isArray($localeTranslations = json_decode((string) File::get(lang_path($locale.'.json')), true, 512, JSON_THROW_ON_ERROR));
                     $translator = new GoogleTranslate($locale);
                     $translator->setSource('en');
                     $newLocaleTranslations = [];

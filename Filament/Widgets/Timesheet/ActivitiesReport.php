@@ -104,6 +104,10 @@ class ActivitiesReport extends ChartWidget
             ->groupBy('activity_id')
             ->get();
 
-        return TrendActivityData::collection($res->toArray());
+        /**
+         * @var DataCollection<TrendActivityData>
+         */
+        $res_coll=TrendActivityData::collect($res->toArray());
+        return $res_coll;
     }
 }

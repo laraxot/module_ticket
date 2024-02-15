@@ -253,7 +253,7 @@ class ViewTicket extends ViewRecord implements HasForms
                     ->color('danger')
                     ->button()
                     ->close()
-                    ->emit('doDeleteComment', ['commentId' => $commentId]),
+                    ->dispatch('doDeleteComment', ['commentId' => $commentId]),
                 Action::make('cancel')
                     ->label(__('Cancel'))
                     ->close(),

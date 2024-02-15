@@ -18,7 +18,6 @@ use Webmozart\Assert\Assert;
  * @property Project|null            $project
  * @property Collection<int, Ticket> $tickets
  * @property int|null                $tickets_count
- *
  * @method static TicketStatusFactory  factory($count = null, $state = [])
  * @method static Builder|TicketStatus newModelQuery()
  * @method static Builder|TicketStatus newQuery()
@@ -26,7 +25,6 @@ use Webmozart\Assert\Assert;
  * @method static Builder|TicketStatus query()
  * @method static Builder|TicketStatus withTrashed()
  * @method static Builder|TicketStatus withoutTrashed()
- *
  * @property int         $id
  * @property string      $name
  * @property string      $color
@@ -39,7 +37,6 @@ use Webmozart\Assert\Assert;
  * @property string|null $updated_by
  * @property string|null $created_by
  * @property string|null $deleted_by
- *
  * @method static Builder|TicketStatus whereColor($value)
  * @method static Builder|TicketStatus whereCreatedAt($value)
  * @method static Builder|TicketStatus whereCreatedBy($value)
@@ -52,7 +49,6 @@ use Webmozart\Assert\Assert;
  * @method static Builder|TicketStatus whereProjectId($value)
  * @method static Builder|TicketStatus whereUpdatedAt($value)
  * @method static Builder|TicketStatus whereUpdatedBy($value)
- *
  * @mixin \Eloquent
  */
 class TicketStatus extends BaseModel
