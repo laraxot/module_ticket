@@ -27,7 +27,7 @@ class FavoriteProjects extends BaseWidget
 
     public static function canView(): bool
     {
-        Assert::notNull($user=auth()->user());
+        Assert::notNull($user = auth()->user());
 
         return $user->can('List projects');
     }
@@ -35,7 +35,7 @@ class FavoriteProjects extends BaseWidget
     protected function getCards(): array
     {
         Assert::notNull($user = auth()->user());
-        $profile=Profile::firstOrCreate(['user_id' => $user->id]);
+        $profile = Profile::firstOrCreate(['user_id' => $user->id]);
 
         $favoriteProjects = $profile->favoriteProjects;
         $cards = [];
