@@ -111,7 +111,8 @@ class WeeklyReport extends ChartWidget
         /**
          * @var DataCollection<TrendDayData>
          */
-        $res_coll=TrendDayData::collect($res->toArray());
+        $res_coll = TrendDayData::collect($res->toArray());
+
         return $res_coll;
     }
 

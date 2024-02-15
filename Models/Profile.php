@@ -38,6 +38,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Collection<int, Role>       $roles
  * @property int|null                    $roles_count
  * @property User|null                   $user
+ *
  * @method static CachedBuilder|Profile   all($columns = [])
  * @method static CachedBuilder|Profile   avg($column)
  * @method static CachedBuilder|Profile   cache(array $tags = [])
@@ -61,6 +62,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static CachedBuilder|Profile   sum($column)
  * @method static CachedBuilder|Profile   truncate()
  * @method static CachedBuilder|BaseModel withCacheCooldownSeconds(?int $seconds = null)
+ *
  * @property int         $id
  * @property string|null $first_name
  * @property string|null $last_name
@@ -68,6 +70,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Carbon|null $updated_at
  * @property string|null $updated_by
  * @property string|null $created_by
+ *
  * @method static Builder|Profile whereCreatedAt($value)
  * @method static Builder|Profile whereCreatedBy($value)
  * @method static Builder|Profile whereFirstName($value)
@@ -75,6 +78,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|Profile whereLastName($value)
  * @method static Builder|Profile whereUpdatedAt($value)
  * @method static Builder|Profile whereUpdatedBy($value)
+ *
  * @property Collection<int, Project>       $favoriteProjects
  * @property int|null                       $favorite_projects_count
  * @property Collection<int, TicketHour>    $hours
@@ -89,7 +93,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property int|null                       $tickets_owned_count
  * @property Collection<int, Ticket>        $ticketsResponsible
  * @property int|null                       $tickets_responsible_count
- * @property-read mixed $total_logged_in_hours
+ * @property mixed                          $total_logged_in_hours
+ *
  * @mixin \Eloquent
  */
 class Profile extends BaseModel implements ModelProfileContract

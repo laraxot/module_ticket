@@ -13,9 +13,11 @@ use Modules\User\Models\User;
  * Modules\Ticket\Models\ProjectUser.
  *
  * @property Project|null $project
+ *
  * @method static Builder|ProjectUser newModelQuery()
  * @method static Builder|ProjectUser newQuery()
  * @method static Builder|ProjectUser query()
+ *
  * @property int         $id
  * @property int         $user_id
  * @property int         $project_id
@@ -26,6 +28,7 @@ use Modules\User\Models\User;
  * @property string|null $created_by
  * @property Carbon|null $deleted_at
  * @property string|null $deleted_by
+ *
  * @method static Builder|ProjectUser whereCreatedAt($value)
  * @method static Builder|ProjectUser whereCreatedBy($value)
  * @method static Builder|ProjectUser whereDeletedAt($value)
@@ -36,7 +39,9 @@ use Modules\User\Models\User;
  * @method static Builder|ProjectUser whereUpdatedAt($value)
  * @method static Builder|ProjectUser whereUpdatedBy($value)
  * @method static Builder|ProjectUser whereUserId($value)
+ *
  * @property User|null $user
+ *
  * @mixin \Eloquent
  */
 class ProjectUser extends BasePivot

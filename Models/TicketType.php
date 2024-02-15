@@ -15,6 +15,7 @@ use Modules\Ticket\Database\Factories\TicketTypeFactory;
  *
  * @property Collection<int, Ticket> $tickets
  * @property int|null                $tickets_count
+ *
  * @method static TicketTypeFactory  factory($count = null, $state = [])
  * @method static Builder|TicketType newModelQuery()
  * @method static Builder|TicketType newQuery()
@@ -22,6 +23,7 @@ use Modules\Ticket\Database\Factories\TicketTypeFactory;
  * @method static Builder|TicketType query()
  * @method static Builder|TicketType withTrashed()
  * @method static Builder|TicketType withoutTrashed()
+ *
  * @property int         $id
  * @property string      $name
  * @property string      $icon
@@ -33,6 +35,7 @@ use Modules\Ticket\Database\Factories\TicketTypeFactory;
  * @property string|null $updated_by
  * @property string|null $created_by
  * @property string|null $deleted_by
+ *
  * @method static Builder|TicketType whereColor($value)
  * @method static Builder|TicketType whereCreatedAt($value)
  * @method static Builder|TicketType whereCreatedBy($value)
@@ -44,6 +47,7 @@ use Modules\Ticket\Database\Factories\TicketTypeFactory;
  * @method static Builder|TicketType whereName($value)
  * @method static Builder|TicketType whereUpdatedAt($value)
  * @method static Builder|TicketType whereUpdatedBy($value)
+ *
  * @mixin \Eloquent
  */
 class TicketType extends BaseModel
