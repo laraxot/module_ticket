@@ -16,7 +16,6 @@ use Webmozart\Assert\Assert;
  * Modules\Ticket\Models\TicketComment.
  *
  * @property Ticket|null $ticket
- *
  * @method static TicketCommentFactory  factory($count = null, $state = [])
  * @method static Builder|TicketComment newModelQuery()
  * @method static Builder|TicketComment newQuery()
@@ -24,7 +23,6 @@ use Webmozart\Assert\Assert;
  * @method static Builder|TicketComment query()
  * @method static Builder|TicketComment withTrashed()
  * @method static Builder|TicketComment withoutTrashed()
- *
  * @property int         $id
  * @property int         $ticket_id
  * @property int         $user_id
@@ -36,7 +34,6 @@ use Webmozart\Assert\Assert;
  * @property string|null $created_by
  * @property string|null $deleted_by
  * @property User|null   $user
- *
  * @method static Builder|TicketComment whereContent($value)
  * @method static Builder|TicketComment whereCreatedAt($value)
  * @method static Builder|TicketComment whereCreatedBy($value)
@@ -47,7 +44,6 @@ use Webmozart\Assert\Assert;
  * @method static Builder|TicketComment whereUpdatedAt($value)
  * @method static Builder|TicketComment whereUpdatedBy($value)
  * @method static Builder|TicketComment whereUserId($value)
- *
  * @mixin \Eloquent
  */
 class TicketComment extends BaseModel

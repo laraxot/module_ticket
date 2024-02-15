@@ -15,7 +15,6 @@ use Modules\Ticket\Database\Factories\TicketPriorityFactory;
  *
  * @property Collection<int, Ticket> $tickets
  * @property int|null                $tickets_count
- *
  * @method static TicketPriorityFactory  factory($count = null, $state = [])
  * @method static Builder|TicketPriority newModelQuery()
  * @method static Builder|TicketPriority newQuery()
@@ -23,7 +22,6 @@ use Modules\Ticket\Database\Factories\TicketPriorityFactory;
  * @method static Builder|TicketPriority query()
  * @method static Builder|TicketPriority withTrashed()
  * @method static Builder|TicketPriority withoutTrashed()
- *
  * @property int         $id
  * @property string      $name
  * @property string      $color
@@ -34,7 +32,6 @@ use Modules\Ticket\Database\Factories\TicketPriorityFactory;
  * @property string|null $updated_by
  * @property string|null $created_by
  * @property string|null $deleted_by
- *
  * @method static Builder|TicketPriority whereColor($value)
  * @method static Builder|TicketPriority whereCreatedAt($value)
  * @method static Builder|TicketPriority whereCreatedBy($value)
@@ -45,7 +42,6 @@ use Modules\Ticket\Database\Factories\TicketPriorityFactory;
  * @method static Builder|TicketPriority whereName($value)
  * @method static Builder|TicketPriority whereUpdatedAt($value)
  * @method static Builder|TicketPriority whereUpdatedBy($value)
- *
  * @mixin \Eloquent
  */
 class TicketPriority extends BaseModel

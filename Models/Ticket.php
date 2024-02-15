@@ -47,7 +47,6 @@ use Webmozart\Assert\Assert;
  * @property Collection<int, User>           $watchers
  * @property int|null                        $subscribers_count
  * @property TicketType|null                 $type
- *
  * @method static TicketFactory  factory($count = null, $state = [])
  * @method static Builder|Ticket newModelQuery()
  * @method static Builder|Ticket newQuery()
@@ -55,7 +54,6 @@ use Webmozart\Assert\Assert;
  * @method static Builder|Ticket query()
  * @method static Builder|Ticket withTrashed()
  * @method static Builder|Ticket withoutTrashed()
- *
  * @property int         $id
  * @property string      $name
  * @property string      $content
@@ -81,7 +79,6 @@ use Webmozart\Assert\Assert;
  * @property string|null $deleted_by
  * @property int|null    $totalLoggedHours
  * @property int|null    $totalLoggedSeconds
- *
  * @method static Builder|Ticket whereCode($value)
  * @method static Builder|Ticket whereContent($value)
  * @method static Builder|Ticket whereCreatedAt($value)
@@ -102,7 +99,13 @@ use Webmozart\Assert\Assert;
  * @method static Builder|Ticket whereTicketPrefix($value)
  * @method static Builder|Ticket whereUpdatedAt($value)
  * @method static Builder|Ticket whereUpdatedBy($value)
- *
+ * @property-read mixed $completude_percentage
+ * @property-read mixed $estimation_for_humans
+ * @property-read float|null $estimation_in_seconds
+ * @property-read int|float $estimation_progress
+ * @property-read mixed $total_logged_hours
+ * @property-read mixed $total_logged_in_hours
+ * @property-read int|float $total_logged_seconds
  * @mixin \Eloquent
  */
 class Ticket extends BaseModel implements HasMedia

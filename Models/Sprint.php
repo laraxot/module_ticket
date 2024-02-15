@@ -19,7 +19,6 @@ use Modules\Ticket\Database\Factories\SprintFactory;
  * @property Project|null            $project
  * @property Collection<int, Ticket> $tickets
  * @property int|null                $tickets_count
- *
  * @method static SprintFactory  factory($count = null, $state = [])
  * @method static Builder|Sprint newModelQuery()
  * @method static Builder|Sprint newQuery()
@@ -27,7 +26,6 @@ use Modules\Ticket\Database\Factories\SprintFactory;
  * @method static Builder|Sprint query()
  * @method static Builder|Sprint withTrashed()
  * @method static Builder|Sprint withoutTrashed()
- *
  * @property int         $id
  * @property string      $name
  * @property Carbon      $starts_at
@@ -45,7 +43,6 @@ use Modules\Ticket\Database\Factories\SprintFactory;
  * @property string|null $deleted_by
  * @property Carbon|null $remaining
  * @property Carbon|null $nextSprint
- *
  * @method static Builder|Sprint whereCreatedAt($value)
  * @method static Builder|Sprint whereCreatedBy($value)
  * @method static Builder|Sprint whereDeletedAt($value)
@@ -61,7 +58,6 @@ use Modules\Ticket\Database\Factories\SprintFactory;
  * @method static Builder|Sprint whereStartsAt($value)
  * @method static Builder|Sprint whereUpdatedAt($value)
  * @method static Builder|Sprint whereUpdatedBy($value)
- *
  * @mixin \Eloquent
  */
 class Sprint extends BaseModel
