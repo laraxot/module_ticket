@@ -108,8 +108,11 @@ class WeeklyReport extends ChartWidget
             ->where('user_id', $user->id)
             ->groupBy(DB::raw("DATE_FORMAT(created_at,'%Y-%m-%d')"))
             ->get();
-
-        return TrendDayData::collection($res->toArray());
+        /**
+         * @var DataCollection<TrendDayData>
+         */
+        $res_coll=TrendDayData::collect($res->toArray());
+        return $res_coll;
     }
 
     protected function buildDatesRange(string $weekStartDate, string $weekEndDate): array

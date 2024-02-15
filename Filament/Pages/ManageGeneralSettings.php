@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace Modules\Ticket\Filament\Pages;
 
 use Filament\Actions\Action;
+use Webmozart\Assert\Assert;
+use Modules\User\Models\Role;
+use Filament\Pages\SettingsPage;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Pages\SettingsPage;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Contracts\Support\Htmlable;
 use Modules\Ticket\Settings\GeneralSettings;
-use Modules\User\Models\Role;
-use Webmozart\Assert\Assert;
 
 class ManageGeneralSettings extends SettingsPage
 {
@@ -50,8 +51,9 @@ class ManageGeneralSettings extends SettingsPage
 
     protected function getFormSchema(): array
     {
+        Assert::integer($max_file_size=config('system.max_file_size'));
         return [
-            Card::make()
+            Section::make()
                 ->schema([
                     Grid::make(3)
                         ->schema([
@@ -60,7 +62,7 @@ class ManageGeneralSettings extends SettingsPage
                                 ->helperText(__('This is the platform logo (e.g. Used in site favicon)'))
                                 ->image()
                                 ->columnSpan(1)
-                                ->maxSize(config('system.max_file_size')),
+                                ->maxSize($max_file_size),
 
                             Grid::make(1)
                                 ->columnSpan(2)
@@ -92,12 +94,13 @@ class ManageGeneralSettings extends SettingsPage
                                         ->helperText(__('The language used by the platform.'))
                                         ->searchable()
                                         ->options($this->getLanguages()),
-
+                                    /*
                                     Select::make('default_role')
                                         ->label(__('Default role'))
                                         ->helperText(__('The platform default role (used mainly in OIDC Connect).'))
                                         ->searchable()
                                         ->options(Role::all()->pluck('name', 'id')->toArray()),
+                                    */
                                 ]),
                         ]),
                 ]),

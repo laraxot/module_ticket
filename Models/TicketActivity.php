@@ -16,11 +16,9 @@ use Modules\User\Models\User;
  * @property TicketStatus|null $newStatus
  * @property TicketStatus|null $oldStatus
  * @property Ticket|null       $ticket
- *
  * @method static Builder|TicketActivity newModelQuery()
  * @method static Builder|TicketActivity newQuery()
  * @method static Builder|TicketActivity query()
- *
  * @property int         $id
  * @property int         $ticket_id
  * @property int         $old_status_id
@@ -33,7 +31,6 @@ use Modules\User\Models\User;
  * @property Carbon|null $deleted_at
  * @property string|null $deleted_by
  * @property User|null   $user
- *
  * @method static Builder|TicketActivity whereCreatedAt($value)
  * @method static Builder|TicketActivity whereCreatedBy($value)
  * @method static Builder|TicketActivity whereDeletedAt($value)
@@ -45,7 +42,6 @@ use Modules\User\Models\User;
  * @method static Builder|TicketActivity whereUpdatedAt($value)
  * @method static Builder|TicketActivity whereUpdatedBy($value)
  * @method static Builder|TicketActivity whereUserId($value)
- *
  * @mixin \Eloquent
  */
 class TicketActivity extends BasePivot

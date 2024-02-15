@@ -91,7 +91,11 @@ class MonthlyReport extends ChartWidget
             ->groupBy(DB::raw("DATE_FORMAT(created_at,'%m')"))
             ->get();
 
-        return TrendMonthData::collection($res);
+        /**
+         * @var DataCollection<TrendMonthData>
+         */
+        $res_coll=TrendMonthData::collect($res);
+        return $res_coll;
     }
 
     protected function getDatasets(array $rapportData): array

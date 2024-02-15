@@ -13,11 +13,9 @@ use Illuminate\Support\Carbon;
  *
  * @property Ticket|null $relation
  * @property Ticket|null $ticket
- *
  * @method static Builder|TicketRelation newModelQuery()
  * @method static Builder|TicketRelation newQuery()
  * @method static Builder|TicketRelation query()
- *
  * @property int         $id
  * @property int|null    $ticket_id
  * @property int|null    $relation_id
@@ -29,7 +27,6 @@ use Illuminate\Support\Carbon;
  * @property string|null $created_by
  * @property Carbon|null $deleted_at
  * @property string|null $deleted_by
- *
  * @method static Builder|TicketRelation whereCreatedAt($value)
  * @method static Builder|TicketRelation whereCreatedBy($value)
  * @method static Builder|TicketRelation whereDeletedAt($value)
@@ -41,7 +38,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|TicketRelation whereType($value)
  * @method static Builder|TicketRelation whereUpdatedAt($value)
  * @method static Builder|TicketRelation whereUpdatedBy($value)
- *
  * @mixin \Eloquent
  */
 class TicketRelation extends BasePivot

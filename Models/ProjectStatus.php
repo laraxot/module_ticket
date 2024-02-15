@@ -15,7 +15,6 @@ use Modules\Ticket\Database\Factories\ProjectStatusFactory;
  *
  * @property Collection<int, Project> $projects
  * @property int|null                 $projects_count
- *
  * @method static ProjectStatusFactory  factory($count = null, $state = [])
  * @method static Builder|ProjectStatus newModelQuery()
  * @method static Builder|ProjectStatus newQuery()
@@ -23,7 +22,6 @@ use Modules\Ticket\Database\Factories\ProjectStatusFactory;
  * @method static Builder|ProjectStatus query()
  * @method static Builder|ProjectStatus withTrashed()
  * @method static Builder|ProjectStatus withoutTrashed()
- *
  * @property int         $id
  * @property string      $name
  * @property string      $color
@@ -35,7 +33,6 @@ use Modules\Ticket\Database\Factories\ProjectStatusFactory;
  * @property string|null $updated_by
  * @property string|null $created_by
  * @property string|null $deleted_by
- *
  * @method static Builder|ProjectStatus whereColor($value)
  * @method static Builder|ProjectStatus whereCreatedAt($value)
  * @method static Builder|ProjectStatus whereCreatedBy($value)
@@ -47,7 +44,6 @@ use Modules\Ticket\Database\Factories\ProjectStatusFactory;
  * @method static Builder|ProjectStatus whereProjectId($value)
  * @method static Builder|ProjectStatus whereUpdatedAt($value)
  * @method static Builder|ProjectStatus whereUpdatedBy($value)
- *
  * @mixin \Eloquent
  */
 class ProjectStatus extends BaseModel

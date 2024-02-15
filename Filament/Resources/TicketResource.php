@@ -213,7 +213,8 @@ class TicketResource extends Resource
                                 if ($ticketRelation) {
                                     Assert::notNull($ticketRelation->relation);
 
-                                    return __(config('system.tickets.relations.list.'.$ticketRelation->type))
+                                    //return __(config('system.tickets.relations.list.'.$ticketRelation->type))
+                                    return $ticketRelation->type
                                         .' '
                                         .$ticketRelation->relation->name
                                         .' ('.$ticketRelation->relation->code.')';
@@ -224,12 +225,13 @@ class TicketResource extends Resource
                             ->relationship()
                             ->collapsible()
                             ->collapsed()
-                            ->orderable()
+                            ->orderColumn()
                             ->defaultItems(0)
                             ->schema([
                                 Grid::make()
                                     ->columns(3)
                                     ->schema([
+                                        /* -- creare TicketData che prenda il config etc etc
                                         Select::make('type')
                                             ->label(__('Relation type'))
                                             ->required()
@@ -250,6 +252,7 @@ class TicketResource extends Resource
 
                                                 return $query->get()->pluck('name', 'id')->toArray();
                                             }),
+                                        */
                                     ]),
                             ]),
                     ]),

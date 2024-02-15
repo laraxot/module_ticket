@@ -60,7 +60,7 @@ trait JiraHelper
             foreach ($projectKeys as $projectKey) {
                 $response = $client->get('/rest/api/2/search?jql=project='.$projectKey);
                 // $data = json_decode($response->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
-                $data = json_decode($response->getBody()->getContents(), true);
+                Assert::isArray($data = json_decode($response->getBody()->getContents(), true));
                 $results[$projectKey] = [
                     'total' => $data['total'],
                     'issues' => $formatIssues($data['issues']),

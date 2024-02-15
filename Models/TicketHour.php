@@ -17,11 +17,9 @@ use Modules\User\Models\User;
  * @property Activity|null $activity
  * @property Ticket|null   $ticket
  * @property User|null     $user
- *
  * @method static Builder|TicketHour newModelQuery()
  * @method static Builder|TicketHour newQuery()
  * @method static Builder|TicketHour query()
- *
  * @property int         $id
  * @property int         $ticket_id
  * @property int         $user_id
@@ -35,7 +33,6 @@ use Modules\User\Models\User;
  * @property Carbon|null $deleted_at
  * @property string|null $deleted_by
  * @property Carbon|null $forHumans
- *
  * @method static Builder|TicketHour whereActivityId($value)
  * @method static Builder|TicketHour whereComment($value)
  * @method static Builder|TicketHour whereCreatedAt($value)
@@ -48,7 +45,7 @@ use Modules\User\Models\User;
  * @method static Builder|TicketHour whereUpdatedBy($value)
  * @method static Builder|TicketHour whereUserId($value)
  * @method static Builder|TicketHour whereValue($value)
- *
+ * @property-read mixed $for_humans
  * @mixin \Eloquent
  */
 class TicketHour extends BasePivot
