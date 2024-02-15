@@ -107,7 +107,7 @@ class ActivitiesReport extends ChartWidget
         /**
          * @var DataCollection<TrendActivityData>
          */
-        $res_coll = TrendActivityData::collect($res->toArray(),DataCollection::class);
+        $res_coll = TrendActivityData::collect($res->toArray(), DataCollection::class);
 
         return $res_coll;
     }

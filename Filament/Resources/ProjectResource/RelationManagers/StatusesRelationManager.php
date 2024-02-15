@@ -32,7 +32,7 @@ class StatusesRelationManager extends RelationManager
      */
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
-       // Assert::isInstanceOf($ownerRecord, Project::class);
+        // Assert::isInstanceOf($ownerRecord, Project::class);
         // Access to an undefined property Illuminate\Database\Eloquent\Model::$status_type.
         return 'custom' === $ownerRecord->status_type;
     }

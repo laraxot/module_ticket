@@ -94,7 +94,7 @@ class MonthlyReport extends ChartWidget
         /**
          * @var DataCollection<TrendMonthData>
          */
-        $res_coll = TrendMonthData::collect($res,DataCollection::class);
+        $res_coll = TrendMonthData::collect($res, DataCollection::class);
 
         return $res_coll;
     }
