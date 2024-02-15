@@ -11,10 +11,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * Modules\Ticket\Models\ProfileProject.
  *
  * @property Project|null $project
+ *
  * @method static Builder|ProfileProject newModelQuery()
  * @method static Builder|ProfileProject newQuery()
  * @method static Builder|ProfileProject query()
+ *
  * @property Profile|null $profile
+ *
  * @mixin \Eloquent
  */
 class ProfileProject extends BasePivot

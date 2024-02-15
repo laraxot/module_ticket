@@ -213,7 +213,7 @@ class TicketResource extends Resource
                                 if ($ticketRelation) {
                                     Assert::notNull($ticketRelation->relation);
 
-                                    //return __(config('system.tickets.relations.list.'.$ticketRelation->type))
+                                    // return __(config('system.tickets.relations.list.'.$ticketRelation->type))
                                     return $ticketRelation->type
                                         .' '
                                         .$ticketRelation->relation->name

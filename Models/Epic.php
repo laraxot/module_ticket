@@ -20,6 +20,7 @@ use Modules\Ticket\Database\Factories\EpicFactory;
  * @property Sprint|null             $sprint
  * @property Collection<int, Ticket> $tickets
  * @property int|null                $tickets_count
+ *
  * @method static EpicFactory  factory($count = null, $state = [])
  * @method static Builder|Epic newModelQuery()
  * @method static Builder|Epic newQuery()
@@ -27,6 +28,7 @@ use Modules\Ticket\Database\Factories\EpicFactory;
  * @method static Builder|Epic query()
  * @method static Builder|Epic withTrashed()
  * @method static Builder|Epic withoutTrashed()
+ *
  * @property int         $id
  * @property int|null    $parent_id
  * @property int         $project_id
@@ -39,6 +41,7 @@ use Modules\Ticket\Database\Factories\EpicFactory;
  * @property string|null $updated_by
  * @property string|null $created_by
  * @property string|null $deleted_by
+ *
  * @method static Builder|Epic whereCreatedAt($value)
  * @method static Builder|Epic whereCreatedBy($value)
  * @method static Builder|Epic whereDeletedAt($value)
@@ -51,6 +54,7 @@ use Modules\Ticket\Database\Factories\EpicFactory;
  * @method static Builder|Epic whereStartsAt($value)
  * @method static Builder|Epic whereUpdatedAt($value)
  * @method static Builder|Epic whereUpdatedBy($value)
+ *
  * @mixin \Eloquent
  */
 class Epic extends BaseModel

@@ -34,6 +34,7 @@ use Webmozart\Assert\Assert;
  * @property int|null                      $statuses_count
  * @property Collection<int, Ticket>       $tickets
  * @property int|null                      $tickets_count
+ *
  * @method static ProjectFactory  factory($count = null, $state = [])
  * @method static Builder|Project newModelQuery()
  * @method static Builder|Project newQuery()
@@ -41,6 +42,7 @@ use Webmozart\Assert\Assert;
  * @method static Builder|Project query()
  * @method static Builder|Project withTrashed()
  * @method static Builder|Project withoutTrashed()
+ *
  * @property int         $id
  * @property string      $name
  * @property string|null $description
@@ -59,7 +61,8 @@ use Webmozart\Assert\Assert;
  * @property Sprint|null $nextSprint
  * @property Carbon|null $epicsFirstDate
  * @property Carbon|null $epicsLastDate
- * @property Collection $contributors
+ * @property Collection  $contributors
+ *
  * @method static Builder|Project whereCreatedAt($value)
  * @method static Builder|Project whereCreatedBy($value)
  * @method static Builder|Project whereDeletedAt($value)
@@ -74,13 +77,15 @@ use Webmozart\Assert\Assert;
  * @method static Builder|Project whereType($value)
  * @method static Builder|Project whereUpdatedAt($value)
  * @method static Builder|Project whereUpdatedBy($value)
+ *
  * @property Collection<int, User> $users
  * @property int|null              $users_count
- * @property-read mixed $cover
- * @property-read mixed $current_sprint
- * @property-read mixed $epics_first_date
- * @property-read mixed $epics_last_date
- * @property-read mixed $next_sprint
+ * @property mixed                 $cover
+ * @property mixed                 $current_sprint
+ * @property mixed                 $epics_first_date
+ * @property mixed                 $epics_last_date
+ * @property mixed                 $next_sprint
+ *
  * @mixin \Eloquent
  */
 class Project extends BaseModel implements HasMedia
@@ -182,8 +187,6 @@ class Project extends BaseModel implements HasMedia
 
     public function cover(): Attribute
     {
-
-
         return new Attribute(
             // get: fn () => $this->media('cover')?->first()->getFullUrl()
             get: fn () => $this->getFirstMediaUrl('cover')

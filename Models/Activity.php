@@ -18,6 +18,7 @@ use Modules\Ticket\Database\Factories\ActivityFactory;
  * @method static Builder|Activity query()
  * @method static Builder|Activity withTrashed()
  * @method static Builder|Activity withoutTrashed()
+ *
  * @property int         $id
  * @property string      $name
  * @property string      $description
@@ -27,6 +28,7 @@ use Modules\Ticket\Database\Factories\ActivityFactory;
  * @property string|null $updated_by
  * @property string|null $created_by
  * @property string|null $deleted_by
+ *
  * @method static Builder|Activity whereCreatedAt($value)
  * @method static Builder|Activity whereCreatedBy($value)
  * @method static Builder|Activity whereDeletedAt($value)
@@ -36,6 +38,7 @@ use Modules\Ticket\Database\Factories\ActivityFactory;
  * @method static Builder|Activity whereName($value)
  * @method static Builder|Activity whereUpdatedAt($value)
  * @method static Builder|Activity whereUpdatedBy($value)
+ *
  * @mixin \Eloquent
  */
 class Activity extends BaseModel

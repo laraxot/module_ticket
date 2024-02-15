@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace Modules\Ticket\Filament\Pages;
 
 use Filament\Actions\Action;
-use Webmozart\Assert\Assert;
-use Modules\User\Models\Role;
-use Filament\Pages\SettingsPage;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Pages\SettingsPage;
 use Illuminate\Contracts\Support\Htmlable;
 use Modules\Ticket\Settings\GeneralSettings;
+use Modules\User\Models\Role;
+use Webmozart\Assert\Assert;
 
 class ManageGeneralSettings extends SettingsPage
 {
@@ -51,7 +50,8 @@ class ManageGeneralSettings extends SettingsPage
 
     protected function getFormSchema(): array
     {
-        Assert::integer($max_file_size=config('system.max_file_size'));
+        Assert::integer($max_file_size = config('system.max_file_size'));
+
         return [
             Section::make()
                 ->schema([

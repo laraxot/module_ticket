@@ -14,9 +14,11 @@ use Modules\User\Models\User;
  *
  * @property Ticket|null $ticket
  * @property User|null   $user
+ *
  * @method static Builder|TicketSubscriber newModelQuery()
  * @method static Builder|TicketSubscriber newQuery()
  * @method static Builder|TicketSubscriber query()
+ *
  * @property int         $id
  * @property int         $user_id
  * @property int         $ticket_id
@@ -26,6 +28,7 @@ use Modules\User\Models\User;
  * @property string|null $created_by
  * @property Carbon|null $deleted_at
  * @property string|null $deleted_by
+ *
  * @method static Builder|TicketSubscriber whereCreatedAt($value)
  * @method static Builder|TicketSubscriber whereCreatedBy($value)
  * @method static Builder|TicketSubscriber whereDeletedAt($value)
@@ -35,6 +38,7 @@ use Modules\User\Models\User;
  * @method static Builder|TicketSubscriber whereUpdatedAt($value)
  * @method static Builder|TicketSubscriber whereUpdatedBy($value)
  * @method static Builder|TicketSubscriber whereUserId($value)
+ *
  * @mixin \Eloquent
  */
 class TicketSubscriber extends BasePivot
