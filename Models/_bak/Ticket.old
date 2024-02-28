@@ -66,9 +66,7 @@ class Ticket extends BaseModel {
     use GeoTrait;
     use HasCategory;
 
-    /**
-     * @var array<string>
-     */
+    /** @var array<int, string> */
     protected $fillable = [
         'user_id', 'dept_id', 'team_id', 'priority_id', 'sla', 'help_topic_id', 'status',
         'assigned_to', 'source', 'ticket_number', 'rating', 'ratingreply', 'flags',

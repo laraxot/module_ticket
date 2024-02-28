@@ -110,9 +110,7 @@ class Profile extends BaseModel implements ModelProfileContract
 
     // protected $connection = 'quaeris';
 
-    /**
-     * @var string[]
-     */
+    /** @var array<int, string> */
     protected $fillable = ['id', 'user_id', 'phone', 'email', 'bio'];
 
     // ------- RELATIONSHIP ----------

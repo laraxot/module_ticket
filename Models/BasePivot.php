@@ -26,9 +26,7 @@ abstract class BasePivot extends Pivot
      */
     public static $snakeAttributes = true;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     public $incrementing = true;
 
     /**
@@ -38,9 +36,7 @@ abstract class BasePivot extends Pivot
 
     // use Searchable;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $connection = 'ticket';
 
     /**
@@ -53,9 +49,7 @@ abstract class BasePivot extends Pivot
      */
     protected $appends = [];
 
-    /**
-     * @var array<string, string>
-     */
+    /** @var array<string, string> */
     protected $casts = [
         'id' => 'string', // must be string else primary key of related model will be typed as int
         'created_at' => 'datetime',

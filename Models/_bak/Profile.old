@@ -83,11 +83,10 @@ class Profile extends BaseModel implements ModelProfileContract
     // use WidgetTrait;
     use HasRoles;
 
+    /** @var string */
     protected $connection = 'ticket';
 
-    /**
-     * @var string[]
-     */
+    /**  @var array<int, string>  */
     protected $fillable = ['id', 'user_id', 'phone', 'email', 'bio'];
 
     // ------- RELATIONSHIP ----------

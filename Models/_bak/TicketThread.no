@@ -29,9 +29,7 @@ use Modules\LU\Models\User;
  * @property User               $user
  */
 class TicketThread extends BaseModel {
-    /**
-     * @var array<string>
-     */
+    /** @var array<int, string> */
     protected $fillable = ['ticket_id',
         'user_id', 'source', 'poster', 'reply_rating',
         'rating_count', 'is_internal', 'title', 'body',
