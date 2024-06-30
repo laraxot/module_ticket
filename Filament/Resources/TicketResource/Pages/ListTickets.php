@@ -23,6 +23,7 @@ class ListTickets extends ListRecords
         ];
     }
 
+    /*
     protected function getTableQuery(): Builder
     {
         return parent::getTableQuery()
@@ -37,4 +38,5 @@ class ListTickets extends ListRecords
                     });
             });
     }
+    */
 }

@@ -37,14 +37,14 @@ class Project extends BaseModel implements HasMedia
     {
         return $this->belongsTo(ProjectStatus::class, 'status_id', 'id')->withTrashed();
     }
-
+    /*
     public function users(): BelongsToMany
     {
         $user_class=XotData::make()->getUserClass();
         return $this->belongsToMany($user_class, 'project_users', 'project_id', 'user_id')
             ->withPivot(['role']);
     }
-
+    */
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'project_id', 'id');

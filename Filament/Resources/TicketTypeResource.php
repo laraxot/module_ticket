@@ -2,16 +2,19 @@
 
 namespace Modules\Ticket\Filament\Resources;
 
+use Filament\Forms;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Radio;
+
+use Modules\Ticket\Models\TicketType;
+use Filament\Tables\Columns\IconColumn;
+use Guava\FilamentIconPicker\Forms\IconPicker;
 use Modules\Ticket\Filament\Resources\TicketTypeResource\Pages;
 use Modules\Ticket\Filament\Resources\TicketTypeResource\RelationManagers;
-use Modules\Ticket\Models\TicketType;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables\Table;
-use Filament\Tables;
-use Guava\FilamentIconPicker\Forms\IconPicker;
-use Guava\FilamentIconPicker\Tables\IconColumn;
+
 
 class TicketTypeResource extends Resource
 {
@@ -52,11 +55,38 @@ class TicketTypeResource extends Resource
                                 Forms\Components\ColorPicker::make('color')
                                     ->label(__('Type color'))
                                     ->required(),
-
+                                /*
                                 IconPicker::make('icon')
                                     ->label(__('Type icon'))
                                     ->required(),
+                                */
+                                Forms\Components\TextInput::make('icon')
+                                    ->suffixAction(
+                                        \Filament\Forms\Components\Actions\Action::make('icon')
+                                        
+                                        ->icon(fn(string $state)=>$state)
+                                        ->form([
+                                            Forms\Components\TextInput::make('iconx')
+                                            ->default(fn($get)=>dddx($get('icon')))
+                                            ->suffixAction(
+                                                \Filament\Forms\Components\Actions\Action::make('choose')
+                                                ->icon('heroicon-o-academic-cap')
+                                            )->suffixAction(
+                                                \Filament\Forms\Components\Actions\Action::make('choose1')
+                                                ->icon('heroicon-o-adjustments-horizontal')
+                                            )->suffixAction(
+                                                \Filament\Forms\Components\Actions\Action::make('choose2')
+                                                ->icon('heroicon-o-adjustments-horizontal')
+                                            )->suffixAction(
+                                                \Filament\Forms\Components\Actions\Action::make('choose3')
+                                                ->icon('heroicon-o-adjustments-horizontal')
+                                            )->suffixAction(
+                                                \Filament\Forms\Components\Actions\Action::make('choose4')
+                                                ->icon('heroicon-o-adjustments-horizontal')
+                                            )
+                                        ])  
 
+                                    ),
                                 Forms\Components\Checkbox::make('is_default')
                                     ->label(__('Default type'))
                                     ->helperText(
@@ -80,13 +110,17 @@ class TicketTypeResource extends Resource
                     ->label(__('Type name'))
                     ->sortable()
                     ->searchable(),
-
+                /*
                 IconColumn::make('icon')
                     ->label(__('Type icon'))
                     ->sortable()
                     ->searchable(),
+                */
+                IconColumn::make('icon')
+                    ->icon(fn(string $state)=>$state)
+                    ,
 
-                Tables\Columns\IconColumn::make('is_default')
+                IconColumn::make('is_default')
                     ->label(__('Default type'))
                     ->boolean()
                     ->sortable(),

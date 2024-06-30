@@ -52,6 +52,7 @@ class TicketResource extends Resource
                     ->schema([
                         Forms\Components\Grid::make()
                             ->schema([
+                                /*
                                 Forms\Components\Select::make('project_id')
                                     ->label(__('Project'))
                                     ->searchable()
@@ -83,6 +84,7 @@ class TicketResource extends Resource
                                     )
                                     ->default(fn() => request()->get('project'))
                                     ->required(),
+                                */
                                 Forms\Components\Select::make('epic_id')
                                     ->label(__('Epic'))
                                     ->searchable()
@@ -108,19 +110,20 @@ class TicketResource extends Resource
                                             )
                                             ->maxLength(255),
                                     ]),
-
+                                
+                                /*
                                 Forms\Components\Select::make('owner_id')
                                     ->label(__('Ticket owner'))
                                     ->searchable()
                                     ->options(fn() => User::all()->pluck('name', 'id')->toArray())
                                     ->default(fn() => auth()->user()->id)
                                     ->required(),
-
+                                
                                 Forms\Components\Select::make('responsible_id')
                                     ->label(__('Ticket responsible'))
                                     ->searchable()
                                     ->options(fn() => User::all()->pluck('name', 'id')->toArray()),
-
+                                */
                                 Forms\Components\Grid::make()
                                     ->columns(3)
                                     ->columnSpan(2)
@@ -307,6 +310,7 @@ class TicketResource extends Resource
         return $table
             ->columns(self::tableColumns())
             ->filters([
+                /*
                 Tables\Filters\SelectFilter::make('project_id')
                     ->label(__('Project'))
                     ->multiple()
@@ -314,7 +318,7 @@ class TicketResource extends Resource
                         ->orWhereHas('users', function ($query) {
                             return $query->where('users.id', auth()->user()->id);
                         })->pluck('name', 'id')->toArray()),
-
+                
                 Tables\Filters\SelectFilter::make('owner_id')
                     ->label(__('Owner'))
                     ->multiple()
@@ -324,7 +328,7 @@ class TicketResource extends Resource
                     ->label(__('Responsible'))
                     ->multiple()
                     ->options(fn() => User::all()->pluck('name', 'id')->toArray()),
-
+                */
                 Tables\Filters\SelectFilter::make('status_id')
                     ->label(__('Status'))
                     ->multiple()
