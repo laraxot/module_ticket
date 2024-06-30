@@ -1,16 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources\ProjectStatusResource\Pages;
 
-use Filament\Resources\Pages\CreateRecord;
 use Modules\Ticket\Filament\Resources\ProjectStatusResource;
 use Modules\Ticket\Models\ProjectStatus;
+use Filament\Resources\Pages\CreateRecord;
 
-/**
- * @property ProjectStatus $record
- */
 class CreateProjectStatus extends CreateRecord
 {
     protected static string $resource = ProjectStatusResource::class;

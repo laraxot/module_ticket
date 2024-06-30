@@ -1,87 +1,66 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Pages;
 
-use Filament\Actions\Action;
-use Filament\Facades\Filament;
-use Filament\Forms\ComponentContainer;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Notifications\Notification;
-use Filament\Pages\Page;
-use Illuminate\Contracts\Support\Htmlable;
 use Modules\Ticket\Helpers\KanbanScrumHelper;
 use Modules\Ticket\Models\Project;
-use Webmozart\Assert\Assert;
+use Filament\Facades\Filament;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Pages\Actions\Action;
+use Filament\Pages\Page;
+use Illuminate\Contracts\Support\Htmlable;
 
-/**
- * @property ComponentContainer $form
- */
 class Scrum extends Page implements HasForms
 {
-    use InteractsWithForms;
-    use KanbanScrumHelper;
+    use InteractsWithForms, KanbanScrumHelper;
 
     protected static ?string $navigationIcon = 'heroicon-o-view-columns';
 
     protected static ?string $slug = 'scrum/{project}';
 
-    protected static string $view = 'ticket::filament.pages.scrum';
+    protected static string $view = 'filament.pages.scrum';
 
     protected static bool $shouldRegisterNavigation = false;
 
-    /**
-     * @var array<string>
-     */
     protected $listeners = [
         'recordUpdated',
-        'closeTicketDialog',
+        'closeTicketDialog'
     ];
 
-    public function mount(Project $project): void
+    public function mount(Project $project)
     {
         $this->project = $project;
-        if ('scrum' !== $this->project->type) {
+        if ($this->project->type !== 'scrum') {
             $this->redirect(route('filament.pages.kanban/{project}', ['project' => $project]));
         } elseif (
-            $this->project->owner_id !== auth()->id()
-            && ! $this->project->users->where('id', auth()->id())->count()
+            $this->project->owner_id != auth()->user()->id
+            &&
+            !$this->project->users->where('id', auth()->user()->id)->count()
         ) {
             abort(403);
         }
-
         $this->form->fill();
     }
 
     protected function getHeaderActions(): array
     {
-        if (null == $this->project) {
-            return [];
-        }
-        Assert::notNull(auth()->user());
-
         return [
             Action::make('manage-sprints')
                 ->button()
-                ->visible(fn (): bool => $this->project->currentSprint && auth()->user()->can('update', $this->project))
+                ->visible(fn() => $this->project->currentSprint && auth()->user()->can('update', $this->project))
                 ->label(__('Manage sprints'))
                 ->color('primary')
                 ->url(route('filament.resources.projects.edit', $this->project)),
 
             Action::make('refresh')
                 ->button()
-                ->visible(fn () => $this->project->currentSprint)
+                ->visible(fn() => $this->project->currentSprint)
                 ->label(__('Refresh'))
                 ->color('gray')
-                ->action(function (): void {
+                ->action(function () {
                     $this->getRecords();
-                    // Filament::notify('success', __('Kanban board updated'));
-                    Notification::make()
-                        ->title(__('Kanban board updated'))
-                        ->success()
-                        ->send();
+                    Filament::notify('success', __('Kanban board updated'));
                 }),
         ];
     }
@@ -100,4 +79,5 @@ class Scrum extends Page implements HasForms
     {
         return $this->formSchema();
     }
+
 }

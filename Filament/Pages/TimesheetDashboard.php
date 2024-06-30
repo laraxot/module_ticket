@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Pages;
 
-use Filament\Pages\Page;
 use Modules\Ticket\Filament\Widgets\Timesheet\ActivitiesReport;
 use Modules\Ticket\Filament\Widgets\Timesheet\MonthlyReport;
 use Modules\Ticket\Filament\Widgets\Timesheet\WeeklyReport;
+use Filament\Pages\Page;
 
 class TimesheetDashboard extends Page
 {
@@ -15,9 +13,9 @@ class TimesheetDashboard extends Page
 
     protected static ?int $navigationSort = 2;
 
-    protected static string $view = 'ticket::filament::pages.dashboard';
+    protected static string $view = 'filament::pages.dashboard';
 
-    protected function getColumns(): int|array
+    protected function getColumns(): int | array
     {
         return 6;
     }
@@ -34,12 +32,7 @@ class TimesheetDashboard extends Page
 
     public static function shouldRegisterNavigation(): bool
     {
-        $user = auth()->user();
-        if (null == $user) {
-            return false;
-        }
-
-        return $user->can('View timesheet dashboard');
+        return auth()->user()->can('View timesheet dashboard');
     }
 
     protected function getWidgets(): array
@@ -47,7 +40,7 @@ class TimesheetDashboard extends Page
         return [
             MonthlyReport::class,
             ActivitiesReport::class,
-            WeeklyReport::class,
+            WeeklyReport::class
         ];
     }
 }

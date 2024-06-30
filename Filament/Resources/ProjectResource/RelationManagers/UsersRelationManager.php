@@ -1,22 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources\ProjectResource\RelationManagers;
 
-use Filament\Forms\Components\Select;
+use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Actions\AttachAction;
-use Filament\Tables\Actions\CreateAction;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\DetachAction;
-use Filament\Tables\Actions\DetachBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Columns\BadgeColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables;
 use Illuminate\Database\Eloquent\Model;
 
 class UsersRelationManager extends RelationManager
@@ -37,51 +27,51 @@ class UsersRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                Tables\Columns\TextColumn::make('name')
                     ->label(__('User full name'))
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('pivot.role')
-                    ->label(__('User role')),
-                // BadgeColumn::make('pivot.role')
-                //     ->label(__('User role'))
-                //     ->enum(config('system.projects.affectations.roles.list'))
-                //     ->colors(config('system.projects.affectations.roles.colors'))
-                //     ->searchable()
-                //     ->sortable(),
+
+                Tables\Columns\BadgeColumn::make('pivot.role')
+                    ->label(__('User role'))
+                    ->enum(config('system.projects.affectations.roles.list'))
+                    ->colors(config('system.projects.affectations.roles.colors'))
+                    ->searchable()
+                    ->sortable(),
             ])
             ->filters([
+                //
             ])
             ->headerActions([
-                CreateAction::make(),
-                AttachAction::make()
+                Tables\Actions\CreateAction::make(),
+                Tables\Actions\AttachAction::make()
                     ->preloadRecordSelect()
-                    ->form(static fn (AttachAction $action): array => [
+                    ->form(fn (Tables\Actions\AttachAction $action): array => [
                         $action->getRecordSelect(),
-                        Select::make('role')
+                        Forms\Components\Select::make('role')
                             ->label(__('User role'))
                             ->searchable()
-                            ->default(static fn () => config('system.projects.affectations.roles.default'))
-                            ->options(static fn () => config('system.projects.affectations.roles.list'))
+                            ->default(fn () => config('system.projects.affectations.roles.default'))
+                            ->options(fn () => config('system.projects.affectations.roles.list'))
                             ->required(),
                     ]),
             ])
             ->actions([
-                EditAction::make()
+                Tables\Actions\EditAction::make()
                     ->modalWidth('xl')
-                    ->form(static fn (EditAction $action): array => [
-                        Select::make('role')
+                    ->form(fn (Tables\Actions\EditAction $action): array => [
+                        Forms\Components\Select::make('role')
                             ->label(__('User role'))
                             ->searchable()
-                            ->options(static fn () => config('system.projects.affectations.roles.list'))
+                            ->options(fn () => config('system.projects.affectations.roles.list'))
                             ->required(),
                     ]),
-                DeleteAction::make(),
-                DetachAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DetachAction::make(),
             ])
             ->bulkActions([
-                DeleteBulkAction::make(),
-                DetachBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DetachBulkAction::make(),
             ]);
     }
 

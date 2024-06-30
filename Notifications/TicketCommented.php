@@ -1,36 +1,40 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Notifications;
 
+use Modules\Ticket\Models\TicketComment;
+use Modules\Ticket\Models\User;
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification as FilamentNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Modules\Ticket\Models\TicketComment;
-use Modules\User\Models\User;
-use Webmozart\Assert\Assert;
 
 class TicketCommented extends Notification implements ShouldQueue
 {
     use Queueable;
 
+    private TicketComment $ticketComment;
+
     /**
      * Create a new notification instance.
      *
+     * @param TicketComment $ticket
      * @return void
      */
-    public function __construct(private readonly TicketComment $ticketComment)
+    public function __construct(TicketComment $ticketComment)
     {
+        $this->ticketComment = $ticketComment;
     }
 
     /**
      * Get the notification's delivery channels.
+     *
+     * @param mixed $notifiable
+     * @return array
      */
-    public function via(User $notifiable): array
+    public function via($notifiable)
     {
         return ['mail', 'database'];
     }
@@ -38,20 +42,18 @@ class TicketCommented extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @return MailMessage
+     * @param mixed $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail(User $notifiable)
+    public function toMail($notifiable)
     {
-        Assert::notNull($this->ticketComment->ticket);
-        Assert::notNull($this->ticketComment->user);
-
-        return (new MailMessage())
+        return (new MailMessage)
             ->line(
                 __(
                     'A new comment has been added to the ticket :ticket by :name.',
                     [
                         'ticket' => $this->ticketComment->ticket->name,
-                        'name' => $this->ticketComment->user->name,
+                        'name' => $this->ticketComment->user->name
                     ]
                 )
             )
@@ -64,25 +66,22 @@ class TicketCommented extends Notification implements ShouldQueue
 
     public function toDatabase(User $notifiable): array
     {
-        Assert::notNull($this->ticketComment->ticket);
-        Assert::notNull($this->ticketComment->user);
-
         return FilamentNotification::make()
             ->title(
                 __(
                     'Ticket :ticket commented',
                     [
-                        'ticket' => $this->ticketComment->ticket->name,
+                        'ticket' => $this->ticketComment->ticket->name
                     ]
                 )
             )
             ->icon('heroicon-o-ticket')
-            ->body(fn () => __('by :name', ['name' => $this->ticketComment->user->name]))
+            ->body(fn() => __('by :name', ['name' => $this->ticketComment->user->name]))
             ->actions([
                 Action::make('view')
                     ->link()
                     ->icon('heroicon-s-eye')
-                    ->url(fn () => route('filament.resources.tickets.share', $this->ticketComment->ticket->code)),
+                    ->url(fn() => route('filament.resources.tickets.share', $this->ticketComment->ticket->code)),
             ])
             ->getDatabaseMessage();
     }

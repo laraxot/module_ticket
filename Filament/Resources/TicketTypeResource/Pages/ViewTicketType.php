@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources\TicketTypeResource\Pages;
 
-use Filament\Pages\Actions\EditAction;
-use Filament\Resources\Pages\ViewRecord;
 use Modules\Ticket\Filament\Resources\TicketTypeResource;
+use Filament\Pages\Actions;
+use Filament\Resources\Pages\ViewRecord;
 
 class ViewTicketType extends ViewRecord
 {
@@ -15,7 +13,7 @@ class ViewTicketType extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
+            Actions\EditAction::make(),
         ];
     }
 }

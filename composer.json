@@ -24,6 +24,8 @@
         }
     },
     "require": {
+    },
+    "require_comment": {
         "calebporzio/sushi": "*",
         "illuminate/contracts": "^9.0|^10.0",
         "illuminate/support": "^9.12|^10.0",
@@ -37,6 +39,8 @@
         "thecodingmachine/safe": "^2.5"
     },
     "require-dev": {
+    },
+    "require-dev_comment": {
         "driftingly/rector-laravel": "^0.26.2",
         "enlightn/enlightn": "^2.7",
         "fakerphp/faker": "*",

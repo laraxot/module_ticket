@@ -1,39 +1,33 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Helpers;
 
-use Filament\Facades\Filament;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Notifications\Notification;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Support\Collection;
-use Illuminate\Support\HtmlString;
 use Modules\Ticket\Models\Project;
 use Modules\Ticket\Models\Ticket;
 use Modules\Ticket\Models\TicketPriority;
 use Modules\Ticket\Models\TicketStatus;
 use Modules\Ticket\Models\TicketType;
-use Modules\User\Models\User;
-use Webmozart\Assert\Assert;
+use Modules\Ticket\Models\User;
+use Filament\Facades\Filament;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
 
 trait KanbanScrumHelper
 {
+
     public bool $sortable = true;
 
-    public ?Project $project = null;
+    public Project|null $project = null;
 
-    public array $users = [];
-
-    public array $types = [];
-
-    public array $priorities = [];
-
-    public bool $includeNotAffectedTickets = false;
+    public $users = [];
+    public $types = [];
+    public $priorities = [];
+    public $includeNotAffectedTickets = false;
 
     public bool $ticket = false;
 
@@ -42,7 +36,7 @@ trait KanbanScrumHelper
         return [
             Grid::make([
                 'default' => 2,
-                'md' => 6,
+                'md' => 6
             ])
                 ->schema([
                     Select::make('users')
@@ -71,13 +65,13 @@ trait KanbanScrumHelper
                                     wire:click="filter" wire:loading.attr="disabled"
                                     class="bg-primary-500 px-3 py-2 text-white rounded hover:bg-primary-600
                                     disabled:bg-primary-300">
-                                '.__('Filter').'
+                                ' . __('Filter') . '
                             </button>
                             <button type="button"
                                     wire:click="resetFilters" wire:loading.attr="disabled"
                                     class="ml-2 bg-gray-800 px-3 py-2 text-white rounded hover:bg-gray-900
                                     disabled:bg-gray-300">
-                                '.__('Reset filters').'
+                                ' . __('Reset filters') . '
                             </button>
                         ')),
                 ]),
@@ -87,29 +81,25 @@ trait KanbanScrumHelper
     public function getStatuses(): Collection
     {
         $query = TicketStatus::query();
-        if ($this->project && 'custom' === $this->project->status_type) {
+        if ($this->project && $this->project->status_type === 'custom') {
             $query->where('project_id', $this->project->id);
         } else {
             $query->whereNull('project_id');
         }
-
         return $query->orderBy('order')
             ->get()
-            ->map(function ($item): array {
+            ->map(function ($item) {
                 $query = Ticket::query();
                 if ($this->project) {
                     $query->where('project_id', $this->project->id);
                 }
-
                 $query->where('status_id', $item->id);
-                Assert::notNull(auth()->user());
-
                 return [
                     'id' => $item->id,
                     'title' => $item->name,
                     'color' => $item->color,
                     'size' => $query->count(),
-                    'add_ticket' => $item->is_default && auth()->user()->can('Create ticket'),
+                    'add_ticket' => $item->is_default && auth()->user()->can('Create ticket')
                 ];
             });
     }
@@ -117,50 +107,38 @@ trait KanbanScrumHelper
     public function getRecords(): Collection
     {
         $query = Ticket::query();
-        Assert::notNull($this->project);
-        if ('scrum' === $this->project->type) {
-            Assert::notNull($this->project->currentSprint);
+        if ($this->project->type === 'scrum') {
             $query->where('sprint_id', $this->project->currentSprint->id);
         }
-
         $query->with(['project', 'owner', 'responsible', 'status', 'type', 'priority', 'epic']);
         $query->where('project_id', $this->project->id);
-        if (\count($this->users) > 0) {
-            $query->where(fn ($query) => $query->whereIn('owner_id', $this->users)
-                ->orWhereIn('responsible_id', $this->users));
+        if (sizeof($this->users)) {
+            $query->where(function ($query) {
+                return $query->whereIn('owner_id', $this->users)
+                    ->orWhereIn('responsible_id', $this->users);
+            });
         }
-
-        if (\count($this->types) > 0) {
+        if (sizeof($this->types)) {
             $query->whereIn('type_id', $this->types);
         }
-
-        if (\count($this->priorities) > 0) {
+        if (sizeof($this->priorities)) {
             $query->whereIn('priority_id', $this->priorities);
         }
-
         if ($this->includeNotAffectedTickets) {
             $query->whereNull('responsible_id');
         }
-
-        $query->where(static function ($query) {
-            Assert::notNull(auth()->user());
-
-            return $query->where('owner_id', auth()->id())
-                ->orWhere('responsible_id', auth()->id())
-                ->orWhereHas('project', static function ($query) {
-                    Assert::notNull(auth()->user());
-
-                    return $query->where('owner_id', auth()->id())
-                        ->orWhereHas('users', static function ($query) {
-                            Assert::notNull(auth()->user());
-
-                            return $query->where('users.id', auth()->id());
+        $query->where(function ($query) {
+            return $query->where('owner_id', auth()->user()->id)
+                ->orWhere('responsible_id', auth()->user()->id)
+                ->orWhereHas('project', function ($query) {
+                    return $query->where('owner_id', auth()->user()->id)
+                        ->orWhereHas('users', function ($query) {
+                            return $query->where('users.id', auth()->user()->id);
                         });
                 });
         });
-
         return $query->get()
-            ->map(static fn (Ticket $item): array => [
+            ->map(fn(Ticket $item) => [
                 'id' => $item->id,
                 'code' => $item->code,
                 'title' => $item->name,
@@ -168,11 +146,11 @@ trait KanbanScrumHelper
                 'type' => $item->type,
                 'responsible' => $item->responsible,
                 'project' => $item->project,
-                'status' => $item->status?->id,
+                'status' => $item->status->id,
                 'priority' => $item->priority,
                 'epic' => $item->epic,
                 'relations' => $item->relations,
-                'totalLoggedHours' => $item->totalLoggedSeconds ? $item->totalLoggedHours : null,
+                'totalLoggedHours' => $item->totalLoggedSeconds ? $item->totalLoggedHours : null
             ]);
     }
 
@@ -183,17 +161,13 @@ trait KanbanScrumHelper
             $ticket->order = $newIndex;
             $ticket->status_id = $newStatus;
             $ticket->save();
-            // Filament::notify('success', __('Ticket updated'));
-            Notification::make()
-                ->title(__('Ticket updated'))
-                ->success()
-                ->send();
+            Filament::notify('success', __('Ticket updated'));
         }
     }
 
     public function isMultiProject(): bool
     {
-        return null === $this->project;
+        return $this->project === null;
     }
 
     public function filter(): void
@@ -223,81 +197,75 @@ trait KanbanScrumHelper
     protected function kanbanHeading(): string|Htmlable
     {
         $heading = '<div class="w-full flex flex-col gap-1">';
-        $heading .= '<a href="'.route('filament.pages.board').'"
+        $heading .= '<a href="' . route('filament.pages.board') . '"
                             class="text-primary-500 text-xs font-medium hover:underline">';
         $heading .= __('Back to board');
         $heading .= '</a>';
         $heading .= '<div class="flex flex-col gap-1">';
-        $heading .= '<span>'.__('Kanban');
+        $heading .= '<span>' . __('Kanban');
         if ($this->project) {
-            $heading .= ' - '.$this->project->name.'</span>';
+            $heading .= ' - ' . $this->project->name . '</span>';
         } else {
             $heading .= '</span><span class="text-xs text-gray-400">'
-                .__('Only default statuses are listed when no projects selected')
-                .'</span>';
+                . __('Only default statuses are listed when no projects selected')
+                . '</span>';
         }
-
         $heading .= '</div>';
         $heading .= '</div>';
-
         return new HtmlString($heading);
     }
 
     protected function scrumHeading(): string|Htmlable
     {
         $heading = '<div class="w-full flex flex-col gap-1">';
-        $heading .= '<a href="'.route('filament.pages.board').'"
+        $heading .= '<a href="' . route('filament.pages.board') . '"
                             class="text-primary-500 text-xs font-medium hover:underline">';
         $heading .= __('Back to board');
         $heading .= '</a>';
         $heading .= '<div class="flex flex-col gap-1">';
-        $heading .= '<span>'.__('Scrum');
+        $heading .= '<span>' . __('Scrum');
         if ($this->project) {
-            $heading .= ' - '.$this->project->name.'</span>';
+            $heading .= ' - ' . $this->project->name . '</span>';
         } else {
             $heading .= '</span><span class="text-xs text-gray-400">'
-                .__('Only default statuses are listed when no projects selected')
-                .'</span>';
+                . __('Only default statuses are listed when no projects selected')
+                . '</span>';
         }
-
         $heading .= '</div>';
         $heading .= '</div>';
-
         return new HtmlString($heading);
     }
 
     protected function scrumSubHeading(): string|Htmlable|null
     {
-        Assert::notNull($this->project);
-        Assert::notNull($this->project->currentSprint);
-        Assert::notNull($this->project->currentSprint->started_at);
-        Assert::notNull($this->project->currentSprint->ends_at);
-        if ($this->project->currentSprint) {
+        if ($this->project?->currentSprint) {
             return new HtmlString(
-                '<div class="w-full flex flex-col gap-1"><div class="w-full flex items-center gap-2">'
-                .'<span class="bg-danger-500 px-2 py-1 rounded text-white text-sm">'
-                .$this->project->currentSprint->name
-                .'</span>'
-                .'<span class="text-xs text-gray-400">'
-                .__('Started at:').' '.$this->project->currentSprint->started_at->format(__('Y-m-d')).' - '
-                .__('Ends at:').' '.$this->project->currentSprint->ends_at->format(__('Y-m-d')).' - '
-                .($this->project->currentSprint->remaining ?
+                '<div class="w-full flex flex-col gap-1">'
+                . '<div class="w-full flex items-center gap-2">'
+                . '<span class="bg-danger-500 px-2 py-1 rounded text-white text-sm">'
+                . $this->project->currentSprint->name
+                . '</span>'
+                . '<span class="text-xs text-gray-400">'
+                . __('Started at:') . ' ' . $this->project->currentSprint->started_at->format(__('Y-m-d')) . ' - '
+                . __('Ends at:') . ' ' . $this->project->currentSprint->ends_at->format(__('Y-m-d')) . ' - '
+                . ($this->project->currentSprint->remaining ?
                     (
-                        __('Remaining:').' '.$this->project->currentSprint->remaining.' '.__('days'))
+                        __('Remaining:') . ' ' . $this->project->currentSprint->remaining . ' ' . __('days'))
                     : ''
                 )
-                .'</span>'
-                .'</div>'
-                .($this->project->nextSprint ? '<span class="text-xs text-primary-500 font-medium">'
-                    .__('Next sprint:').' '.$this->project->nextSprint->name.' - '
-                    .__('Starts at:').' '.$this->project->nextSprint->starts_at->format(__('Y-m-d'))
-                    .' ('.__('in').' '.$this->project->nextSprint->starts_at->diffForHumans().')'
-                    .'</span>'
-                    .'</span>' : '')
-                .'</div>'
+                . '</span>'
+                . '</div>'
+                . ($this->project->nextSprint ? '<span class="text-xs text-primary-500 font-medium">'
+                    . __('Next sprint:') . ' ' . $this->project->nextSprint->name . ' - '
+                    . __('Starts at:') . ' ' . $this->project->nextSprint->starts_at->format(__('Y-m-d'))
+                    . ' (' . __('in') . ' ' . $this->project->nextSprint->starts_at->diffForHumans() . ')'
+                    . '</span>'
+                    . '</span>' : '')
+                . '</div>'
             );
+        } else {
+            return null;
         }
-
-        return null;
     }
+
 }

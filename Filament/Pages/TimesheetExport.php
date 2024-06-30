@@ -4,19 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Pages;
 
-use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
+use Filament\Forms\Components\DatePicker;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-/**
- * @property ComponentContainer $form
- */
 class TimesheetExport extends Page implements HasForms
 {
     use InteractsWithForms;
@@ -25,7 +21,7 @@ class TimesheetExport extends Page implements HasForms
 
     protected static ?int $navigationSort = 2;
 
-    protected static string $view = 'ticket::filament.pages.timesheet-export';
+    protected static string $view = 'filament.pages.timesheet-export';
 
     public static function getNavigationGroup(): ?string
     {
@@ -51,9 +47,9 @@ class TimesheetExport extends Page implements HasForms
                         DatePicker::make('end_date')
                             ->required()
                             ->reactive()
-                            ->label('End date'),
-                    ]),
-            ]),
+                            ->label('End date')
+                    ])
+            ])
         ];
     }
 
@@ -62,8 +58,8 @@ class TimesheetExport extends Page implements HasForms
         $data = $this->form->getState();
 
         return Excel::download(
-            new \Modules\Ticket\Exports\TimesheetExport($data),
-            'time_'.time().'.csv',
+            new \App\Exports\TimesheetExport($data),
+            'time_' . time() . '.csv',
             \Maatwebsite\Excel\Excel::CSV,
             ['Content-Type' => 'text/csv']
         );

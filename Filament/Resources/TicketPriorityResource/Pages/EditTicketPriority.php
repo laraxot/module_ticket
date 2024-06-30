@@ -1,18 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources\TicketPriorityResource\Pages;
 
-use Filament\Actions\DeleteAction;
-use Filament\Actions\ViewAction;
-use Filament\Resources\Pages\EditRecord;
 use Modules\Ticket\Filament\Resources\TicketPriorityResource;
 use Modules\Ticket\Models\TicketPriority;
+use Filament\Pages\Actions;
+use Filament\Resources\Pages\EditRecord;
 
-/**
- * @property TicketPriority $record
- */
 class EditTicketPriority extends EditRecord
 {
     protected static string $resource = TicketPriorityResource::class;
@@ -20,8 +14,8 @@ class EditTicketPriority extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            ViewAction::make(),
-            DeleteAction::make(),
+            Actions\ViewAction::make(),
+            Actions\DeleteAction::make(),
         ];
     }
 

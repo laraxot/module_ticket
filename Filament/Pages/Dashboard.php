@@ -1,10 +1,7 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Pages;
 
-use Filament\Pages\Dashboard as BasePage;
 use Modules\Ticket\Filament\Widgets\FavoriteProjects;
 use Modules\Ticket\Filament\Widgets\LatestActivities;
 use Modules\Ticket\Filament\Widgets\LatestComments;
@@ -14,12 +11,13 @@ use Modules\Ticket\Filament\Widgets\TicketsByPriority;
 use Modules\Ticket\Filament\Widgets\TicketsByType;
 use Modules\Ticket\Filament\Widgets\TicketTimeLogged;
 use Modules\Ticket\Filament\Widgets\UserTimeLogged;
+use Filament\Pages\Dashboard as BasePage;
 
 class Dashboard extends BasePage
 {
     protected static bool $shouldRegisterNavigation = false;
 
-    public function getColumns(): int|array
+    public function getColumns(): int | array
     {
         return 6;
     }
@@ -35,7 +33,7 @@ class Dashboard extends BasePage
             TicketsByPriority::class,
             TicketsByType::class,
             TicketTimeLogged::class,
-            UserTimeLogged::class,
+            UserTimeLogged::class
         ];
     }
 }

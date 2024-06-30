@@ -1,28 +1,15 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources;
 
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\ColorPicker;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\TextInput;
+use Modules\Ticket\Filament\Resources\TicketStatusResource\Pages;
+use Modules\Ticket\Filament\Resources\TicketStatusResource\RelationManagers;
+use Modules\Ticket\Models\TicketStatus;
+use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\ColorColumn;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Modules\Ticket\Filament\Resources\TicketStatusResource\Pages\CreateTicketStatus;
-use Modules\Ticket\Filament\Resources\TicketStatusResource\Pages\EditTicketStatus;
-use Modules\Ticket\Filament\Resources\TicketStatusResource\Pages\ListTicketStatuses;
-use Modules\Ticket\Filament\Resources\TicketStatusResource\Pages\ViewTicketStatus;
-use Modules\Ticket\Models\TicketStatus;
+use Filament\Tables;
 
 class TicketStatusResource extends Resource
 {
@@ -51,32 +38,32 @@ class TicketStatusResource extends Resource
     {
         return $form
             ->schema([
-                Card::make()
+                Forms\Components\Card::make()
                     ->schema([
-                        Grid::make()
+                        Forms\Components\Grid::make()
                             ->schema([
-                                TextInput::make('name')
+                                Forms\Components\TextInput::make('name')
                                     ->label(__('Status name'))
                                     ->required()
                                     ->maxLength(255),
 
-                                ColorPicker::make('color')
+                                Forms\Components\ColorPicker::make('color')
                                     ->label(__('Status color'))
                                     ->required(),
 
-                                Checkbox::make('is_default')
+                                Forms\Components\Checkbox::make('is_default')
                                     ->label(__('Default status'))
                                     ->helperText(
                                         __('If checked, this status will be automatically affected to new projects')
                                     ),
 
-                                TextInput::make('order')
+                                Forms\Components\TextInput::make('order')
                                     ->label(__('Status order'))
                                     ->integer()
-                                    ->default(static fn (): int => TicketStatus::whereNull('project_id')->count() + 1)
+                                    ->default(fn() => TicketStatus::whereNull('project_id')->count() + 1)
                                     ->required(),
-                            ]),
-                    ]),
+                            ])
+                    ])
             ]);
     }
 
@@ -84,57 +71,60 @@ class TicketStatusResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('order')
+                Tables\Columns\TextColumn::make('order')
                     ->label(__('Status order'))
                     ->sortable()
                     ->searchable(),
 
-                ColorColumn::make('color')
+                Tables\Columns\ColorColumn::make('color')
                     ->label(__('Status color'))
                     ->sortable()
                     ->searchable(),
 
-                TextColumn::make('name')
+                Tables\Columns\TextColumn::make('name')
                     ->label(__('Status name'))
                     ->sortable()
                     ->searchable(),
 
-                IconColumn::make('is_default')
+                Tables\Columns\IconColumn::make('is_default')
                     ->label(__('Default status'))
                     ->boolean()
                     ->sortable(),
 
-                TextColumn::make('created_at')
+                Tables\Columns\TextColumn::make('created_at')
                     ->label(__('Created at'))
                     ->dateTime()
                     ->sortable()
                     ->searchable(),
             ])
             ->filters([
+                //
             ])
             ->actions([
-                ViewAction::make(),
-                EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
             ])
+            ->reorderable('order')
             ->defaultSort('order');
     }
 
     public static function getRelations(): array
     {
         return [
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ListTicketStatuses::route('/'),
-            'create' => CreateTicketStatus::route('/create'),
-            'view' => ViewTicketStatus::route('/{record}'),
-            'edit' => EditTicketStatus::route('/{record}/edit'),
+            'index' => Pages\ListTicketStatuses::route('/'),
+            'create' => Pages\CreateTicketStatus::route('/create'),
+            'view' => Pages\ViewTicketStatus::route('/{record}'),
+            'edit' => Pages\EditTicketStatus::route('/{record}/edit'),
         ];
     }
 }

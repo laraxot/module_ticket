@@ -1,28 +1,15 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources;
 
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\ColorPicker;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\TextInput;
+use Modules\Ticket\Filament\Resources\ProjectStatusResource\Pages;
+use Modules\Ticket\Filament\Resources\ProjectStatusResource\RelationManagers;
+use Modules\Ticket\Models\ProjectStatus;
+use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\ColorColumn;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Modules\Ticket\Filament\Resources\ProjectStatusResource\Pages\CreateProjectStatus;
-use Modules\Ticket\Filament\Resources\ProjectStatusResource\Pages\EditProjectStatus;
-use Modules\Ticket\Filament\Resources\ProjectStatusResource\Pages\ListProjectStatuses;
-use Modules\Ticket\Filament\Resources\ProjectStatusResource\Pages\ViewProjectStatus;
-use Modules\Ticket\Models\ProjectStatus;
+use Filament\Tables;
 
 class ProjectStatusResource extends Resource
 {
@@ -51,26 +38,26 @@ class ProjectStatusResource extends Resource
     {
         return $form
             ->schema([
-                Card::make()
+                Forms\Components\Card::make()
                     ->schema([
-                        Grid::make()
+                        Forms\Components\Grid::make()
                             ->schema([
-                                TextInput::make('name')
+                                Forms\Components\TextInput::make('name')
                                     ->label(__('Status name'))
                                     ->required()
                                     ->maxLength(255),
 
-                                ColorPicker::make('color')
+                                Forms\Components\ColorPicker::make('color')
                                     ->label(__('Status color'))
                                     ->required(),
 
-                                Checkbox::make('is_default')
+                                Forms\Components\Checkbox::make('is_default')
                                     ->label(__('Default status'))
                                     ->helperText(
                                         __('If checked, this status will be automatically affected to new projects')
                                     ),
-                            ]),
-                    ]),
+                            ])
+                    ])
             ]);
     }
 
@@ -78,51 +65,53 @@ class ProjectStatusResource extends Resource
     {
         return $table
             ->columns([
-                ColorColumn::make('color')
+                Tables\Columns\ColorColumn::make('color')
                     ->label(__('Status color'))
                     ->sortable()
                     ->searchable(),
 
-                TextColumn::make('name')
+                Tables\Columns\TextColumn::make('name')
                     ->label(__('Status name'))
                     ->sortable()
                     ->searchable(),
 
-                IconColumn::make('is_default')
+                Tables\Columns\IconColumn::make('is_default')
                     ->label(__('Default status'))
                     ->boolean()
                     ->sortable(),
 
-                TextColumn::make('created_at')
+                Tables\Columns\TextColumn::make('created_at')
                     ->label(__('Created at'))
                     ->dateTime()
                     ->sortable()
                     ->searchable(),
             ])
             ->filters([
+                //
             ])
             ->actions([
-                ViewAction::make(),
-                EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ListProjectStatuses::route('/'),
-            'create' => CreateProjectStatus::route('/create'),
-            'view' => ViewProjectStatus::route('/{record}'),
-            'edit' => EditProjectStatus::route('/{record}/edit'),
+            'index' => Pages\ListProjectStatuses::route('/'),
+            'create' => Pages\CreateProjectStatus::route('/create'),
+            'view' => Pages\ViewProjectStatus::route('/{record}'),
+            'edit' => Pages\EditProjectStatus::route('/{record}/edit'),
         ];
     }
 }

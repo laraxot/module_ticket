@@ -1,25 +1,19 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources;
 
-use Filament\Forms\Components\Card;
+use Modules\Ticket\Filament\Resources\TimesheetResource\Pages;
+use Modules\Ticket\Filament\Resources\TimesheetResource\RelationManagers;
+use Modules\Ticket\Models\Activity;
+use Modules\Ticket\Models\TicketHour;
+use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Modules\Ticket\Filament\Resources\TimesheetResource\Pages\EditTimesheet;
-use Modules\Ticket\Filament\Resources\TimesheetResource\Pages\ListTimesheet;
-use Modules\Ticket\Models\Activity;
-use Modules\Ticket\Models\TicketHour;
-use Webmozart\Assert\Assert;
+use Filament\Tables;
 
 class TimesheetResource extends Resource
 {
@@ -46,8 +40,6 @@ class TimesheetResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        Assert::notNull(auth()->user());
-
         return auth()->user()->can('List timesheet data');
     }
 
@@ -55,13 +47,15 @@ class TimesheetResource extends Resource
     {
         return $form
             ->schema([
-                Card::make()
+                Forms\Components\Card::make()
                     ->schema([
                         Select::make('activity_id')
                             ->label(__('Activity'))
                             ->searchable()
                             ->reactive()
-                            ->options(static fn ($get, $set) => Activity::all()->pluck('name', 'id')->toArray()),
+                            ->options(function ($get, $set) {
+                                return Activity::all()->pluck('name', 'id')->toArray();
+                            }),
                         TextInput::make('value')
                             ->label(__('Time to log'))
                             ->numeric()
@@ -70,7 +64,7 @@ class TimesheetResource extends Resource
                         Textarea::make('comment')
                             ->label(__('Comment'))
                             ->rows(3),
-                    ]),
+                    ])
             ]);
     }
 
@@ -78,58 +72,60 @@ class TimesheetResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('user.name')
+                Tables\Columns\TextColumn::make('user.name')
                     ->label(__('Owner'))
                     ->sortable()
-                    ->formatStateUsing(static fn ($record) => view('components.user-avatar', ['user' => $record->user]))
+                    ->formatStateUsing(fn($record) => view('components.user-avatar', ['user' => $record->user]))
                     ->searchable(),
 
-                TextColumn::make('value')
+                Tables\Columns\TextColumn::make('value')
                     ->label(__('Hours'))
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('comment')
+                Tables\Columns\TextColumn::make('comment')
                     ->label(__('Comment'))
                     ->limit(50)
                     ->sortable()
                     ->searchable(),
 
-                TextColumn::make('activity.name')
+                Tables\Columns\TextColumn::make('activity.name')
                     ->label(__('Activity'))
                     ->sortable(),
 
-                TextColumn::make('ticket.name')
+                Tables\Columns\TextColumn::make('ticket.name')
                     ->label(__('Ticket'))
                     ->sortable(),
 
-                TextColumn::make('created_at')
+                Tables\Columns\TextColumn::make('created_at')
                     ->label(__('Created at'))
                     ->dateTime()
                     ->sortable()
                     ->searchable(),
             ])
             ->filters([
+                //
             ])
             ->actions([
-                ViewAction::make(),
-                EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ListTimesheet::route('/'),
-            'edit' => EditTimesheet::route('/{record}/edit'),
+            'index' => Pages\ListTimesheet::route('/'),
+            'edit' => Pages\EditTimesheet::route('/{record}/edit'),
         ];
     }
 }

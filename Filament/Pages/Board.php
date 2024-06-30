@@ -1,10 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Pages;
 
-use Filament\Forms\ComponentContainer;
+use Modules\Ticket\Models\Project;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -12,19 +10,14 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
-use Modules\Ticket\Models\Project;
-use Webmozart\Assert\Assert;
 
-/**
- * @property ComponentContainer $form
- */
 class Board extends Page implements HasForms
 {
     use InteractsWithForms;
 
     protected static ?string $navigationIcon = 'heroicon-o-view-columns';
 
-    protected static string $view = 'ticket::filament.pages.board';
+    protected static string $view = 'filament.pages.board';
 
     protected static ?string $slug = 'board';
 
@@ -58,7 +51,6 @@ class Board extends Page implements HasForms
                     Grid::make()
                         ->columns(1)
                         ->schema([
-                            /*
                             Select::make('project')
                                 ->label(__('Project'))
                                 ->required()
@@ -66,11 +58,10 @@ class Board extends Page implements HasForms
                                 ->reactive()
                                 ->afterStateUpdated(fn () => $this->search())
                                 ->helperText(__("Choose a project to show it's board"))
-                                ->options(static fn () => Project::where('owner_id', auth()->id())
-                                    ->orWhereHas('users', static function ($query) {
-                                        return $query->where('users.id', auth()->id());
+                                ->options(fn() => Project::where('owner_id', auth()->user()->id)
+                                    ->orWhereHas('users', function ($query) {
+                                        return $query->where('users.id', auth()->user()->id);
                                     })->pluck('name', 'id')->toArray()),
-                            */
                         ]),
                 ]),
         ];
@@ -80,8 +71,7 @@ class Board extends Page implements HasForms
     {
         $data = $this->form->getState();
         $project = Project::find($data['project']);
-        Assert::isInstanceOf($project, Project::class);
-        if ('scrum' === $project->type) {
+        if ($project->type === "scrum") {
             $this->redirect(route('filament.pages.scrum/{project}', ['project' => $project]));
         } else {
             $this->redirect(route('filament.pages.kanban/{project}', ['project' => $project]));

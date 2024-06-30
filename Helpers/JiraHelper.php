@@ -1,92 +1,78 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Helpers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Log;
 
-use function Safe\json_decode;
-
-use Webmozart\Assert\Assert;
-
 trait JiraHelper
 {
-    public function connectToJira(string $host, string $username, string $token): ?Client
+
+    public function connectToJira($host, $username, $token): Client|null
     {
         return new Client([
             'base_uri' => $host,
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
-                'Authorization' => 'Basic '.base64_encode($username.':'.$token),
-            ],
+                'Authorization' => 'Basic ' . base64_encode($username . ":" . $token)
+            ]
         ]);
     }
 
-    public function getJiraProjects(Client $client): ?array
+    public function getJiraProjects(Client $client): array|null
     {
         try {
             $response = $client->get('/rest/api/2/project');
-
-            Assert::isArray($res = json_decode($response->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR));
-
-            return $res;
-        } catch (GuzzleException $guzzleException) {
-            Log::error($guzzleException->getTraceAsString());
-
+            return json_decode($response->getBody()->getContents());
+        } catch (GuzzleException $e) {
+            Log::error($e->getTraceAsString());
             return null;
         }
     }
 
-    public function getJiraTicketsByProject(Client $client, array $projectKeys): ?array
+    public function getJiraTicketsByProject(Client $client, $projectKeys): array|null
     {
         try {
-            $formatIssues = static function ($issues): array {
+            $formatIssues = function ($issues) {
                 $results = [];
                 foreach ($issues as $issue) {
                     $results[] = [
                         'code' => $issue->key,
                         'name' => $issue->fields->summary,
-                        'data' => $issue,
+                        'data' => $issue
                     ];
                 }
-
                 return $results;
             };
             $results = [];
             foreach ($projectKeys as $projectKey) {
-                $response = $client->get('/rest/api/2/search?jql=project='.$projectKey);
-                // $data = json_decode($response->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
-                Assert::isArray($data = json_decode($response->getBody()->getContents(), true));
+                $response = $client->get('/rest/api/2/search?jql=project=' . $projectKey);
+                $data = json_decode($response->getBody()->getContents());
                 $results[$projectKey] = [
-                    'total' => $data['total'],
-                    'issues' => $formatIssues($data['issues']),
+                    'total' => $data->total,
+                    'issues' => $formatIssues($data->issues)
                 ];
             }
-
             return $results;
-        } catch (GuzzleException $guzzleException) {
-            Log::error($guzzleException->getTraceAsString());
-
+        } catch (GuzzleException $e) {
+            Log::error($e->getTraceAsString());
             return null;
         }
     }
 
-    public function getJiraTicketDetails(string $host, string $username, string $token, string $url): mixed
+    public function getJiraTicketDetails($host, $username, $token, $url)
     {
         try {
-            Assert::notNull($client = $this->connectToJira($host, $username, $token));
+            $client = $this->connectToJira($host, $username, $token);
             $url = explode('/', $url);
-            $response = $client->get('/rest/api/2/issue/'.$url[\count($url) - 1]);
-
-            return json_decode($response->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
-        } catch (GuzzleException $guzzleException) {
-            Log::error($guzzleException->getTraceAsString());
-
+            $response = $client->get('/rest/api/2/issue/' . $url[sizeof($url) - 1]);
+            return json_decode($response->getBody()->getContents());
+        } catch (GuzzleException $e) {
+            Log::error($e->getTraceAsString());
             return null;
         }
     }
+
 }

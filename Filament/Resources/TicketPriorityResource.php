@@ -1,28 +1,18 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources;
 
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\ColorPicker;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\TextInput;
+use Modules\Ticket\Filament\Resources\TicketPriorityResource\Pages;
+use Modules\Ticket\Filament\Resources\TicketPriorityResource\RelationManagers;
+use Modules\Ticket\Models\TicketPriority;
+use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\ColorColumn;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Modules\Ticket\Filament\Resources\TicketPriorityResource\Pages\CreateTicketPriority;
-use Modules\Ticket\Filament\Resources\TicketPriorityResource\Pages\EditTicketPriority;
-use Modules\Ticket\Filament\Resources\TicketPriorityResource\Pages\ListTicketPriorities;
-use Modules\Ticket\Filament\Resources\TicketPriorityResource\Pages\ViewTicketPriority;
-use Modules\Ticket\Models\TicketPriority;
+use Filament\Tables;
+use Guava\FilamentIconPicker\Tables\IconColumn;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TicketPriorityResource extends Resource
 {
@@ -51,26 +41,26 @@ class TicketPriorityResource extends Resource
     {
         return $form
             ->schema([
-                Card::make()
+                Forms\Components\Card::make()
                     ->schema([
-                        Grid::make()
+                        Forms\Components\Grid::make()
                             ->schema([
-                                TextInput::make('name')
+                                Forms\Components\TextInput::make('name')
                                     ->label(__('Priority name'))
                                     ->required()
                                     ->maxLength(255),
 
-                                ColorPicker::make('color')
+                                Forms\Components\ColorPicker::make('color')
                                     ->label(__('Priority color'))
                                     ->required(),
 
-                                Checkbox::make('is_default')
+                                Forms\Components\Checkbox::make('is_default')
                                     ->label(__('Default priority'))
                                     ->helperText(
                                         __('If checked, this priority will be automatically affected to new tickets')
                                     ),
-                            ]),
-                    ]),
+                            ])
+                    ])
             ]);
     }
 
@@ -78,51 +68,53 @@ class TicketPriorityResource extends Resource
     {
         return $table
             ->columns([
-                ColorColumn::make('color')
+                Tables\Columns\ColorColumn::make('color')
                     ->label(__('Priority color'))
                     ->sortable()
                     ->searchable(),
 
-                TextColumn::make('name')
+                Tables\Columns\TextColumn::make('name')
                     ->label(__('Priority name'))
                     ->sortable()
                     ->searchable(),
 
-                IconColumn::make('is_default')
+                Tables\Columns\IconColumn::make('is_default')
                     ->label(__('Default priority'))
                     ->boolean()
                     ->sortable(),
 
-                TextColumn::make('created_at')
+                Tables\Columns\TextColumn::make('created_at')
                     ->label(__('Created at'))
                     ->dateTime()
                     ->sortable()
                     ->searchable(),
             ])
             ->filters([
+                //
             ])
             ->actions([
-                ViewAction::make(),
-                EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ListTicketPriorities::route('/'),
-            'create' => CreateTicketPriority::route('/create'),
-            'view' => ViewTicketPriority::route('/{record}'),
-            'edit' => EditTicketPriority::route('/{record}/edit'),
+            'index' => Pages\ListTicketPriorities::route('/'),
+            'create' => Pages\CreateTicketPriority::route('/create'),
+            'view' => Pages\ViewTicketPriority::route('/{record}'),
+            'edit' => Pages\EditTicketPriority::route('/{record}/edit'),
         ];
     }
 }

@@ -1,32 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Resources\Pages\CreateRecord;
-use Filament\Resources\Pages\EditRecord;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Table;
-use Illuminate\Support\HtmlString;
-use Modules\Ticket\Filament\Resources\TicketResource\Pages\CreateTicket;
-use Modules\Ticket\Filament\Resources\TicketResource\Pages\EditTicket;
-use Modules\Ticket\Filament\Resources\TicketResource\Pages\ListTickets;
-use Modules\Ticket\Filament\Resources\TicketResource\Pages\ViewTicket;
+use Modules\Ticket\Filament\Resources\TicketResource\Pages;
+use Modules\Ticket\Filament\Resources\TicketResource\RelationManagers;
 use Modules\Ticket\Models\Epic;
 use Modules\Ticket\Models\Project;
 use Modules\Ticket\Models\Ticket;
@@ -34,8 +11,15 @@ use Modules\Ticket\Models\TicketPriority;
 use Modules\Ticket\Models\TicketRelation;
 use Modules\Ticket\Models\TicketStatus;
 use Modules\Ticket\Models\TicketType;
-use Modules\User\Models\User;
-use Webmozart\Assert\Assert;
+use Modules\Ticket\Models\User;
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Resource;
+use Filament\Tables\Table;
+use Filament\Tables;
+use Illuminate\Support\HtmlString;
 
 class TicketResource extends Resource
 {
@@ -62,22 +46,19 @@ class TicketResource extends Resource
 
     public static function form(Form $form): Form
     {
-        Assert::notNull(auth()->user());
-
         return $form
             ->schema([
-                Card::make()
+                Forms\Components\Card::make()
                     ->schema([
-                        Grid::make()
+                        Forms\Components\Grid::make()
                             ->schema([
-                                /*--passare a field separato
                                 Forms\Components\Select::make('project_id')
                                     ->label(__('Project'))
                                     ->searchable()
                                     ->reactive()
-                                    ->afterStateUpdated(static function ($get, $set) {
+                                    ->afterStateUpdated(function ($get, $set) {
                                         $project = Project::where('id', $get('project_id'))->first();
-                                        if ('custom' === $project?->status_type) {
+                                        if ($project?->status_type === 'custom') {
                                             $set(
                                                 'status_id',
                                                 TicketStatus::where('project_id', $project->id)
@@ -95,164 +76,158 @@ class TicketResource extends Resource
                                             );
                                         }
                                     })
-                                    ->options(static fn () => Project::where('owner_id', auth()->id())
-                                        ->orWhereHas('users', static function ($query) {
-                                            return $query->where('users.id', auth()->id());
+                                    ->options(fn() => Project::where('owner_id', auth()->user()->id)
+                                        ->orWhereHas('users', function ($query) {
+                                            return $query->where('users.id', auth()->user()->id);
                                         })->pluck('name', 'id')->toArray()
                                     )
-                                    ->default(static fn () => request()->get('project'))
+                                    ->default(fn() => request()->get('project'))
                                     ->required(),
-                                */
-                                Select::make('epic_id')
+                                Forms\Components\Select::make('epic_id')
                                     ->label(__('Epic'))
                                     ->searchable()
                                     ->reactive()
-                                    ->options(static fn ($get, $set) => Epic::where('project_id', $get('project_id'))->pluck('name', 'id')->toArray()),
-                                Grid::make()
+                                    ->options(function ($get, $set) {
+                                        return Epic::where('project_id', $get('project_id'))->pluck('name', 'id')->toArray();
+                                    }),
+                                Forms\Components\Grid::make()
                                     ->columns(12)
                                     ->columnSpan(2)
                                     ->schema([
-                                        TextInput::make('code')
+                                        Forms\Components\TextInput::make('code')
                                             ->label(__('Ticket code'))
-                                            ->visible(static fn ($livewire): bool => ! ($livewire instanceof CreateRecord))
+                                            ->visible(fn($livewire) => !($livewire instanceof CreateRecord))
                                             ->columnSpan(2)
                                             ->disabled(),
 
-                                        TextInput::make('name')
+                                        Forms\Components\TextInput::make('name')
                                             ->label(__('Ticket name'))
                                             ->required()
                                             ->columnSpan(
-                                                static fn ($livewire): int => $livewire instanceof CreateRecord ? 12 : 10
+                                                fn($livewire) => !($livewire instanceof CreateRecord) ? 10 : 12
                                             )
                                             ->maxLength(255),
                                     ]),
 
-                                Select::make('owner_id')
+                                Forms\Components\Select::make('owner_id')
                                     ->label(__('Ticket owner'))
                                     ->searchable()
-                                    ->options(static fn () => User::all()->pluck('name', 'id')->toArray())
-                                    ->default(static fn () => auth()->id())
+                                    ->options(fn() => User::all()->pluck('name', 'id')->toArray())
+                                    ->default(fn() => auth()->user()->id)
                                     ->required(),
 
-                                Select::make('responsible_id')
+                                Forms\Components\Select::make('responsible_id')
                                     ->label(__('Ticket responsible'))
                                     ->searchable()
-                                    ->options(static fn () => User::all()->pluck('name', 'id')->toArray()),
+                                    ->options(fn() => User::all()->pluck('name', 'id')->toArray()),
 
-                                Grid::make()
+                                Forms\Components\Grid::make()
                                     ->columns(3)
                                     ->columnSpan(2)
                                     ->schema([
-                                        Select::make('status_id')
+                                        Forms\Components\Select::make('status_id')
                                             ->label(__('Ticket status'))
                                             ->searchable()
-                                            ->options(static function ($get) {
+                                            ->options(function ($get) {
                                                 $project = Project::where('id', $get('project_id'))->first();
-                                                if ('custom' === $project?->status_type) {
+                                                if ($project?->status_type === 'custom') {
                                                     return TicketStatus::where('project_id', $project->id)
                                                         ->get()
                                                         ->pluck('name', 'id')
                                                         ->toArray();
+                                                } else {
+                                                    return TicketStatus::whereNull('project_id')
+                                                        ->get()
+                                                        ->pluck('name', 'id')
+                                                        ->toArray();
                                                 }
-
-                                                return TicketStatus::whereNull('project_id')
-                                                    ->get()
-                                                    ->pluck('name', 'id')
-                                                    ->toArray();
                                             })
-                                            ->default(static function ($get) {
+                                            ->default(function ($get) {
                                                 $project = Project::where('id', $get('project_id'))->first();
-                                                if ('custom' === $project?->status_type) {
+                                                if ($project?->status_type === 'custom') {
                                                     return TicketStatus::where('project_id', $project->id)
                                                         ->where('is_default', true)
                                                         ->first()
                                                         ?->id;
+                                                } else {
+                                                    return TicketStatus::whereNull('project_id')
+                                                        ->where('is_default', true)
+                                                        ->first()
+                                                        ?->id;
                                                 }
-
-                                                return TicketStatus::whereNull('project_id')
-                                                    ->where('is_default', true)
-                                                    ->first()
-                                                    ?->id;
                                             })
                                             ->required(),
 
-                                        Select::make('type_id')
+                                        Forms\Components\Select::make('type_id')
                                             ->label(__('Ticket type'))
                                             ->searchable()
-                                            ->options(static fn () => TicketType::all()->pluck('name', 'id')->toArray())
-                                            ->default(static fn () => TicketType::where('is_default', true)->first()?->id)
+                                            ->options(fn() => TicketType::all()->pluck('name', 'id')->toArray())
+                                            ->default(fn() => TicketType::where('is_default', true)->first()?->id)
                                             ->required(),
 
-                                        Select::make('priority_id')
+                                        Forms\Components\Select::make('priority_id')
                                             ->label(__('Ticket priority'))
                                             ->searchable()
-                                            ->options(static fn () => TicketPriority::all()->pluck('name', 'id')->toArray())
-                                            ->default(static fn () => TicketPriority::where('is_default', true)->first()?->id)
+                                            ->options(fn() => TicketPriority::all()->pluck('name', 'id')->toArray())
+                                            ->default(fn() => TicketPriority::where('is_default', true)->first()?->id)
                                             ->required(),
                                     ]),
                             ]),
 
-                        RichEditor::make('content')
+                        Forms\Components\RichEditor::make('content')
                             ->label(__('Ticket content'))
                             ->required()
                             ->columnSpan(2),
 
-                        Grid::make()
+                        Forms\Components\Grid::make()
                             ->columnSpan(2)
                             ->columns(12)
                             ->schema([
-                                TextInput::make('estimation')
+                                Forms\Components\TextInput::make('estimation')
                                     ->label(__('Estimation time'))
                                     ->numeric()
                                     ->columnSpan(2),
                             ]),
 
-                        Repeater::make('relations')
-                            ->itemLabel(static function (array $state): ?string {
-                                $ticketRelation = TicketRelation::firstWhere(['id' => $state['id'] ?? 0]);
+                        Forms\Components\Repeater::make('relations')
+                            ->itemLabel(function (array $state) {
+                                $ticketRelation = TicketRelation::find($state['id'] ?? 0);
                                 if ($ticketRelation) {
-                                    Assert::notNull($ticketRelation->relation);
-
-                                    // return __(config('system.tickets.relations.list.'.$ticketRelation->type))
-                                    return $ticketRelation->type
-                                        .' '
-                                        .$ticketRelation->relation->name
-                                        .' ('.$ticketRelation->relation->code.')';
+                                    return __(config('system.tickets.relations.list.' . $ticketRelation->type))
+                                        . ' '
+                                        . $ticketRelation->relation->name
+                                        . ' (' . $ticketRelation->relation->code . ')';
                                 }
-
                                 return null;
                             })
                             ->relationship()
                             ->collapsible()
                             ->collapsed()
-                            ->orderColumn()
+                            ->orderable()
                             ->defaultItems(0)
                             ->schema([
-                                Grid::make()
+                                Forms\Components\Grid::make()
                                     ->columns(3)
                                     ->schema([
-                                        /* -- creare TicketData che prenda il config etc etc
-                                        Select::make('type')
+                                        Forms\Components\Select::make('type')
                                             ->label(__('Relation type'))
                                             ->required()
                                             ->searchable()
                                             ->options(config('system.tickets.relations.list'))
-                                            ->default(static fn () => config('system.tickets.relations.default')),
+                                            ->default(fn() => config('system.tickets.relations.default')),
 
-                                        Select::make('relation_id')
+                                        Forms\Components\Select::make('relation_id')
                                             ->label(__('Related ticket'))
                                             ->required()
                                             ->searchable()
                                             ->columnSpan(2)
-                                            ->options(static function ($livewire) {
+                                            ->options(function ($livewire) {
                                                 $query = Ticket::query();
                                                 if ($livewire instanceof EditRecord && $livewire->record) {
                                                     $query->where('id', '<>', $livewire->record->id);
                                                 }
-
                                                 return $query->get()->pluck('name', 'id')->toArray();
                                             }),
-                                        */
                                     ]),
                             ]),
                     ]),
@@ -263,68 +238,68 @@ class TicketResource extends Resource
     {
         $columns = [];
         if ($withProject) {
-            $columns[] = TextColumn::make('project.name')
+            $columns[] = Tables\Columns\TextColumn::make('project.name')
                 ->label(__('Project'))
                 ->sortable()
                 ->searchable();
         }
-
-        return array_merge($columns, [
-            TextColumn::make('name')
+        $columns = array_merge($columns, [
+            Tables\Columns\TextColumn::make('name')
                 ->label(__('Ticket name'))
                 ->sortable()
                 ->searchable(),
 
-            TextColumn::make('owner.name')
+            Tables\Columns\TextColumn::make('owner.name')
                 ->label(__('Owner'))
                 ->sortable()
-                ->formatStateUsing(static fn ($record) => view('components.user-avatar', ['user' => $record->owner]))
+                ->formatStateUsing(fn($record) => view('components.user-avatar', ['user' => $record->owner]))
                 ->searchable(),
 
-            TextColumn::make('responsible.name')
+            Tables\Columns\TextColumn::make('responsible.name')
                 ->label(__('Responsible'))
                 ->sortable()
-                ->formatStateUsing(static fn ($record) => view('components.user-avatar', ['user' => $record->responsible]))
+                ->formatStateUsing(fn($record) => view('components.user-avatar', ['user' => $record->responsible]))
                 ->searchable(),
 
-            TextColumn::make('status.name')
+            Tables\Columns\TextColumn::make('status.name')
                 ->label(__('Status'))
-                ->formatStateUsing(static fn ($record): HtmlString => new HtmlString('
+                ->formatStateUsing(fn($record) => new HtmlString('
                             <div class="flex items-center gap-2 mt-1">
                                 <span class="filament-tables-color-column relative flex h-6 w-6 rounded-md"
-                                    style="background-color: '.$record->status->color.'"></span>
-                                <span>'.$record->status->name.'</span>
+                                    style="background-color: ' . $record->status->color . '"></span>
+                                <span>' . $record->status->name . '</span>
                             </div>
                         '))
                 ->sortable()
                 ->searchable(),
 
-            TextColumn::make('type.name')
+            Tables\Columns\TextColumn::make('type.name')
                 ->label(__('Type'))
                 ->formatStateUsing(
-                    static fn ($record) => view('partials.filament.resources.ticket-type', ['state' => $record->type])
+                    fn($record) => view('partials.filament.resources.ticket-type', ['state' => $record->type])
                 )
                 ->sortable()
                 ->searchable(),
 
-            TextColumn::make('priority.name')
+            Tables\Columns\TextColumn::make('priority.name')
                 ->label(__('Priority'))
-                ->formatStateUsing(static fn ($record): HtmlString => new HtmlString('
+                ->formatStateUsing(fn($record) => new HtmlString('
                             <div class="flex items-center gap-2 mt-1">
                                 <span class="filament-tables-color-column relative flex h-6 w-6 rounded-md"
-                                    style="background-color: '.$record->priority->color.'"></span>
-                                <span>'.$record->priority->name.'</span>
+                                    style="background-color: ' . $record->priority->color . '"></span>
+                                <span>' . $record->priority->name . '</span>
                             </div>
                         '))
                 ->sortable()
                 ->searchable(),
 
-            TextColumn::make('created_at')
+            Tables\Columns\TextColumn::make('created_at')
                 ->label(__('Created at'))
                 ->dateTime()
                 ->sortable()
                 ->searchable(),
         ]);
+        return $columns;
     }
 
     public static function table(Table $table): Table
@@ -332,62 +307,62 @@ class TicketResource extends Resource
         return $table
             ->columns(self::tableColumns())
             ->filters([
-                /*-- fare filtro separato
                 Tables\Filters\SelectFilter::make('project_id')
                     ->label(__('Project'))
                     ->multiple()
-                    ->options(static fn () => Project::where('owner_id', auth()->id())
-                        ->orWhereHas('users', static function ($query) {
-                            return $query->where('users.id', auth()->id());
+                    ->options(fn() => Project::where('owner_id', auth()->user()->id)
+                        ->orWhereHas('users', function ($query) {
+                            return $query->where('users.id', auth()->user()->id);
                         })->pluck('name', 'id')->toArray()),
-                */
-                SelectFilter::make('owner_id')
+
+                Tables\Filters\SelectFilter::make('owner_id')
                     ->label(__('Owner'))
                     ->multiple()
-                    ->options(static fn () => User::all()->pluck('name', 'id')->toArray()),
+                    ->options(fn() => User::all()->pluck('name', 'id')->toArray()),
 
-                SelectFilter::make('responsible_id')
+                Tables\Filters\SelectFilter::make('responsible_id')
                     ->label(__('Responsible'))
                     ->multiple()
-                    ->options(static fn () => User::all()->pluck('name', 'id')->toArray()),
+                    ->options(fn() => User::all()->pluck('name', 'id')->toArray()),
 
-                SelectFilter::make('status_id')
+                Tables\Filters\SelectFilter::make('status_id')
                     ->label(__('Status'))
                     ->multiple()
-                    ->options(static fn () => TicketStatus::all()->pluck('name', 'id')->toArray()),
+                    ->options(fn() => TicketStatus::all()->pluck('name', 'id')->toArray()),
 
-                SelectFilter::make('type_id')
+                Tables\Filters\SelectFilter::make('type_id')
                     ->label(__('Type'))
                     ->multiple()
-                    ->options(static fn () => TicketType::all()->pluck('name', 'id')->toArray()),
+                    ->options(fn() => TicketType::all()->pluck('name', 'id')->toArray()),
 
-                SelectFilter::make('priority_id')
+                Tables\Filters\SelectFilter::make('priority_id')
                     ->label(__('Priority'))
                     ->multiple()
-                    ->options(static fn () => TicketPriority::all()->pluck('name', 'id')->toArray()),
+                    ->options(fn() => TicketPriority::all()->pluck('name', 'id')->toArray()),
             ])
             ->actions([
-                ViewAction::make(),
-                EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ListTickets::route('/'),
-            'create' => CreateTicket::route('/create'),
-            'view' => ViewTicket::route('/{record}'),
-            'edit' => EditTicket::route('/{record}/edit'),
+            'index' => Pages\ListTickets::route('/'),
+            'create' => Pages\CreateTicket::route('/create'),
+            'view' => Pages\ViewTicket::route('/{record}'),
+            'edit' => Pages\EditTicket::route('/{record}/edit'),
         ];
     }
 }

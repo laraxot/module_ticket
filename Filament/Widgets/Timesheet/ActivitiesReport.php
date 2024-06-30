@@ -4,29 +4,20 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Widgets\Timesheet;
 
+use Modules\Ticket\Models\TicketHour;
+use Modules\Ticket\Models\User;
 use Carbon\Carbon;
 use Filament\Widgets\BarChartWidget;
-use Filament\Widgets\ChartWidget;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
-use Modules\Ticket\Datas\TrendActivityData;
-use Modules\Ticket\Models\TicketHour;
-use Modules\User\Models\User;
-use Spatie\LaravelData\DataCollection;
-use Webmozart\Assert\Assert;
 
-// class ActivitiesReport extends BarChartWidget
-class ActivitiesReport extends ChartWidget
+class ActivitiesReport extends BarChartWidget
 {
     protected int|string|array $columnSpan = [
         'sm' => 1,
         'md' => 6,
-        'lg' => 3,
+        'lg' => 3
     ];
-
-    protected function getType(): string
-    {
-        return 'bar';
-    }
 
     public ?string $filter = '2023';
 
@@ -39,15 +30,14 @@ class ActivitiesReport extends ChartWidget
     {
         return [
             2022 => 2022,
-            2023 => 2023,
+            2023 => 2023
         ];
     }
 
     protected function getData(): array
     {
-        Assert::notNull(auth()->user());
         $collection = $this->filter(auth()->user(), [
-            'year' => $this->filter,
+            'year' => $this->filter
         ]);
 
         $datasets = $this->getDatasets($collection);
@@ -58,10 +48,10 @@ class ActivitiesReport extends ChartWidget
                     'label' => __('Total time logged'),
                     'data' => $datasets['sets'],
                     'backgroundColor' => [
-                        'rgba(54, 162, 235, .6)',
+                        'rgba(54, 162, 235, .6)'
                     ],
                     'borderColor' => [
-                        'rgba(54, 162, 235, .8)',
+                        'rgba(54, 162, 235, .8)'
                     ],
                 ],
             ],
@@ -69,14 +59,11 @@ class ActivitiesReport extends ChartWidget
         ];
     }
 
-    /**
-     * @param DataCollection<TrendActivityData> $collection
-     */
-    protected function getDatasets(DataCollection $collection): array
+    protected function getDatasets(Collection $collection): array
     {
         $datasets = [
             'sets' => [],
-            'labels' => [],
+            'labels' => []
         ];
 
         foreach ($collection as $item) {
@@ -87,28 +74,18 @@ class ActivitiesReport extends ChartWidget
         return $datasets;
     }
 
-    /**
-     * @return DataCollection<TrendActivityData>
-     */
-    protected function filter(User $user, array $params): DataCollection
+    protected function filter(User $user, array $params): Collection
     {
-        $res = TicketHour::with('activity')
+        return TicketHour::with('activity')
             ->select([
                 'activity_id',
                 DB::raw('SUM(value) as value'),
             ])
             ->whereRaw(
-                'YEAR(created_at)='.($params['year'] ?? Carbon::now()->format('Y'))
+                DB::raw("YEAR(created_at)=" . (is_null($params['year']) ? Carbon::now()->format('Y') : $params['year']))
             )
             ->where('user_id', $user->id)
             ->groupBy('activity_id')
             ->get();
-
-        /**
-         * @var DataCollection<TrendActivityData>
-         */
-        $res_coll = TrendActivityData::collect($res->toArray(), DataCollection::class);
-
-        return $res_coll;
     }
 }

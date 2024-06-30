@@ -1,25 +1,15 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources;
 
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\TextInput;
+use Modules\Ticket\Filament\Resources\ActivityResource\Pages;
+use Modules\Ticket\Filament\Resources\ActivityResource\RelationManagers;
+use Modules\Ticket\Models\Activity;
+use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Modules\Ticket\Filament\Resources\ActivityResource\Pages\CreateActivity;
-use Modules\Ticket\Filament\Resources\ActivityResource\Pages\EditActivity;
-use Modules\Ticket\Filament\Resources\ActivityResource\Pages\ListActivities;
-use Modules\Ticket\Filament\Resources\ActivityResource\Pages\ViewActivity;
-use Modules\Ticket\Models\Activity;
+use Filament\Tables;
 
 class ActivityResource extends Resource
 {
@@ -48,21 +38,22 @@ class ActivityResource extends Resource
     {
         return $form
             ->schema([
-                Card::make()
+                Forms\Components\Card::make()
                     ->schema([
-                        Grid::make()
+                        Forms\Components\Grid::make()
                             ->schema([
-                                TextInput::make('name')
+                                Forms\Components\TextInput::make('name')
                                     ->label(__('Activity name'))
                                     ->required()
                                     ->maxLength(255),
 
-                                RichEditor::make('description')
+                                Forms\Components\RichEditor::make('description')
                                     ->label(__('Description'))
                                     ->required()
                                     ->columnSpan(2),
-                            ]),
-                    ]),
+
+                            ])
+                    ])
             ]);
     }
 
@@ -70,25 +61,26 @@ class ActivityResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                Tables\Columns\TextColumn::make('name')
                     ->label(__('Activity name'))
                     ->sortable()
                     ->searchable(),
 
-                TextColumn::make('created_at')
+                Tables\Columns\TextColumn::make('created_at')
                     ->label(__('Created at'))
                     ->dateTime()
                     ->sortable()
                     ->searchable(),
             ])
             ->filters([
+                //
             ])
             ->actions([
-                ViewAction::make(),
-                EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
             ])
             ->defaultSort('id');
     }
@@ -96,16 +88,17 @@ class ActivityResource extends Resource
     public static function getRelations(): array
     {
         return [
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ListActivities::route('/'),
-            'create' => CreateActivity::route('/create'),
-            'view' => ViewActivity::route('/{record}'),
-            'edit' => EditActivity::route('/{record}/edit'),
+            'index' => Pages\ListActivities::route('/'),
+            'create' => Pages\CreateActivity::route('/create'),
+            'view' => Pages\ViewActivity::route('/{record}'),
+            'edit' => Pages\EditActivity::route('/{record}/edit'),
         ];
     }
 }

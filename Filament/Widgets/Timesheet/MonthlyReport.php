@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Widgets\Timesheet;
 
-use Carbon\Carbon;
-use Filament\Widgets\ChartWidget;
-use Illuminate\Support\Facades\DB;
-use Modules\Ticket\Datas\TrendMonthData;
 use Modules\Ticket\Models\TicketHour;
-use Modules\User\Models\User;
-use Spatie\LaravelData\DataCollection;
-use Webmozart\Assert\Assert;
+use Modules\Ticket\Models\User;
+use Carbon\Carbon;
+use Filament\Widgets\BarChartWidget;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
-class MonthlyReport extends ChartWidget
+class MonthlyReport extends BarChartWidget
 {
     public function getHeading(): string
     {
@@ -22,16 +20,10 @@ class MonthlyReport extends ChartWidget
 
     public ?string $filter = '2023';
 
-    protected function getType(): string
-    {
-        return 'bar';
-    }
-
     protected function getData(): array
     {
-        Assert::notNull(auth()->user());
         $collection = $this->filter(auth()->user(), [
-            'year' => $this->filter,
+            'year' => $this->filter
         ]);
 
         $datasets = $this->getDatasets($this->buildRapport($collection));
@@ -42,10 +34,10 @@ class MonthlyReport extends ChartWidget
                     'label' => __('Total time logged'),
                     'data' => $datasets['sets'],
                     'backgroundColor' => [
-                        'rgba(54, 162, 235, .6)',
+                        'rgba(54, 162, 235, .6)'
                     ],
                     'borderColor' => [
-                        'rgba(54, 162, 235, .8)',
+                        'rgba(54, 162, 235, .8)'
                     ],
                 ],
             ],
@@ -57,7 +49,7 @@ class MonthlyReport extends ChartWidget
     {
         return [
             2022 => 2022,
-            2023 => 2023,
+            2023 => 2023
         ];
     }
 
@@ -72,38 +64,28 @@ class MonthlyReport extends ChartWidget
     protected int|string|array $columnSpan = [
         'sm' => 1,
         'md' => 6,
-        'lg' => 3,
+        'lg' => 3
     ];
 
-    /**
-     * @return DataCollection<TrendMonthData> $collection
-     */
-    protected function filter(User $user, array $params): DataCollection
+    protected function filter(User $user, array $params)
     {
-        $res = TicketHour::select([
+        return TicketHour::select([
             DB::raw("DATE_FORMAT(created_at,'%m') as month"),
             DB::raw('SUM(value) as value'),
         ])
             ->whereRaw(
-                'YEAR(created_at)='.($params['year'] ?? Carbon::now()->format('Y'))
+                DB::raw("YEAR(created_at)=" . (is_null($params['year']) ? Carbon::now()->format('Y') : $params['year']))
             )
             ->where('user_id', $user->id)
             ->groupBy(DB::raw("DATE_FORMAT(created_at,'%m')"))
             ->get();
-
-        /**
-         * @var DataCollection<TrendMonthData>
-         */
-        $res_coll = TrendMonthData::collect($res, DataCollection::class);
-
-        return $res_coll;
     }
 
     protected function getDatasets(array $rapportData): array
     {
         $datasets = [
             'sets' => [],
-            'labels' => [],
+            'labels' => []
         ];
 
         foreach ($rapportData as $data) {
@@ -114,10 +96,7 @@ class MonthlyReport extends ChartWidget
         return $datasets;
     }
 
-    /**
-     * @param DataCollection<TrendMonthData> $collection
-     */
-    protected function buildRapport(DataCollection $collection): array
+    protected function buildRapport(Collection $collection): array
     {
         $months = [
             1 => ['January', 0],
@@ -131,12 +110,12 @@ class MonthlyReport extends ChartWidget
             9 => ['September', 0],
             10 => ['October', 0],
             11 => ['November', 0],
-            12 => ['December', 0],
+            12 => ['December', 0]
         ];
 
         foreach ($collection as $value) {
-            if (isset($months[(int) $value->month])) {
-                $months[(int) $value->month][1] = (float) $value->value;
+            if (isset($months[(int)$value->month])) {
+                $months[(int)$value->month][1] = (float)$value->value;
             }
         }
 

@@ -1,50 +1,38 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Pages;
 
+use Modules\Ticket\Models\Epic;
+use Modules\Ticket\Models\Project;
 use Carbon\Carbon;
-use Filament\Facades\Filament;
-use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
 use Illuminate\Database\Eloquent\Builder;
-use Modules\Ticket\Actions\Project\GetBuilderByUserIdAction;
-use Modules\Ticket\Models\Epic;
-use Modules\Ticket\Models\Project;
-use Webmozart\Assert\Assert;
 
-/**
- * @property ComponentContainer $form
- */
 class RoadMap extends Page implements HasForms
 {
     use InteractsWithForms;
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
-    protected static string $view = 'ticket::filament.pages.road-map';
+    protected static string $view = 'filament.pages.road-map';
 
     protected static ?string $slug = 'road-map';
 
     protected static ?int $navigationSort = 5;
 
-    public Project $project;
+    public $project;
 
-    public ?Epic $epic = null;
+    public Epic|null $epic = null;
 
     public bool $ticket = false;
 
-    /**
-     * @var array<int|string, string>
-     */
     protected $listeners = [
         'closeEpicDialog' => 'closeDialog',
         'closeTicketDialog' => 'closeDialog',
-        'updateEpic',
+        'updateEpic'
     ];
 
     public static function getNavigationLabel(): string
@@ -57,26 +45,21 @@ class RoadMap extends Page implements HasForms
         return __('Management');
     }
 
-    public function mount(): void
+    public function mount()
     {
         $p = request()->get('p');
         if ($p && $project = $this->projectQuery()->where('id', $p)->first()) {
-            Assert::isInstanceOf($project, Project::class);
             $this->project = $project;
         } else {
-            Assert::isInstanceOf($first_project = $this->projectQuery()->first(), Project::class);
-            Assert::notNull($first_project);
-            $this->project = $first_project;
+            $this->project = $this->projectQuery()->first();
         }
-
-        if (null !== $this->project) {
+        if ($this->project) {
             $this->form->fill([
-                'selectedProject' => $this->project->id,
+                'selectedProject' => $this->project->id
             ]);
+        } else {
+            $this->form->fill();
         }
-        // else {
-        //     $this->form->fill();
-        // }
     }
 
     protected function getFormSchema(): array
@@ -87,14 +70,16 @@ class RoadMap extends Page implements HasForms
                 ->disableLabel()
                 ->searchable()
                 ->extraAttributes([
-                    'class' => 'min-w-[16rem]',
+                    'class' => 'min-w-[16rem]'
                 ])
                 ->disablePlaceholderSelection()
                 ->required()
-                ->options(fn () => $this->projectQuery()
-                    ->get()
-                    ->pluck('name', 'id')
-                    ->toArray()),
+                ->options(function () {
+                    return $this->projectQuery()
+                        ->get()
+                        ->pluck('name', 'id')
+                        ->toArray();
+                })
         ];
     }
 
@@ -102,13 +87,12 @@ class RoadMap extends Page implements HasForms
     {
         $data = $this->form->getState();
         $project = $data['selectedProject'];
-        Assert::notNull(Project::where('id', $project)->first());
         $this->project = Project::where('id', $project)->first();
-        $this->dispatch('projectChanged', [
+        $this->dispatchBrowserEvent('projectChanged', [
             'url' => route('road-map.data', $this->project),
             'start_date' => Carbon::parse($this->project->epicsFirstDate)->subYear()->format('Y-m-d'),
             'end_date' => Carbon::parse($this->project->epicsLastDate)->addYear()->format('Y-m-d'),
-            'scroll_to' => Carbon::parse($this->project->epicsFirstDate)->subDays(5)->format('Y-m-d'),
+            'scroll_to' => Carbon::parse($this->project->epicsFirstDate)->subDays(5)->format('Y-m-d')
         ]);
     }
 
@@ -139,16 +123,11 @@ class RoadMap extends Page implements HasForms
 
     private function projectQuery(): Builder
     {
-        Assert::string($user_id = Filament::auth()->id());
-
-        return app(GetBuilderByUserIdAction::class)->execute($user_id);
-        /*
-        return Project::where(static function ($query) {
-            return $query->where('owner_id', auth()->id())
-                ->orWhereHas('users', static function ($query) {
-                    return $query->where('users.id', auth()->id());
+        return Project::where(function ($query) {
+            return $query->where('owner_id', auth()->user()->id)
+                ->orWhereHas('users', function ($query) {
+                    return $query->where('users.id', auth()->user()->id);
                 });
         });
-        */
     }
 }

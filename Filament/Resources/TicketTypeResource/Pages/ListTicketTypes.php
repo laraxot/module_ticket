@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources\TicketTypeResource\Pages;
 
-use Filament\Pages\Actions\CreateAction;
-use Filament\Resources\Pages\ListRecords;
 use Modules\Ticket\Filament\Resources\TicketTypeResource;
+use Filament\Pages\Actions;
+use Filament\Resources\Pages\ListRecords;
 
 class ListTicketTypes extends ListRecords
 {
@@ -15,7 +13,7 @@ class ListTicketTypes extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            Actions\CreateAction::make(),
         ];
     }
 }

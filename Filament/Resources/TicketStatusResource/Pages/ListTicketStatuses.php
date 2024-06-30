@@ -1,14 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources\TicketStatusResource\Pages;
 
-use Filament\Actions\CreateAction;
+use Modules\Ticket\Filament\Resources\TicketStatusResource;
+use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
-use Modules\Ticket\Filament\Resources\TicketStatusResource;
-use Webmozart\Assert\Assert;
 
 class ListTicketStatuses extends ListRecords
 {
@@ -17,14 +14,12 @@ class ListTicketStatuses extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            Actions\CreateAction::make(),
         ];
     }
 
     protected function getTableQuery(): Builder
     {
-        Assert::notNull(parent::getTableQuery());
-
         return parent::getTableQuery()
             ->whereNull('project_id');
     }

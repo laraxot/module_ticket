@@ -1,13 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources\TimesheetResource\Pages;
 
-use Filament\Pages\Actions\DeleteAction;
-use Filament\Pages\Actions\ViewAction;
-use Filament\Resources\Pages\EditRecord;
 use Modules\Ticket\Filament\Resources\TimesheetResource;
+use Filament\Pages\Actions;
+use Filament\Resources\Pages\EditRecord;
 
 class EditTimesheet extends EditRecord
 {
@@ -16,8 +13,8 @@ class EditTimesheet extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            ViewAction::make(),
-            DeleteAction::make(),
+            Actions\ViewAction::make(),
+            Actions\DeleteAction::make(),
         ];
     }
 }

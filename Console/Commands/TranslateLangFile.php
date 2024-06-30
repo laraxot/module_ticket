@@ -1,16 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
-
-use function Safe\json_decode;
-use function Safe\json_encode;
-
 use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class TranslateLangFile extends Command
@@ -31,28 +25,28 @@ class TranslateLangFile extends Command
 
     /**
      * Execute the console command.
+     *
+     * @return int
      */
-    public function handle(): int
+    public function handle()
     {
         $locales = explode(',', $this->argument('locales'));
         foreach ($locales as $locale) {
-            Artisan::call('translatable:export '.$locale);
-            $filePath = lang_path($locale.'.json');
+            Artisan::call('translatable:export ' . $locale);
+            $filePath = lang_path($locale . '.json');
             if (File::exists($filePath)) {
-                $this->info('Translating '.$locale.', please wait...');
+                $this->info('Translating ' . $locale . ', please wait...');
                 $results = [];
                 $localeFile = File::get($filePath);
-                $localeFileContent = array_keys((array) json_decode((string) $localeFile, true, 512, JSON_THROW_ON_ERROR));
+                $localeFileContent = array_keys(json_decode($localeFile, true));
                 $translator = new GoogleTranslate($locale);
                 $translator->setSource('en');
                 foreach ($localeFileContent as $key) {
-                    $results[$key] = $translator->translate((string) $key);
+                    $results[$key] = $translator->translate($key);
                 }
-
                 File::put($filePath, json_encode($results, JSON_UNESCAPED_UNICODE));
             }
         }
-
         return Command::SUCCESS;
     }
 }

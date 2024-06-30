@@ -1,30 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources;
 
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\ColorPicker;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\TextInput;
+use Modules\Ticket\Filament\Resources\TicketTypeResource\Pages;
+use Modules\Ticket\Filament\Resources\TicketTypeResource\RelationManagers;
+use Modules\Ticket\Models\TicketType;
+use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\ColorColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables;
 use Guava\FilamentIconPicker\Forms\IconPicker;
 use Guava\FilamentIconPicker\Tables\IconColumn;
-use Modules\Ticket\Filament\Resources\TicketTypeResource\Pages\CreateTicketType;
-use Modules\Ticket\Filament\Resources\TicketTypeResource\Pages\EditTicketType;
-use Modules\Ticket\Filament\Resources\TicketTypeResource\Pages\ListTicketTypes;
-use Modules\Ticket\Filament\Resources\TicketTypeResource\Pages\ViewTicketType;
-use Modules\Ticket\Models\TicketType;
 
 class TicketTypeResource extends Resource
 {
@@ -53,16 +40,16 @@ class TicketTypeResource extends Resource
     {
         return $form
             ->schema([
-                Card::make()
+                Forms\Components\Card::make()
                     ->schema([
-                        Grid::make()
+                        Forms\Components\Grid::make()
                             ->schema([
-                                TextInput::make('name')
+                                Forms\Components\TextInput::make('name')
                                     ->label(__('Type name'))
                                     ->required()
                                     ->maxLength(255),
 
-                                ColorPicker::make('color')
+                                Forms\Components\ColorPicker::make('color')
                                     ->label(__('Type color'))
                                     ->required(),
 
@@ -70,13 +57,13 @@ class TicketTypeResource extends Resource
                                     ->label(__('Type icon'))
                                     ->required(),
 
-                                Checkbox::make('is_default')
+                                Forms\Components\Checkbox::make('is_default')
                                     ->label(__('Default type'))
                                     ->helperText(
                                         __('If checked, this type will be automatically affected to new tickets')
                                     ),
-                            ]),
-                    ]),
+                            ])
+                    ])
             ]);
     }
 
@@ -84,12 +71,12 @@ class TicketTypeResource extends Resource
     {
         return $table
             ->columns([
-                ColorColumn::make('color')
+                Tables\Columns\ColorColumn::make('color')
                     ->label(__('Type color'))
                     ->sortable()
                     ->searchable(),
 
-                TextColumn::make('name')
+                Tables\Columns\TextColumn::make('name')
                     ->label(__('Type name'))
                     ->sortable()
                     ->searchable(),
@@ -104,36 +91,38 @@ class TicketTypeResource extends Resource
                     ->boolean()
                     ->sortable(),
 
-                TextColumn::make('created_at')
+                Tables\Columns\TextColumn::make('created_at')
                     ->label(__('Created at'))
                     ->dateTime()
                     ->sortable()
                     ->searchable(),
             ])
             ->filters([
+                //
             ])
             ->actions([
-                ViewAction::make(),
-                EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ListTicketTypes::route('/'),
-            'create' => CreateTicketType::route('/create'),
-            'view' => ViewTicketType::route('/{record}'),
-            'edit' => EditTicketType::route('/{record}/edit'),
+            'index' => Pages\ListTicketTypes::route('/'),
+            'create' => Pages\CreateTicketType::route('/create'),
+            'view' => Pages\ViewTicketType::route('/{record}'),
+            'edit' => Pages\EditTicketType::route('/{record}/edit'),
         ];
     }
 }

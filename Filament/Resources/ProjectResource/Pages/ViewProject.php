@@ -1,18 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Resources\ProjectResource\Pages;
 
-use Filament\Actions\Action;
-use Filament\Actions\EditAction;
-use Filament\Resources\Pages\ViewRecord;
 use Modules\Ticket\Filament\Resources\ProjectResource;
-use Modules\Ticket\Models\Project;
+use Filament\Pages\Actions;
+use Filament\Resources\Pages\ViewRecord;
 
-/**
- * @property Project $record
- */
 class ViewProject extends ViewRecord
 {
     protected static string $resource = ProjectResource::class;
@@ -20,21 +13,22 @@ class ViewProject extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Action::make('kanban')
+            Actions\Action::make('kanban')
                 ->label(
-                    fn () => ('scrum' === $this->record->type ? __('Scrum board') : __('Kanban board'))
+                    fn ()
+                    => ($this->record->type === 'scrum' ? __('Scrum board') : __('Kanban board'))
                 )
                 ->icon('heroicon-o-view-columns')
                 ->color('gray')
                 ->url(function () {
-                    if ('scrum' === $this->record->type) {
+                    if ($this->record->type === 'scrum') {
                         return route('filament.pages.scrum/{project}', ['project' => $this->record->id]);
+                    } else {
+                        return route('filament.pages.kanban/{project}', ['project' => $this->record->id]);
                     }
-
-                    return route('filament.pages.kanban/{project}', ['project' => $this->record->id]);
                 }),
 
-            EditAction::make(),
+            Actions\EditAction::make(),
         ];
     }
 }

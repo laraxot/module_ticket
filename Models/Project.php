@@ -1,126 +1,46 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Carbon;
-use Modules\Media\Models\Media;
-use Modules\Ticket\Database\Factories\ProjectFactory;
-use Modules\User\Models\User;
+use Modules\Xot\Datas\XotData;
 use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
-use Webmozart\Assert\Assert;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-/**
- * Modules\Ticket\Models\Project.
- *
- * @property Collection<int, Epic>         $epics
- * @property int|null                      $epics_count
- * @property MediaCollection<int, Media>   $media
- * @property int|null                      $media_count
- * @property User|null                     $owner
- * @property Collection<int, Sprint>       $sprints
- * @property int|null                      $sprints_count
- * @property ProjectStatus|null            $status
- * @property Collection<int, TicketStatus> $statuses
- * @property int|null                      $statuses_count
- * @property Collection<int, Ticket>       $tickets
- * @property int|null                      $tickets_count
- *
- * @method static ProjectFactory  factory($count = null, $state = [])
- * @method static Builder|Project newModelQuery()
- * @method static Builder|Project newQuery()
- * @method static Builder|Project onlyTrashed()
- * @method static Builder|Project query()
- * @method static Builder|Project withTrashed()
- * @method static Builder|Project withoutTrashed()
- *
- * @property int         $id
- * @property string      $name
- * @property string|null $description
- * @property int|null    $owner_id
- * @property int         $status_id
- * @property string      $status_type
- * @property string      $type
- * @property string      $ticket_prefix
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property string|null $deleted_by
- * @property Sprint|null $currentSprint
- * @property Sprint|null $nextSprint
- * @property Carbon|null $epicsFirstDate
- * @property Carbon|null $epicsLastDate
- * @property Collection  $contributors
- *
- * @method static Builder|Project whereCreatedAt($value)
- * @method static Builder|Project whereCreatedBy($value)
- * @method static Builder|Project whereDeletedAt($value)
- * @method static Builder|Project whereDeletedBy($value)
- * @method static Builder|Project whereDescription($value)
- * @method static Builder|Project whereId($value)
- * @method static Builder|Project whereName($value)
- * @method static Builder|Project whereOwnerId($value)
- * @method static Builder|Project whereStatusId($value)
- * @method static Builder|Project whereStatusType($value)
- * @method static Builder|Project whereTicketPrefix($value)
- * @method static Builder|Project whereType($value)
- * @method static Builder|Project whereUpdatedAt($value)
- * @method static Builder|Project whereUpdatedBy($value)
- *
- * @property Collection<int, User> $users
- * @property int|null              $users_count
- * @property mixed                 $cover
- * @property mixed                 $current_sprint
- * @property mixed                 $epics_first_date
- * @property mixed                 $epics_last_date
- * @property mixed                 $next_sprint
- *
- * @mixin \Eloquent
- */
-class Project extends BaseModel implements HasMedia
+class Project extends Model implements HasMedia
 {
-    use InteractsWithMedia;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
 
     protected $fillable = [
-        'name',
-        'description',
-        'status_id',
-        'owner_id',
-        'ticket_prefix',
-        'status_type',
-        'type',
+        'name', 'description', 'status_id', 'owner_id', 'ticket_prefix',
+        'status_type', 'type'
     ];
 
     protected $appends = [
-        'cover',
+        'cover'
     ];
 
     public function owner(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'owner_id', 'id');
+        $user_class=XotData::make()->getUserClass();
+        return $this->belongsTo($user_class, 'owner_id', 'id');
     }
 
     public function status(): BelongsTo
     {
-        return $this->belongsTo(ProjectStatus::class, 'status_id', 'id')
-            ->withTrashed();
+        return $this->belongsTo(ProjectStatus::class, 'status_id', 'id')->withTrashed();
     }
 
-    // -- da fare passando per profile
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'project_users', 'project_id', 'user_id')
+        $user_class=XotData::make()->getUserClass();
+        return $this->belongsToMany($user_class, 'project_users', 'project_id', 'user_id')
             ->withPivot(['role']);
     }
 
@@ -152,7 +72,6 @@ class Project extends BaseModel implements HasMedia
                 if ($firstEpic) {
                     return $firstEpic->starts_at;
                 }
-
                 return now();
             }
         );
@@ -166,7 +85,6 @@ class Project extends BaseModel implements HasMedia
                 if ($firstEpic) {
                     return $firstEpic->ends_at;
                 }
-
                 return now();
             }
         );
@@ -177,9 +95,7 @@ class Project extends BaseModel implements HasMedia
         return new Attribute(
             get: function () {
                 $users = $this->users;
-                Assert::notNull($this->owner);
                 $users->push($this->owner);
-
                 return $users->unique('id');
             }
         );
@@ -188,17 +104,16 @@ class Project extends BaseModel implements HasMedia
     public function cover(): Attribute
     {
         return new Attribute(
-            // get: fn () => $this->media('cover')?->first()->getFullUrl()
-            get: fn () => $this->getFirstMediaUrl('cover')
-            // ??
-            //  'https://ui-avatars.com/api/?background=3f84f3&color=ffffff&name='.$this->name
+            get: fn() => $this->media('cover')?->first()?->getFullUrl()
+                ??
+                'https://ui-avatars.com/api/?background=3f84f3&color=ffffff&name=' . $this->name
         );
     }
 
     public function currentSprint(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->sprints()
+            get: fn() => $this->sprints()
                 ->whereNotNull('started_at')
                 ->whereNull('ended_at')
                 ->first()
@@ -209,7 +124,7 @@ class Project extends BaseModel implements HasMedia
     {
         return new Attribute(
             get: function () {
-                if ($this->currentSprint instanceof Sprint) {
+                if ($this->currentSprint) {
                     return $this->sprints()
                         ->whereNull('started_at')
                         ->whereNull('ended_at')
@@ -217,6 +132,7 @@ class Project extends BaseModel implements HasMedia
                         ->orderBy('starts_at')
                         ->first();
                 }
+                return null;
             }
         );
     }

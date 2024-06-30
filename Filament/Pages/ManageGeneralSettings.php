@@ -1,21 +1,19 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Ticket\Filament\Pages;
 
-use Filament\Actions\Action;
+use Modules\Ticket\Models\Role;
+use Modules\Ticket\Settings\GeneralSettings;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Pages\Actions\Action;
 use Filament\Pages\SettingsPage;
 use Illuminate\Contracts\Support\Htmlable;
-use Modules\Ticket\Settings\GeneralSettings;
-use Modules\User\Models\Role;
-use Webmozart\Assert\Assert;
 
 class ManageGeneralSettings extends SettingsPage
 {
@@ -25,12 +23,7 @@ class ManageGeneralSettings extends SettingsPage
 
     public static function shouldRegisterNavigation(): bool
     {
-        $user = auth()->user();
-        if (null === $user) {
-            return false;
-        }
-
-        return $user->can('Manage general settings');
+        return auth()->user()->can('Manage general settings');
     }
 
     public function getHeading(): string|Htmlable
@@ -50,10 +43,8 @@ class ManageGeneralSettings extends SettingsPage
 
     protected function getFormSchema(): array
     {
-        Assert::integer($max_file_size = config('system.max_file_size'));
-
         return [
-            Section::make()
+            Card::make()
                 ->schema([
                     Grid::make(3)
                         ->schema([
@@ -62,7 +53,7 @@ class ManageGeneralSettings extends SettingsPage
                                 ->helperText(__('This is the platform logo (e.g. Used in site favicon)'))
                                 ->image()
                                 ->columnSpan(1)
-                                ->maxSize($max_file_size),
+                                ->maxSize(config('system.max_file_size')),
 
                             Grid::make(1)
                                 ->columnSpan(2)
@@ -70,7 +61,7 @@ class ManageGeneralSettings extends SettingsPage
                                     TextInput::make('site_name')
                                         ->label(__('Site name'))
                                         ->helperText(__('This is the platform name'))
-                                        ->default(static fn () => config('app.name'))
+                                        ->default(fn() => config('app.name'))
                                         ->required(),
 
                                     Toggle::make('enable_registration')
@@ -94,13 +85,12 @@ class ManageGeneralSettings extends SettingsPage
                                         ->helperText(__('The language used by the platform.'))
                                         ->searchable()
                                         ->options($this->getLanguages()),
-                                    /*
+
                                     Select::make('default_role')
                                         ->label(__('Default role'))
                                         ->helperText(__('The platform default role (used mainly in OIDC Connect).'))
                                         ->searchable()
                                         ->options(Role::all()->pluck('name', 'id')->toArray()),
-                                    */
                                 ]),
                         ]),
                 ]),
@@ -114,9 +104,8 @@ class ManageGeneralSettings extends SettingsPage
 
     private function getLanguages(): array
     {
-        Assert::isArray($languages = config('system.locales.list'));
+        $languages = config('system.locales.list');
         asort($languages);
-
         return $languages;
     }
 }
