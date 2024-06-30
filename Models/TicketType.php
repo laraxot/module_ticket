@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TicketType extends Model
+class TicketType extends BaseModel
 {
-    use HasFactory, SoftDeletes;
+    
 
     protected $fillable = [
         'name', 'color', 'icon', 'is_default'

@@ -16,9 +16,10 @@ use Modules\Ticket\Notifications\TicketStatusUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Ticket extends Model implements HasMedia
+class Ticket extends BaseModel implements HasMedia
 {
-    use HasFactory, SoftDeletes, InteractsWithMedia;
+    
+    use InteractsWithMedia;
 
     protected $fillable = [
         'name', 'content', 'owner_id', 'responsible_id',

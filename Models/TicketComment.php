@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Ticket\Notifications\TicketStatusUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class TicketComment extends Model
+class TicketComment extends BaseModel
 {
-    use HasFactory, SoftDeletes;
+    
 
     protected $fillable = [
         'user_id', 'ticket_id', 'content'

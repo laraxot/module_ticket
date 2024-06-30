@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TicketStatus extends Model
+class TicketStatus extends BaseModel
 {
-    use HasFactory, SoftDeletes;
+    
 
     protected $fillable = [
         'name', 'color', 'is_default', 'order',

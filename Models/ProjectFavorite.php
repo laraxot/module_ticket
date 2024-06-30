@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ProjectFavorite extends Model
+class ProjectFavorite extends BasePivot
 {
-    use HasFactory;
+    
 
     protected $fillable = [
         'user_id', 'project_id'

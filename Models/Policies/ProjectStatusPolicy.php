@@ -18,7 +18,8 @@ class ProjectStatusPolicy
      */
     public function viewAny(UserContract $user)
     {
-        return $user->can('List project statuses');
+        return true;
+        //return $user->can('List project statuses');
     }
 
     /**

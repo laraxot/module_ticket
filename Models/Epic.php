@@ -9,12 +9,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Epic extends Model
+class Epic extends BaseModel
 {
-    use HasFactory, SoftDeletes;
+    
 
     protected $fillable = [
-        'name', 'project_id', 'starts_at', 'ends_at',
+        'name', 
+        'project_id', 
+        'starts_at', 'ends_at',
         'parent_id'
     ];
 

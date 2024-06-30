@@ -18,7 +18,8 @@ class TicketStatusPolicy
      */
     public function viewAny(UserContract $user)
     {
-        return $user->can('List ticket statuses');
+        return true;
+        //return $user->can('List ticket statuses');
     }
 
     /**

@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProjectStatus extends Model
+class ProjectStatus extends BaseModel
 {
-    use HasFactory, SoftDeletes;
+    
 
     protected $fillable = [
         'name', 'color', 'is_default'

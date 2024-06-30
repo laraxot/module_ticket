@@ -19,7 +19,8 @@ class PermissionPolicy
      */
     public function viewAny(UserContract $user)
     {
-        return $user->can('List permissions');
+        return true;
+        //return $user->can('List permissions');
     }
 
     /**

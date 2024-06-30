@@ -13,9 +13,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Project extends Model implements HasMedia
+class Project extends BaseModel implements HasMedia
 {
-    use HasFactory, SoftDeletes, InteractsWithMedia;
+    //use HasFactory, SoftDeletes, InteractsWithMedia;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'name', 'description', 'status_id', 'owner_id', 'ticket_prefix',

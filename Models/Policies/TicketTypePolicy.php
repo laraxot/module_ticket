@@ -18,7 +18,8 @@ class TicketTypePolicy
      */
     public function viewAny(UserContract $user)
     {
-        return $user->can('List ticket types');
+        return true;
+        //return $user->can('List ticket types');
     }
 
     /**

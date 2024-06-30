@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
+use Modules\Ticket\Models\Epic;
 use Illuminate\Database\Schema\Blueprint;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
 /**
  * Class .
  */
-class CreateEpicsTable extends XotBaseMigration
+class CreateTicketEpicsTable extends XotBaseMigration
 {
+    protected ?string $model_class = Epic::class;
     /**
      * Run the migrations.
      */
@@ -24,8 +26,6 @@ class CreateEpicsTable extends XotBaseMigration
                 $table->string('name');
                 $table->date('starts_at');
                 $table->date('ends_at');
-                $table->timestamps();
-                $table->softDeletes();
             }
         );
         // -- UPDATE --

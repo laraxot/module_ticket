@@ -17,7 +17,8 @@ class UserPolicy
      */
     public function viewAny(UserContract $user)
     {
-        return $user->can('List users');
+        return true;
+        //return $user->can('List users');
     }
 
     /**

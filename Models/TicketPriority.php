@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TicketPriority extends Model
+class TicketPriority extends BaseModel
 {
-    use HasFactory, SoftDeletes;
+    
 
     protected $fillable = [
         'name', 'color', 'is_default'

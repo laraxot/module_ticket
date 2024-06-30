@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class TicketActivity extends Model
+class TicketActivity extends BaseModel
 {
-    use HasFactory;
+    
 
     protected $fillable = [
-        'ticket_id', 'old_status_id', 'new_status_id', 'user_id'
+        'ticket_id', 
+        'old_status_id', 
+        'new_status_id', 
+        'user_id'
     ];
 
     public function ticket(): BelongsTo

@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class TicketRelation extends Model
+class TicketRelation extends BaseModel
 {
-    use HasFactory;
+    
 
     protected $fillable = [
         'ticket_id', 'type', 'relation_id', 'sort'

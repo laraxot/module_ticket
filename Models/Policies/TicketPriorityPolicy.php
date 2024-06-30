@@ -18,7 +18,8 @@ class TicketPriorityPolicy
      */
     public function viewAny(UserContract $user)
     {
-        return $user->can('List ticket priorities');
+        return true;
+        //return $user->can('List ticket priorities');
     }
 
     /**

@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class TicketHour extends Model
+class TicketHour extends BaseModel
 {
-    use HasFactory;
+    
 
     protected $fillable = [
         'user_id', 'ticket_id', 'value', 'comment', 'activity_id'

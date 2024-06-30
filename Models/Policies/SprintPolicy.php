@@ -18,7 +18,8 @@ class SprintPolicy
      */
     public function viewAny(UserContract $user)
     {
-        return $user->can('List sprints');
+        return true;
+        //return $user->can('List sprints');
     }
 
     /**

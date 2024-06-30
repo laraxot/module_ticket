@@ -18,7 +18,8 @@ class RolePolicy
      */
     public function viewAny(UserContract $user)
     {
-        return $user->can('List roles');
+        return true;
+        //return $user->can('List roles');
     }
 
     /**
