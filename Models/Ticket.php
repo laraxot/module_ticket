@@ -30,7 +30,7 @@ class Ticket extends BaseModel implements HasMedia
     public static function boot()
     {
         parent::boot();
-
+        /*
         static::creating(function (Ticket $item) {
             $project = Project::where('id', $item->project_id)->first();
             $count = Ticket::where('project_id', $project->id)->count();
@@ -38,7 +38,7 @@ class Ticket extends BaseModel implements HasMedia
             $item->code = $project->ticket_prefix . '-' . ($count + 1);
             $item->order = $order + 1;
         });
-
+        */
         static::created(function (Ticket $item) {
             if ($item->sprint_id && $item->sprint->epic_id) {
                 Ticket::where('id', $item->id)->update(['epic_id' => $item->sprint->epic_id]);

@@ -26,6 +26,9 @@ use Modules\User\Models\Traits\IsProfileTrait;
 use Modules\User\Models\User;
 use Modules\Xot\Contracts\ModelProfileContract;
 use Spatie\Permission\Traits\HasRoles;
+use Modules\User\Models\BaseProfile as UserBaseProfile;
+
+
 
 /**
  * Modules\Ticket\Models\Profile.
@@ -97,19 +100,12 @@ use Spatie\Permission\Traits\HasRoles;
  *
  * @mixin \Eloquent
  */
-class Profile extends BaseModel implements ModelProfileContract
+class Profile extends UserBaseProfile
 {
-    // use PrivacyTrait;
-    use HasFactory;
-    use HasRoles;
-    // use GeoTrait;
-    // use HasProfileTrait;
-    use IsProfileTrait;
-
-    // use WidgetTrait;
-
-    // protected $connection = 'quaeris';
-
+    
+    /** @var string */
+    protected $connection = 'ticket';
+    
     /** @var array<int, string> */
     protected $fillable = ['id', 'user_id', 'phone', 'email', 'bio'];
 
