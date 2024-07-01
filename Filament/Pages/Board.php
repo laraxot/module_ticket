@@ -17,7 +17,7 @@ class Board extends Page implements HasForms
 
     protected static ?string $navigationIcon = 'heroicon-o-view-columns';
 
-    protected static string $view = 'filament.pages.board';
+    protected static string $view = 'ticket::filament.pages.board';
 
     protected static ?string $slug = 'board';
 
