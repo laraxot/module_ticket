@@ -16,6 +16,14 @@ use Modules\Ticket\Notifications\TicketStatusUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * Modules\Ticket\Models\Ticket.
+ *
+ * @property string                 $name
+ * 
+ * @mixin \Eloquent
+ */
+
 class Ticket extends BaseModel implements HasMedia
 {
     
