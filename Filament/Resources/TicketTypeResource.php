@@ -60,33 +60,33 @@ class TicketTypeResource extends Resource
                                     ->label(__('Type icon'))
                                     ->required(),
                                 */
-                                Forms\Components\TextInput::make('icon')
-                                    ->suffixAction(
-                                        \Filament\Forms\Components\Actions\Action::make('icon')
+                                // Forms\Components\TextInput::make('icon')
+                                //     ->suffixAction(
+                                //         \Filament\Forms\Components\Actions\Action::make('icon')
                                         
-                                        ->icon(fn(string $state)=>$state)
-                                        ->form([
-                                            Forms\Components\TextInput::make('iconx')
-                                            ->default(fn($get)=>dddx($get('icon')))
-                                            ->suffixAction(
-                                                \Filament\Forms\Components\Actions\Action::make('choose')
-                                                ->icon('heroicon-o-academic-cap')
-                                            )->suffixAction(
-                                                \Filament\Forms\Components\Actions\Action::make('choose1')
-                                                ->icon('heroicon-o-adjustments-horizontal')
-                                            )->suffixAction(
-                                                \Filament\Forms\Components\Actions\Action::make('choose2')
-                                                ->icon('heroicon-o-adjustments-horizontal')
-                                            )->suffixAction(
-                                                \Filament\Forms\Components\Actions\Action::make('choose3')
-                                                ->icon('heroicon-o-adjustments-horizontal')
-                                            )->suffixAction(
-                                                \Filament\Forms\Components\Actions\Action::make('choose4')
-                                                ->icon('heroicon-o-adjustments-horizontal')
-                                            )
-                                        ])  
+                                //         ->icon(fn(string $state)=>$state)
+                                //         ->form([
+                                //             Forms\Components\TextInput::make('iconx')
+                                //             ->default(fn($get)=>dddx($get('icon')))
+                                //             ->suffixAction(
+                                //                 \Filament\Forms\Components\Actions\Action::make('choose')
+                                //                 ->icon('heroicon-o-academic-cap')
+                                //             )->suffixAction(
+                                //                 \Filament\Forms\Components\Actions\Action::make('choose1')
+                                //                 ->icon('heroicon-o-adjustments-horizontal')
+                                //             )->suffixAction(
+                                //                 \Filament\Forms\Components\Actions\Action::make('choose2')
+                                //                 ->icon('heroicon-o-adjustments-horizontal')
+                                //             )->suffixAction(
+                                //                 \Filament\Forms\Components\Actions\Action::make('choose3')
+                                //                 ->icon('heroicon-o-adjustments-horizontal')
+                                //             )->suffixAction(
+                                //                 \Filament\Forms\Components\Actions\Action::make('choose4')
+                                //                 ->icon('heroicon-o-adjustments-horizontal')
+                                //             )
+                                //         ])  
 
-                                    ),
+                                //     ),
                                 Forms\Components\Checkbox::make('is_default')
                                     ->label(__('Default type'))
                                     ->helperText(
@@ -94,52 +94,6 @@ class TicketTypeResource extends Resource
                                     ),
                             ])
                     ])
-            ]);
-    }
-
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                Tables\Columns\ColorColumn::make('color')
-                    ->label(__('Type color'))
-                    ->sortable()
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('name')
-                    ->label(__('Type name'))
-                    ->sortable()
-                    ->searchable(),
-                /*
-                IconColumn::make('icon')
-                    ->label(__('Type icon'))
-                    ->sortable()
-                    ->searchable(),
-                */
-                IconColumn::make('icon')
-                    ->icon(fn(string $state)=>$state)
-                    ,
-
-                IconColumn::make('is_default')
-                    ->label(__('Default type'))
-                    ->boolean()
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('Created at'))
-                    ->dateTime()
-                    ->sortable()
-                    ->searchable(),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 

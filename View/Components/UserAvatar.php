@@ -2,9 +2,9 @@
 
 namespace Modules\Ticket\View\Components;
 
-use Modules\Ticket\Models\User;
-use Illuminate\Contracts\Auth\Authenticatable;
+use Modules\User\Models\User;
 use Illuminate\View\Component;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class UserAvatar extends Component
 {

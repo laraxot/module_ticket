@@ -2,15 +2,16 @@
 
 namespace Modules\Ticket\Notifications;
 
+use Webmozart\Assert\Assert;
+use Illuminate\Bus\Queueable;
+use Modules\Ticket\Models\User;
 use Modules\Ticket\Models\Ticket;
 use Modules\Ticket\Models\TicketActivity;
-use Modules\Ticket\Models\User;
 use Filament\Notifications\Actions\Action;
-use Filament\Notifications\Notification as FilamentNotification;
-use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
+use Filament\Notifications\Notification as FilamentNotification;
 
 class TicketStatusUpdated extends Notification implements ShouldQueue
 {
@@ -28,7 +29,7 @@ class TicketStatusUpdated extends Notification implements ShouldQueue
     public function __construct(Ticket $ticket)
     {
         $this->ticket = $ticket;
-        $this->activity = $this->ticket->activities->last();
+        $this->activity = Assert::notNull($this->ticket->activities->last());
     }
 
     /**
