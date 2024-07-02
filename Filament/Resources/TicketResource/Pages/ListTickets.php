@@ -102,7 +102,7 @@ class ListTickets extends ListRecords
         return $columns;
     }
 
-    public function getTaleFilters(): array
+    public function getTableFilters(): array
     {
         return [
                 /*
