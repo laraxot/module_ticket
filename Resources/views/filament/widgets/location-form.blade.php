@@ -4,11 +4,11 @@
     {{ $this->form }} 
 
 
-    Lat-lng <br/>
+    {{-- Lat-lng <br/>
     lat:{{ $lat }}<br/>
     lng:{{ $lng }}<br/>
     err_code:{{ $err_code }}<br/>
-    err_message:{{ $err_message }}<br/>
+    err_message:{{ $err_message }}<br/> --}}
 
 
 
