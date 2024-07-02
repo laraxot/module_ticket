@@ -1,0 +1,68 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Ticket\Models;
+
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
+
+/**
+ * Modules\Ticket\Models\Priority.
+ *
+ * @property int                     $id
+ * @property string                  $name
+ * @property string|null             $color
+ * @property Carbon|null             $created_at
+ * @property Carbon|null             $updated_at
+ * @property Carbon|null             $deleted_at
+ * @property Collection<int, Ticket> $tickets
+ * @property int|null                $tickets_count
+ *
+ * @method static Builder|Priority newModelQuery()
+ * @method static Builder|Priority newQuery()
+ * @method static Builder|Priority onlyTrashed()
+ * @method static Builder|Priority query()
+ * @method static Builder|Priority whereColor($value)
+ * @method static Builder|Priority whereCreatedAt($value)
+ * @method static Builder|Priority whereDeletedAt($value)
+ * @method static Builder|Priority whereId($value)
+ * @method static Builder|Priority whereName($value)
+ * @method static Builder|Priority whereUpdatedAt($value)
+ * @method static Builder|Priority withTrashed()
+ * @method static Builder|Priority withoutTrashed()
+ *
+ * @mixin \Eloquent
+ */
+class Priority extends Model
+{
+    use SoftDeletes;
+
+    public $table = 'priorities';
+
+    /**
+     * @var string[]
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    protected $fillable = [
+        'name',
+        'color',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    public function tickets(): HasMany
+    {
+        return $this->hasMany(Ticket::class, 'priority_id', 'id');
+    }
+}
