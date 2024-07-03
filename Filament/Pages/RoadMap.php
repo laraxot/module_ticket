@@ -17,7 +17,7 @@ class RoadMap extends Page implements HasForms
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
-    protected static string $view = 'filament.pages.road-map';
+    protected static string $view = 'ticket::filament.pages.road-map';
 
     protected static ?string $slug = 'road-map';
 
@@ -123,11 +123,13 @@ class RoadMap extends Page implements HasForms
 
     private function projectQuery(): Builder
     {
+
         return Project::where(function ($query) {
             return $query->where('owner_id', auth()->user()->id)
-                ->orWhereHas('users', function ($query) {
-                    return $query->where('users.id', auth()->user()->id);
-                });
+                //->orWhereHas('users', function ($query) {
+                //    return $query->where('users.id', auth()->user()->id);
+                //})
+                ;
         });
     }
 }

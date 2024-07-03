@@ -1,32 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Models\Policies;
 
 use Modules\Ticket\Models\Sprint;
+use Modules\User\Models\Policies\UserBasePolicy;
 use Modules\Xot\Contracts\UserContract;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
-class SprintPolicy
+class SprintPolicy extends UserBasePolicy
 {
-    use HandlesAuthorization;
-
     /**
      * Determine whether the user can view any models.
      *
      * @param \App\Models\UserContract $user
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(UserContract $user)
     {
         return true;
-        //return $user->can('List sprints');
+        // return $user->can('List sprints');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param \App\Models\UserContract $user
-     * @param \App\Models\Sprint $sprint
+     * @param \App\Models\Sprint       $sprint
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(UserContract $user, Sprint $sprint)
@@ -34,8 +36,7 @@ class SprintPolicy
         return $user->can('View sprint')
             && (
                 $sprint->project->owner_id === $user->id
-                ||
-                $sprint->project->users()->where('users.id', $user->id)->count()
+                || $sprint->project->profiles()->where('users.id', $user->id)->count()
             );
     }
 
@@ -43,6 +44,7 @@ class SprintPolicy
      * Determine whether the user can create models.
      *
      * @param \App\Models\UserContract $user
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(UserContract $user)
@@ -54,7 +56,8 @@ class SprintPolicy
      * Determine whether the user can update the model.
      *
      * @param \App\Models\UserContract $user
-     * @param \App\Models\Sprint $sprint
+     * @param \App\Models\Sprint       $sprint
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(UserContract $user, Sprint $sprint)
@@ -62,8 +65,7 @@ class SprintPolicy
         return $user->can('Update sprint')
             && (
                 $sprint->project->owner_id === $user->id
-                ||
-                $sprint->project->users()->where('users.id', $user->id)
+                || $sprint->project->profiles()->where('users.id', $user->id)
                     ->where('role', config('system.projects.affectations.roles.can_manage'))
                     ->count()
             );
@@ -73,7 +75,8 @@ class SprintPolicy
      * Determine whether the user can delete the model.
      *
      * @param \App\Models\UserContract $user
-     * @param \App\Models\Sprint $sprint
+     * @param \App\Models\Sprint       $sprint
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(UserContract $user, Sprint $sprint)

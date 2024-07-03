@@ -2,14 +2,15 @@
 
 namespace Modules\Ticket\Models\Policies;
 
-use Modules\Xot\Contracts\UserContract;
 use Modules\Ticket\Models\Project;
+use Modules\Xot\Contracts\UserContract;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Modules\User\Models\Policies\UserBasePolicy;
 
 
-class ProjectPolicy
+class ProjectPolicy extends UserBasePolicy
 {
-    use HandlesAuthorization;
+
 
     /**
      * Determine whether the user can view any models.
@@ -36,7 +37,7 @@ class ProjectPolicy
             && (
                 $project->owner_id === $user->id
                 ||
-                $project->users()->where('users.id', $user->id)->count()
+                $project->profiles()->where('users.id', $user->id)->count()
             );
     }
 
@@ -64,7 +65,7 @@ class ProjectPolicy
             && (
                 $project->owner_id === $user->id
                 ||
-                $project->users()->where('users.id', $user->id)
+                $project->profiles()->where('users.id', $user->id)
                     ->where('role', config('system.projects.affectations.roles.can_manage'))
                     ->count()
             );

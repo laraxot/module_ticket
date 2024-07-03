@@ -19,7 +19,7 @@ class Kanban extends Page implements HasForms
 
     protected static ?string $slug = 'kanban/{project}';
 
-    protected static string $view = 'filament.pages.kanban';
+    protected static string $view = 'ticket::filament.pages.kanban';
 
     protected static bool $shouldRegisterNavigation = false;
 
@@ -36,7 +36,7 @@ class Kanban extends Page implements HasForms
         } elseif (
             $this->project->owner_id != auth()->user()->id
             &&
-            !$this->project->users->where('id', auth()->user()->id)->count()
+            !$this->project->profiles->where('id', auth()->user()->id)->count()
         ) {
             abort(403);
         }

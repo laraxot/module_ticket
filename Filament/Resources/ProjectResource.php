@@ -175,10 +175,13 @@ class ProjectResource extends Resource
                     ->sortable()
                     ->searchable(),
 
+                /*
                 Tables\Columns\TagsColumn::make('users.name')
                     ->label(__('Affected users'))
                     ->limit(2),
-
+                */
+                // Tables\Columns\TextColumn::make('users.name'),
+                /*
                 Tables\Columns\BadgeColumn::make('type')
                     ->enum([
                         'kanban' => __('Kanban'),
@@ -188,7 +191,8 @@ class ProjectResource extends Resource
                         'secondary' => 'kanban',
                         'warning' => 'scrum',
                     ]),
-
+                */
+                Tables\Columns\TextColumn::make('type'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(__('Created at'))
                     ->dateTime()
@@ -196,11 +200,12 @@ class ProjectResource extends Resource
                     ->searchable(),
             ])
             ->filters([
+                /*
                 Tables\Filters\SelectFilter::make('owner_id')
                     ->label(__('Owner'))
                     ->multiple()
                     ->options(fn () => User::all()->pluck('name', 'id')->toArray()),
-
+                */
                 Tables\Filters\SelectFilter::make('status_id')
                     ->label(__('Status'))
                     ->multiple()
@@ -209,7 +214,7 @@ class ProjectResource extends Resource
             ->actions([
                 Tables\Actions\Action::make('favorite')
                     ->label('')
-                    ->icon('heroicon-o-star')
+                    ->icon('heroicon-o-magnifying-glassstar')
                     ->color(fn ($record) => auth()->user()->favoriteProjects()
                         ->where('projects.id', $record->id)->count() ? 'success' : 'default')
                     ->action(function ($record) {
@@ -234,7 +239,7 @@ class ProjectResource extends Resource
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\Action::make('exportLogHours')
                         ->label(__('Export hours'))
-                        ->icon('heroicon-o-document-arrow-down')
+                        ->icon('heroicon-o-magnifying-glassdocument-arrow-down')
                         ->color('gray')
                         ->action(fn ($record) => Excel::download(
                             new ProjectHoursExport($record),
@@ -267,7 +272,7 @@ class ProjectResource extends Resource
     {
         return [
             RelationManagers\SprintsRelationManager::class,
-            RelationManagers\UsersRelationManager::class,
+            // RelationManagers\UsersRelationManager::class,
             RelationManagers\StatusesRelationManager::class,
         ];
     }

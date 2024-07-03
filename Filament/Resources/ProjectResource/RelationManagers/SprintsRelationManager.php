@@ -133,7 +133,7 @@ class SprintsRelationManager extends RelationManager
                     ->requiresConfirmation()
                     ->color('success')
                     ->button()
-                    ->icon('heroicon-o-play')
+                    ->icon('heroicon-o-magnifying-glassplay')
                     ->action(function ($record) {
                         $now = now();
                         Sprint::where('project_id', $record->project_id)
@@ -171,7 +171,7 @@ class SprintsRelationManager extends RelationManager
                     ->requiresConfirmation()
                     ->color('danger')
                     ->button()
-                    ->icon('heroicon-o-pause')
+                    ->icon('heroicon-o-magnifying-glasspause')
                     ->action(function ($record) {
                         $now = now();
                         $record->ended_at = $now;

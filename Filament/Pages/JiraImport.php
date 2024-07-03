@@ -24,7 +24,7 @@ class JiraImport extends Page implements HasForms
 
     protected static ?string $navigationIcon = 'heroicon-o-cloud-arrow-down';
 
-    protected static string $view = 'filament.pages.jira-import';
+    protected static string $view = 'ticket::filament.pages.jira-import';
 
     protected static ?string $slug = 'jira-import';
 

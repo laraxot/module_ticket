@@ -26,6 +26,6 @@ class TicketPriority extends Component
      */
     public function render()
     {
-        return view('components.ticket-priority');
+        return view('ticket::components.ticket-priority');
     }
 }

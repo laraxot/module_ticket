@@ -89,7 +89,7 @@ class LatestActivities extends BaseWidget
 
             Tables\Columns\TextColumn::make('user.name')
                 ->label(__('Changed by'))
-                ->formatStateUsing(fn($record) => view('components.user-avatar', ['user' => $record->user])),
+                ->formatStateUsing(fn($record) => view('ticket::components.user-avatar', ['user' => $record->user])),
 
             Tables\Columns\TextColumn::make('created_at')
                 ->label(__('Performed at'))

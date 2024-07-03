@@ -7,7 +7,7 @@ use Modules\Ticket\Models\Project;
 use Filament\Facades\Filament;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Pages\Actions\Action;
+use Filament\Actions\Action;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 
@@ -19,7 +19,7 @@ class Scrum extends Page implements HasForms
 
     protected static ?string $slug = 'scrum/{project}';
 
-    protected static string $view = 'filament.pages.scrum';
+    protected static string $view = 'ticket::filament.pages.scrum';
 
     protected static bool $shouldRegisterNavigation = false;
 
@@ -36,7 +36,7 @@ class Scrum extends Page implements HasForms
         } elseif (
             $this->project->owner_id != auth()->user()->id
             &&
-            !$this->project->users->where('id', auth()->user()->id)->count()
+            !$this->project->profiles->where('id', auth()->user()->id)->count()
         ) {
             abort(403);
         }

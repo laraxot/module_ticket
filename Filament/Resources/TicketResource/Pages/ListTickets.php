@@ -60,13 +60,13 @@ class ListTickets extends ListRecords
             Tables\Columns\TextColumn::make('owner.name')
                 ->label(__('Owner'))
                 ->sortable()
-                ->formatStateUsing(fn ($record) => view('components.user-avatar', ['user' => $record->owner]))
+                ->formatStateUsing(fn ($record) => view('ticket::components.user-avatar', ['user' => $record->owner]))
                 ->searchable(),
 
             Tables\Columns\TextColumn::make('responsible.name')
                 ->label(__('Responsible'))
                 ->sortable()
-                ->formatStateUsing(fn ($record) => view('components.user-avatar', ['user' => $record->responsible]))
+                ->formatStateUsing(fn ($record) => view('ticket::components.user-avatar', ['user' => $record->responsible]))
                 ->searchable(),
 
             Tables\Columns\TextColumn::make('status.name')
@@ -84,7 +84,7 @@ class ListTickets extends ListRecords
             Tables\Columns\TextColumn::make('type.name')
                 ->label(__('Type'))
                 ->formatStateUsing(
-                    fn ($record) => view('partials.filament.resources.ticket-type', ['state' => $record->type])
+                    fn ($record) => view('ticket::partials.filament.resources.ticket-type', ['state' => $record->type])
                 )
                 ->sortable()
                 ->searchable(),

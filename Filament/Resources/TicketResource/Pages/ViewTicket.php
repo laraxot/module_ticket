@@ -28,7 +28,7 @@ class ViewTicket extends ViewRecord implements HasForms
 
     protected static string $resource = TicketResource::class;
 
-    protected static string $view = 'filament.resources.tickets.view';
+    protected static string $view = 'ticket::filament.resources.tickets.view';
 
     public string $tab = 'comments';
 
@@ -56,7 +56,7 @@ class ViewTicket extends ViewRecord implements HasForms
                         'danger'
                         : 'success'
                 )
-                ->icon('heroicon-o-bell')
+                ->icon('heroicon-o-magnifying-glassbell')
                 ->button()
                 ->action(function () {
                     if (
@@ -79,7 +79,7 @@ class ViewTicket extends ViewRecord implements HasForms
                 ->label(__('Share'))
                 ->color('gray')
                 ->button()
-                ->icon('heroicon-o-share')
+                ->icon('heroicon-o-magnifying-glassshare')
                 ->action(fn() => $this->dispatchBrowserEvent('shareTicket', [
                     'url' => route('filament.resources.tickets.share', $this->record->code)
                 ])),
@@ -128,7 +128,7 @@ class ViewTicket extends ViewRecord implements HasForms
             Actions\ActionGroup::make([
                 Actions\Action::make('exportLogHours')
                     ->label(__('Export time logged'))
-                    ->icon('heroicon-o-document-arrow-down')
+                    ->icon('heroicon-o-magnifying-glassdocument-arrow-down')
                     ->color('warning')
                     ->visible(
                         fn() => $this->record->watchers->where('id', auth()->user()->id)->count()
@@ -191,7 +191,7 @@ class ViewTicket extends ViewRecord implements HasForms
     {
         return $this->record
                 ->project
-                ->users()
+                ->profiles()
                 ->where('users.id', auth()->user()->id)
                 ->where('role', 'administrator')
                 ->count() != 0;

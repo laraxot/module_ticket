@@ -79,7 +79,7 @@ class LatestComments extends BaseWidget
 
             Tables\Columns\TextColumn::make('user.name')
                 ->label(__('Owner'))
-                ->formatStateUsing(fn($record) => view('components.user-avatar', ['user' => $record->user])),
+                ->formatStateUsing(fn($record) => view('ticket::components.user-avatar', ['user' => $record->user])),
 
             Tables\Columns\TextColumn::make('created_at')
                 ->label(__('Commented at'))

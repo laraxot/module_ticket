@@ -22,7 +22,7 @@ class TicketTypeSeeder extends Seeder
         ],
         [
             'name' => 'Bug',
-            'icon' => 'heroicon-o-x-mark',
+            'icon' => 'heroicon-o-magnifying-glassx-mark',
             'color' => '#ff0000',
             'is_default' => false
         ],

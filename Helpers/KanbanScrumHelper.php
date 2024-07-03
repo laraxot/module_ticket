@@ -112,10 +112,10 @@ trait KanbanScrumHelper
         }
         $query->with(['project', 'owner', 'responsible', 'status', 'type', 'priority', 'epic']);
         $query->where('project_id', $this->project->id);
-        if (sizeof($this->users)) {
+        if (sizeof($this->profiles)) {
             $query->where(function ($query) {
-                return $query->whereIn('owner_id', $this->users)
-                    ->orWhereIn('responsible_id', $this->users);
+                return $query->whereIn('owner_id', $this->profiles)
+                    ->orWhereIn('responsible_id', $this->profiles);
             });
         }
         if (sizeof($this->types)) {

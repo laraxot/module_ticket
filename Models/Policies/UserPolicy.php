@@ -1,31 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Models\Policies;
 
+use Modules\User\Models\Policies\UserBasePolicy;
 use Modules\Xot\Contracts\UserContract;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class UserPolicy extends UserBasePolicy
 {
-    use HandlesAuthorization;
-
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \Modules\Xot\Contracts\UserContract  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(UserContract $user)
     {
         return true;
-        //return $user->can('List users');
+        // return $user->can('List users');
     }
 
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \Modules\Xot\Contracts\UserContract  $user
-     * @param  \Modules\Xot\Contracts\UserContract  $model
+     * @param \Modules\Xot\Contracts\UserContract $model
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(UserContract $user, User $model)
@@ -36,7 +35,6 @@ class UserPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \Modules\Xot\Contracts\UserContract  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(UserContract $user)
@@ -47,8 +45,8 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \Modules\Xot\Contracts\UserContract  $user
-     * @param  \Modules\Xot\Contracts\UserContract  $model
+     * @param \Modules\Xot\Contracts\UserContract $model
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(UserContract $user, User $model)
@@ -59,8 +57,8 @@ class UserPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \Modules\Xot\Contracts\UserContract  $user
-     * @param  \Modules\Xot\Contracts\UserContract  $model
+     * @param \Modules\Xot\Contracts\UserContract $model
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(UserContract $user, User $model)

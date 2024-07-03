@@ -26,6 +26,6 @@ class TicketType extends Component
      */
     public function render()
     {
-        return view('components.ticket-type');
+        return view('ticket::components.ticket-type');
     }
 }

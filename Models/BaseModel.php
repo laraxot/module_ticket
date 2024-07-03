@@ -38,7 +38,7 @@ abstract class BaseModel extends Model
     protected $perPage = 30;
 
     /** @var string */
-    protected $connection = 'ticket'; // this will use the specified database conneciton
+    protected $connection = 'ticket';
 
     /** @var array<int, string> */
     protected $fillable = ['id'];

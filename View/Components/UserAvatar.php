@@ -27,6 +27,6 @@ class UserAvatar extends Component
      */
     public function render()
     {
-        return view('components.user-avatar');
+        return view('ticket::components.user-avatar');
     }
 }

@@ -70,7 +70,7 @@ class LatestTickets extends BaseWidget
                         ' . ($record->responsible ? '
                         <div class="flex items-center gap-3">
                             <div class="flex items-center gap-1 text-xs text-gray-400">'
-                        . view('components.user-avatar', ['user' => $record->responsible])
+                        . view('ticket::components.user-avatar', ['user' => $record->responsible])
                         . '<span>' . $record->responsible?->name . '</span>'
                         . '</div>
                         </div>' : '') . '
@@ -89,7 +89,7 @@ class LatestTickets extends BaseWidget
 
             Tables\Columns\TextColumn::make('type.name')
                 ->label(__('Type'))
-                ->formatStateUsing(fn($record) => view('components.ticket-type', ['type' => $record->type])),
+                ->formatStateUsing(fn($record) => view('ticket::components.ticket-type', ['type' => $record->type])),
 
             Tables\Columns\TextColumn::make('priority.name')
                 ->label(__('Priority'))

@@ -1,36 +1,37 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Xot\Datas\XotData;
 use Spatie\MediaLibrary\HasMedia;
-use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
 
 class Project extends BaseModel implements HasMedia
 {
-    //use HasFactory, SoftDeletes, InteractsWithMedia;
+    // use HasFactory, SoftDeletes, InteractsWithMedia;
     use InteractsWithMedia;
 
     protected $fillable = [
         'name', 'description', 'status_id', 'owner_id', 'ticket_prefix',
-        'status_type', 'type'
+        'status_type', 'type',
     ];
 
     protected $appends = [
-        'cover'
+        'cover',
     ];
 
     public function owner(): BelongsTo
     {
-        $user_class=XotData::make()->getUserClass();
+        $user_class = XotData::make()->getUserClass();
+
         return $this->belongsTo($user_class, 'owner_id', 'id');
     }
 
@@ -38,14 +39,30 @@ class Project extends BaseModel implements HasMedia
     {
         return $this->belongsTo(ProjectStatus::class, 'status_id', 'id')->withTrashed();
     }
-    /*
-    public function users(): BelongsToMany
-    {
-        $user_class=XotData::make()->getUserClass();
-        return $this->belongsToMany($user_class, 'project_users', 'project_id', 'user_id')
-            ->withPivot(['role']);
-    }
-    */
+
+    // *-- da portare in profiles
+    //public function users(): BelongsToMany
+    //{
+        // $user_class = XotData::make()->getUserClass();
+    //    $profile_class = XotData::make()->getProfileClass();
+
+        // return $this->belongsToMany($user_class, 'project_users', 'project_id', 'user_id')
+        //    ->withPivot(['role']);
+    //    return $this->belongsToMany(
+    //        related: $profile_class,
+            /*
+            table: 'profile_project',
+            foreignPivotKey: 'project_id',
+            relatedPivotKey: 'user_id',
+            parentKey: 'id',
+            relatedKey: 'user_id',
+            relation: null,
+            */
+    //    )
+    //        ->withPivot(['role']);
+    //}
+    // */
+
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'project_id', 'id');
@@ -74,6 +91,7 @@ class Project extends BaseModel implements HasMedia
                 if ($firstEpic) {
                     return $firstEpic->starts_at;
                 }
+
                 return now();
             }
         );
@@ -87,35 +105,39 @@ class Project extends BaseModel implements HasMedia
                 if ($firstEpic) {
                     return $firstEpic->ends_at;
                 }
+
                 return now();
             }
         );
     }
 
+    /*
     public function contributors(): Attribute
     {
         return new Attribute(
             get: function () {
-                $users = $this->users;
+                $users = $this->profiles;
                 $users->push($this->owner);
+
                 return $users->unique('id');
             }
         );
     }
+    */
 
     public function cover(): Attribute
     {
         return new Attribute(
-            get: fn() => $this->media('cover')?->first()?->getFullUrl()
+            get: fn () => $this->media('cover')?->first()?->getFullUrl()
                 ??
-                'https://ui-avatars.com/api/?background=3f84f3&color=ffffff&name=' . $this->name
+                'https://ui-avatars.com/api/?background=3f84f3&color=ffffff&name='.$this->name
         );
     }
 
     public function currentSprint(): Attribute
     {
         return new Attribute(
-            get: fn() => $this->sprints()
+            get: fn () => $this->sprints()
                 ->whereNotNull('started_at')
                 ->whereNull('ended_at')
                 ->first()
@@ -134,6 +156,7 @@ class Project extends BaseModel implements HasMedia
                         ->orderBy('starts_at')
                         ->first();
                 }
+
                 return null;
             }
         );

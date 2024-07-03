@@ -46,11 +46,12 @@ class Board extends Page implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            Card::make()
+            Section::make()
                 ->schema([
                     Grid::make()
                         ->columns(1)
                         ->schema([
+                            /*
                             Select::make('project')
                                 ->label(__('Project'))
                                 ->required()
@@ -62,6 +63,7 @@ class Board extends Page implements HasForms
                                     ->orWhereHas('users', function ($query) {
                                         return $query->where('users.id', auth()->user()->id);
                                     })->pluck('name', 'id')->toArray()),
+                            */
                         ]),
                 ]),
         ];

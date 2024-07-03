@@ -75,7 +75,7 @@ class TimesheetResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->label(__('Owner'))
                     ->sortable()
-                    ->formatStateUsing(fn($record) => view('components.user-avatar', ['user' => $record->user]))
+                    ->formatStateUsing(fn($record) => view('ticket::components.user-avatar', ['user' => $record->user]))
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('value')

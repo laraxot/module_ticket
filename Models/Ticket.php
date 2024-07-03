@@ -1,39 +1,36 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Models;
 
 use Carbon\CarbonInterval;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Ticket\Notifications\TicketCreated;
+use Modules\Ticket\Notifications\TicketStatusUpdated;
 use Modules\Xot\Datas\XotData;
 use Spatie\MediaLibrary\HasMedia;
-use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\Ticket\Notifications\TicketCreated;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Modules\Ticket\Notifications\TicketStatusUpdated;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Modules\Ticket\Models\Ticket.
  *
- * @property string                 $name
+ * @property string $name
  *
  * @mixin \Eloquent
  */
-
 class Ticket extends BaseModel implements HasMedia
 {
-
     use InteractsWithMedia;
 
     protected $fillable = [
         'name', 'content', 'owner_id', 'responsible_id',
         'status_id', 'project_id', 'code', 'order', 'type_id',
         'priority_id', 'estimation', 'epic_id', 'sprint_id',
-        'latitude','longitude', //GEO
+        'latitude', 'longitude', // GEO
     ];
 
     public static function boot()
@@ -52,7 +49,7 @@ class Ticket extends BaseModel implements HasMedia
             if ($item->sprint_id && $item->sprint->epic_id) {
                 Ticket::where('id', $item->id)->update(['epic_id' => $item->sprint->epic_id]);
             }
-            foreach ($item->watchers as $user) {
+            foreach ($item->watchers ?? [] as $user) {
                 $user->notify(new TicketCreated($item));
             }
         });
@@ -67,7 +64,7 @@ class Ticket extends BaseModel implements HasMedia
                     'ticket_id' => $item->id,
                     'old_status_id' => $oldStatus,
                     'new_status_id' => $item->status_id,
-                    'user_id' => auth()->user()->id
+                    'user_id' => auth()->user()->id,
                 ]);
                 foreach ($item->watchers as $user) {
                     $user->notify(new TicketStatusUpdated($item));
@@ -76,7 +73,7 @@ class Ticket extends BaseModel implements HasMedia
 
             // Ticket sprint update
             $oldSprint = $old->sprint_id;
-            if ($oldSprint && !$item->sprint_id) {
+            if ($oldSprint && ! $item->sprint_id) {
                 Ticket::where('id', $item->id)->update(['epic_id' => null]);
             } elseif ($item->sprint_id && $item->sprint->epic_id) {
                 Ticket::where('id', $item->id)->update(['epic_id' => $item->sprint->epic_id]);
@@ -86,13 +83,15 @@ class Ticket extends BaseModel implements HasMedia
 
     public function owner(): BelongsTo
     {
-        $user_class=XotData::make()->getUserClass();
+        $user_class = XotData::make()->getUserClass();
+
         return $this->belongsTo($user_class, 'owner_id', 'id');
     }
 
     public function responsible(): BelongsTo
     {
-        $user_class=XotData::make()->getUserClass();
+        $user_class = XotData::make()->getUserClass();
+
         return $this->belongsTo($user_class, 'responsible_id', 'id');
     }
 
@@ -128,7 +127,8 @@ class Ticket extends BaseModel implements HasMedia
 
     public function subscribers(): BelongsToMany
     {
-        $user_class=XotData::make()->getUserClass();
+        $user_class = XotData::make()->getUserClass();
+
         return $this->belongsToMany($user_class, 'ticket_subscribers', 'ticket_id', 'user_id');
     }
 
@@ -157,11 +157,12 @@ class Ticket extends BaseModel implements HasMedia
         return $this->belongsTo(Sprint::class, 'sprint_id', 'id');
     }
 
+    /*
     public function watchers(): Attribute
     {
         return new Attribute(
             get: function () {
-                $users = $this->project->users;
+                $users = $this->project->profiles;
                 $users->push($this->owner);
                 if ($this->responsible) {
                     $users->push($this->responsible);
@@ -170,12 +171,14 @@ class Ticket extends BaseModel implements HasMedia
             }
         );
     }
+    */
 
     public function totalLoggedHours(): Attribute
     {
         return new Attribute(
             get: function () {
                 $seconds = $this->hours->sum('value') * 3600;
+
                 return CarbonInterval::seconds($seconds)->cascade()->forHumans();
             }
         );
@@ -212,9 +215,10 @@ class Ticket extends BaseModel implements HasMedia
     {
         return new Attribute(
             get: function () {
-                if (!$this->estimation) {
+                if (! $this->estimation) {
                     return null;
                 }
+
                 return $this->estimation * 3600;
             }
         );
@@ -232,7 +236,7 @@ class Ticket extends BaseModel implements HasMedia
     public function completudePercentage(): Attribute
     {
         return new Attribute(
-            get: fn() => $this->estimationProgress
+            get: fn () => $this->estimationProgress
         );
     }
 }
