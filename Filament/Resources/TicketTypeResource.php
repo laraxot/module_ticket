@@ -43,7 +43,7 @@ class TicketTypeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Card::make()
+                Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\Grid::make()
                             ->schema([
@@ -63,7 +63,7 @@ class TicketTypeResource extends Resource
                                 // Forms\Components\TextInput::make('icon')
                                 //     ->suffixAction(
                                 //         \Filament\Forms\Components\Actions\Action::make('icon')
-                                        
+
                                 //         ->icon(fn(string $state)=>$state)
                                 //         ->form([
                                 //             Forms\Components\TextInput::make('iconx')
@@ -84,7 +84,7 @@ class TicketTypeResource extends Resource
                                 //                 \Filament\Forms\Components\Actions\Action::make('choose4')
                                 //                 ->icon('heroicon-o-adjustments-horizontal')
                                 //             )
-                                //         ])  
+                                //         ])
 
                                 //     ),
                                 Forms\Components\Checkbox::make('is_default')

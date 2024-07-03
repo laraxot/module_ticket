@@ -30,7 +30,7 @@ class LocationFormWidget extends Widget implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            Forms\Components\Card::make()
+            Forms\Components\Section::make()
                 ->schema([
                     Forms\Components\Grid::make()
                         ->schema([
@@ -59,7 +59,7 @@ class LocationFormWidget extends Widget implements HasForms
                                         )
                                         ->maxLength(255),
                                 ]),
-                            
+
                             Forms\Components\Grid::make()
                                 ->columns(3)
                                 ->columnSpan(2)

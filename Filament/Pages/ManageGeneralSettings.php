@@ -4,7 +4,7 @@ namespace Modules\Ticket\Filament\Pages;
 
 use Modules\Ticket\Models\Role;
 use Modules\Ticket\Settings\GeneralSettings;
-use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;

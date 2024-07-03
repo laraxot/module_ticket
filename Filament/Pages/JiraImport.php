@@ -4,7 +4,7 @@ namespace Modules\Ticket\Filament\Pages;
 
 use Modules\Ticket\Helpers\JiraHelper;
 use Modules\Ticket\Jobs\ImportJiraTicketsJob;
-use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Grid;

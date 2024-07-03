@@ -41,7 +41,7 @@ class TicketPriorityResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Card::make()
+                Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\Grid::make()
                             ->schema([

@@ -1,9 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources;
 
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Resource;
 use Modules\Ticket\Filament\Resources\TicketResource\Pages;
-use Modules\Ticket\Filament\Resources\TicketResource\RelationManagers;
 use Modules\Ticket\Models\Epic;
 use Modules\Ticket\Models\Project;
 use Modules\Ticket\Models\Ticket;
@@ -12,14 +18,6 @@ use Modules\Ticket\Models\TicketRelation;
 use Modules\Ticket\Models\TicketStatus;
 use Modules\Ticket\Models\TicketType;
 use Modules\Ticket\Models\User;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Pages\CreateRecord;
-use Filament\Resources\Pages\EditRecord;
-use Filament\Resources\Resource;
-use Filament\Tables\Table;
-use Filament\Tables;
-use Illuminate\Support\HtmlString;
 
 class TicketResource extends Resource
 {
@@ -48,7 +46,7 @@ class TicketResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Card::make()
+                Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\Grid::make()
                             ->schema([
@@ -98,7 +96,7 @@ class TicketResource extends Resource
                                     ->schema([
                                         Forms\Components\TextInput::make('code')
                                             ->label(__('Ticket code'))
-                                            ->visible(fn($livewire) => !($livewire instanceof CreateRecord))
+                                            ->visible(fn ($livewire) => ! ($livewire instanceof CreateRecord))
                                             ->columnSpan(2)
                                             ->disabled(),
 
@@ -106,11 +104,11 @@ class TicketResource extends Resource
                                             ->label(__('Ticket name'))
                                             ->required()
                                             ->columnSpan(
-                                                fn($livewire) => !($livewire instanceof CreateRecord) ? 10 : 12
+                                                fn ($livewire) => ! ($livewire instanceof CreateRecord) ? 10 : 12
                                             )
                                             ->maxLength(255),
                                     ]),
-                                
+
                                 /*
                                 Forms\Components\Select::make('owner_id')
                                     ->label(__('Ticket owner'))
@@ -118,7 +116,7 @@ class TicketResource extends Resource
                                     ->options(fn() => User::all()->pluck('name', 'id')->toArray())
                                     ->default(fn() => auth()->user()->id)
                                     ->required(),
-                                
+
                                 Forms\Components\Select::make('responsible_id')
                                     ->label(__('Ticket responsible'))
                                     ->searchable()
@@ -133,7 +131,7 @@ class TicketResource extends Resource
                                             ->searchable()
                                             ->options(function ($get) {
                                                 $project = Project::where('id', $get('project_id'))->first();
-                                                if ($project?->status_type === 'custom') {
+                                                if ('custom' === $project?->status_type) {
                                                     return TicketStatus::where('project_id', $project->id)
                                                         ->get()
                                                         ->pluck('name', 'id')
@@ -147,7 +145,7 @@ class TicketResource extends Resource
                                             })
                                             ->default(function ($get) {
                                                 $project = Project::where('id', $get('project_id'))->first();
-                                                if ($project?->status_type === 'custom') {
+                                                if ('custom' === $project?->status_type) {
                                                     return TicketStatus::where('project_id', $project->id)
                                                         ->where('is_default', true)
                                                         ->first()
@@ -164,15 +162,15 @@ class TicketResource extends Resource
                                         Forms\Components\Select::make('type_id')
                                             ->label(__('Ticket type'))
                                             ->searchable()
-                                            ->options(fn() => TicketType::all()->pluck('name', 'id')->toArray())
-                                            ->default(fn() => TicketType::where('is_default', true)->first()?->id)
+                                            ->options(fn () => TicketType::all()->pluck('name', 'id')->toArray())
+                                            ->default(fn () => TicketType::where('is_default', true)->first()?->id)
                                             ->required(),
 
                                         Forms\Components\Select::make('priority_id')
                                             ->label(__('Ticket priority'))
                                             ->searchable()
-                                            ->options(fn() => TicketPriority::all()->pluck('name', 'id')->toArray())
-                                            ->default(fn() => TicketPriority::where('is_default', true)->first()?->id)
+                                            ->options(fn () => TicketPriority::all()->pluck('name', 'id')->toArray())
+                                            ->default(fn () => TicketPriority::where('is_default', true)->first()?->id)
                                             ->required(),
                                     ]),
                             ]),
@@ -196,11 +194,12 @@ class TicketResource extends Resource
                             ->itemLabel(function (array $state) {
                                 $ticketRelation = TicketRelation::find($state['id'] ?? 0);
                                 if ($ticketRelation) {
-                                    return __(config('system.tickets.relations.list.' . $ticketRelation->type))
-                                        . ' '
-                                        . $ticketRelation->relation->name
-                                        . ' (' . $ticketRelation->relation->code . ')';
+                                    return __(config('system.tickets.relations.list.'.$ticketRelation->type))
+                                        .' '
+                                        .$ticketRelation->relation->name
+                                        .' ('.$ticketRelation->relation->code.')';
                                 }
+
                                 return null;
                             })
                             ->relationship()
@@ -217,7 +216,7 @@ class TicketResource extends Resource
                                             ->required()
                                             ->searchable()
                                             ->options(config('system.tickets.relations.list'))
-                                            ->default(fn() => config('system.tickets.relations.default')),
+                                            ->default(fn () => config('system.tickets.relations.default')),
 
                                         Forms\Components\Select::make('relation_id')
                                             ->label(__('Related ticket'))
@@ -229,6 +228,7 @@ class TicketResource extends Resource
                                                 if ($livewire instanceof EditRecord && $livewire->record) {
                                                     $query->where('id', '<>', $livewire->record->id);
                                                 }
+
                                                 return $query->get()->pluck('name', 'id')->toArray();
                                             }),
                                     ]),
@@ -240,7 +240,6 @@ class TicketResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 

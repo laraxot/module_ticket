@@ -3,7 +3,7 @@
 namespace Modules\Ticket\Filament\Pages;
 
 use Modules\Ticket\Models\Project;
-use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;

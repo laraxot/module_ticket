@@ -1,3 +1,3 @@
 <div>
-    MAP
+    @livewire(\Modules\Geo\Filament\Widgets\OSMMapWidget::class)
 </div>
