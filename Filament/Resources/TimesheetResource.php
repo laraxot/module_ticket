@@ -1,19 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources;
 
-use Modules\Ticket\Filament\Resources\TimesheetResource\Pages;
-use Modules\Ticket\Filament\Resources\TimesheetResource\RelationManagers;
-use Modules\Ticket\Models\Activity;
-use Modules\Ticket\Models\TicketHour;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
+use Modules\Ticket\Filament\Resources\TimesheetResource\Pages;
+use Modules\Ticket\Models\Activity;
+use Modules\Ticket\Models\TicketHour;
 
 class TimesheetResource extends Resource
 {
@@ -64,7 +65,7 @@ class TimesheetResource extends Resource
                         Textarea::make('comment')
                             ->label(__('Comment'))
                             ->rows(3),
-                    ])
+                    ]),
             ]);
     }
 
@@ -75,7 +76,7 @@ class TimesheetResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->label(__('Owner'))
                     ->sortable()
-                    ->formatStateUsing(fn($record) => view('components.user-avatar', ['user' => $record->user]))
+                    ->formatStateUsing(fn ($record) => view('components.user-avatar', ['user' => $record->user]))
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('value')
@@ -103,7 +104,6 @@ class TimesheetResource extends Resource
                     ->searchable(),
             ])
             ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -117,7 +117,6 @@ class TimesheetResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 

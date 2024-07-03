@@ -1,22 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Sprint extends BaseModel
 {
-    
-
     protected $fillable = [
         'name', 'starts_at', 'ends_at', 'description',
-        'project_id', 'started_at', 'ended_at'
+        'project_id', 'started_at', 'ended_at',
     ];
 
     protected $casts = [
@@ -35,7 +31,7 @@ class Sprint extends BaseModel
                 'name' => $item->name,
                 'starts_at' => $item->starts_at,
                 'ends_at' => $item->ends_at,
-                'project_id' => $item->project_id
+                'project_id' => $item->project_id,
             ]);
             $item->epic_id = $epic->id;
             $item->save();
@@ -61,9 +57,10 @@ class Sprint extends BaseModel
     {
         return new Attribute(
             get: function () {
-                if ($this->starts_at && $this->ends_at && $this->started_at && !$this->ended_at) {
+                if ($this->starts_at && $this->ends_at && $this->started_at && ! $this->ended_at) {
                     return $this->ends_at->diffInDays(now()) + 1;
                 }
+
                 return null;
             }
         );

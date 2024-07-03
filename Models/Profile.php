@@ -9,26 +9,19 @@ use GeneaLabs\LaravelModelCaching\CachedBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
-use Modules\LU\Models\Traits\HasProfileTrait;
 // --- TRAITS ---
 use Modules\Quaeris\Models\Customer;
 use Modules\RealEstate\Models\BaseModel;
-use Modules\User\Models\Permission;
-use Modules\User\Models\Role;
-// use Modules\Xot\Models\Traits\WidgetTrait;
-use Modules\User\Models\SocialiteUser;
-use Modules\User\Models\Traits\IsProfileTrait;
-use Modules\User\Models\User;
-use Modules\Xot\Contracts\ModelProfileContract;
-use Spatie\Permission\Traits\HasRoles;
 use Modules\User\Models\BaseProfile as UserBaseProfile;
-
-
+use Modules\User\Models\Permission;
+// use Modules\Xot\Models\Traits\WidgetTrait;
+use Modules\User\Models\Role;
+use Modules\User\Models\SocialiteUser;
+use Modules\User\Models\User;
 
 /**
  * Modules\Ticket\Models\Profile.
@@ -102,10 +95,9 @@ use Modules\User\Models\BaseProfile as UserBaseProfile;
  */
 class Profile extends UserBaseProfile
 {
-    
     /** @var string */
     protected $connection = 'ticket';
-    
+
     /** @var array<int, string> */
     protected $fillable = ['id', 'user_id', 'phone', 'email', 'bio'];
 

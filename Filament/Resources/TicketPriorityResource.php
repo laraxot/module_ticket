@@ -1,18 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources;
 
-use Modules\Ticket\Filament\Resources\TicketPriorityResource\Pages;
-use Modules\Ticket\Filament\Resources\TicketPriorityResource\RelationManagers;
-use Modules\Ticket\Models\TicketPriority;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
-use Guava\FilamentIconPicker\Tables\IconColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Table;
+use Modules\Ticket\Filament\Resources\TicketPriorityResource\Pages;
+use Modules\Ticket\Models\TicketPriority;
 
 class TicketPriorityResource extends Resource
 {
@@ -59,8 +57,8 @@ class TicketPriorityResource extends Resource
                                     ->helperText(
                                         __('If checked, this priority will be automatically affected to new tickets')
                                     ),
-                            ])
-                    ])
+                            ]),
+                    ]),
             ]);
     }
 
@@ -90,7 +88,6 @@ class TicketPriorityResource extends Resource
                     ->searchable(),
             ])
             ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -104,7 +101,6 @@ class TicketPriorityResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 

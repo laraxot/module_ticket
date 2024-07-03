@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\UserResource\Pages;
 
-use Modules\Ticket\Filament\Resources\UserResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
+use Modules\Ticket\Filament\Resources\UserResource;
 
 class CreateUser extends CreateRecord
 {

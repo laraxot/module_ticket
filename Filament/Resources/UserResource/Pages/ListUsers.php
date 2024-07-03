@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\UserResource\Pages;
 
-use Modules\Ticket\Filament\Resources\UserResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Modules\Ticket\Filament\Resources\UserResource;
 
 class ListUsers extends ListRecords
 {

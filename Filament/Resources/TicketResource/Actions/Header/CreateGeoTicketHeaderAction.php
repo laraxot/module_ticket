@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Resources\TicketResource\Actions\Header;
 
-use Filament\Forms;
-use Filament\Forms\Set;
-use Filament\Actions\Action;
 use Dotswan\MapPicker\Fields\Map;
-use Illuminate\Support\Facades\Gate;
-use Modules\Ticket\Models\TicketType;
+use Filament\Actions\Action;
+use Filament\Forms;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Set;
+use Illuminate\Support\Facades\Gate;
 use Modules\Ticket\Models\TicketPriority;
+use Modules\Ticket\Models\TicketType;
 use Modules\Xot\Filament\Traits\NavigationActionLabelTrait;
 
 class CreateGeoTicketHeaderAction extends Action
@@ -34,7 +34,7 @@ class CreateGeoTicketHeaderAction extends Action
             // ->steps([
             // ])
             ->form([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                                             ->label(__('Ticket name'))
                                             ->required()
 

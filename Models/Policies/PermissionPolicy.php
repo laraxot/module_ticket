@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Models\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Modules\Ticket\Models\Permission;
 use Modules\Xot\Contracts\UserContract;
-use Illuminate\Auth\Access\HandlesAuthorization;
-
 
 class PermissionPolicy
 {
@@ -14,20 +15,19 @@ class PermissionPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \Modules\Xot\Contracts\UserContract  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(UserContract $user)
     {
         return true;
-        //return $user->can('List permissions');
+        // return $user->can('List permissions');
     }
 
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \Modules\Xot\Contracts\UserContract  $user
-     * @param  \App\Models\Permission  $permission
+     * @param \App\Models\Permission $permission
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(UserContract $user, Permission $permission)
@@ -38,7 +38,6 @@ class PermissionPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \Modules\Xot\Contracts\UserContract  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(UserContract $user)
@@ -49,8 +48,8 @@ class PermissionPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \Modules\Xot\Contracts\UserContract  $user
-     * @param  \App\Models\Permission  $permission
+     * @param \App\Models\Permission $permission
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(UserContract $user, Permission $permission)
@@ -61,8 +60,8 @@ class PermissionPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \Modules\Xot\Contracts\UserContract  $user
-     * @param  \App\Models\Permission  $permission
+     * @param \App\Models\Permission $permission
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(UserContract $user, Permission $permission)

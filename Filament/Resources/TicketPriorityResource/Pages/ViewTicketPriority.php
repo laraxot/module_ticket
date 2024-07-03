@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\TicketPriorityResource\Pages;
 
-use Modules\Ticket\Filament\Resources\TicketPriorityResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
+use Modules\Ticket\Filament\Resources\TicketPriorityResource;
 
 class ViewTicketPriority extends ViewRecord
 {

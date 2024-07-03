@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Modules\Ticket\Models\Epic;
 use Illuminate\Database\Schema\Blueprint;
+use Modules\Ticket\Models\Epic;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
 /**
@@ -12,6 +12,7 @@ use Modules\Xot\Database\Migrations\XotBaseMigration;
 class CreateTicketEpicsTable extends XotBaseMigration
 {
     protected ?string $model_class = Epic::class;
+
     /**
      * Run the migrations.
      */

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\ProjectResource\Pages;
 
-use Modules\Ticket\Filament\Resources\ProjectResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Modules\Ticket\Filament\Resources\ProjectResource;
 
 class EditProject extends EditRecord
 {
@@ -15,13 +17,12 @@ class EditProject extends EditRecord
         return [
             Actions\Action::make('kanban')
                 ->label(
-                    fn ()
-                    => ($this->record->type === 'scrum' ? __('Scrum board') : __('Kanban board'))
+                    fn () => ('scrum' === $this->record->type ? __('Scrum board') : __('Kanban board'))
                 )
                 ->icon('heroicon-o-view-columns')
                 ->color('gray')
                 ->url(function () {
-                    if ($this->record->type === 'scrum') {
+                    if ('scrum' === $this->record->type) {
                         return route('filament.pages.scrum/{project}', ['project' => $this->record->id]);
                     } else {
                         return route('filament.pages.kanban/{project}', ['project' => $this->record->id]);

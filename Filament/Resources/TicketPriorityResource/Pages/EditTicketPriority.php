@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\TicketPriorityResource\Pages;
 
-use Modules\Ticket\Filament\Resources\TicketPriorityResource;
-use Modules\Ticket\Models\TicketPriority;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Modules\Ticket\Filament\Resources\TicketPriorityResource;
+use Modules\Ticket\Models\TicketPriority;
 
 class EditTicketPriority extends EditRecord
 {

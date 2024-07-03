@@ -1,24 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Models;
 
-use Modules\Xot\Datas\XotData;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\Ticket\Notifications\TicketCreated;
-use Modules\Ticket\Notifications\TicketCommented;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Modules\Ticket\Notifications\TicketStatusUpdated;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Ticket\Notifications\TicketCommented;
+use Modules\Xot\Datas\XotData;
 
 class TicketComment extends BaseModel
 {
-    
-
     protected $fillable = [
-        'user_id', 'ticket_id', 'content'
+        'user_id', 'ticket_id', 'content',
     ];
-
 
     public static function boot()
     {
@@ -33,7 +27,8 @@ class TicketComment extends BaseModel
 
     public function user(): BelongsTo
     {
-        $user_class=XotData::make()->getUserClass();
+        $user_class = XotData::make()->getUserClass();
+
         return $this->belongsTo($user_class, 'user_id', 'id');
     }
 

@@ -1,20 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources;
 
 use Filament\Forms;
-use Filament\Tables;
 use Filament\Forms\Form;
-use Filament\Tables\Table;
 use Filament\Resources\Resource;
-use Filament\Forms\Components\Radio;
-
-use Modules\Ticket\Models\TicketType;
-use Filament\Tables\Columns\IconColumn;
 use Guava\FilamentIconPicker\Forms\IconPicker;
 use Modules\Ticket\Filament\Resources\TicketTypeResource\Pages;
-use Modules\Ticket\Filament\Resources\TicketTypeResource\RelationManagers;
-
+use Modules\Ticket\Models\TicketType;
 
 class TicketTypeResource extends Resource
 {
@@ -92,15 +87,14 @@ class TicketTypeResource extends Resource
                                     ->helperText(
                                         __('If checked, this type will be automatically affected to new tickets')
                                     ),
-                            ])
-                    ])
+                            ]),
+                    ]),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 

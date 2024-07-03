@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\TimesheetResource\Pages;
 
-use Modules\Ticket\Filament\Resources\TimesheetResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Modules\Ticket\Filament\Resources\TimesheetResource;
 
 class EditTimesheet extends EditRecord
 {

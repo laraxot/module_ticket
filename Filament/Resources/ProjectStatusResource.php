@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources;
 
-use Modules\Ticket\Filament\Resources\ProjectStatusResource\Pages;
-use Modules\Ticket\Filament\Resources\ProjectStatusResource\RelationManagers;
-use Modules\Ticket\Models\ProjectStatus;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
+use Modules\Ticket\Filament\Resources\ProjectStatusResource\Pages;
+use Modules\Ticket\Models\ProjectStatus;
 
 class ProjectStatusResource extends Resource
 {
@@ -56,8 +57,8 @@ class ProjectStatusResource extends Resource
                                     ->helperText(
                                         __('If checked, this status will be automatically affected to new projects')
                                     ),
-                            ])
-                    ])
+                            ]),
+                    ]),
             ]);
     }
 
@@ -87,7 +88,6 @@ class ProjectStatusResource extends Resource
                     ->searchable(),
             ])
             ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -101,7 +101,6 @@ class ProjectStatusResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 

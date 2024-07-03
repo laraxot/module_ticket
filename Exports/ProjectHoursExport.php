@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Exports;
 
-use Modules\Ticket\Models\Project;
-use Modules\Ticket\Models\Ticket;
-use Modules\Ticket\Models\TicketHour;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Modules\Ticket\Models\Project;
+use Modules\Ticket\Models\TicketHour;
 
 class ProjectHoursExport implements FromCollection, WithHeadings
 {
@@ -31,17 +32,13 @@ class ProjectHoursExport implements FromCollection, WithHeadings
         ];
     }
 
-    /**
-     * @return Collection
-     */
     public function collection(): Collection
     {
         $collection = collect();
         $this->project->tickets
-            ->filter(fn($ticket) => $ticket->hours()->count())
-            ->each(fn ($ticket) =>
-                $ticket->hours
-                    ->each(fn(TicketHour $item) => $collection->push([
+            ->filter(fn ($ticket) => $ticket->hours()->count())
+            ->each(fn ($ticket) => $ticket->hours
+                    ->each(fn (TicketHour $item) => $collection->push([
                         '#' => $item->ticket->code,
                         'ticket' => $item->ticket->name,
                         'user' => $item->user->name,
@@ -51,6 +48,7 @@ class ProjectHoursExport implements FromCollection, WithHeadings
                         'date' => $item->created_at->format(__('Y-m-d g:i A')),
                     ]))
             );
+
         return $collection;
     }
 }

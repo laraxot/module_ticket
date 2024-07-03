@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\ProjectResource\RelationManagers;
 
-use Modules\Ticket\Models\Ticket;
-use Modules\Ticket\Models\TicketStatus;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Ticket\Models\TicketStatus;
 
 class StatusesRelationManager extends RelationManager
 {
@@ -19,7 +20,7 @@ class StatusesRelationManager extends RelationManager
 
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
-        return $ownerRecord->status_type === 'custom';
+        return 'custom' === $ownerRecord->status_type;
     }
 
     public function form(Form $form): Form
@@ -44,8 +45,7 @@ class StatusesRelationManager extends RelationManager
                 Forms\Components\TextInput::make('order')
                     ->label(__('Status order'))
                     ->integer()
-                    ->default(fn($livewire) =>
-                        TicketStatus::where('project_id', $livewire->ownerRecord->id)->count() + 1
+                    ->default(fn ($livewire) => TicketStatus::where('project_id', $livewire->ownerRecord->id)->count() + 1
                     )
                     ->required(),
             ]);
@@ -82,7 +82,6 @@ class StatusesRelationManager extends RelationManager
                     ->searchable(),
             ])
             ->filters([
-                //
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),

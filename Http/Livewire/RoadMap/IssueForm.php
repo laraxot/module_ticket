@@ -1,32 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Http\Livewire\RoadMap;
 
+use Filament\Facades\Filament;
+use Filament\Forms;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Livewire\Component;
 use Modules\Ticket\Models\Project;
 use Modules\Ticket\Models\Ticket;
 use Modules\Ticket\Models\TicketPriority;
 use Modules\Ticket\Models\TicketStatus;
 use Modules\Ticket\Models\TicketType;
 use Modules\Ticket\Models\User;
-use Closure;
-use Filament\Facades\Filament;
-use Filament\Forms;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Livewire\Component;
 
 class IssueForm extends Component implements HasForms
 {
     use InteractsWithForms;
 
-    public Project|null $project = null;
+    public ?Project $project = null;
     public array $epics;
     public array $sprints;
 
     public function mount()
     {
         $this->initProject($this->project?->id);
-        if ($this->project?->status_type === 'custom') {
+        if ('custom' === $this->project?->status_type) {
             $defaultStatus = TicketStatus::where('project_id', $this->project->id)
                 ->where('is_default', true)
                 ->first()
@@ -42,7 +43,7 @@ class IssueForm extends Component implements HasForms
             'owner_id' => auth()->user()->id,
             'status_id' => $defaultStatus,
             'type_id' => TicketType::where('is_default', true)->first()?->id,
-            'priority_id' => TicketPriority::where('is_default', true)->first()?->id
+            'priority_id' => TicketPriority::where('is_default', true)->first()?->id,
         ]);
     }
 
@@ -73,21 +74,21 @@ class IssueForm extends Component implements HasForms
                                 ->label(__('Project'))
                                 ->searchable()
                                 ->reactive()
-                                ->disabled($this->project != null)
+                                ->disabled(null != $this->project)
                                 ->columnSpan(2)
-                                ->options(fn() => Project::where('owner_id', auth()->user()->id)
+                                ->options(fn () => Project::where('owner_id', auth()->user()->id)
                                     ->orWhereHas('users', function ($query) {
                                         return $query->where('users.id', auth()->user()->id);
                                     })->pluck('name', 'id')->toArray()
                                 )
-                                ->afterStateUpdated(fn(\Filament\Forms\Get $get) => $this->initProject($get('project_id')))
+                                ->afterStateUpdated(fn (Forms\Get $get) => $this->initProject($get('project_id')))
                                 ->required(),
 
                             Forms\Components\Select::make('sprint_id')
                                 ->label(__('Sprint'))
                                 ->searchable()
                                 ->reactive()
-                                ->visible(fn () => $this->project && $this->project->type === 'scrum')
+                                ->visible(fn () => $this->project && 'scrum' === $this->project->type)
                                 ->columnSpan(2)
                                 ->options(fn () => $this->sprints),
 
@@ -97,7 +98,7 @@ class IssueForm extends Component implements HasForms
                                 ->reactive()
                                 ->columnSpan(2)
                                 ->required()
-                                ->visible(fn () => $this->project && $this->project->type !== 'scrum')
+                                ->visible(fn () => $this->project && 'scrum' !== $this->project->type)
                                 ->options(fn () => $this->epics),
 
                             Forms\Components\TextInput::make('name')
@@ -110,13 +111,13 @@ class IssueForm extends Component implements HasForms
                     Forms\Components\Select::make('owner_id')
                         ->label(__('Ticket owner'))
                         ->searchable()
-                        ->options(fn() => User::all()->pluck('name', 'id')->toArray())
+                        ->options(fn () => User::all()->pluck('name', 'id')->toArray())
                         ->required(),
 
                     Forms\Components\Select::make('responsible_id')
                         ->label(__('Ticket responsible'))
                         ->searchable()
-                        ->options(fn() => User::all()->pluck('name', 'id')->toArray()),
+                        ->options(fn () => User::all()->pluck('name', 'id')->toArray()),
 
                     Forms\Components\Grid::make()
                         ->columns(3)
@@ -126,7 +127,7 @@ class IssueForm extends Component implements HasForms
                                 ->label(__('Ticket status'))
                                 ->searchable()
                                 ->options(function ($get) {
-                                    if ($this->project?->status_type === 'custom') {
+                                    if ('custom' === $this->project?->status_type) {
                                         return TicketStatus::where('project_id', $this->project->id)
                                             ->get()
                                             ->pluck('name', 'id')
@@ -143,13 +144,13 @@ class IssueForm extends Component implements HasForms
                             Forms\Components\Select::make('type_id')
                                 ->label(__('Ticket type'))
                                 ->searchable()
-                                ->options(fn() => TicketType::all()->pluck('name', 'id')->toArray())
+                                ->options(fn () => TicketType::all()->pluck('name', 'id')->toArray())
                                 ->required(),
 
                             Forms\Components\Select::make('priority_id')
                                 ->label(__('Ticket priority'))
                                 ->searchable()
-                                ->options(fn() => TicketPriority::all()->pluck('name', 'id')->toArray())
+                                ->options(fn () => TicketPriority::all()->pluck('name', 'id')->toArray())
                                 ->required(),
                         ]),
                 ]),

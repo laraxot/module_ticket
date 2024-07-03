@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\TicketTypeResource\Pages;
 
+use Filament\Resources\Pages\CreateRecord;
 use Modules\Ticket\Filament\Resources\TicketTypeResource;
 use Modules\Ticket\Models\TicketType;
-use Filament\Resources\Pages\CreateRecord;
 
 class CreateTicketType extends CreateRecord
 {

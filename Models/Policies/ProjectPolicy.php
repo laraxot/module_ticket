@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Models\Policies;
 
-use Modules\Xot\Contracts\UserContract;
-use Modules\Ticket\Models\Project;
 use Illuminate\Auth\Access\HandlesAuthorization;
-
+use Modules\Ticket\Models\Project;
+use Modules\Xot\Contracts\UserContract;
 
 class ProjectPolicy
 {
@@ -15,19 +16,21 @@ class ProjectPolicy
      * Determine whether the user can view any models.
      *
      * @param \App\Models\UserContract $user
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(UserContract $user)
     {
         return true;
-        //return $user->can('List projects');
+        // return $user->can('List projects');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param \App\Models\UserContract $user
-     * @param \App\Models\Project $project
+     * @param \App\Models\Project      $project
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(UserContract $user, Project $project)
@@ -35,8 +38,7 @@ class ProjectPolicy
         return $user->can('View project')
             && (
                 $project->owner_id === $user->id
-                ||
-                $project->users()->where('users.id', $user->id)->count()
+                || $project->users()->where('users.id', $user->id)->count()
             );
     }
 
@@ -44,6 +46,7 @@ class ProjectPolicy
      * Determine whether the user can create models.
      *
      * @param \App\Models\UserContract $user
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(UserContract $user)
@@ -55,7 +58,8 @@ class ProjectPolicy
      * Determine whether the user can update the model.
      *
      * @param \App\Models\UserContract $user
-     * @param \App\Models\Project $project
+     * @param \App\Models\Project      $project
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(UserContract $user, Project $project)
@@ -63,8 +67,7 @@ class ProjectPolicy
         return $user->can('Update project')
             && (
                 $project->owner_id === $user->id
-                ||
-                $project->users()->where('users.id', $user->id)
+                || $project->users()->where('users.id', $user->id)
                     ->where('role', config('system.projects.affectations.roles.can_manage'))
                     ->count()
             );
@@ -74,7 +77,8 @@ class ProjectPolicy
      * Determine whether the user can delete the model.
      *
      * @param \App\Models\UserContract $user
-     * @param \App\Models\Project $project
+     * @param \App\Models\Project      $project
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(UserContract $user, Project $project)

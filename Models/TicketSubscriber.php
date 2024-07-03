@@ -1,22 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TicketSubscriber extends BaseModel
 {
-    
-
     protected $fillable = [
-        'user_id', 'ticket_id'
+        'user_id', 'ticket_id',
     ];
 
     public function user(): BelongsTo
     {
-        $user_class=XotData::make()->getUserClass();
+        $user_class = XotData::make()->getUserClass();
+
         return $this->belongsTo($user_class, 'user_id', 'id');
     }
 

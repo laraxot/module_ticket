@@ -1,19 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Pages;
 
-use Modules\Ticket\Helpers\KanbanScrumHelper;
-use Modules\Ticket\Models\Project;
 use Filament\Facades\Filament;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Actions\Action;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
+use Modules\Ticket\Helpers\KanbanScrumHelper;
+use Modules\Ticket\Models\Project;
 
 class Scrum extends Page implements HasForms
 {
-    use InteractsWithForms, KanbanScrumHelper;
+    use InteractsWithForms;
+    use KanbanScrumHelper;
 
     protected static ?string $navigationIcon = 'heroicon-o-view-columns';
 
@@ -25,18 +28,17 @@ class Scrum extends Page implements HasForms
 
     protected $listeners = [
         'recordUpdated',
-        'closeTicketDialog'
+        'closeTicketDialog',
     ];
 
     public function mount(Project $project)
     {
         $this->project = $project;
-        if ($this->project->type !== 'scrum') {
+        if ('scrum' !== $this->project->type) {
             $this->redirect(route('filament.pages.kanban/{project}', ['project' => $project]));
         } elseif (
             $this->project->owner_id != auth()->user()->id
-            &&
-            !$this->project->users->where('id', auth()->user()->id)->count()
+            && ! $this->project->users->where('id', auth()->user()->id)->count()
         ) {
             abort(403);
         }
@@ -48,14 +50,14 @@ class Scrum extends Page implements HasForms
         return [
             Action::make('manage-sprints')
                 ->button()
-                ->visible(fn() => $this->project->currentSprint && auth()->user()->can('update', $this->project))
+                ->visible(fn () => $this->project->currentSprint && auth()->user()->can('update', $this->project))
                 ->label(__('Manage sprints'))
                 ->color('primary')
                 ->url(route('filament.resources.projects.edit', $this->project)),
 
             Action::make('refresh')
                 ->button()
-                ->visible(fn() => $this->project->currentSprint)
+                ->visible(fn () => $this->project->currentSprint)
                 ->label(__('Refresh'))
                 ->color('gray')
                 ->action(function () {
@@ -79,5 +81,4 @@ class Scrum extends Page implements HasForms
     {
         return $this->formSchema();
     }
-
 }

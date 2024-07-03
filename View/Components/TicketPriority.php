@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\View\Components;
 
-use Modules\Ticket\Models\TicketPriority as Model;
 use Illuminate\View\Component;
+use Modules\Ticket\Models\TicketPriority as Model;
 
 class TicketPriority extends Component
 {

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\ProjectStatusResource\Pages;
 
-use Modules\Ticket\Filament\Resources\ProjectStatusResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Modules\Ticket\Filament\Resources\ProjectStatusResource;
 
 class ListProjectStatuses extends ListRecords
 {

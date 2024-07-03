@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Notifications;
 
-use Webmozart\Assert\Assert;
-use Illuminate\Bus\Queueable;
-use Modules\Ticket\Models\User;
-use Modules\Ticket\Models\Ticket;
-use Modules\Ticket\Models\TicketActivity;
 use Filament\Notifications\Actions\Action;
-use Illuminate\Notifications\Notification;
+use Filament\Notifications\Notification as FilamentNotification;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Filament\Notifications\Notification as FilamentNotification;
+use Illuminate\Notifications\Notification;
+use Modules\Ticket\Models\Ticket;
+use Modules\Ticket\Models\TicketActivity;
+use Modules\Ticket\Models\User;
+use Webmozart\Assert\Assert;
 
 class TicketStatusUpdated extends Notification implements ShouldQueue
 {
@@ -23,7 +25,6 @@ class TicketStatusUpdated extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      *
-     * @param Ticket $ticket
      * @return void
      */
     public function __construct(Ticket $ticket)
@@ -35,7 +36,6 @@ class TicketStatusUpdated extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -46,8 +46,7 @@ class TicketStatusUpdated extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
     public function toMail($notifiable)
     {
@@ -56,10 +55,10 @@ class TicketStatusUpdated extends Notification implements ShouldQueue
         Assert::notNull($this->ticket->oldStatus);
         Assert::notNull($this->ticket->newStatus);
 
-        return (new MailMessage)
+        return (new MailMessage())
             ->line(__('The status of ticket :ticket has been updated.', ['ticket' => $this->ticket->name]))
-            ->line('- ' . __('Old status:') . ' ' . $this->activity->oldStatus->name)
-            ->line('- ' . __('New status:') . ' ' . $this->activity->newStatus->name)
+            ->line('- '.__('Old status:').' '.$this->activity->oldStatus->name)
+            ->line('- '.__('New status:').' '.$this->activity->newStatus->name)
             ->line(__('See more details of this ticket by clicking on the button below:'))
             ->action(__('View details'), route('filament.resources.tickets.share', $this->ticket->code));
     }
@@ -70,7 +69,7 @@ class TicketStatusUpdated extends Notification implements ShouldQueue
             ->title(__('Ticket status updated'))
             ->icon('heroicon-o-ticket')
             ->body(
-                fn() => __('Old status: :oldStatus - New status: :newStatus', [
+                fn () => __('Old status: :oldStatus - New status: :newStatus', [
                     'oldStatus' => $this->activity->oldStatus->name,
                     'newStatus' => $this->activity->newStatus->name,
                 ])
@@ -79,7 +78,7 @@ class TicketStatusUpdated extends Notification implements ShouldQueue
                 Action::make('view')
                     ->link()
                     ->icon('heroicon-s-eye')
-                    ->url(fn() => route('filament.resources.tickets.share', $this->ticket->code)),
+                    ->url(fn () => route('filament.resources.tickets.share', $this->ticket->code)),
             ])
             ->getDatabaseMessage();
     }

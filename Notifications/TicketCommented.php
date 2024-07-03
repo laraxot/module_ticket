@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Notifications;
 
-use Modules\Ticket\Models\TicketComment;
-use Modules\Ticket\Models\User;
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification as FilamentNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Modules\Ticket\Models\TicketComment;
+use Modules\Ticket\Models\User;
 
 class TicketCommented extends Notification implements ShouldQueue
 {
@@ -20,7 +22,6 @@ class TicketCommented extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      *
-     * @param TicketComment $ticket
      * @return void
      */
     public function __construct(TicketComment $ticketComment)
@@ -31,7 +32,6 @@ class TicketCommented extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -42,18 +42,17 @@ class TicketCommented extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->line(
                 __(
                     'A new comment has been added to the ticket :ticket by :name.',
                     [
                         'ticket' => $this->ticketComment->ticket->name,
-                        'name' => $this->ticketComment->user->name
+                        'name' => $this->ticketComment->user->name,
                     ]
                 )
             )
@@ -71,17 +70,17 @@ class TicketCommented extends Notification implements ShouldQueue
                 __(
                     'Ticket :ticket commented',
                     [
-                        'ticket' => $this->ticketComment->ticket->name
+                        'ticket' => $this->ticketComment->ticket->name,
                     ]
                 )
             )
             ->icon('heroicon-o-ticket')
-            ->body(fn() => __('by :name', ['name' => $this->ticketComment->user->name]))
+            ->body(fn () => __('by :name', ['name' => $this->ticketComment->user->name]))
             ->actions([
                 Action::make('view')
                     ->link()
                     ->icon('heroicon-s-eye')
-                    ->url(fn() => route('filament.resources.tickets.share', $this->ticketComment->ticket->code)),
+                    ->url(fn () => route('filament.resources.tickets.share', $this->ticketComment->ticket->code)),
             ])
             ->getDatabaseMessage();
     }

@@ -42,10 +42,10 @@ class CreateTicketsTable extends XotBaseMigration
         $this->tableUpdate(
             function (Blueprint $table): void {
                 if (! $this->hasColumn('latitude')) {
-                    $table->decimal('latitude',20,18)->nullable();
+                    $table->decimal('latitude', 20, 18)->nullable();
                 }
                 if (! $this->hasColumn('longitude')) {
-                    $table->decimal('longitude',20,18)->nullable();
+                    $table->decimal('longitude', 20, 18)->nullable();
                 }
 
                 $this->updateTimestamps(table: $table, hasSoftDeletes: true);

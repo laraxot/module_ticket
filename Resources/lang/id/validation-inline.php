@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Baris Bahasa untuk Validasi
@@ -135,5 +136,4 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
-
 ];

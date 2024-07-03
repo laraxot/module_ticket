@@ -1,16 +1,13 @@
 <?php
 
-namespace Modules\Ticket\Models;
+declare(strict_types=1);
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+namespace Modules\Ticket\Models;
 
 class Activity extends BaseModel
 {
-    
     protected $fillable = [
         'name',
-        'description'
+        'description',
     ];
 }

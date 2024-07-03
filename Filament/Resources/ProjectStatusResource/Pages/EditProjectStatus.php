@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\ProjectStatusResource\Pages;
 
-use Modules\Ticket\Filament\Resources\ProjectStatusResource;
-use Modules\Ticket\Models\ProjectStatus;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Modules\Ticket\Filament\Resources\ProjectStatusResource;
+use Modules\Ticket\Models\ProjectStatus;
 
 class EditProjectStatus extends EditRecord
 {

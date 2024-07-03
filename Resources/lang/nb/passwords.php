@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Password Reset Language Lines
@@ -18,5 +19,4 @@ return [
     'throttled' => 'Vennligst vent før du prøver på nytt.',
     'token' => 'Denne koden for å nullstille passordet er ugyldig.',
     'user' => 'Vi kan ikke finne en bruker med den e-postadressen.',
-
 ];
