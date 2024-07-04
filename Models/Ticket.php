@@ -167,6 +167,7 @@ class Ticket extends BaseModel implements HasMedia
                 if ($this->responsible) {
                     $users->push($this->responsible);
                 }
+
                 return $users->unique('id');
             }
         );

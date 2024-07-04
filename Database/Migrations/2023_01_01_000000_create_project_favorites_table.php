@@ -21,7 +21,6 @@ class CreateProjectFavoritesTable extends XotBaseMigration
                 $table->id();
                 $table->foreignId('user_id'); // ->constrained('users');
                 $table->foreignId('project_id'); // ->constrained('projects');
-                
             }
         );
         // -- UPDATE --

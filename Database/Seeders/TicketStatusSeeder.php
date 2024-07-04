@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use Modules\Ticket\Models\TicketStatus;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Modules\Ticket\Models\TicketStatus;
 
 class TicketStatusSeeder extends Seeder
 {
@@ -13,25 +14,25 @@ class TicketStatusSeeder extends Seeder
             'name' => 'Todo',
             'color' => '#cecece',
             'is_default' => true,
-            'order' => 1
+            'order' => 1,
         ],
         [
             'name' => 'In progress',
             'color' => '#ff7f00',
             'is_default' => false,
-            'order' => 2
+            'order' => 2,
         ],
         [
             'name' => 'Done',
             'color' => '#008000',
             'is_default' => false,
-            'order' => 3
+            'order' => 3,
         ],
         [
             'name' => 'Archived',
             'color' => '#ff0000',
             'is_default' => false,
-            'order' => 4
+            'order' => 4,
         ],
     ];
 

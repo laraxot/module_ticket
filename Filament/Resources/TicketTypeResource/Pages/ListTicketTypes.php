@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\TicketTypeResource\Pages;
 
-use Filament\Tables;
-use Filament\Tables\Table;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Tables;
+use Filament\Tables\Table;
 use Modules\Ticket\Filament\Resources\TicketTypeResource;
 
 class ListTicketTypes extends ListRecords
@@ -47,8 +49,7 @@ class ListTicketTypes extends ListRecords
                 ->searchable(),
             */
             Tables\Columns\IconColumn::make('icon')
-                ->icon(fn(string $state)=>$state)
-                ,
+                ->icon(fn (string $state) => $state),
 
             Tables\Columns\IconColumn::make('is_default')
                 ->label(__('Default type'))

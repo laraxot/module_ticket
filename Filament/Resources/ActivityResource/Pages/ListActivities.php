@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\ActivityResource\Pages;
 
-use Modules\Ticket\Filament\Resources\ActivityResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Modules\Ticket\Filament\Resources\ActivityResource;
 
 class ListActivities extends ListRecords
 {

@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources;
 
-use Modules\Ticket\Filament\Resources\TicketStatusResource\Pages;
-use Modules\Ticket\Filament\Resources\TicketStatusResource\RelationManagers;
-use Modules\Ticket\Models\TicketStatus;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
+use Modules\Ticket\Filament\Resources\TicketStatusResource\Pages;
+use Modules\Ticket\Models\TicketStatus;
 
 class TicketStatusResource extends Resource
 {
@@ -60,10 +61,10 @@ class TicketStatusResource extends Resource
                                 Forms\Components\TextInput::make('order')
                                     ->label(__('Status order'))
                                     ->integer()
-                                    ->default(fn() => TicketStatus::whereNull('project_id')->count() + 1)
+                                    ->default(fn () => TicketStatus::whereNull('project_id')->count() + 1)
                                     ->required(),
-                            ])
-                    ])
+                            ]),
+                    ]),
             ]);
     }
 
@@ -98,7 +99,6 @@ class TicketStatusResource extends Resource
                     ->searchable(),
             ])
             ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -114,7 +114,6 @@ class TicketStatusResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 

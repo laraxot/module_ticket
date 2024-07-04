@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Modules\Ticket\Models\Permission;
-use Modules\User\Models\Policies\UserBasePolicy;
 use Modules\Xot\Contracts\UserContract;
 
-class PermissionPolicy extends UserBasePolicy
+class PermissionPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      *
@@ -17,8 +19,7 @@ class PermissionPolicy extends UserBasePolicy
      */
     public function viewAny(UserContract $user)
     {
-        return true;
-        // return $user->can('List permissions');
+        return $user->can('List permissions');
     }
 
     /**

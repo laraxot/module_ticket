@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models\Policies;
 
-use Modules\User\Models\Policies\UserBasePolicy;
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Modules\Xot\Contracts\UserContract;
 
-class UserPolicy extends UserBasePolicy
+class UserPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      *
@@ -16,14 +18,13 @@ class UserPolicy extends UserBasePolicy
      */
     public function viewAny(UserContract $user)
     {
-        return true;
-        // return $user->can('List users');
+        return $user->can('List users');
     }
 
     /**
      * Determine whether the user can view the model.
      *
-     * @param \Modules\Xot\Contracts\UserContract $model
+     * @param UserContract $model
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -45,7 +46,7 @@ class UserPolicy extends UserBasePolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param \Modules\Xot\Contracts\UserContract $model
+     * @param UserContract $model
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -57,7 +58,7 @@ class UserPolicy extends UserBasePolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param \Modules\Xot\Contracts\UserContract $model
+     * @param UserContract $model
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */

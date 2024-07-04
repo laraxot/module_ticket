@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources;
 
-use Modules\Ticket\Filament\Resources\ActivityResource\Pages;
-use Modules\Ticket\Filament\Resources\ActivityResource\RelationManagers;
-use Modules\Ticket\Models\Activity;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
+use Modules\Ticket\Filament\Resources\ActivityResource\Pages;
+use Modules\Ticket\Models\Activity;
 
 class ActivityResource extends Resource
 {
@@ -51,9 +52,8 @@ class ActivityResource extends Resource
                                     ->label(__('Description'))
                                     ->required()
                                     ->columnSpan(2),
-
-                            ])
-                    ])
+                            ]),
+                    ]),
             ]);
     }
 
@@ -73,7 +73,6 @@ class ActivityResource extends Resource
                     ->searchable(),
             ])
             ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -88,7 +87,6 @@ class ActivityResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 

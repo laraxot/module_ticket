@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\ProjectResource\Pages;
 
-use Modules\Ticket\Filament\Resources\ProjectResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\Ticket\Filament\Resources\ProjectResource;
 
 class ListProjects extends ListRecords
 {

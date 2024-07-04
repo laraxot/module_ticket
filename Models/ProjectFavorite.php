@@ -1,23 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Models;
 
-use Modules\Xot\Datas\XotData;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Xot\Datas\XotData;
 
 class ProjectFavorite extends BasePivot
 {
-    
-
     protected $fillable = [
-        'user_id', 'project_id'
+        'user_id', 'project_id',
     ];
 
     public function user(): BelongsTo
     {
-        $user_class=XotData::make()->getUserClass();
+        $user_class = XotData::make()->getUserClass();
+
         return $this->belongsTo($user_class, 'user_id', 'id');
     }
 

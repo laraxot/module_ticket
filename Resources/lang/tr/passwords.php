@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Parola Sıfırlama Dil Satırları
@@ -18,5 +19,4 @@ return [
     'throttled' => 'Tekrar denemeden önce lütfen bekleyin.',
     'token' => 'Parola sıfırlama kodu geçersiz.',
     'user' => 'Bu e-posta adresi ile kayıtlı bir üye bulunamadı.',
-
 ];

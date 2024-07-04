@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\ProjectStatusResource\Pages;
 
+use Filament\Resources\Pages\CreateRecord;
 use Modules\Ticket\Filament\Resources\ProjectStatusResource;
 use Modules\Ticket\Models\ProjectStatus;
-use Filament\Resources\Pages\CreateRecord;
 
 class CreateProjectStatus extends CreateRecord
 {

@@ -1,19 +1,18 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Widgets;
 
 use Filament\Forms;
-use Illuminate\Support\Str;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Widgets\Widget;
 use Modules\Ticket\Models\Epic;
 use Modules\Ticket\Models\Project;
-use Modules\Ticket\Models\TicketType;
-use Filament\Forms\Contracts\HasForms;
-use Modules\Ticket\Models\TicketStatus;
 use Modules\Ticket\Models\TicketPriority;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Modules\Ticket\Filament\Resources\TicketResource;
+use Modules\Ticket\Models\TicketStatus;
+use Modules\Ticket\Models\TicketType;
 
 class LocationFormWidget extends Widget implements HasForms
 {
@@ -22,10 +21,10 @@ class LocationFormWidget extends Widget implements HasForms
     protected static ?string $heading = 'Location Map';
 
     protected static string $view = 'ticket::filament.widgets.location-form';
-    public float $lat=0;
-    public float $lng=0;
-    public ?int $err_code=null;
-    public ?string $err_message=null;
+    public float $lat = 0;
+    public float $lng = 0;
+    public ?int $err_code = null;
+    public ?string $err_message = null;
 
     protected function getFormSchema(): array
     {
@@ -47,7 +46,7 @@ class LocationFormWidget extends Widget implements HasForms
                                 ->schema([
                                     Forms\Components\TextInput::make('code')
                                         ->label(__('Ticket code'))
-                                        ->visible(fn($livewire) => !($livewire instanceof CreateRecord))
+                                        ->visible(fn ($livewire) => ! ($livewire instanceof CreateRecord))
                                         ->columnSpan(2)
                                         ->disabled(),
 
@@ -55,7 +54,7 @@ class LocationFormWidget extends Widget implements HasForms
                                         ->label(__('Ticket name'))
                                         ->required()
                                         ->columnSpan(
-                                            fn($livewire) => !($livewire instanceof CreateRecord) ? 10 : 12
+                                            fn ($livewire) => ! ($livewire instanceof CreateRecord) ? 10 : 12
                                         )
                                         ->maxLength(255),
                                 ]),
@@ -69,7 +68,7 @@ class LocationFormWidget extends Widget implements HasForms
                                         ->searchable()
                                         ->options(function ($get) {
                                             $project = Project::where('id', $get('project_id'))->first();
-                                            if ($project?->status_type === 'custom') {
+                                            if ('custom' === $project?->status_type) {
                                                 return TicketStatus::where('project_id', $project->id)
                                                     ->get()
                                                     ->pluck('name', 'id')
@@ -83,7 +82,7 @@ class LocationFormWidget extends Widget implements HasForms
                                         })
                                         ->default(function ($get) {
                                             $project = Project::where('id', $get('project_id'))->first();
-                                            if ($project?->status_type === 'custom') {
+                                            if ('custom' === $project?->status_type) {
                                                 return TicketStatus::where('project_id', $project->id)
                                                     ->where('is_default', true)
                                                     ->first()
@@ -100,15 +99,15 @@ class LocationFormWidget extends Widget implements HasForms
                                     Forms\Components\Select::make('type_id')
                                         ->label(__('Ticket type'))
                                         ->searchable()
-                                        ->options(fn() => TicketType::all()->pluck('name', 'id')->toArray())
-                                        ->default(fn() => TicketType::where('is_default', true)->first()?->id)
+                                        ->options(fn () => TicketType::all()->pluck('name', 'id')->toArray())
+                                        ->default(fn () => TicketType::where('is_default', true)->first()?->id)
                                         ->required(),
 
                                     Forms\Components\Select::make('priority_id')
                                         ->label(__('Ticket priority'))
                                         ->searchable()
-                                        ->options(fn() => TicketPriority::all()->pluck('name', 'id')->toArray())
-                                        ->default(fn() => TicketPriority::where('is_default', true)->first()?->id)
+                                        ->options(fn () => TicketPriority::all()->pluck('name', 'id')->toArray())
+                                        ->default(fn () => TicketPriority::where('is_default', true)->first()?->id)
                                         ->required(),
                                 ]),
                         ]),
@@ -171,6 +170,6 @@ class LocationFormWidget extends Widget implements HasForms
                     //     ]),
                 ])
                 ->columnSpanFull(),
-            ];
+        ];
     }
 }

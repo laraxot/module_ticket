@@ -1,18 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Resources\TicketResource\Pages;
 
-use Modules\Ticket\Exports\TicketHoursExport;
-use Modules\Ticket\Filament\Resources\TicketResource;
-use Modules\Ticket\Models\Activity;
-use Modules\Ticket\Models\TicketComment;
-use Modules\Ticket\Models\TicketHour;
-use Modules\Ticket\Models\TicketSubscriber;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Actions\Action;
@@ -21,6 +16,12 @@ use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Facades\Excel;
+use Modules\Ticket\Exports\TicketHoursExport;
+use Modules\Ticket\Filament\Resources\TicketResource;
+use Modules\Ticket\Models\Activity;
+use Modules\Ticket\Models\TicketComment;
+use Modules\Ticket\Models\TicketHour;
+use Modules\Ticket\Models\TicketSubscriber;
 
 class ViewTicket extends ViewRecord implements HasForms
 {
@@ -28,7 +29,7 @@ class ViewTicket extends ViewRecord implements HasForms
 
     protected static string $resource = TicketResource::class;
 
-    protected static string $view = 'ticket::filament.resources.tickets.view';
+    protected static string $view = 'filament.resources.tickets.view';
 
     public string $tab = 'comments';
 
@@ -36,7 +37,7 @@ class ViewTicket extends ViewRecord implements HasForms
 
     public $selectedCommentId;
 
-    public function mount(int | string $record): void
+    public function mount(int|string $record): void
     {
         parent::mount($record);
         $this->form->fill();
@@ -47,16 +48,16 @@ class ViewTicket extends ViewRecord implements HasForms
         return [
             Actions\Action::make('toggleSubscribe')
                 ->label(
-                    fn() => $this->record->subscribers()->where('users.id', auth()->user()->id)->count() ?
+                    fn () => $this->record->subscribers()->where('users.id', auth()->user()->id)->count() ?
                         __('Unsubscribe')
                         : __('Subscribe')
                 )
                 ->color(
-                    fn() => $this->record->subscribers()->where('users.id', auth()->user()->id)->count() ?
+                    fn () => $this->record->subscribers()->where('users.id', auth()->user()->id)->count() ?
                         'danger'
                         : 'success'
                 )
-                ->icon('heroicon-o-magnifying-glassbell')
+                ->icon('heroicon-o-bell')
                 ->button()
                 ->action(function () {
                     if (
@@ -69,7 +70,7 @@ class ViewTicket extends ViewRecord implements HasForms
                     } else {
                         TicketSubscriber::create([
                             'user_id' => auth()->user()->id,
-                            'ticket_id' => $this->record->id
+                            'ticket_id' => $this->record->id,
                         ]);
                         $this->notify('success', __('You subscribed to the ticket'));
                     }
@@ -79,9 +80,9 @@ class ViewTicket extends ViewRecord implements HasForms
                 ->label(__('Share'))
                 ->color('gray')
                 ->button()
-                ->icon('heroicon-o-magnifying-glassshare')
-                ->action(fn() => $this->dispatchBrowserEvent('shareTicket', [
-                    'url' => route('filament.resources.tickets.share', $this->record->code)
+                ->icon('heroicon-o-share')
+                ->action(fn () => $this->dispatchBrowserEvent('shareTicket', [
+                    'url' => route('filament.resources.tickets.share', $this->record->code),
                 ])),
             Actions\EditAction::make(),
             Actions\Action::make('logHours')
@@ -92,7 +93,7 @@ class ViewTicket extends ViewRecord implements HasForms
                 ->modalHeading(__('Log worked time'))
                 ->modalSubheading(__('Use the following form to add your worked time in this ticket.'))
                 ->modalButton(__('Log'))
-                ->visible(fn() => in_array(
+                ->visible(fn () => in_array(
                     auth()->user()->id,
                     [$this->record->owner_id, $this->record->responsible_id]
                 ))
@@ -120,7 +121,7 @@ class ViewTicket extends ViewRecord implements HasForms
                         'activity_id' => $data['activity_id'],
                         'user_id' => auth()->user()->id,
                         'value' => $value,
-                        'comment' => $comment
+                        'comment' => $comment,
                     ]);
                     $this->record->refresh();
                     $this->notify('success', __('Time logged into ticket'));
@@ -128,26 +129,26 @@ class ViewTicket extends ViewRecord implements HasForms
             Actions\ActionGroup::make([
                 Actions\Action::make('exportLogHours')
                     ->label(__('Export time logged'))
-                    ->icon('heroicon-o-magnifying-glassdocument-arrow-down')
+                    ->icon('heroicon-o-document-arrow-down')
                     ->color('warning')
                     ->visible(
-                        fn() => $this->record->watchers->where('id', auth()->user()->id)->count()
+                        fn () => $this->record->watchers->where('id', auth()->user()->id)->count()
                             && $this->record->hours()->count()
                     )
-                    ->action(fn() => Excel::download(
+                    ->action(fn () => Excel::download(
                         new TicketHoursExport($this->record),
-                        'time_' . str_replace('-', '_', $this->record->code) . '.csv',
+                        'time_'.str_replace('-', '_', $this->record->code).'.csv',
                         \Maatwebsite\Excel\Excel::CSV,
                         ['Content-Type' => 'text/csv']
                     )),
             ])
-                ->visible(fn() => (in_array(
-                        auth()->user()->id,
-                        [$this->record->owner_id, $this->record->responsible_id]
-                    )) || (
-                        $this->record->watchers->where('id', auth()->user()->id)->count()
-                        && $this->record->hours()->count()
-                    ))
+                ->visible(fn () => in_array(
+                    auth()->user()->id,
+                    [$this->record->owner_id, $this->record->responsible_id]
+                ) || (
+                    $this->record->watchers->where('id', auth()->user()->id)->count()
+                    && $this->record->hours()->count()
+                ))
                 ->color('gray'),
         ];
     }
@@ -163,7 +164,7 @@ class ViewTicket extends ViewRecord implements HasForms
             RichEditor::make('comment')
                 ->disableLabel()
                 ->placeholder(__('Type a new comment'))
-                ->required()
+                ->required(),
         ];
     }
 
@@ -173,13 +174,13 @@ class ViewTicket extends ViewRecord implements HasForms
         if ($this->selectedCommentId) {
             TicketComment::where('id', $this->selectedCommentId)
                 ->update([
-                    'content' => $data['comment']
+                    'content' => $data['comment'],
                 ]);
         } else {
             TicketComment::create([
                 'user_id' => auth()->user()->id,
                 'ticket_id' => $this->record->id,
-                'content' => $data['comment']
+                'content' => $data['comment'],
             ]);
         }
         $this->record->refresh();
@@ -189,18 +190,18 @@ class ViewTicket extends ViewRecord implements HasForms
 
     public function isAdministrator(): bool
     {
-        return $this->record
+        return 0 != $this->record
                 ->project
-                ->profiles()
+                ->users()
                 ->where('users.id', auth()->user()->id)
                 ->where('role', 'administrator')
-                ->count() != 0;
+                ->count();
     }
 
     public function editComment(int $commentId): void
     {
         $this->form->fill([
-            'comment' => $this->record->comments->where('id', $commentId)->first()?->content
+            'comment' => $this->record->comments->where('id', $commentId)->first()?->content,
         ]);
         $this->selectedCommentId = $commentId;
     }
@@ -220,7 +221,7 @@ class ViewTicket extends ViewRecord implements HasForms
                     ->emit('doDeleteComment', compact('commentId')),
                 Action::make('cancel')
                     ->label(__('Cancel'))
-                    ->close()
+                    ->close(),
             ])
             ->persistent()
             ->send();

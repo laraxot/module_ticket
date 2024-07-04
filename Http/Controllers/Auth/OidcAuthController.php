@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use League\OAuth2\Client\Provider\GenericProvider;
 use Modules\Ticket\Http\Controllers\Controller;
 use Modules\Ticket\Models\Role;
 use Modules\Ticket\Models\User;
 use Modules\Ticket\Settings\GeneralSettings;
-use Illuminate\Http\Request;
-use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
-use League\OAuth2\Client\Provider\GenericProvider;
 
 class OidcAuthController extends Controller
 {
@@ -23,13 +25,14 @@ class OidcAuthController extends Controller
             'urlAuthorize' => config('services.oidc.url_authorize'),
             'urlAccessToken' => config('services.oidc.url_access_token'),
             'urlResourceOwnerDetails' => config('services.oidc.url_resource_owner_details'),
-            'scopes' => config('services.oidc.scope')
+            'scopes' => config('services.oidc.scope'),
         ]);
     }
 
     public function redirect()
     {
         $authUrl = $this->client->getAuthorizationUrl();
+
         return redirect($authUrl);
     }
 
@@ -37,7 +40,7 @@ class OidcAuthController extends Controller
     {
         try {
             $accessToken = $this->client->getAccessToken('authorization_code', [
-                'code' => $request->input('code')
+                'code' => $request->input('code'),
             ]);
             $user = $this->client->getResourceOwner($accessToken);
 
@@ -45,15 +48,15 @@ class OidcAuthController extends Controller
             if ($user) {
                 $data = $user->toArray();
                 $user = User::where('email', $data['email'])->first();
-                if (!$user) {
+                if (! $user) {
                     $user = User::create([
-                        'name' => $data['given_name'] . ' ' . $data['family_name'],
+                        'name' => $data['given_name'].' '.$data['family_name'],
                         'email' => $data['email'],
                         'oidc_username' => $data['preferred_username'],
                         'email_verified_at' => $data['email_verified'] ? now() : null,
                         'type' => 'oidc',
                         'oidc_sub' => $data['sub'],
-                        'password' => null
+                        'password' => null,
                     ]);
                     $defaultRoleSettings = app(GeneralSettings::class)->default_role;
                     if ($defaultRoleSettings && $defaultRole = Role::where('id', $defaultRoleSettings)->first()) {
@@ -61,12 +64,12 @@ class OidcAuthController extends Controller
                     }
                 } else {
                     $user->update([
-                        'name' => $data['given_name'] . ' ' . $data['family_name'],
+                        'name' => $data['given_name'].' '.$data['family_name'],
                         'email' => $data['email'],
                         'oidc_username' => $data['preferred_username'],
                         'type' => 'oidc',
                         'oidc_sub' => $data['sub'],
-                        'password' => null
+                        'password' => null,
                     ]);
                     $user->refresh();
                 }
@@ -77,9 +80,11 @@ class OidcAuthController extends Controller
                 return redirect()->intended();
             }
             session()->flash('oidc_error');
+
             return redirect()->route('login');
         } catch (IdentityProviderException $e) {
             session()->flash('oidc_error');
+
             return redirect()->route('login');
         }
     }

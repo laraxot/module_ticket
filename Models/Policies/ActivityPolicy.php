@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Modules\Ticket\Models\Activity;
-use Modules\User\Models\Policies\UserBasePolicy;
 use Modules\Xot\Contracts\UserContract;
 
-class ActivityPolicy extends UserBasePolicy
+class ActivityPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      *
@@ -17,8 +19,7 @@ class ActivityPolicy extends UserBasePolicy
      */
     public function viewAny(UserContract $user)
     {
-        return true;
-        // return $user->can('List activities');
+        return $user->can('List activities');
     }
 
     /**

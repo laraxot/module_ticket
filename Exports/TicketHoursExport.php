@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Exports;
 
-use Modules\Ticket\Models\Ticket;
-use Modules\Ticket\Models\TicketHour;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Modules\Ticket\Models\Ticket;
+use Modules\Ticket\Models\TicketHour;
 
 class TicketHoursExport implements FromCollection, WithHeadings
 {
@@ -44,7 +46,7 @@ class TicketHoursExport implements FromCollection, WithHeadings
                 'hours' => number_format($item->value, 2, ',', ' '),
                 'activity' => $item->activity ? $item->activity->name : '-',
                 'date' => $item->created_at->format(__('Y-m-d g:i A')),
-                'comment' => $item->comment
+                'comment' => $item->comment,
             ]);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Http\Middleware;
 
 use Illuminate\Routing\Middleware\ValidateSignature as Middleware;

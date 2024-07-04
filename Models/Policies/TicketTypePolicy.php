@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Modules\Ticket\Models\TicketType;
 use Modules\User\Models\Policies\UserBasePolicy;
 use Modules\Xot\Contracts\UserContract;

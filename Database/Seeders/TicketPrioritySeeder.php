@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use Modules\Ticket\Models\TicketPriority;
 use Illuminate\Database\Seeder;
+use Modules\Ticket\Models\TicketPriority;
 
 class TicketPrioritySeeder extends Seeder
 {
@@ -11,17 +13,17 @@ class TicketPrioritySeeder extends Seeder
         [
             'name' => 'Low',
             'color' => '#008000',
-            'is_default' => false
+            'is_default' => false,
         ],
         [
             'name' => 'Normal',
             'color' => '#CECECE',
-            'is_default' => true
+            'is_default' => true,
         ],
         [
             'name' => 'High',
             'color' => '#ff0000',
-            'is_default' => false
+            'is_default' => false,
         ],
     ];
 

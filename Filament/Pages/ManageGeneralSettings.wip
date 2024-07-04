@@ -1,11 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Pages;
 
-use Modules\Ticket\Models\Role;
-use Modules\Ticket\Settings\GeneralSettings;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -14,6 +12,8 @@ use Filament\Forms\Components\Toggle;
 use Filament\Pages\Actions\Action;
 use Filament\Pages\SettingsPage;
 use Illuminate\Contracts\Support\Htmlable;
+use Modules\Ticket\Models\Role;
+use Modules\Ticket\Settings\GeneralSettings;
 
 class ManageGeneralSettings extends SettingsPage
 {
@@ -61,7 +61,7 @@ class ManageGeneralSettings extends SettingsPage
                                     TextInput::make('site_name')
                                         ->label(__('Site name'))
                                         ->helperText(__('This is the platform name'))
-                                        ->default(fn() => config('app.name'))
+                                        ->default(fn () => config('app.name'))
                                         ->required(),
 
                                     Toggle::make('enable_registration')
@@ -106,6 +106,7 @@ class ManageGeneralSettings extends SettingsPage
     {
         $languages = config('system.locales.list');
         asort($languages);
+
         return $languages;
     }
 }

@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Modules\Ticket\Models\Sprint;
-use Modules\User\Models\Policies\UserBasePolicy;
 use Modules\Xot\Contracts\UserContract;
 
-class SprintPolicy extends UserBasePolicy
+class SprintPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      *
@@ -19,8 +21,7 @@ class SprintPolicy extends UserBasePolicy
      */
     public function viewAny(UserContract $user)
     {
-        return true;
-        // return $user->can('List sprints');
+        return $user->can('List sprints');
     }
 
     /**
@@ -36,7 +37,7 @@ class SprintPolicy extends UserBasePolicy
         return $user->can('View sprint')
             && (
                 $sprint->project->owner_id === $user->id
-                || $sprint->project->profiles()->where('users.id', $user->id)->count()
+                || $sprint->project->users()->where('users.id', $user->id)->count()
             );
     }
 
@@ -65,7 +66,7 @@ class SprintPolicy extends UserBasePolicy
         return $user->can('Update sprint')
             && (
                 $sprint->project->owner_id === $user->id
-                || $sprint->project->profiles()->where('users.id', $user->id)
+                || $sprint->project->users()->where('users.id', $user->id)
                     ->where('role', config('system.projects.affectations.roles.can_manage'))
                     ->count()
             );

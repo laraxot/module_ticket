@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\View\Components;
 
-use Modules\User\Models\User;
-use Illuminate\View\Component;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\View\Component;
+use Modules\User\Models\User;
 
 class UserAvatar extends Component
 {

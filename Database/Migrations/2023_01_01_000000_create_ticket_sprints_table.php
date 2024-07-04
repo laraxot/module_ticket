@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Modules\Ticket\Models\Sprint;
 use Illuminate\Database\Schema\Blueprint;
+use Modules\Ticket\Models\Sprint;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
 /**
@@ -12,6 +12,7 @@ use Modules\Xot\Database\Migrations\XotBaseMigration;
 class CreateTicketSprintsTable extends XotBaseMigration
 {
     protected ?string $model_class = Sprint::class;
+
     /**
      * Run the migrations.
      */

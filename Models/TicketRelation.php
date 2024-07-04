@@ -1,17 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TicketRelation extends BaseModel
 {
-    
-
     protected $fillable = [
-        'ticket_id', 'type', 'relation_id', 'sort'
+        'ticket_id', 'type', 'relation_id', 'sort',
     ];
 
     public function ticket(): BelongsTo

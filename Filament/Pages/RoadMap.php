@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Pages;
 
-use Modules\Ticket\Models\Epic;
-use Modules\Ticket\Models\Project;
 use Carbon\Carbon;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\Ticket\Models\Epic;
+use Modules\Ticket\Models\Project;
 
 class RoadMap extends Page implements HasForms
 {
@@ -25,14 +27,14 @@ class RoadMap extends Page implements HasForms
 
     public $project;
 
-    public Epic|null $epic = null;
+    public ?Epic $epic = null;
 
     public bool $ticket = false;
 
     protected $listeners = [
         'closeEpicDialog' => 'closeDialog',
         'closeTicketDialog' => 'closeDialog',
-        'updateEpic'
+        'updateEpic',
     ];
 
     public static function getNavigationLabel(): string
@@ -55,7 +57,7 @@ class RoadMap extends Page implements HasForms
         }
         if ($this->project) {
             $this->form->fill([
-                'selectedProject' => $this->project->id
+                'selectedProject' => $this->project->id,
             ]);
         } else {
             $this->form->fill();
@@ -70,7 +72,7 @@ class RoadMap extends Page implements HasForms
                 ->disableLabel()
                 ->searchable()
                 ->extraAttributes([
-                    'class' => 'min-w-[16rem]'
+                    'class' => 'min-w-[16rem]',
                 ])
                 ->disablePlaceholderSelection()
                 ->required()
@@ -79,7 +81,7 @@ class RoadMap extends Page implements HasForms
                         ->get()
                         ->pluck('name', 'id')
                         ->toArray();
-                })
+                }),
         ];
     }
 
@@ -92,7 +94,7 @@ class RoadMap extends Page implements HasForms
             'url' => route('road-map.data', $this->project),
             'start_date' => Carbon::parse($this->project->epicsFirstDate)->subYear()->format('Y-m-d'),
             'end_date' => Carbon::parse($this->project->epicsLastDate)->addYear()->format('Y-m-d'),
-            'scroll_to' => Carbon::parse($this->project->epicsFirstDate)->subDays(5)->format('Y-m-d')
+            'scroll_to' => Carbon::parse($this->project->epicsFirstDate)->subDays(5)->format('Y-m-d'),
         ]);
     }
 

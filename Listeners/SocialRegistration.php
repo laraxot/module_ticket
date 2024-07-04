@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Listeners;
 
 use DutchCodingCompany\FilamentSocialite\Events\Registered;
@@ -13,13 +15,11 @@ class SocialRegistration
      */
     public function __construct()
     {
-        //
     }
 
     /**
      * Handle the event.
      *
-     * @param Registered $event
      * @return void
      */
     public function handle(Registered $event)

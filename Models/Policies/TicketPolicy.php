@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Modules\Ticket\Models\Ticket;
-use Modules\User\Models\Policies\UserBasePolicy;
 use Modules\Xot\Contracts\UserContract;
 
-class TicketPolicy extends UserBasePolicy
+class TicketPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      *
@@ -30,13 +32,11 @@ class TicketPolicy extends UserBasePolicy
      */
     public function view(UserContract $user, Ticket $ticket)
     {
-        return true;
-
         return $user->can('View ticket')
             && (
                 $ticket->owner_id === $user->id
                 || $ticket->responsible_id === $user->id
-                || $ticket->project->profiles()->where('users.id', auth()->user()->id)->count()
+                || $ticket->project->users()->where('users.id', auth()->user()->id)->count()
                 || $ticket->project->owner_id === $user->id
             );
     }
@@ -48,8 +48,6 @@ class TicketPolicy extends UserBasePolicy
      */
     public function create(UserContract $user)
     {
-        return true;
-
         return $user->can('Create ticket');
     }
 
@@ -62,13 +60,11 @@ class TicketPolicy extends UserBasePolicy
      */
     public function update(UserContract $user, Ticket $ticket)
     {
-        return true;
-
         return $user->can('Update ticket')
             && (
                 $ticket->owner_id === $user->id
                 || $ticket->responsible_id === $user->id
-                || $ticket->project->profiles()->where('users.id', auth()->user()->id)->count()
+                || $ticket->project->users()->where('users.id', auth()->user()->id)->count()
                 || $ticket->project->owner_id === $user->id
             );
     }

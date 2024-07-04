@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Exports;
 
-use Modules\Ticket\Models\Project;
-use Modules\Ticket\Models\Ticket;
-use Modules\Ticket\Models\TicketHour;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Modules\Ticket\Models\TicketHour;
 
 class TimesheetExport implements FromCollection, WithHeadings
 {
@@ -33,9 +33,6 @@ class TimesheetExport implements FromCollection, WithHeadings
         ];
     }
 
-    /**
-     * @return Collection
-     */
     public function collection(): Collection
     {
         $collection = collect();

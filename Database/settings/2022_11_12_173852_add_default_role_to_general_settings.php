@@ -1,6 +1,7 @@
 <?php
 
-use Modules\Ticket\Models\Role;
+declare(strict_types=1);
+
 use Spatie\LaravelSettings\Migrations\SettingsMigration;
 
 class AddDefaultRoleToGeneralSettings extends SettingsMigration

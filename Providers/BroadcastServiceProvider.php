@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Providers;
 
 use Illuminate\Support\Facades\Broadcast;

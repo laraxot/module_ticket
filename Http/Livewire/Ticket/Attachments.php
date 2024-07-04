@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Http\Livewire\Ticket;
 
-use Modules\Ticket\Models\Ticket;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -14,15 +15,17 @@ use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
+use Modules\Ticket\Models\Ticket;
 
 class Attachments extends Component implements HasForms, HasTable
 {
-    use InteractsWithForms, InteractsWithTable;
+    use InteractsWithForms;
+    use InteractsWithTable;
 
     public Ticket $ticket;
 
     protected $listeners = [
-        'filesUploaded'
+        'filesUploaded',
     ];
 
     public function mount(): void
@@ -48,7 +51,7 @@ class Attachments extends Component implements HasForms, HasTable
                 ->hint(__('Important: If a file has the same name, it will be replaced'))
                 ->helperText(__('Here you can attach all files needed for this ticket'))
                 ->multiple()
-                ->disablePreview()
+                ->disablePreview(),
         ];
     }
 
@@ -97,7 +100,7 @@ class Attachments extends Component implements HasForms, HasTable
                 ->action(function ($record) {
                     $record->delete();
                     Filament::notify('success', __('Ticket attachment deleted'));
-                })
+                }),
         ];
     }
 }

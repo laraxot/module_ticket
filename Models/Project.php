@@ -6,6 +6,7 @@ namespace Modules\Ticket\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,9 +15,10 @@ use Modules\Xot\Datas\XotData;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Project extends BaseModel implements HasMedia
+class Project extends Model implements HasMedia
 {
-    // use HasFactory, SoftDeletes, InteractsWithMedia;
+    use HasFactory;
+    use SoftDeletes;
     use InteractsWithMedia;
 
     protected $fillable = [
@@ -40,28 +42,13 @@ class Project extends BaseModel implements HasMedia
         return $this->belongsTo(ProjectStatus::class, 'status_id', 'id')->withTrashed();
     }
 
-    // *-- da portare in profiles
-    //public function users(): BelongsToMany
-    //{
-        // $user_class = XotData::make()->getUserClass();
-    //    $profile_class = XotData::make()->getProfileClass();
+    public function users(): BelongsToMany
+    {
+        $user_class = XotData::make()->getUserClass();
 
-        // return $this->belongsToMany($user_class, 'project_users', 'project_id', 'user_id')
-        //    ->withPivot(['role']);
-    //    return $this->belongsToMany(
-    //        related: $profile_class,
-            /*
-            table: 'profile_project',
-            foreignPivotKey: 'project_id',
-            relatedPivotKey: 'user_id',
-            parentKey: 'id',
-            relatedKey: 'user_id',
-            relation: null,
-            */
-    //    )
-    //        ->withPivot(['role']);
-    //}
-    // */
+        return $this->belongsToMany($user_class, 'project_users', 'project_id', 'user_id')
+            ->withPivot(['role']);
+    }
 
     public function tickets(): HasMany
     {
@@ -111,19 +98,17 @@ class Project extends BaseModel implements HasMedia
         );
     }
 
-    /*
     public function contributors(): Attribute
     {
         return new Attribute(
             get: function () {
-                $users = $this->profiles;
+                $users = $this->users;
                 $users->push($this->owner);
 
                 return $users->unique('id');
             }
         );
     }
-    */
 
     public function cover(): Attribute
     {
