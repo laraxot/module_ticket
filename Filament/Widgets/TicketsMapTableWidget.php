@@ -1,30 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Filament\Widgets;
 
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Set;
-use Filament\Actions\Action;
-use Modules\Ticket\Models\Epic;
-use Modules\Geo\Models\Location;
-use Dotswan\MapPicker\Fields\Map;
-use Modules\Ticket\Models\Ticket;
-use Modules\Ticket\Models\Project;
-use Modules\Ticket\Models\TicketType;
-use Modules\Ticket\Models\TicketStatus;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Actions\CreateAction;
-use Illuminate\Database\Eloquent\Builder;
-use Modules\Ticket\Models\TicketPriority;
-use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\TextEntry;
-use Cheesegrits\FilamentGoogleMaps\Widgets\MapWidget;
 use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
-use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
 use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
+use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
 use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
 use Cheesegrits\FilamentGoogleMaps\Widgets\MapTableWidget;
+use Dotswan\MapPicker\Fields\Map;
+use Filament\Actions\Action;
+use Filament\Forms;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Set;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Tables;
+use Filament\Tables\Actions\CreateAction;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Geo\Models\Location;
+use Modules\Ticket\Models\Ticket;
+use Modules\Ticket\Models\TicketPriority;
+use Modules\Ticket\Models\TicketType;
 
 class TicketsMapTableWidget extends MapTableWidget
 {
@@ -76,24 +74,23 @@ class TicketsMapTableWidget extends MapTableWidget
     {
         return [
             Forms\Components\Section::make()->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->maxLength(256),
-                Forms\Components\TextInput::make('lat')
+                TextInput::make('lat')
                     ->maxLength(32),
-                Forms\Components\TextInput::make('lng')
+                TextInput::make('lng')
                     ->maxLength(32),
-                Forms\Components\TextInput::make('street')
+                TextInput::make('street')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('city')
+                TextInput::make('city')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('state')
+                TextInput::make('state')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('zip')
+                TextInput::make('zip')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('formatted_address')
+                TextInput::make('formatted_address')
                     ->maxLength(1024),
-
-            ])
+            ]),
         ];
     }
 
@@ -153,7 +150,6 @@ class TicketsMapTableWidget extends MapTableWidget
             GoToAction::make()
                 ->zoom(fn () => 14),
             RadiusAction::make('location'),
-
         ];
     }
 
@@ -174,13 +170,13 @@ class TicketsMapTableWidget extends MapTableWidget
                     'lat' => $location->lat ? round(floatval($location->lat), static::$precision) : 0,
                     'lng' => $location->lng ? round(floatval($location->lng), static::$precision) : 0,
                 ],
-                'label'    => $location->formatted_address,
-                'id'       => $location->id,
+                'label' => $location->formatted_address,
+                'id' => $location->id,
                 'icon' => [
-                    //'url' => url('images/dealership.svg'),
+                    // 'url' => url('images/dealership.svg'),
                     'url' => url('images/fire.svg'),
                     'type' => 'svg',
-                    'scale' => [35,35],
+                    'scale' => [35, 35],
                 ],
             ];
         }
@@ -201,7 +197,7 @@ class TicketsMapTableWidget extends MapTableWidget
                     TextEntry::make('zip'),
                     TextEntry::make('formatted_address'),
                 ])
-                    ->columns(3)
+                    ->columns(3),
             ])
             ->record(function (array $arguments) {
                 return array_key_exists('model_id', $arguments) ? Location::find($arguments['model_id']) : null;
@@ -214,7 +210,7 @@ class TicketsMapTableWidget extends MapTableWidget
         return [
             Forms\Components\Section::make()
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                                             ->label(__('Ticket name'))
                                             ->required()
 
@@ -282,12 +278,11 @@ class TicketsMapTableWidget extends MapTableWidget
                        'zoomDelta' => 1,
                        'zoomSnap' => 2,
                    ]),
-            ])
+            ]),
             // ->action(function ($data) {
             //     Ticket::create($data);
             //     // dddx($data);
             // })
-            ];
+        ];
     }
-
 }

@@ -35,7 +35,7 @@ class CreateGeoTicketHeaderAction extends Action
             // ->steps([
             // ])
             ->form([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                                             ->label(__('Ticket name'))
                                             ->required()
 

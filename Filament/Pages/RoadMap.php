@@ -125,13 +125,12 @@ class RoadMap extends Page implements HasForms
 
     private function projectQuery(): Builder
     {
-
         return Project::where(function ($query) {
             return $query->where('owner_id', auth()->user()->id)
-                //->orWhereHas('users', function ($query) {
+                // ->orWhereHas('users', function ($query) {
                 //    return $query->where('users.id', auth()->user()->id);
-                //})
-                ;
+                // })
+            ;
         });
     }
 }
