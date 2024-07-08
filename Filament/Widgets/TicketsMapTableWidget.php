@@ -11,6 +11,7 @@ use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
 use Cheesegrits\FilamentGoogleMaps\Widgets\MapTableWidget;
 use Dotswan\MapPicker\Fields\Map;
 use Filament\Actions\Action;
+use Filament\Actions\StaticAction;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Set;
@@ -141,6 +142,7 @@ class TicketsMapTableWidget extends MapTableWidget
             // ->canCreateAnother(false)
             ->form($this->getFormSchema2())
             ->createAnother(false)
+            ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
             ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
         ];
     }
