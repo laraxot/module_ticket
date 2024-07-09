@@ -7,9 +7,9 @@ namespace Modules\Ticket\Filament\Resources;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Guava\FilamentIconPicker\Forms\IconPicker;
 use Modules\Ticket\Filament\Resources\TicketTypeResource\Pages;
 use Modules\Ticket\Models\TicketType;
+use Modules\UI\Filament\Forms\Components\IconPicker;
 
 class TicketTypeResource extends Resource
 {
@@ -50,11 +50,11 @@ class TicketTypeResource extends Resource
                                 Forms\Components\ColorPicker::make('color')
                                     ->label(__('Type color'))
                                     ->required(),
-                                /*
+
                                 IconPicker::make('icon')
                                     ->label(__('Type icon'))
                                     ->required(),
-                                */
+
                                 // Forms\Components\TextInput::make('icon')
                                 //     ->suffixAction(
                                 //         \Filament\Forms\Components\Actions\Action::make('icon')
