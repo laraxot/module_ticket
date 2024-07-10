@@ -63,6 +63,7 @@ class TicketsMapTableWidget extends MapTableWidget
         //        ];
 
         //        $config['zoom'] = 5;
+        
         $config['center'] = [
             'lat' => 34.730369,
             'lng' => -86.586104,
