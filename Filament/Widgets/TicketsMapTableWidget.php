@@ -23,6 +23,7 @@ use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
 use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
 use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
 use Cheesegrits\FilamentGoogleMaps\Widgets\MapTableWidget;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class TicketsMapTableWidget extends MapTableWidget
@@ -63,7 +64,7 @@ class TicketsMapTableWidget extends MapTableWidget
         //        ];
 
         //        $config['zoom'] = 5;
-        
+
         $config['center'] = [
             'lat' => 34.730369,
             'lng' => -86.586104,
@@ -115,6 +116,9 @@ class TicketsMapTableWidget extends MapTableWidget
                 ->searchable()
                 ->sortable(),
             Tables\Columns\TextColumn::make('zip'),
+            SpatieMediaLibraryImageColumn::make('images')
+                //->conversion('thumb')
+                ->collection('ticket'),
         ];
     }
 
@@ -153,7 +157,7 @@ class TicketsMapTableWidget extends MapTableWidget
                     'type_id' => $data['type_id'],
                     'priority_id' => $data['priority_id'],
                     'latitude' => $data['latitude'],
-                    'longitude' => $data['longitude']   
+                    'longitude' => $data['longitude']
                 ]);
                 return Location::create([
                     'name' => $data['name'],
