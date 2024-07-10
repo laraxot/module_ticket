@@ -143,7 +143,25 @@ class TicketsMapTableWidget extends MapTableWidget
             ->form($this->getFormSchema2())
             ->createAnother(false)
             ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
-            ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
+            ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'])
+            ->using(function (array $data, string $model): Location {
+                // dddx([$data, $model]);
+                $ticket = Ticket::create([
+                    'name' => $data['name'],
+                    'content' => $data['content'],
+                    'type_id' => $data['type_id'],
+                    'priority_id' => $data['priority_id'],
+                    'latitude' => $data['latitude'],
+                    'longitude' => $data['longitude']   
+                ]);
+                return Location::create([
+                    'name' => $data['name'],
+                    'lat' => $data['latitude'],
+                    'lng' => $data['longitude'],
+                    'model_type' => 'ticket',
+                    'model_id' => $ticket->id
+                ]);
+            }),
         ];
     }
 
@@ -286,6 +304,8 @@ class TicketsMapTableWidget extends MapTableWidget
                        'zoomDelta' => 1,
                        'zoomSnap' => 2,
                    ])
+                //    ,
+                //    FileUpload::make('attachment')
                    ->columnSpanfull(),
             ])->columns(2),
             // ->action(function ($data) {
