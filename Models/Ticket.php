@@ -240,4 +240,12 @@ class Ticket extends BaseModel implements HasMedia
             get: fn () => $this->estimationProgress
         );
     }
+
+    public static function getLatLngAttributes(): array
+    {
+        return [
+            'lat' => 'lat',
+            'lng' => 'lng',
+        ];
+    }
 }
