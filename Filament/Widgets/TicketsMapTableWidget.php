@@ -216,15 +216,10 @@ class TicketsMapTableWidget extends MapTableWidget
             Forms\Components\Section::make()
             ->schema([
                 TextInput::make('name')
-<<<<<<< HEAD
-                                            ->label(__('Ticket name'))
-                                            ->required()
-=======
                     ->label(__('Ticket name'))
                     ->columnSpanfull()
                     ->required()
                     ->maxLength(255),
->>>>>>> 187f62f (up)
 
                 Forms\Components\Select::make('type_id')
                     ->label(__('Ticket type'))
@@ -288,14 +283,9 @@ class TicketsMapTableWidget extends MapTableWidget
                    ->extraControl([
                        'zoomDelta' => 1,
                        'zoomSnap' => 2,
-<<<<<<< HEAD
-                   ]),
-            ]),
-=======
                    ])
                    ->columnSpanfull(),
             ])->columns(2),
->>>>>>> 187f62f (up)
             // ->action(function ($data) {
             //     Ticket::create($data);
             //     // dddx($data);
