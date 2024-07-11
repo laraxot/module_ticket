@@ -73,29 +73,7 @@ class TicketsMapTableWidget extends MapTableWidget
         return $config;
     }
 
-    protected function getFormSchema(): array
-    {
-        return [
-            Forms\Components\Section::make()->schema([
-                TextInput::make('name')
-                    ->maxLength(256),
-                TextInput::make('lat')
-                    ->maxLength(32),
-                TextInput::make('lng')
-                    ->maxLength(32),
-                TextInput::make('street')
-                    ->maxLength(255),
-                TextInput::make('city')
-                    ->maxLength(255),
-                TextInput::make('state')
-                    ->maxLength(255),
-                TextInput::make('zip')
-                    ->maxLength(255),
-                TextInput::make('formatted_address')
-                    ->maxLength(1024),
-            ]),
-        ];
-    }
+
 
     protected function getTableQuery(): Builder
     {
@@ -141,11 +119,8 @@ class TicketsMapTableWidget extends MapTableWidget
     {
         return [
             CreateAction::make()
-            // ->form($this->getFormSchema()),
-            // ->label('bbbbbbbbbbbbbbbbbbbbb')
-            // ->tooltip('aaaaaaaaaa')
-            // ->canCreateAnother(false)
-            ->form($this->getFormSchema2())
+
+            ->form($this->getFormSchema())
             ->createAnother(false)
             ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
             ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'])
@@ -235,7 +210,7 @@ class TicketsMapTableWidget extends MapTableWidget
             ->modalSubmitAction(false);
     }
 
-    public function getFormSchema2(): array
+    public function getFormSchema(): array
     {
         return [
             Forms\Components\Section::make()
