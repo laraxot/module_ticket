@@ -130,7 +130,7 @@ class TicketsMapTableWidget extends MapTableWidget
             ->form($this->getFormSchema())
             ->createAnother(false)
             ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
-            ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'])
+            ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
             /*
             ->using(function (array $data, string $model): Ticket {
                 // dddx([$data, $model]);
@@ -303,7 +303,10 @@ class TicketsMapTableWidget extends MapTableWidget
                     ->multiple()
                     ->columnSpanfull(),
             ])->columns(2),
+<<<<<<< HEAD
             // ->action(function ($data) {
+=======
+>>>>>>> fa7784b (up)
         ];
     }
 }
