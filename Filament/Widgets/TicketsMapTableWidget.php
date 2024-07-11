@@ -297,6 +297,8 @@ class TicketsMapTableWidget extends MapTableWidget
                    ->columnSpanfull(),
                 SpatieMediaLibraryFileUpload::make('images')
                     ->collection('ticket')
+                    ->directory('ticket')
+                    ->disk('uploads')
                     ->responsiveImages()
                     ->multiple()
                     ->columnSpanfull(),
