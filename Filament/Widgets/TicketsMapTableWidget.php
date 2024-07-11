@@ -122,7 +122,8 @@ class TicketsMapTableWidget extends MapTableWidget
             ->createAnother(false)
             ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
             ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'])
-            ->using(function (array $data, string $model): Location {
+            /*
+            ->using(function (array $data, string $model): Ticket {
                 // dddx([$data, $model]);
                 $ticket = Ticket::create([
                     'name' => $data['name'],
@@ -132,7 +133,7 @@ class TicketsMapTableWidget extends MapTableWidget
                     'latitude' => $data['latitude'],
                     'longitude' => $data['longitude'],
                 ]);
-
+                LOCATION NON CENTRA NULLA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
                 return Location::create([
                     'name' => $data['name'],
                     'lat' => $data['latitude'],
@@ -141,6 +142,7 @@ class TicketsMapTableWidget extends MapTableWidget
                     'model_id' => $ticket->id,
                 ]);
             }),
+            */
         ];
     }
 
@@ -283,8 +285,6 @@ class TicketsMapTableWidget extends MapTableWidget
                        'zoomDelta' => 1,
                        'zoomSnap' => 2,
                    ])
-                //    ,
-                //    FileUpload::make('attachment')
                    ->columnSpanfull(),
                 SpatieMediaLibraryFileUpload::make('images')
                     ->collection('ticket')
