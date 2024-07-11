@@ -136,7 +136,12 @@ class TicketsMapTableWidget extends MapTableWidget
         return [
             CreateAction::make()
             // ->form($this->getFormSchema()),
-            ->form($this->getFormSchema2()),
+            // ->label('bbbbbbbbbbbbbbbbbbbbb')
+            // ->tooltip('aaaaaaaaaa')
+            // ->canCreateAnother(false)
+            ->form($this->getFormSchema2())
+            ->createAnother(false)
+            ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
         ];
     }
 
@@ -211,16 +216,22 @@ class TicketsMapTableWidget extends MapTableWidget
             Forms\Components\Section::make()
             ->schema([
                 TextInput::make('name')
+<<<<<<< HEAD
                                             ->label(__('Ticket name'))
                                             ->required()
+=======
+                    ->label(__('Ticket name'))
+                    ->columnSpanfull()
+                    ->required()
+                    ->maxLength(255),
+>>>>>>> 187f62f (up)
 
-                                            ->maxLength(255),
                 Forms\Components\Select::make('type_id')
-                                            ->label(__('Ticket type'))
-                                            ->searchable()
-                                            ->options(fn () => TicketType::all()->pluck('name', 'id')->toArray())
-                                            ->default(fn () => TicketType::where('is_default', true)->first()?->id)
-                                            ->required(),
+                    ->label(__('Ticket type'))
+                    ->searchable()
+                    ->options(fn () => TicketType::all()->pluck('name', 'id')->toArray())
+                    ->default(fn () => TicketType::where('is_default', true)->first()?->id)
+                    ->required(),
 
                 Forms\Components\Select::make('priority_id')
                     ->label(__('Ticket priority'))
@@ -230,19 +241,19 @@ class TicketsMapTableWidget extends MapTableWidget
                     ->required(),
 
                 Forms\Components\RichEditor::make('content')
-                            ->label(__('Ticket content'))
-                            ->required()
-                            ->columnSpan(2),
+                    ->label(__('Ticket content'))
+                    ->required()
+                    ->columnSpanfull(),
 
                 TextInput::make('latitude')
                 // ->hiddenLabel()
                 // ->hidden()
-                ,
+                    ->readOnly(),
 
                 TextInput::make('longitude')
                 // ->hiddenLabel()
                 // ->hidden()
-                ,
+                    ->readOnly(),
                 Map::make('location')
                    ->label('Location')
                    ->columnSpanFull()
@@ -277,8 +288,14 @@ class TicketsMapTableWidget extends MapTableWidget
                    ->extraControl([
                        'zoomDelta' => 1,
                        'zoomSnap' => 2,
+<<<<<<< HEAD
                    ]),
             ]),
+=======
+                   ])
+                   ->columnSpanfull(),
+            ])->columns(2),
+>>>>>>> 187f62f (up)
             // ->action(function ($data) {
             //     Ticket::create($data);
             //     // dddx($data);
