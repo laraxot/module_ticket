@@ -75,6 +75,7 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableQuery(): Builder
     {
+        // dddx(Ticket::query()->latest()->first());
         return Ticket::query()->latest();
     }
 
@@ -83,15 +84,23 @@ class TicketsMapTableWidget extends MapTableWidget
         return [
             Tables\Columns\TextColumn::make('name')
                 ->searchable(),
-            Tables\Columns\TextColumn::make('street')
+            Tables\Columns\TextColumn::make('priority.name')
                 ->searchable(),
-            Tables\Columns\TextColumn::make('city')
-                ->searchable()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('state')
-                ->searchable()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('zip'),
+            Tables\Columns\TextColumn::make('type.type')
+                ->searchable(),
+            Tables\Columns\TextColumn::make('latitude')
+                ->searchable(),
+            Tables\Columns\TextColumn::make('longitude')
+                ->searchable(),
+            // Tables\Columns\TextColumn::make('street')
+            //     ->searchable(),
+            // Tables\Columns\TextColumn::make('city')
+            //     ->searchable()
+            //     ->sortable(),
+            // Tables\Columns\TextColumn::make('state')
+            //     ->searchable()
+            //     ->sortable(),
+            // Tables\Columns\TextColumn::make('zip'),
             SpatieMediaLibraryImageColumn::make('images')
                 // ->conversion('thumb')
                 ->collection('ticket'),
