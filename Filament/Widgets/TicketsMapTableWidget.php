@@ -293,5 +293,6 @@ class TicketsMapTableWidget extends MapTableWidget
                     ->columnSpanfull(),
             ])->columns(2),
             // ->action(function ($data) {
+        ];
     }
 }
