@@ -19,8 +19,8 @@ use Modules\Ticket\Models\TicketPriority;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
-use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
 use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
+use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
 use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
 use Cheesegrits\FilamentGoogleMaps\Widgets\MapTableWidget;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
@@ -74,7 +74,6 @@ class TicketsMapTableWidget extends MapTableWidget
     }
 
 
-
     protected function getTableQuery(): Builder
     {
         return Ticket::query()->latest();
@@ -124,7 +123,8 @@ class TicketsMapTableWidget extends MapTableWidget
             ->createAnother(false)
             ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
             ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'])
-            ->using(function (array $data, string $model): Location {
+            /*
+            ->using(function (array $data, string $model): Ticket {
                 // dddx([$data, $model]);
                 $ticket = Ticket::create([
                     'name' => $data['name'],
@@ -134,6 +134,7 @@ class TicketsMapTableWidget extends MapTableWidget
                     'latitude' => $data['latitude'],
                     'longitude' => $data['longitude']
                 ]);
+                LOCATION NON CENTRA NULLA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
                 return Location::create([
                     'name' => $data['name'],
                     'lat' => $data['latitude'],
@@ -142,6 +143,7 @@ class TicketsMapTableWidget extends MapTableWidget
                     'model_id' => $ticket->id
                 ]);
             }),
+            */
         ];
     }
 
@@ -284,8 +286,6 @@ class TicketsMapTableWidget extends MapTableWidget
                        'zoomDelta' => 1,
                        'zoomSnap' => 2,
                    ])
-                //    ,
-                //    FileUpload::make('attachment')
                    ->columnSpanfull(),
                 SpatieMediaLibraryFileUpload::make('images')
                     ->collection('ticket')
