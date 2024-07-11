@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Widgets;
 
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Set;
-use Filament\Actions\Action;
-use Dotswan\MapPicker\Fields\Map;
-use Modules\Ticket\Models\Ticket;
-use Filament\Actions\StaticAction;
-use Modules\Ticket\Models\TicketType;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Actions\CreateAction;
-use Illuminate\Database\Eloquent\Builder;
-use Modules\Ticket\Models\TicketPriority;
-use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\TextEntry;
 use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
 use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
 use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
 use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
 use Cheesegrits\FilamentGoogleMaps\Widgets\MapTableWidget;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Dotswan\MapPicker\Fields\Map;
+use Filament\Actions\Action;
+use Filament\Actions\StaticAction;
+use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Set;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Tables;
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Ticket\Models\Ticket;
+use Modules\Ticket\Models\TicketPriority;
+use Modules\Ticket\Models\TicketType;
 
 class TicketsMapTableWidget extends MapTableWidget
 {
@@ -73,7 +73,6 @@ class TicketsMapTableWidget extends MapTableWidget
         return $config;
     }
 
-
     protected function getTableQuery(): Builder
     {
         return Ticket::query()->latest();
@@ -94,7 +93,7 @@ class TicketsMapTableWidget extends MapTableWidget
                 ->sortable(),
             Tables\Columns\TextColumn::make('zip'),
             SpatieMediaLibraryImageColumn::make('images')
-                //->conversion('thumb')
+                // ->conversion('thumb')
                 ->collection('ticket'),
         ];
     }
@@ -132,7 +131,7 @@ class TicketsMapTableWidget extends MapTableWidget
                     'type_id' => $data['type_id'],
                     'priority_id' => $data['priority_id'],
                     'latitude' => $data['latitude'],
-                    'longitude' => $data['longitude']
+                    'longitude' => $data['longitude'],
                 ]);
                 LOCATION NON CENTRA NULLA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
                 return Location::create([
@@ -140,7 +139,7 @@ class TicketsMapTableWidget extends MapTableWidget
                     'lat' => $data['latitude'],
                     'lng' => $data['longitude'],
                     'model_type' => 'ticket',
-                    'model_id' => $ticket->id
+                    'model_id' => $ticket->id,
                 ]);
             }),
             */
@@ -294,9 +293,5 @@ class TicketsMapTableWidget extends MapTableWidget
                     ->columnSpanfull(),
             ])->columns(2),
             // ->action(function ($data) {
-            //     Ticket::create($data);
-            //     // dddx($data);
-            // })
-        ];
     }
 }
