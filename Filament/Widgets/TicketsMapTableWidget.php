@@ -19,8 +19,8 @@ use Modules\Ticket\Models\TicketPriority;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
-use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
 use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
+use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
 use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
 use Cheesegrits\FilamentGoogleMaps\Widgets\MapTableWidget;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
@@ -73,29 +73,6 @@ class TicketsMapTableWidget extends MapTableWidget
         return $config;
     }
 
-    protected function getFormSchema(): array
-    {
-        return [
-            Forms\Components\Section::make()->schema([
-                TextInput::make('name')
-                    ->maxLength(256),
-                TextInput::make('lat')
-                    ->maxLength(32),
-                TextInput::make('lng')
-                    ->maxLength(32),
-                TextInput::make('street')
-                    ->maxLength(255),
-                TextInput::make('city')
-                    ->maxLength(255),
-                TextInput::make('state')
-                    ->maxLength(255),
-                TextInput::make('zip')
-                    ->maxLength(255),
-                TextInput::make('formatted_address')
-                    ->maxLength(1024),
-            ]),
-        ];
-    }
 
     protected function getTableQuery(): Builder
     {
@@ -141,15 +118,13 @@ class TicketsMapTableWidget extends MapTableWidget
     {
         return [
             CreateAction::make()
-            // ->form($this->getFormSchema()),
-            // ->label('bbbbbbbbbbbbbbbbbbbbb')
-            // ->tooltip('aaaaaaaaaa')
-            // ->canCreateAnother(false)
-            ->form($this->getFormSchema2())
+
+            ->form($this->getFormSchema())
             ->createAnother(false)
             ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
             ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'])
-            ->using(function (array $data, string $model): Location {
+            /*
+            ->using(function (array $data, string $model): Ticket {
                 // dddx([$data, $model]);
                 $ticket = Ticket::create([
                     'name' => $data['name'],
@@ -159,6 +134,7 @@ class TicketsMapTableWidget extends MapTableWidget
                     'latitude' => $data['latitude'],
                     'longitude' => $data['longitude']
                 ]);
+                LOCATION NON CENTRA NULLA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
                 return Location::create([
                     'name' => $data['name'],
                     'lat' => $data['latitude'],
@@ -167,6 +143,7 @@ class TicketsMapTableWidget extends MapTableWidget
                     'model_id' => $ticket->id
                 ]);
             }),
+            */
         ];
     }
 
@@ -235,7 +212,7 @@ class TicketsMapTableWidget extends MapTableWidget
             ->modalSubmitAction(false);
     }
 
-    public function getFormSchema2(): array
+    public function getFormSchema(): array
     {
         return [
             Forms\Components\Section::make()
@@ -309,8 +286,6 @@ class TicketsMapTableWidget extends MapTableWidget
                        'zoomDelta' => 1,
                        'zoomSnap' => 2,
                    ])
-                //    ,
-                //    FileUpload::make('attachment')
                    ->columnSpanfull(),
                 SpatieMediaLibraryFileUpload::make('images')
                     ->collection('ticket')
