@@ -125,8 +125,8 @@ class Ticket extends BaseModel implements HasMedia
         });
         */
         static::created(function (Ticket $item) {
-            if ($item->sprint_id && $item->sprint->epic_id) {
-                Ticket::where('id', $item->id)->update(['epic_id' => $item->sprint->epic_id]);
+            if ($item->sprint_id && $item->sprint?->epic_id) {
+                Ticket::where('id', $item->id)->update(['epic_id' => $item->sprint?->epic_id]);
             }
             foreach ($item->watchers ?? [] as $user) {
                 $user->notify(new TicketCreated($item));
@@ -137,7 +137,7 @@ class Ticket extends BaseModel implements HasMedia
             $old = Ticket::where('id', $item->id)->first();
 
             // Ticket activity based on status
-            $oldStatus = $old->status_id;
+            $oldStatus = $old?->status_id;
             if ($oldStatus != $item->status_id) {
                 TicketActivity::create([
                     'ticket_id' => $item->id,

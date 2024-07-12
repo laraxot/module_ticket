@@ -9,7 +9,7 @@ use Modules\Ticket\Notifications\TicketCommented;
 use Modules\Xot\Datas\XotData;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $ticket_id
@@ -53,7 +53,7 @@ class TicketComment extends BaseModel
         parent::boot();
 
         static::created(function (TicketComment $item) {
-            foreach ($item->ticket->watchers as $user) {
+            foreach ($item->ticket?->watchers as $user) {
                 $user->notify(new TicketCommented($item));
             }
         });

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Xot\Datas\XotData;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property int $user_id
@@ -37,7 +37,7 @@ use Modules\Xot\Datas\XotData;
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectUser whereUserId($value)
  * @mixin \Eloquent
  */
-class ProjectUser extends BAsePivot
+class ProjectUser extends BasePivot
 {
     protected $fillable = [
         'user_id', 'project_id', 'role',

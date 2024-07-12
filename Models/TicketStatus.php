@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -62,14 +62,14 @@ class TicketStatus extends BaseModel
                 $query = TicketStatus::where('id', '<>', $item->id)
                     ->where('is_default', true);
                 if ($item->project_id) {
-                    $query->where('project_id', $item->project->id);
+                    $query->where('project_id', $item->project?->id);
                 }
                 $query->update(['is_default' => false]);
             }
 
             $query = TicketStatus::where('order', '>=', $item->order)->where('id', '<>', $item->id);
             if ($item->project_id) {
-                $query->where('project_id', $item->project->id);
+                $query->where('project_id', $item->project?->id);
             }
             $toUpdate = $query->orderBy('order', 'asc')
                 ->get();

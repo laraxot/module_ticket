@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Notifications;
 
-use Filament\Notifications\Actions\Action;
-use Filament\Notifications\Notification as FilamentNotification;
 use Illuminate\Bus\Queueable;
+use Modules\Ticket\Models\User;
+use Modules\Ticket\Models\Ticket;
+use Modules\Xot\Contracts\UserContract;
+use Filament\Notifications\Actions\Action;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
-use Modules\Ticket\Models\Ticket;
-use Modules\Ticket\Models\User;
+use Filament\Notifications\Notification as FilamentNotification;
 
 class TicketCreated extends Notification implements ShouldQueue
 {
@@ -59,7 +60,7 @@ class TicketCreated extends Notification implements ShouldQueue
             ->action(__('View details'), route('filament.resources.tickets.share', $this->ticket->code));
     }
 
-    public function toDatabase(User $notifiable): array
+    public function toDatabase(UserContract $notifiable): array
     {
         return FilamentNotification::make()
             ->title(__('New ticket created'))
