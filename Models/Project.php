@@ -15,6 +15,65 @@ use Modules\Xot\Datas\XotData;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $description
+ * @property int|null $owner_id
+ * @property int $status_id
+ * @property string $status_type
+ * @property string $type
+ * @property string $ticket_prefix
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property string|null $deleted_by
+ * @property-read mixed $contributors
+ * @property-read mixed $cover
+ * @property-read mixed $current_sprint
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\Epic> $epics
+ * @property-read int|null $epics_count
+ * @property-read mixed $epics_first_date
+ * @property-read mixed $epics_last_date
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read mixed $next_sprint
+ * @property-read \Modules\User\Models\User|null $owner
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\Sprint> $sprints
+ * @property-read int|null $sprints_count
+ * @property-read \Modules\Ticket\Models\ProjectStatus $status
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\TicketStatus> $statuses
+ * @property-read int|null $statuses_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\Ticket> $tickets
+ * @property-read int|null $tickets_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $users
+ * @property-read int|null $users_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereOwnerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereStatusId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereStatusType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereTicketPrefix($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Project extends Model implements HasMedia
 {
     use HasFactory;

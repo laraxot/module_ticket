@@ -13,7 +13,7 @@ class TicketTypePolicy extends UserBasePolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param \App\Models\UserContract $user
+     * @param \Modules\Xot\Contracts\UserContract $user
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -26,8 +26,8 @@ class TicketTypePolicy extends UserBasePolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param \App\Models\UserContract $user
-     * @param \App\Models\TicketType   $ticketType
+     * @param \Modules\Xot\Contracts\UserContract $user
+     * @param \Modules\Ticket\Models\TicketType   $ticketType
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -39,7 +39,7 @@ class TicketTypePolicy extends UserBasePolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param \App\Models\UserContract $user
+     * @param \Modules\Xot\Contracts\UserContract $user
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -53,8 +53,8 @@ class TicketTypePolicy extends UserBasePolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param \App\Models\UserContract $user
-     * @param \App\Models\TicketType   $ticketType
+     * @param \Modules\Xot\Contracts\UserContract $user
+     * @param \Modules\Ticket\Models\TicketType   $ticketType
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -67,8 +67,8 @@ class TicketTypePolicy extends UserBasePolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param \App\Models\UserContract $user
-     * @param \App\Models\TicketType   $ticketType
+     * @param \Modules\Xot\Contracts\UserContract $user
+     * @param \Modules\Ticket\Models\TicketType   $ticketType
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */

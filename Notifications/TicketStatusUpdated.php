@@ -36,6 +36,7 @@ class TicketStatusUpdated extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
+     * @param  Ticket  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -45,7 +46,7 @@ class TicketStatusUpdated extends Notification implements ShouldQueue
 
     /**
      * Get the mail representation of the notification.
-     *
+      * @param  Ticket  $notifiable
      * @return MailMessage
      */
     public function toMail($notifiable)

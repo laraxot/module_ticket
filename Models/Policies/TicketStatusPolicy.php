@@ -24,7 +24,7 @@ class TicketStatusPolicy extends UserBasePolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param \App\Models\TicketStatus $ticketStatus
+     * @param \Modules\Ticket\Models\TicketStatus $ticketStatus
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -46,7 +46,7 @@ class TicketStatusPolicy extends UserBasePolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param \App\Models\TicketStatus $ticketStatus
+     * @param \Modules\Ticket\Models\TicketStatus $ticketStatus
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -58,7 +58,7 @@ class TicketStatusPolicy extends UserBasePolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param \App\Models\TicketStatus $ticketStatus
+     * @param \Modules\Ticket\Models\TicketStatus $ticketStatus
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */

@@ -34,7 +34,6 @@ use Modules\User\Models\User;
  * @property Collection<int, Role>       $roles
  * @property int|null                    $roles_count
  * @property User|null                   $user
- *
  * @method static CachedBuilder|Profile   all($columns = [])
  * @method static CachedBuilder|Profile   avg($column)
  * @method static CachedBuilder|Profile   cache(array $tags = [])
@@ -58,7 +57,6 @@ use Modules\User\Models\User;
  * @method static CachedBuilder|Profile   sum($column)
  * @method static CachedBuilder|Profile   truncate()
  * @method static CachedBuilder|BaseModel withCacheCooldownSeconds(?int $seconds = null)
- *
  * @property int         $id
  * @property string|null $first_name
  * @property string|null $last_name
@@ -66,7 +64,6 @@ use Modules\User\Models\User;
  * @property Carbon|null $updated_at
  * @property string|null $updated_by
  * @property string|null $created_by
- *
  * @method static Builder|Profile whereCreatedAt($value)
  * @method static Builder|Profile whereCreatedBy($value)
  * @method static Builder|Profile whereFirstName($value)
@@ -74,7 +71,6 @@ use Modules\User\Models\User;
  * @method static Builder|Profile whereLastName($value)
  * @method static Builder|Profile whereUpdatedAt($value)
  * @method static Builder|Profile whereUpdatedBy($value)
- *
  * @property Collection<int, Project>       $favoriteProjects
  * @property int|null                       $favorite_projects_count
  * @property Collection<int, TicketHour>    $hours
@@ -90,7 +86,40 @@ use Modules\User\Models\User;
  * @property Collection<int, Ticket>        $ticketsResponsible
  * @property int|null                       $tickets_responsible_count
  * @property mixed                          $total_logged_in_hours
- *
+ * @property string $user_id
+ * @property string|null $email
+ * @property string $credits
+ * @property string|null $slug
+ * @property \Spatie\SchemalessAttributes\SchemalessAttributes|null $extra
+ * @property Carbon|null $deleted_at
+ * @property string|null $deleted_by
+ * @property-read string $avatar
+ * @property-read Collection<int, \Modules\User\Models\DeviceUser> $deviceUsers
+ * @property-read int|null $device_users_count
+ * @property-read Collection<int, \Modules\User\Models\Device> $devices
+ * @property-read int|null $devices_count
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read Collection<int, \Modules\User\Models\DeviceUser> $mobileDeviceUsers
+ * @property-read int|null $mobile_device_users_count
+ * @property-read Collection<int, \Modules\User\Models\Device> $mobileDevices
+ * @property-read int|null $mobile_devices_count
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
+ * @property-read Collection<int, \Modules\User\Models\Team> $teams
+ * @property-read int|null $teams_count
+ * @property-read string|null $user_name
+ * @method static \Modules\Ticket\Database\Factories\ProfileFactory factory($count = null, $state = [])
+ * @method static Builder|Profile whereCredits($value)
+ * @method static Builder|Profile whereDeletedAt($value)
+ * @method static Builder|Profile whereDeletedBy($value)
+ * @method static Builder|Profile whereEmail($value)
+ * @method static Builder|Profile whereExtra($value)
+ * @method static Builder|Profile whereSlug($value)
+ * @method static Builder|Profile whereUserId($value)
+ * @method static Builder|BaseProfile withExtraAttributes()
+ * @method static Builder|BaseProfile withoutPermission($permissions)
+ * @method static Builder|BaseProfile withoutRole($roles, $guard = null)
  * @mixin \Eloquent
  */
 class Profile extends UserBaseProfile

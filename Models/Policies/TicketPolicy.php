@@ -26,7 +26,7 @@ class TicketPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param \App\Models\Ticket $ticket
+     * @param \Modules\Ticket\Models\Ticket $ticket
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -54,7 +54,7 @@ class TicketPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param \App\Models\Ticket $ticket
+     * @param \Modules\Ticket\Models\Ticket $ticket
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -72,7 +72,7 @@ class TicketPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param \App\Models\Ticket $ticket
+     * @param \Modules\Ticket\Models\Ticket $ticket
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
