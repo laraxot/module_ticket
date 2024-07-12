@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use Modules\Xot\Traits\Updater;
-use Illuminate\Database\Eloquent\Model;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
+use Illuminate\Database\Eloquent\Factories\Factory;
 // use Laravel\Scout\Searchable;
 // ---------- traits
 
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Xot\Actions\Factory\GetFactoryAction;
-use GeneaLabs\LaravelModelCaching\Traits\Cachable;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Xot\Traits\Updater;
 
 /**
  * Class BaseModel.
@@ -75,7 +74,6 @@ abstract class BaseModel extends Model
      */
     protected static function newFactory()
     {
-
         return app(GetFactoryAction::class)->execute(static::class);
     }
 }

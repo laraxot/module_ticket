@@ -15,8 +15,6 @@ class ProjectPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param \Modules\Xot\Contracts\UserContract $user
-     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(UserContract $user)
@@ -28,8 +26,7 @@ class ProjectPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param \Modules\Xot\Contracts\UserContract $user
-     * @param \App\Models\Project      $project
+     * @param \App\Models\Project $project
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -45,8 +42,6 @@ class ProjectPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param \Modules\Xot\Contracts\UserContract $user
-     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(UserContract $user)
@@ -57,8 +52,7 @@ class ProjectPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param \Modules\Xot\Contracts\UserContract $user
-     * @param \App\Models\Project      $project
+     * @param \App\Models\Project $project
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -76,8 +70,7 @@ class ProjectPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param \Modules\Xot\Contracts\UserContract $user
-     * @param \App\Models\Project      $project
+     * @param \App\Models\Project $project
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */

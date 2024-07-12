@@ -10,43 +10,43 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Xot\Datas\XotData;
 
 /**
- * 
- *
- * @property int $id
- * @property int $ticket_id
- * @property int $user_id
- * @property int|null $activity_id
- * @property float $value
- * @property string|null $comment
+ * @property int                             $id
+ * @property int                             $ticket_id
+ * @property int                             $user_id
+ * @property int|null                        $activity_id
+ * @property float                           $value
+ * @property string|null                     $comment
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
+ * @property string|null                     $updated_by
+ * @property string|null                     $created_by
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $deleted_by
- * @property-read \Modules\Ticket\Models\Activity|null $activity
- * @property-read mixed $for_humans
- * @property-read \Modules\Ticket\Models\Ticket|null $ticket
- * @property-read \Modules\User\Models\User|null $user
+ * @property string|null                     $deleted_by
+ * @property Activity|null                   $activity
+ * @property mixed                           $for_humans
+ * @property Ticket|null                     $ticket
+ * @property \Modules\User\Models\User|null  $user
+ *
  * @method static \Modules\Ticket\Database\Factories\TicketHourFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour query()
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour whereActivityId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour whereComment($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour whereTicketId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour whereValue($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|TicketHour withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     whereActivityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     whereComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     whereTicketId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     whereValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class TicketHour extends BaseModel
