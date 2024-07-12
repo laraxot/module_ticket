@@ -126,7 +126,10 @@ class TicketsMapTableWidget extends MapTableWidget
     protected function getTableHeaderActions(): array
     {
         // if(Auth::guest()){
-        //     dddx('guest');
+        //     return [
+        //         Action::make('login')
+        //             ->modalContent(view('ticket::filament.widgets.login'))
+        //     ];
         // }else{
         //     return [
         //         CreateAction::make()
