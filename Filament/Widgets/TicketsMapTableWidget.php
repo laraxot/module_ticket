@@ -11,6 +11,7 @@ use Filament\Actions\Action;
 use Dotswan\MapPicker\Fields\Map;
 use Modules\Ticket\Models\Ticket;
 use Filament\Actions\StaticAction;
+use Filament\Support\Enums\MaxWidth;
 use Illuminate\Support\Facades\Auth;
 use Modules\Ticket\Models\TicketType;
 use Filament\Forms\Components\TextInput;
@@ -19,6 +20,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Modules\Ticket\Models\TicketPriority;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Tables\Actions\Action as LoginAction;
 use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
 use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
 use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
@@ -125,32 +127,35 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableHeaderActions(): array
     {
-        // if(Auth::guest()){
-        //     return [
-        //         Action::make('login')
-        //             ->modalContent(view('ticket::filament.widgets.login'))
-        //     ];
-        // }else{
-        //     return [
-        //         CreateAction::make()
+        if(Auth::guest()){
+            return [
+                LoginAction::make('Nuovo')
+                    ->modalHeading('Devi loggarti per poter creare un ticket')
+                    ->modalContent(view('ticket::filament.widgets.login'))
+                    ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'])
+                    ->modalWidth(MaxWidth::Medium)
+                    ->modalSubmitAction(false),
+            ];
+        }else{
+            return [
+                CreateAction::make()
+                    ->form($this->getFormSchema())
+                    ->createAnother(false)
+                    ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
+                    ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
+            ];
     
-        //         ->form($this->getFormSchema())
-        //         ->createAnother(false)
-        //         ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
-        //         ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
-        //     ];
-    
-        // }
+        }
 
         
-        return [
-            CreateAction::make()
+        // return [
+        //     CreateAction::make()
 
-            ->form($this->getFormSchema())
-            ->createAnother(false)
-            ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
-            ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
-        ];
+        //     ->form($this->getFormSchema())
+        //     ->createAnother(false)
+        //     ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
+        //     ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
+        // ];
     }
 
     protected function getTableActions(): array
