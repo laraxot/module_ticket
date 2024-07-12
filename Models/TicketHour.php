@@ -9,6 +9,13 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Xot\Datas\XotData;
 
+/**
+ * Modules\Ticket\Models\TicketHour.
+ *
+ * @property float $value
+ *
+ * @mixin \Eloquent
+ */
 class TicketHour extends BaseModel
 {
     protected $fillable = [
