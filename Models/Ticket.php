@@ -5,19 +5,21 @@ declare(strict_types=1);
 namespace Modules\Ticket\Models;
 
 use Carbon\CarbonInterval;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Modules\Ticket\Notifications\TicketCreated;
-use Modules\Ticket\Notifications\TicketStatusUpdated;
+use Webmozart\Assert\Assert;
 use Modules\Xot\Datas\XotData;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Modules\Ticket\Notifications\TicketCreated;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Ticket\Notifications\TicketStatusUpdated;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Modules\Ticket\Models\Ticket.
  *
+<<<<<<< HEAD
  * @property string                                                                                                     $name
  * @property int                                                                                                        $id
  * @property string                                                                                                     $content
@@ -100,6 +102,13 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     withoutTrashed()
+=======
+ * @property string $name
+ * @property string $code
+ * @property int $sprint_id
+ * @property int $epic_id
+ * @property int $status_id
+>>>>>>> 2346896 (.)
  *
  * @mixin \Eloquent
  */
@@ -127,6 +136,7 @@ class Ticket extends BaseModel implements HasMedia
         });
         */
         static::created(function (Ticket $item) {
+            Assert::notNull($item->sprint);
             if ($item->sprint_id && $item->sprint->epic_id) {
                 Ticket::where('id', $item->id)->update(['epic_id' => $item->sprint->epic_id]);
             }
@@ -141,6 +151,7 @@ class Ticket extends BaseModel implements HasMedia
             // Ticket activity based on status
             $oldStatus = $old->status_id;
             if ($oldStatus != $item->status_id) {
+                Assert::notNull(auth()->user());
                 TicketActivity::create([
                     'ticket_id' => $item->id,
                     'old_status_id' => $oldStatus,
