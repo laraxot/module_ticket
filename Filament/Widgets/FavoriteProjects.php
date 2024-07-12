@@ -34,7 +34,7 @@ class FavoriteProjects extends BaseWidget
         foreach ($favoriteProjects as $project) {
             $ticketsCount = $project->tickets()->count();
             $contributorsCount = $project->contributors->count();
-            $cards[] = Card::make('', new HtmlString('
+            $cards[] = Section::make('', new HtmlString('
                     <div class="flex items-center gap-2 -mt-2 text-lg">
                         <div style=\'background-image: url("'.$project->cover.'")\'
                              class="w-8 h-8 bg-cover bg-center bg-no-repeat"></div>

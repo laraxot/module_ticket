@@ -44,7 +44,7 @@ class ManageGeneralSettings extends SettingsPage
     protected function getFormSchema(): array
     {
         return [
-            Card::make()
+            Section::make()
                 ->schema([
                     Grid::make(3)
                         ->schema([
