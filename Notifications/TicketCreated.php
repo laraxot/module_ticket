@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Notifications;
 
-use Webmozart\Assert\Assert;
-use Illuminate\Bus\Queueable;
-use Modules\User\Models\User;
-use Modules\Ticket\Models\Ticket;
 use Filament\Notifications\Actions\Action;
-use Illuminate\Notifications\Notification;
+use Filament\Notifications\Notification as FilamentNotification;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Filament\Notifications\Notification as FilamentNotification;
+use Illuminate\Notifications\Notification;
+use Modules\Ticket\Models\Ticket;
+use Modules\User\Models\User;
+use Webmozart\Assert\Assert;
 
 class TicketCreated extends Notification implements ShouldQueue
 {
@@ -50,7 +50,7 @@ class TicketCreated extends Notification implements ShouldQueue
         Assert::notNull($this->ticket);
         Assert::notNull($this->ticket->project);
         Assert::notNull($this->ticket->owner);
-        Assert::notNull($this->ticket->responsible);
+        // Assert::notNull($this->ticket->responsible);
         Assert::notNull($this->ticket->status);
         Assert::notNull($this->ticket->type);
         Assert::notNull($this->ticket->priority);
@@ -60,7 +60,7 @@ class TicketCreated extends Notification implements ShouldQueue
             ->line('- '.__('Ticket name:').' '.$this->ticket->name)
             ->line('- '.__('Project:').' '.$this->ticket->project->name)
             ->line('- '.__('Owner:').' '.$this->ticket->owner->name)
-            ->line('- '.__('Responsible:').' '.$this->ticket->responsible->name ?? '-')
+            ->line('- '.__('Responsible:').' '.$this->ticket->responsible?->name ?? '-')
             ->line('- '.__('Status:').' '.$this->ticket->status->name)
             ->line('- '.__('Type:').' '.$this->ticket->type->name)
             ->line('- '.__('Priority:').' '.$this->ticket->priority->name)

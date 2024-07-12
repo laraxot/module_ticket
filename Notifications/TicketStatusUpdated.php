@@ -54,15 +54,16 @@ class TicketStatusUpdated extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+        /*
         Assert::isInstanceOf($this->ticket, Ticket::class);
         Assert::notNull($this->ticket);
-        Assert::notNull($this->ticket->oldStatus);
-        Assert::notNull($this->ticket->newStatus);
-
+        Assert::notNull($this->activity->oldStatus);
+        Assert::notNull($this->activity->newStatus);
+        */
         return (new MailMessage())
             ->line(__('The status of ticket :ticket has been updated.', ['ticket' => $this->ticket->name]))
-            ->line('- '.__('Old status:').' '.$this->activity->oldStatus->name)
-            ->line('- '.__('New status:').' '.$this->activity->newStatus->name)
+            ->line('- '.__('Old status:').' '.$this->activity->oldStatus?->name)
+            ->line('- '.__('New status:').' '.$this->activity->newStatus?->name)
             ->line(__('See more details of this ticket by clicking on the button below:'))
             ->action(__('View details'), route('filament.resources.tickets.share', $this->ticket->code));
     }
@@ -74,8 +75,8 @@ class TicketStatusUpdated extends Notification implements ShouldQueue
             ->icon('heroicon-o-ticket')
             ->body(
                 fn () => __('Old status: :oldStatus - New status: :newStatus', [
-                    'oldStatus' => $this->activity->oldStatus->name,
-                    'newStatus' => $this->activity->newStatus->name,
+                    'oldStatus' => $this->activity->oldStatus?->name,
+                    'newStatus' => $this->activity->newStatus?->name,
                 ])
             )
             ->actions([
