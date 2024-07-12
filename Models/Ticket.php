@@ -70,6 +70,7 @@ use Webmozart\Assert\Assert;
  * @property mixed                                                                                                      $total_logged_in_hours
  * @property mixed                                                                                                      $total_logged_seconds
  * @property TicketType|null                                                                                            $type
+ *
  * @method static \Modules\Ticket\Database\Factories\TicketFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     newQuery()
@@ -100,6 +101,7 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Ticket extends BaseModel implements HasMedia
@@ -117,6 +119,14 @@ class Ticket extends BaseModel implements HasMedia
         'estimationInSeconds',
         'estimationProgress',
     ];
+
+    public function casts(): array
+    {
+        return [
+            'estimationInSeconds' => 'int',
+            'estimationProgress' => 'float',
+        ];
+    }
 
     public static function boot()
     {
@@ -296,7 +306,7 @@ class Ticket extends BaseModel implements HasMedia
     {
         return new Attribute(
             get: function () {
-                return CarbonInterval::seconds($this->estimationInSeconds)->cascade()->forHumans();
+                return CarbonInterval::seconds($this->estimation_in_seconds)->cascade()->forHumans();
             }
         );
     }
@@ -304,7 +314,7 @@ class Ticket extends BaseModel implements HasMedia
     public function estimationInSeconds(): Attribute
     {
         return new Attribute(
-            get: function () {
+            get: function (): ?int {
                 if (! $this->estimation) {
                     return null;
                 }
@@ -317,7 +327,7 @@ class Ticket extends BaseModel implements HasMedia
     public function estimationProgress(): Attribute
     {
         return new Attribute(
-            get: function () {
+            get: function (): float {
                 return (($this->totalLoggedSeconds ?? 0) / ($this->estimationInSeconds ?? 1)) * 100;
             }
         );
