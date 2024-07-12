@@ -4,27 +4,28 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Widgets;
 
-use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
-use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
-use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
-use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
-use Cheesegrits\FilamentGoogleMaps\Widgets\MapTableWidget;
-use Dotswan\MapPicker\Fields\Map;
-use Filament\Actions\Action;
-use Filament\Actions\StaticAction;
 use Filament\Forms;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Forms\Components\TextInput;
+use Filament\Tables;
 use Filament\Forms\Set;
+use Filament\Actions\Action;
+use Dotswan\MapPicker\Fields\Map;
+use Modules\Ticket\Models\Ticket;
+use Filament\Actions\StaticAction;
+use Illuminate\Support\Facades\Auth;
+use Modules\Ticket\Models\TicketType;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Actions\CreateAction;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Ticket\Models\TicketPriority;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Tables;
-use Filament\Tables\Actions\CreateAction;
+use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
+use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
+use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
+use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
+use Cheesegrits\FilamentGoogleMaps\Widgets\MapTableWidget;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Modules\Ticket\Models\Ticket;
-use Modules\Ticket\Models\TicketPriority;
-use Modules\Ticket\Models\TicketType;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class TicketsMapTableWidget extends MapTableWidget
 {
@@ -124,6 +125,21 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableHeaderActions(): array
     {
+        // if(Auth::guest()){
+        //     dddx('guest');
+        // }else{
+        //     return [
+        //         CreateAction::make()
+    
+        //         ->form($this->getFormSchema())
+        //         ->createAnother(false)
+        //         ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
+        //         ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
+        //     ];
+    
+        // }
+
+        
         return [
             CreateAction::make()
 
@@ -131,27 +147,6 @@ class TicketsMapTableWidget extends MapTableWidget
             ->createAnother(false)
             ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
             ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
-            /*
-            ->using(function (array $data, string $model): Ticket {
-                // dddx([$data, $model]);
-                $ticket = Ticket::create([
-                    'name' => $data['name'],
-                    'content' => $data['content'],
-                    'type_id' => $data['type_id'],
-                    'priority_id' => $data['priority_id'],
-                    'latitude' => $data['latitude'],
-                    'longitude' => $data['longitude'],
-                ]);
-                LOCATION NON CENTRA NULLA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-                return Location::create([
-                    'name' => $data['name'],
-                    'lat' => $data['latitude'],
-                    'lng' => $data['longitude'],
-                    'model_type' => 'ticket',
-                    'model_id' => $ticket->id,
-                ]);
-            }),
-            */
         ];
     }
 
