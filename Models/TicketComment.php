@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Modules\Ticket\Notifications\TicketCommented;
+use Webmozart\Assert\Assert;
 use Modules\Xot\Datas\XotData;
+use Modules\Ticket\Notifications\TicketCommented;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TicketComment extends BaseModel
 {
@@ -19,6 +20,7 @@ class TicketComment extends BaseModel
         parent::boot();
 
         static::created(function (TicketComment $item) {
+            Assert::notNull($item->ticket);
             foreach ($item->ticket->watchers as $user) {
                 $user->notify(new TicketCommented($item));
             }
