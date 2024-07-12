@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
+use Modules\Xot\Datas\XotData;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Xot\Datas\XotData;
 

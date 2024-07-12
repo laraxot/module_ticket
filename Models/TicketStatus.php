@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Webmozart\Assert\Assert;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int                                                                          $id
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\Ticket> $tickets
  * @property int|null                                                                     $tickets_count
  *
+<<<<<<< HEAD
  * @method static \Modules\Ticket\Database\Factories\TicketStatusFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     newQuery()
@@ -43,6 +45,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     withoutTrashed()
+=======
+ * @property string $name
+ * @property bool $is_default
+ * @property int $project_id
+ * @property int $order
+>>>>>>> 5d82a12 (.)
  *
  * @mixin \Eloquent
  */
@@ -58,6 +66,7 @@ class TicketStatus extends BaseModel
         parent::boot();
 
         static::saved(function (TicketStatus $item) {
+            Assert::notNull($item->project);
             if ($item->is_default) {
                 $query = TicketStatus::where('id', '<>', $item->id)
                     ->where('is_default', true);
