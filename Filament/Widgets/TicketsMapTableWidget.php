@@ -303,10 +303,6 @@ class TicketsMapTableWidget extends MapTableWidget
                     ->multiple()
                     ->columnSpanfull(),
             ])->columns(2),
-<<<<<<< HEAD
-            // ->action(function ($data) {
-=======
->>>>>>> fa7784b (up)
         ];
     }
 }
