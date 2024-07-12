@@ -12,7 +12,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Modules\Ticket\Models\Ticket;
 use Modules\Ticket\Models\TicketActivity;
-use Modules\Ticket\Models\User;
+use Modules\User\Models\User;
 use Webmozart\Assert\Assert;
 
 class TicketStatusUpdated extends Notification implements ShouldQueue
