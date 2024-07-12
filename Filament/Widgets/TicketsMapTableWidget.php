@@ -86,7 +86,7 @@ class TicketsMapTableWidget extends MapTableWidget
                 ->searchable(),
             Tables\Columns\TextColumn::make('priority.name')
                 ->searchable(),
-            Tables\Columns\TextColumn::make('type.type')
+            Tables\Columns\TextColumn::make('type.name')
                 ->searchable(),
             Tables\Columns\TextColumn::make('latitude')
                 ->searchable(),
