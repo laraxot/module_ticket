@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Webmozart\Assert\Assert;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Modules\Ticket\Models\TicketStatus.
  *
  * @property string $name
+ * @property bool $is_default
+ * @property int $project_id
+ * @property int $order
  *
  * @mixin \Eloquent
  */
@@ -26,6 +30,7 @@ class TicketStatus extends BaseModel
         parent::boot();
 
         static::saved(function (TicketStatus $item) {
+            Assert::notNull($item->project);
             if ($item->is_default) {
                 $query = TicketStatus::where('id', '<>', $item->id)
                     ->where('is_default', true);
