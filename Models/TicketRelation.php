@@ -7,6 +7,8 @@ namespace Modules\Ticket\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * 
+ *
  * @property int                             $id
  * @property int|null                        $ticket_id
  * @property int|null                        $relation_id
@@ -20,7 +22,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null                     $deleted_by
  * @property Ticket|null                     $relation
  * @property Ticket|null                     $ticket
- *
  * @method static \Modules\Ticket\Database\Factories\TicketRelationFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|TicketRelation     newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketRelation     newQuery()
@@ -39,7 +40,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|TicketRelation     whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketRelation     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketRelation     withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class TicketRelation extends BaseModel

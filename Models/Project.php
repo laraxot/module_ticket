@@ -16,6 +16,8 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
+ * 
+ *
  * @property int                                                                                                        $id
  * @property string                                                                                                     $name
  * @property string|null                                                                                                $description
@@ -50,7 +52,6 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property int|null                                                                                                   $tickets_count
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User>                                   $users
  * @property int|null                                                                                                   $users_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project onlyTrashed()
@@ -71,7 +72,6 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Project withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Project extends Model implements HasMedia
