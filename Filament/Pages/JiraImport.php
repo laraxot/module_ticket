@@ -77,7 +77,7 @@ class JiraImport extends Page implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            Card::make()
+            Section::make()
                 ->schema([
                     Wizard::make([
                         Wizard\Step::make(__('Jira login'))

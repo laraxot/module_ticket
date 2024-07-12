@@ -48,7 +48,7 @@ class TimesheetResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Card::make()
+                Forms\Components\Section::make()
                     ->schema([
                         Select::make('activity_id')
                             ->label(__('Activity'))

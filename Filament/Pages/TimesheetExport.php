@@ -35,7 +35,7 @@ class TimesheetExport extends Page implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            Card::make()->schema([
+            Section::make()->schema([
                 Grid::make()
                     ->columns(2)
                     ->schema([
