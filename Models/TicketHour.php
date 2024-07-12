@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Xot\Datas\XotData;
 
 /**
+<<<<<<< HEAD
  * @property int                             $id
  * @property int                             $ticket_id
  * @property int                             $user_id
@@ -46,6 +47,11 @@ use Modules\Xot\Datas\XotData;
  * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     whereValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketHour     withoutTrashed()
+=======
+ * Modules\Ticket\Models\TicketHour.
+ *
+ * @property float $value
+>>>>>>> 63f2074 (.)
  *
  * @mixin \Eloquent
  */
