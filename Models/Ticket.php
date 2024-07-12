@@ -5,25 +5,20 @@ declare(strict_types=1);
 namespace Modules\Ticket\Models;
 
 use Carbon\CarbonInterval;
-use Webmozart\Assert\Assert;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Ticket\Notifications\TicketCreated;
+use Modules\Ticket\Notifications\TicketStatusUpdated;
 use Modules\Xot\Datas\XotData;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-<<<<<<< HEAD
 use Webmozart\Assert\Assert;
-=======
-use Modules\Ticket\Notifications\TicketCreated;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Modules\Ticket\Notifications\TicketStatusUpdated;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
->>>>>>> bdf9ba7 (.)
 
 /**
  * Modules\Ticket\Models\Ticket.
  *
-<<<<<<< HEAD
  * @property string                                                                                                     $name
  * @property int                                                                                                        $id
  * @property string                                                                                                     $content
@@ -106,13 +101,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     withoutTrashed()
-=======
- * @property string $name
- * @property string $code
- * @property int $sprint_id
- * @property int $epic_id
- * @property int $status_id
->>>>>>> bdf9ba7 (.)
  *
  * @mixin \Eloquent
  */
