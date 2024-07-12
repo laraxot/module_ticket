@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Notifications;
 
-use Filament\Notifications\Actions\Action;
-use Filament\Notifications\Notification as FilamentNotification;
+use Webmozart\Assert\Assert;
 use Illuminate\Bus\Queueable;
+use Modules\User\Models\User;
+use Modules\Ticket\Models\TicketComment;
+use Filament\Notifications\Actions\Action;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
-use Modules\Ticket\Models\TicketComment;
-use Modules\Ticket\Models\User;
+use Filament\Notifications\Notification as FilamentNotification;
 
 class TicketCommented extends Notification implements ShouldQueue
 {
@@ -34,7 +35,7 @@ class TicketCommented extends Notification implements ShouldQueue
      *
      * @return array
      */
-    public function via($notifiable)
+    public function via(User $notifiable)
     {
         return ['mail', 'database'];
     }
@@ -44,8 +45,10 @@ class TicketCommented extends Notification implements ShouldQueue
      *
      * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail(User $notifiable)
     {
+        Assert::notNull($this->ticketComment->ticket);
+
         return (new MailMessage())
             ->line(
                 __(
@@ -65,6 +68,8 @@ class TicketCommented extends Notification implements ShouldQueue
 
     public function toDatabase(User $notifiable): array
     {
+        Assert::notNull($this->ticketComment->ticket);
+
         return FilamentNotification::make()
             ->title(
                 __(
