@@ -118,9 +118,9 @@ class ListTickets extends ListRecords
                 Tables\Filters\SelectFilter::make('project_id')
                     ->label(__('Project'))
                     ->multiple()
-                    ->options(fn() => Project::where('owner_id', auth()->user()->id)
+                    ->options(fn() => Project::where('owner_id', authId())
                         ->orWhereHas('users', function ($query) {
-                            return $query->where('users.id', auth()->user()->id);
+                            return $query->where('users.id', authId());
                         })->pluck('name', 'id')->toArray()),
 
                 Tables\Filters\SelectFilter::make('owner_id')
@@ -170,12 +170,12 @@ class ListTickets extends ListRecords
     {
         return parent::getTableQuery()
             ->where(function ($query) {
-                return $query->where('owner_id', auth()->user()->id)
-                    ->orWhere('responsible_id', auth()->user()->id)
+                return $query->where('owner_id', authId())
+                    ->orWhere('responsible_id', authId())
                     ->orWhereHas('project', function ($query) {
-                        return $query->where('owner_id', auth()->user()->id)
+                        return $query->where('owner_id', authId())
                             ->orWhereHas('users', function ($query) {
-                                return $query->where('users.id', auth()->user()->id);
+                                return $query->where('users.id', authId());
                             });
                     });
             });

@@ -26,7 +26,7 @@ class ProjectPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param \App\Models\Project $project
+     * @param \Modules\Ticket\Models\Project $project
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -52,7 +52,7 @@ class ProjectPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param \App\Models\Project $project
+     * @param \Modules\Ticket\Models\Project $project
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -70,7 +70,7 @@ class ProjectPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param \App\Models\Project $project
+     * @param \Modules\Ticket\Models\Project $project
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */

@@ -8,6 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 use Modules\Ticket\Filament\Resources\TicketPriorityResource;
 use Modules\Ticket\Models\TicketPriority;
 
+/**
+ * @property TicketPriority $record
+ */
 class CreateTicketPriority extends CreateRecord
 {
     protected static string $resource = TicketPriorityResource::class;

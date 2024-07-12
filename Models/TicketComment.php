@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use Webmozart\Assert\Assert;
-use Modules\Xot\Datas\XotData;
-use Modules\Ticket\Notifications\TicketCommented;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Ticket\Notifications\TicketCommented;
+use Modules\Xot\Datas\XotData;
+use Webmozart\Assert\Assert;
 
 /**
  * 
@@ -52,13 +52,14 @@ class TicketComment extends BaseModel
     public static function boot()
     {
         parent::boot();
-
+        /*
         static::created(function (TicketComment $item) {
             Assert::notNull($item->ticket);
             foreach ($item->ticket->watchers as $user) {
                 $user->notify(new TicketCommented($item));
             }
         });
+        */
     }
 
     public function user(): BelongsTo

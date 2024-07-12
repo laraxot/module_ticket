@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models\Policies;
 
-use Modules\Ticket\Models\Role;
-use Modules\User\Models\Policies\UserBasePolicy;
+use Illuminate\Auth\Access\HandlesAuthorization;
+use Modules\Ticket\Models\Permission;
 use Modules\Xot\Contracts\UserContract;
 
-class RolePolicy extends UserBasePolicy
+class PermissionPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      *
@@ -17,20 +19,19 @@ class RolePolicy extends UserBasePolicy
      */
     public function viewAny(UserContract $user)
     {
-        return true;
-        // return $user->can('List roles');
+        return $user->can('List permissions');
     }
 
     /**
      * Determine whether the user can view the model.
      *
-     * @param \App\Models\Role $role
+     * @param \Modules\Ticket\Models\Permission $permission
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(UserContract $user, Role $role)
+    public function view(UserContract $user, Permission $permission)
     {
-        return $user->can('View role');
+        return $user->can('View permission');
     }
 
     /**
@@ -40,30 +41,30 @@ class RolePolicy extends UserBasePolicy
      */
     public function create(UserContract $user)
     {
-        return $user->can('Create role');
+        return $user->can('Create permission');
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param \App\Models\Role $role
+     * @param \Modules\Ticket\Models\Permission $permission
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(UserContract $user, Role $role)
+    public function update(UserContract $user, Permission $permission)
     {
-        return $user->can('Update role');
+        return $user->can('Update permission');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param \App\Models\Role $role
+     * @param \Modules\Ticket\Models\Permission $permission
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(UserContract $user, Role $role)
+    public function delete(UserContract $user, Permission $permission)
     {
-        return $user->can('Delete role');
+        return $user->can('Delete permission');
     }
 }

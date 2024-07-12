@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\Ticket\Filament\Widgets;
 
 use Filament\Widgets\BarChartWidget;
-use Modules\Ticket\Models\User;
+use Modules\User\Models\User;
 
 class UserTimeLogged extends BarChartWidget
 {
@@ -20,7 +20,7 @@ class UserTimeLogged extends BarChartWidget
 
     public static function canView(): bool
     {
-        return auth()->user()->can('List tickets');
+        return auth()->user()?->can('List tickets') ?? false;
     }
 
     public function getHeading(): string

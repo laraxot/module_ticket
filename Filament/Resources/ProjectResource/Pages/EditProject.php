@@ -8,6 +8,9 @@ use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Modules\Ticket\Filament\Resources\ProjectResource;
 
+/**
+ * @property Project $record
+ */
 class EditProject extends EditRecord
 {
     protected static string $resource = ProjectResource::class;

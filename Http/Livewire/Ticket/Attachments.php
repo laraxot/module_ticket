@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Ticket\Http\Livewire\Ticket;
 
 use Filament\Facades\Filament;
+use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -12,11 +13,15 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Modules\Ticket\Models\Ticket;
 
+/**
+ * @property ComponentContainer $form
+ */
 class Attachments extends Component implements HasForms, HasTable
 {
     use InteractsWithForms;
@@ -24,6 +29,9 @@ class Attachments extends Component implements HasForms, HasTable
 
     public Ticket $ticket;
 
+    /**
+     * @var array<string>
+     */
     protected $listeners = [
         'filesUploaded',
     ];
@@ -33,7 +41,7 @@ class Attachments extends Component implements HasForms, HasTable
         $this->form->fill();
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.ticket.attachments');
     }
@@ -59,8 +67,8 @@ class Attachments extends Component implements HasForms, HasTable
     {
         $this->form->getState();
         $this->form->fill();
-        $this->emit('filesUploaded');
-        Filament::notify('success', __('Ticket attachments saved'));
+        $this->dispatch('filesUploaded');
+        // Filament::notify('success', __('Ticket attachments saved'));
     }
 
     public function filesUploaded(): void
@@ -99,7 +107,7 @@ class Attachments extends Component implements HasForms, HasTable
             DeleteAction::make()
                 ->action(function ($record) {
                     $record->delete();
-                    Filament::notify('success', __('Ticket attachment deleted'));
+                    // Filament::notify('success', __('Ticket attachment deleted'));
                 }),
         ];
     }

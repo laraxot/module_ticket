@@ -162,7 +162,9 @@ class Project extends Model implements HasMedia
         return new Attribute(
             get: function () {
                 $users = $this->users;
-                $users->push($this->owner);
+                if (null !== $this->owner) {
+                    $users->push($this->owner);
+                }
 
                 return $users->unique('id');
             }
@@ -172,9 +174,10 @@ class Project extends Model implements HasMedia
     public function cover(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->media('cover')?->first()?->getFullUrl()
-                ??
-                'https://ui-avatars.com/api/?background=3f84f3&color=ffffff&name='.$this->name
+            // get: fn () => $this->media('cover')?->first()?->getFullUrl()
+            fn () => $this->getFirstMediaUrl('cover')
+            // ??
+            // 'https://ui-avatars.com/api/?background=3f84f3&color=ffffff&name='.$this->name
         );
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Ticket\Filament\Pages;
 
 use Filament\Facades\Filament;
+use Filament\Forms\ComponentContainer;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Actions\Action;
@@ -13,6 +14,9 @@ use Illuminate\Contracts\Support\Htmlable;
 use Modules\Ticket\Helpers\KanbanScrumHelper;
 use Modules\Ticket\Models\Project;
 
+/**
+ * @property ComponentContainer $form
+ */
 class Scrum extends Page implements HasForms
 {
     use InteractsWithForms;
@@ -26,6 +30,7 @@ class Scrum extends Page implements HasForms
 
     protected static bool $shouldRegisterNavigation = false;
 
+    /** @var array<int, string> */
     protected $listeners = [
         'recordUpdated',
         'closeTicketDialog',
@@ -37,8 +42,8 @@ class Scrum extends Page implements HasForms
         if ('scrum' !== $this->project->type) {
             $this->redirect(route('filament.pages.kanban/{project}', ['project' => $project]));
         } elseif (
-            $this->project->owner_id != auth()->user()->id
-            && ! $this->project->users->where('id', auth()->user()->id)->count()
+            $this->project->owner_id != authId()
+            && ! $this->project->users->where('id', authId())->count()
         ) {
             abort(403);
         }

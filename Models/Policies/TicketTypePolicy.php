@@ -40,7 +40,7 @@ class TicketTypePolicy extends UserBasePolicy
     {
         return true;
 
-        return $user->can('Create ticket type');
+        // return $user->can('Create ticket type');
     }
 
     /**

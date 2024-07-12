@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Pages;
 
+use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Grid;
@@ -19,6 +20,9 @@ use Illuminate\Support\Str;
 use Modules\Ticket\Helpers\JiraHelper;
 use Modules\Ticket\Jobs\ImportJiraTicketsJob;
 
+/**
+ * @property ComponentContainer $form
+ */
 class JiraImport extends Page implements HasForms
 {
     use InteractsWithForms;
@@ -32,6 +36,7 @@ class JiraImport extends Page implements HasForms
 
     protected static ?int $navigationSort = 2;
 
+    /** @var array<int, string> */
     protected $listeners = [
         'updateJiraProjects',
         'updateJiraTickets',
@@ -110,7 +115,7 @@ class JiraImport extends Page implements HasForms
                             ])
                             ->afterValidation(function () {
                                 $this->loadingProjects = true;
-                                $this->emit('updateJiraProjects');
+                                $this->dispatch('updateJiraProjects');
                             }),
 
                         Wizard\Step::make(__('Jira projects'))
@@ -164,7 +169,7 @@ class JiraImport extends Page implements HasForms
                             ])
                             ->afterValidation(function () {
                                 $this->loadingTickets = true;
-                                $this->emit('updateJiraTickets');
+                                $this->dispatch('updateJiraTickets');
                             }),
 
                         Wizard\Step::make(__('Jira tickets'))

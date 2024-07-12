@@ -75,8 +75,8 @@ class TicketStatusUpdated extends Notification implements ShouldQueue
             ->icon('heroicon-o-ticket')
             ->body(
                 fn () => __('Old status: :oldStatus - New status: :newStatus', [
-                    'oldStatus' => $this->activity->oldStatus?->name,
-                    'newStatus' => $this->activity->newStatus?->name,
+                    'oldStatus' => $this->activity->oldStatus?->name ?? '-',
+                    'newStatus' => $this->activity->newStatus?->name ?? '-',
                 ])
             )
             ->actions([

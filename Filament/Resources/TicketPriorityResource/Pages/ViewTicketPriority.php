@@ -8,6 +8,9 @@ use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use Modules\Ticket\Filament\Resources\TicketPriorityResource;
 
+/**
+ * @property TicketPriority $record
+ */
 class ViewTicketPriority extends ViewRecord
 {
     protected static string $resource = TicketPriorityResource::class;

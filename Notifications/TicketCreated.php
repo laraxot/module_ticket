@@ -60,7 +60,7 @@ class TicketCreated extends Notification implements ShouldQueue
             ->line('- '.__('Ticket name:').' '.$this->ticket->name)
             ->line('- '.__('Project:').' '.$this->ticket->project->name)
             ->line('- '.__('Owner:').' '.$this->ticket->owner->name)
-            ->line('- '.__('Responsible:').' '.$this->ticket->responsible?->name ?? '-')
+            ->line('- '.__('Responsible:').' '.$this->ticket->responsible?->name)
             ->line('- '.__('Status:').' '.$this->ticket->status->name)
             ->line('- '.__('Type:').' '.$this->ticket->type->name)
             ->line('- '.__('Priority:').' '.$this->ticket->priority->name)

@@ -25,17 +25,18 @@ class SprintPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param \App\Models\Sprint $sprint
-     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(UserContract $user, Sprint $sprint)
     {
+        return true;
+        /*
         return $user->can('View sprint')
             && (
                 $sprint->project->owner_id === $user->id
                 || $sprint->project->users()->where('users.id', $user->id)->count()
             );
+        */
     }
 
     /**
@@ -51,12 +52,12 @@ class SprintPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param \App\Models\Sprint $sprint
-     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(UserContract $user, Sprint $sprint)
     {
+        return true;
+        /*
         return $user->can('Update sprint')
             && (
                 $sprint->project->owner_id === $user->id
@@ -64,12 +65,11 @@ class SprintPolicy
                     ->where('role', config('system.projects.affectations.roles.can_manage'))
                     ->count()
             );
+        */
     }
 
     /**
      * Determine whether the user can delete the model.
-     *
-     * @param \App\Models\Sprint $sprint
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */

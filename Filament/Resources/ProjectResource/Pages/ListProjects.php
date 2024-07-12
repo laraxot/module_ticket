@@ -24,9 +24,9 @@ class ListProjects extends ListRecords
     {
         return parent::getTableQuery()
             ->where(function ($query) {
-                return $query->where('owner_id', auth()->user()->id)
+                return $query->where('owner_id', authId())
                     ->orWhereHas('users', function ($query) {
-                        return $query->where('users.id', auth()->user()->id);
+                        return $query->where('users.id', authId());
                     });
             });
     }

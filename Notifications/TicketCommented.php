@@ -80,7 +80,7 @@ class TicketCommented extends Notification implements ShouldQueue
                 )
             )
             ->icon('heroicon-o-ticket')
-            ->body(fn () => __('by :name', ['name' => $this->ticketComment->user->name]))
+            ->body(fn () => __('by :name', ['name' => $this->ticketComment->user?->name ?? '-']))
             ->actions([
                 Action::make('view')
                     ->link()
