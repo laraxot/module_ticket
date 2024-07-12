@@ -6,6 +6,13 @@ namespace Modules\Ticket\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Modules\Ticket\Models\TicketType.
+ *
+ * @property string $name
+ *
+ * @mixin \Eloquent
+ */
 class TicketType extends BaseModel
 {
     protected $fillable = [

@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Notifications;
 
-use Filament\Notifications\Actions\Action;
-use Filament\Notifications\Notification as FilamentNotification;
+use Webmozart\Assert\Assert;
 use Illuminate\Bus\Queueable;
+use Modules\User\Models\User;
+use Modules\Ticket\Models\Ticket;
+use Filament\Notifications\Actions\Action;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
-use Modules\Ticket\Models\Ticket;
-use Modules\Ticket\Models\User;
+use Filament\Notifications\Notification as FilamentNotification;
 
 class TicketCreated extends Notification implements ShouldQueue
 {
@@ -34,7 +35,7 @@ class TicketCreated extends Notification implements ShouldQueue
      *
      * @return array
      */
-    public function via($notifiable)
+    public function via(User $notifiable)
     {
         return ['mail', 'database'];
     }
@@ -44,14 +45,22 @@ class TicketCreated extends Notification implements ShouldQueue
      *
      * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail(User $notifiable)
     {
+        Assert::notNull($this->ticket);
+        Assert::notNull($this->ticket->project);
+        Assert::notNull($this->ticket->owner);
+        Assert::notNull($this->ticket->responsible);
+        Assert::notNull($this->ticket->status);
+        Assert::notNull($this->ticket->type);
+        Assert::notNull($this->ticket->priority);
+
         return (new MailMessage())
             ->line(__('A new ticket has just been created.'))
             ->line('- '.__('Ticket name:').' '.$this->ticket->name)
             ->line('- '.__('Project:').' '.$this->ticket->project->name)
             ->line('- '.__('Owner:').' '.$this->ticket->owner->name)
-            ->line('- '.__('Responsible:').' '.$this->ticket->responsible?->name ?? '-')
+            ->line('- '.__('Responsible:').' '.$this->ticket->responsible->name ?? '-')
             ->line('- '.__('Status:').' '.$this->ticket->status->name)
             ->line('- '.__('Type:').' '.$this->ticket->type->name)
             ->line('- '.__('Priority:').' '.$this->ticket->priority->name)

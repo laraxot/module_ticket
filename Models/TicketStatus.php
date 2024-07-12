@@ -7,6 +7,13 @@ namespace Modules\Ticket\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Modules\Ticket\Models\TicketStatus.
+ *
+ * @property string $name
+ *
+ * @mixin \Eloquent
+ */
 class TicketStatus extends BaseModel
 {
     protected $fillable = [

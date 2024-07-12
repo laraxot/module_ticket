@@ -19,6 +19,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * Modules\Ticket\Models\Ticket.
  *
  * @property string $name
+ * @property string $code
  *
  * @mixin \Eloquent
  */

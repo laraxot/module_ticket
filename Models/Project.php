@@ -15,6 +15,13 @@ use Modules\Xot\Datas\XotData;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ * Modules\Ticket\Models\Project.
+ *
+ * @property string $name
+ *
+ * @mixin \Eloquent
+ */
 class Project extends Model implements HasMedia
 {
     use HasFactory;
