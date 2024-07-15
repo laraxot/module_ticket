@@ -9,6 +9,9 @@ use Filament\Resources\Pages\EditRecord;
 use Modules\Ticket\Filament\Resources\ProjectStatusResource;
 use Modules\Ticket\Models\ProjectStatus;
 
+/**
+ * @property ProjectStatus $record
+ */
 class EditProjectStatus extends EditRecord
 {
     protected static string $resource = ProjectStatusResource::class;

@@ -9,6 +9,9 @@ use Filament\Resources\Pages\EditRecord;
 use Modules\Ticket\Filament\Resources\TicketPriorityResource;
 use Modules\Ticket\Models\TicketPriority;
 
+/**
+ * @property TicketPriority $record
+ */
 class EditTicketPriority extends EditRecord
 {
     protected static string $resource = TicketPriorityResource::class;

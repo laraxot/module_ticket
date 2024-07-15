@@ -26,7 +26,7 @@ class LatestTickets extends BaseWidget
 
     public static function canView(): bool
     {
-        return auth()->user()->can('List tickets');
+        return auth()->user()?->can('List tickets') ?? false;
     }
 
     protected function getTableQuery(): Builder
@@ -34,12 +34,12 @@ class LatestTickets extends BaseWidget
         return Ticket::query()
             ->limit(5)
             ->where(function ($query) {
-                return $query->where('owner_id', auth()->user()->id)
-                    ->orWhere('responsible_id', auth()->user()->id)
+                return $query->where('owner_id', authId())
+                    ->orWhere('responsible_id', authId())
                     ->orWhereHas('project', function ($query) {
-                        return $query->where('owner_id', auth()->user()->id)
+                        return $query->where('owner_id', authId())
                             ->orWhereHas('users', function ($query) {
-                                return $query->where('users.id', auth()->user()->id);
+                                return $query->where('users.id', authId());
                             });
                     });
             })

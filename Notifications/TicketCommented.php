@@ -54,8 +54,8 @@ class TicketCommented extends Notification implements ShouldQueue
                 __(
                     'A new comment has been added to the ticket :ticket by :name.',
                     [
-                        'ticket' => $this->ticketComment->ticket->name,
-                        'name' => $this->ticketComment->user->name,
+                        'ticket' => $this->ticketComment->ticket->name ?? '-',
+                        'name' => $this->ticketComment->user->name ?? '-',
                     ]
                 )
             )
@@ -80,7 +80,7 @@ class TicketCommented extends Notification implements ShouldQueue
                 )
             )
             ->icon('heroicon-o-ticket')
-            ->body(fn () => __('by :name', ['name' => $this->ticketComment->user->name]))
+            ->body(fn () => __('by :name', ['name' => $this->ticketComment->user?->name ?? '-']))
             ->actions([
                 Action::make('view')
                     ->link()

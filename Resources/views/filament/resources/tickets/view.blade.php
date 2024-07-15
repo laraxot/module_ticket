@@ -271,7 +271,7 @@
                                 {{ $comment->created_at->format('Y-m-d g:i A') }}
                                 ({{ $comment->created_at->diffForHumans() }})
                             </span>
-                            @if($this->isAdministrator() || $comment->user_id === auth()->user()->id)
+                            @if($this->isAdministrator() || $comment->user_id === authId())
                                 <div class="actions flex items-center gap-2">
                                     <button type="button" wire:click="editComment({{ $comment->id }})"
                                             class="text-primary-500 text-xs hover:text-primary-600 hover:underline">

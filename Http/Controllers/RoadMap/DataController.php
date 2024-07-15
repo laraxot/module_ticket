@@ -19,9 +19,9 @@ class DataController extends Controller
     public function data(Project $project): JsonResponse
     {
         $project = Project::where(function ($query) {
-            return $query->where('owner_id', auth()->user()->id)
+            return $query->where('owner_id', authId())
                 ->orWhereHas('users', function ($query) {
-                    return $query->where('users.id', auth()->user()->id);
+                    return $query->where('users.id', authId());
                 });
         })->where('id', $project->id)->first();
         if (! $project) {

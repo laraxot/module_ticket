@@ -24,8 +24,6 @@ class ProjectStatusPolicy extends UserBasePolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param \App\Models\ProjectStatus $projectStatus
-     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(UserContract $user, ProjectStatus $projectStatus)
@@ -46,8 +44,6 @@ class ProjectStatusPolicy extends UserBasePolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param \App\Models\ProjectStatus $projectStatus
-     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(UserContract $user, ProjectStatus $projectStatus)
@@ -57,8 +53,6 @@ class ProjectStatusPolicy extends UserBasePolicy
 
     /**
      * Determine whether the user can delete the model.
-     *
-     * @param \App\Models\ProjectStatus $projectStatus
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -70,22 +64,20 @@ class ProjectStatusPolicy extends UserBasePolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param \App\Models\ProjectStatus $projectStatus
-     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function restore(UserContract $user, ProjectStatus $projectStatus)
     {
+        return true;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param \App\Models\ProjectStatus $projectStatus
-     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function forceDelete(UserContract $user, ProjectStatus $projectStatus)
     {
+        return true;
     }
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Widgets;
 
+use Filament\Forms\Components\Section;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
-use Filament\Widgets\StatsOverviewWidget\Card;
 use Illuminate\Support\HtmlString;
 
 class FavoriteProjects extends BaseWidget

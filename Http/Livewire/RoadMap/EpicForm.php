@@ -23,7 +23,7 @@ class EpicForm extends Component implements HasForms
     public Epic $epic;
     public array $epics = [];
 
-    public function mount()
+    public function mount(): void
     {
         $query = Epic::query();
         $query->where('project_id', $this->epic->project_id);
@@ -88,7 +88,7 @@ class EpicForm extends Component implements HasForms
 
     public function cancel($refresh = false): void
     {
-        $this->emit('closeEpicDialog', $refresh);
+        $this->dispatch('closeEpicDialog', $refresh);
     }
 
     public function delete(): void
@@ -98,6 +98,6 @@ class EpicForm extends Component implements HasForms
             $ticket->save();
         });
         $this->epic->delete();
-        $this->emit('closeEpicDialog', true);
+        $this->dispatch('closeEpicDialog', true);
     }
 }

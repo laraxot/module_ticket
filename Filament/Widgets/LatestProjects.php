@@ -39,9 +39,9 @@ class LatestProjects extends BaseWidget
         return Project::query()
             ->limit(5)
             ->where(function ($query) {
-                return $query->where('owner_id', auth()->user()->id)
+                return $query->where('owner_id', authId())
                     ->orWhereHas('users', function ($query) {
-                        return $query->where('users.id', auth()->user()->id);
+                        return $query->where('users.id', authId());
                     });
             })
             ->latest();

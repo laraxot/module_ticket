@@ -10,7 +10,7 @@ use Filament\Widgets\BarChartWidget;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Modules\Ticket\Models\TicketHour;
-use Modules\Ticket\Models\User;
+use Modules\User\Models\User;
 
 class WeeklyReport extends BarChartWidget
 {
@@ -20,7 +20,7 @@ class WeeklyReport extends BarChartWidget
         'lg' => 3,
     ];
 
-    public function __construct($id = null)
+    public function __construct(?string $id = null)
     {
         $weekDaysData = $this->getWeekStartAndFinishDays();
 

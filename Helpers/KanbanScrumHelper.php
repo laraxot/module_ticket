@@ -17,7 +17,7 @@ use Modules\Ticket\Models\Ticket;
 use Modules\Ticket\Models\TicketPriority;
 use Modules\Ticket\Models\TicketStatus;
 use Modules\Ticket\Models\TicketType;
-use Modules\Ticket\Models\User;
+use Modules\User\Models\User;
 
 trait KanbanScrumHelper
 {
@@ -25,10 +25,10 @@ trait KanbanScrumHelper
 
     public ?Project $project = null;
 
-    public $users = [];
-    public $types = [];
-    public $priorities = [];
-    public $includeNotAffectedTickets = false;
+    public array $users = [];
+    public array $types = [];
+    public array $priorities = [];
+    public bool $includeNotAffectedTickets = false;
 
     public bool $ticket = false;
 
@@ -131,12 +131,12 @@ trait KanbanScrumHelper
             $query->whereNull('responsible_id');
         }
         $query->where(function ($query) {
-            return $query->where('owner_id', auth()->user()->id)
-                ->orWhere('responsible_id', auth()->user()->id)
+            return $query->where('owner_id', authId())
+                ->orWhere('responsible_id', authId())
                 ->orWhereHas('project', function ($query) {
-                    return $query->where('owner_id', auth()->user()->id)
+                    return $query->where('owner_id', authId())
                         ->orWhereHas('users', function ($query) {
-                            return $query->where('users.id', auth()->user()->id);
+                            return $query->where('users.id', authId());
                         });
                 });
         });

@@ -19,7 +19,7 @@ use Modules\Ticket\Filament\Resources\ProjectResource\RelationManagers;
 use Modules\Ticket\Models\Project;
 use Modules\Ticket\Models\ProjectFavorite;
 use Modules\Ticket\Models\ProjectStatus;
-use Modules\Ticket\Models\User;
+use Modules\User\Models\User;
 
 class ProjectResource extends Resource
 {
@@ -89,7 +89,7 @@ class ProjectResource extends Resource
                                             ->label(__('Project owner'))
                                             ->searchable()
                                             ->options(fn () => User::all()->pluck('name', 'id')->toArray())
-                                            ->default(fn () => auth()->user()->id)
+                                            ->default(fn () => authId())
                                             ->required(),
 
                                         Forms\Components\Select::make('status_id')
@@ -220,14 +220,14 @@ class ProjectResource extends Resource
                     ->action(function ($record) {
                         $projectId = $record->id;
                         $projectFavorite = ProjectFavorite::where('project_id', $projectId)
-                            ->where('user_id', auth()->user()->id)
+                            ->where('user_id', authId())
                             ->first();
                         if ($projectFavorite) {
                             $projectFavorite->delete();
                         } else {
                             ProjectFavorite::create([
                                 'project_id' => $projectId,
-                                'user_id' => auth()->user()->id,
+                                'user_id' => authId(),
                             ]);
                         }
                         Filament::notify('success', __('Project updated'));

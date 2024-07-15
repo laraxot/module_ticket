@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 trait JiraHelper
 {
-    public function connectToJira($host, $username, $token): ?Client
+    public function connectToJira(string $host, string $username, string $token): ?Client
     {
         return new Client([
             'base_uri' => $host,

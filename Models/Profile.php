@@ -34,7 +34,6 @@ use Modules\User\Models\User;
  * @property Collection<int, Role>       $roles
  * @property int|null                    $roles_count
  * @property User|null                   $user
- *
  * @method static CachedBuilder|Profile   all($columns = [])
  * @method static CachedBuilder|Profile   avg($column)
  * @method static CachedBuilder|Profile   cache(array $tags = [])
@@ -58,7 +57,6 @@ use Modules\User\Models\User;
  * @method static CachedBuilder|Profile   sum($column)
  * @method static CachedBuilder|Profile   truncate()
  * @method static CachedBuilder|BaseModel withCacheCooldownSeconds(?int $seconds = null)
- *
  * @property int         $id
  * @property string|null $first_name
  * @property string|null $last_name
@@ -66,7 +64,6 @@ use Modules\User\Models\User;
  * @property Carbon|null $updated_at
  * @property string|null $updated_by
  * @property string|null $created_by
- *
  * @method static Builder|Profile whereCreatedAt($value)
  * @method static Builder|Profile whereCreatedBy($value)
  * @method static Builder|Profile whereFirstName($value)
@@ -74,23 +71,57 @@ use Modules\User\Models\User;
  * @method static Builder|Profile whereLastName($value)
  * @method static Builder|Profile whereUpdatedAt($value)
  * @method static Builder|Profile whereUpdatedBy($value)
- *
- * @property Collection<int, Project>       $favoriteProjects
- * @property int|null                       $favorite_projects_count
- * @property Collection<int, TicketHour>    $hours
- * @property int|null                       $hours_count
- * @property Collection<int, Project>       $projectsAffected
- * @property int|null                       $projects_affected_count
- * @property Collection<int, Project>       $projectsOwning
- * @property int|null                       $projects_owning_count
- * @property Collection<int, SocialiteUser> $socials
- * @property int|null                       $socials_count
- * @property Collection<int, Ticket>        $ticketsOwned
- * @property int|null                       $tickets_owned_count
- * @property Collection<int, Ticket>        $ticketsResponsible
- * @property int|null                       $tickets_responsible_count
- * @property mixed                          $total_logged_in_hours
- *
+ * @property Collection<int, Project>                                                                                      $favoriteProjects
+ * @property int|null                                                                                                      $favorite_projects_count
+ * @property Collection<int, TicketHour>                                                                                   $hours
+ * @property int|null                                                                                                      $hours_count
+ * @property Collection<int, Project>                                                                                      $projectsAffected
+ * @property int|null                                                                                                      $projects_affected_count
+ * @property Collection<int, Project>                                                                                      $projectsOwning
+ * @property int|null                                                                                                      $projects_owning_count
+ * @property Collection<int, SocialiteUser>                                                                                $socials
+ * @property int|null                                                                                                      $socials_count
+ * @property Collection<int, Ticket>                                                                                       $ticketsOwned
+ * @property int|null                                                                                                      $tickets_owned_count
+ * @property Collection<int, Ticket>                                                                                       $ticketsResponsible
+ * @property int|null                                                                                                      $tickets_responsible_count
+ * @property mixed                                                                                                         $total_logged_in_hours
+ * @property string                                                                                                        $user_id
+ * @property string|null                                                                                                   $email
+ * @property string                                                                                                        $credits
+ * @property string|null                                                                                                   $slug
+ * @property \Spatie\SchemalessAttributes\SchemalessAttributes|null                                                        $extra
+ * @property Carbon|null                                                                                                   $deleted_at
+ * @property string|null                                                                                                   $deleted_by
+ * @property string                                                                                                        $avatar
+ * @property Collection<int, \Modules\User\Models\DeviceUser>                                                              $deviceUsers
+ * @property int|null                                                                                                      $device_users_count
+ * @property Collection<int, \Modules\User\Models\Device>                                                                  $devices
+ * @property int|null                                                                                                      $devices_count
+ * @property \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media>    $media
+ * @property int|null                                                                                                      $media_count
+ * @property Collection<int, \Modules\User\Models\DeviceUser>                                                              $mobileDeviceUsers
+ * @property int|null                                                                                                      $mobile_device_users_count
+ * @property Collection<int, \Modules\User\Models\Device>                                                                  $mobileDevices
+ * @property int|null                                                                                                      $mobile_devices_count
+ * @property \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property int|null                                                                                                      $notifications_count
+ * @property Collection<int, \Modules\User\Models\Team>                                                                    $teams
+ * @property int|null                                                                                                      $teams_count
+ * @property string|null                                                                                                   $user_name
+ * @method static \Modules\Ticket\Database\Factories\ProfileFactory factory($count = null, $state = [])
+ * @method static Builder|Profile                                   whereCredits($value)
+ * @method static Builder|Profile                                   whereDeletedAt($value)
+ * @method static Builder|Profile                                   whereDeletedBy($value)
+ * @method static Builder|Profile                                   whereEmail($value)
+ * @method static Builder|Profile                                   whereExtra($value)
+ * @method static Builder|Profile                                   whereSlug($value)
+ * @method static Builder|Profile                                   whereUserId($value)
+ * @method static Builder|BaseProfile                               withExtraAttributes()
+ * @method static Builder|BaseProfile                               withoutPermission($permissions)
+ * @method static Builder|BaseProfile                               withoutRole($roles, $guard = null)
+ * @property-read \Modules\User\Models\DeviceUser $pivot
+ * @property-read \Modules\User\Models\Membership $membership
  * @mixin \Eloquent
  */
 class Profile extends UserBaseProfile

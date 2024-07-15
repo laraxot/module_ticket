@@ -33,9 +33,10 @@ class ViewTicket extends ViewRecord implements HasForms
 
     public string $tab = 'comments';
 
+    /** @var array<string> */
     protected $listeners = ['doDeleteComment'];
 
-    public $selectedCommentId;
+    public ?string $selectedCommentId = null;
 
     public function mount(int|string $record): void
     {
@@ -48,12 +49,12 @@ class ViewTicket extends ViewRecord implements HasForms
         return [
             Actions\Action::make('toggleSubscribe')
                 ->label(
-                    fn () => $this->record->subscribers()->where('users.id', auth()->user()->id)->count() ?
+                    fn () => $this->record->subscribers()->where('users.id', authId())->count() ?
                         __('Unsubscribe')
                         : __('Subscribe')
                 )
                 ->color(
-                    fn () => $this->record->subscribers()->where('users.id', auth()->user()->id)->count() ?
+                    fn () => $this->record->subscribers()->where('users.id', authId())->count() ?
                         'danger'
                         : 'success'
                 )
@@ -61,7 +62,7 @@ class ViewTicket extends ViewRecord implements HasForms
                 ->button()
                 ->action(function () {
                     if (
-                        $sub = TicketSubscriber::where('user_id', auth()->user()->id)
+                        $sub = TicketSubscriber::where('user_id', authId())
                             ->where('ticket_id', $this->record->id)
                             ->first()
                     ) {
@@ -69,7 +70,7 @@ class ViewTicket extends ViewRecord implements HasForms
                         $this->notify('success', __('You unsubscribed from the ticket'));
                     } else {
                         TicketSubscriber::create([
-                            'user_id' => auth()->user()->id,
+                            'user_id' => authId(),
                             'ticket_id' => $this->record->id,
                         ]);
                         $this->notify('success', __('You subscribed to the ticket'));
@@ -94,7 +95,7 @@ class ViewTicket extends ViewRecord implements HasForms
                 ->modalSubheading(__('Use the following form to add your worked time in this ticket.'))
                 ->modalButton(__('Log'))
                 ->visible(fn () => in_array(
-                    auth()->user()->id,
+                    authId(),
                     [$this->record->owner_id, $this->record->responsible_id]
                 ))
                 ->form([
@@ -119,7 +120,7 @@ class ViewTicket extends ViewRecord implements HasForms
                     TicketHour::create([
                         'ticket_id' => $this->record->id,
                         'activity_id' => $data['activity_id'],
-                        'user_id' => auth()->user()->id,
+                        'user_id' => authId(),
                         'value' => $value,
                         'comment' => $comment,
                     ]);
@@ -132,7 +133,7 @@ class ViewTicket extends ViewRecord implements HasForms
                     ->icon('heroicon-o-document-arrow-down')
                     ->color('warning')
                     ->visible(
-                        fn () => $this->record->watchers->where('id', auth()->user()->id)->count()
+                        fn () => $this->record->watchers->where('id', authId())->count()
                             && $this->record->hours()->count()
                     )
                     ->action(fn () => Excel::download(
@@ -143,10 +144,10 @@ class ViewTicket extends ViewRecord implements HasForms
                     )),
             ])
                 ->visible(fn () => in_array(
-                    auth()->user()->id,
+                    authId(),
                     [$this->record->owner_id, $this->record->responsible_id]
                 ) || (
-                    $this->record->watchers->where('id', auth()->user()->id)->count()
+                    $this->record->watchers->where('id', authId())->count()
                     && $this->record->hours()->count()
                 ))
                 ->color('gray'),
@@ -178,7 +179,7 @@ class ViewTicket extends ViewRecord implements HasForms
                 ]);
         } else {
             TicketComment::create([
-                'user_id' => auth()->user()->id,
+                'user_id' => authId(),
                 'ticket_id' => $this->record->id,
                 'content' => $data['comment'],
             ]);
@@ -193,7 +194,7 @@ class ViewTicket extends ViewRecord implements HasForms
         return 0 != $this->record
                 ->project
                 ->users()
-                ->where('users.id', auth()->user()->id)
+                ->where('users.id', authId())
                 ->where('role', 'administrator')
                 ->count();
     }

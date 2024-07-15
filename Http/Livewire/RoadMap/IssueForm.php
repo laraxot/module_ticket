@@ -14,7 +14,7 @@ use Modules\Ticket\Models\Ticket;
 use Modules\Ticket\Models\TicketPriority;
 use Modules\Ticket\Models\TicketStatus;
 use Modules\Ticket\Models\TicketType;
-use Modules\Ticket\Models\User;
+use Modules\User\Models\User;
 
 class IssueForm extends Component implements HasForms
 {
@@ -24,7 +24,7 @@ class IssueForm extends Component implements HasForms
     public array $epics;
     public array $sprints;
 
-    public function mount()
+    public function mount(): void
     {
         $this->initProject($this->project?->id);
         if ('custom' === $this->project?->status_type) {
@@ -40,7 +40,7 @@ class IssueForm extends Component implements HasForms
         }
         $this->form->fill([
             'project_id' => $this->project?->id ?? null,
-            'owner_id' => auth()->user()->id,
+            'owner_id' => authId(),
             'status_id' => $defaultStatus,
             'type_id' => TicketType::where('is_default', true)->first()?->id,
             'priority_id' => TicketPriority::where('is_default', true)->first()?->id,
@@ -76,9 +76,9 @@ class IssueForm extends Component implements HasForms
                                 ->reactive()
                                 ->disabled(null != $this->project)
                                 ->columnSpan(2)
-                                ->options(fn () => Project::where('owner_id', auth()->user()->id)
+                                ->options(fn () => Project::where('owner_id', authId())
                                     ->orWhereHas('users', function ($query) {
-                                        return $query->where('users.id', auth()->user()->id);
+                                        return $query->where('users.id', authId());
                                     })->pluck('name', 'id')->toArray()
                                 )
                                 ->afterStateUpdated(fn (Forms\Get $get) => $this->initProject($get('project_id')))
@@ -182,6 +182,6 @@ class IssueForm extends Component implements HasForms
 
     public function cancel($refresh = false): void
     {
-        $this->emit('closeTicketDialog', $refresh);
+        $this->dispatch('closeTicketDialog', $refresh);
     }
 }

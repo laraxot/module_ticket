@@ -9,7 +9,7 @@ use Filament\Widgets\BarChartWidget;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Modules\Ticket\Models\TicketHour;
-use Modules\Ticket\Models\User;
+use Modules\User\Models\User;
 
 class MonthlyReport extends BarChartWidget
 {

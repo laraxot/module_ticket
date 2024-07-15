@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Pages;
 
+use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
+/**
+ * @property ComponentContainer $form
+ */
 class TimesheetExport extends Page implements HasForms
 {
     use InteractsWithForms;

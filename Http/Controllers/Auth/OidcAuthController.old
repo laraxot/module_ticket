@@ -9,7 +9,7 @@ use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\GenericProvider;
 use Modules\Ticket\Http\Controllers\Controller;
 use Modules\Ticket\Models\Role;
-use Modules\Ticket\Models\User;
+use Modules\User\Models\User;
 use Modules\Ticket\Settings\GeneralSettings;
 
 class OidcAuthController extends Controller

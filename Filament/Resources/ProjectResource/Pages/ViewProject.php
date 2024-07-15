@@ -8,6 +8,9 @@ use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use Modules\Ticket\Filament\Resources\ProjectResource;
 
+/**
+ * @property Project $record
+ */
 class ViewProject extends ViewRecord
 {
     protected static string $resource = ProjectResource::class;

@@ -9,6 +9,40 @@ use Modules\Xot\Datas\XotData;
 use Modules\Ticket\Notifications\TicketCommented;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * 
+ *
+ * @property int                             $id
+ * @property int                             $ticket_id
+ * @property int                             $user_id
+ * @property string                          $content
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null                     $updated_by
+ * @property string|null                     $created_by
+ * @property string|null                     $deleted_by
+ * @property Ticket|null                     $ticket
+ * @property \Modules\User\Models\User|null  $user
+ * @method static \Modules\Ticket\Database\Factories\TicketCommentFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     whereTicketId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     withoutTrashed()
+ * @mixin \Eloquent
+ */
 class TicketComment extends BaseModel
 {
     protected $fillable = [
@@ -18,13 +52,14 @@ class TicketComment extends BaseModel
     public static function boot()
     {
         parent::boot();
-
+        /*
         static::created(function (TicketComment $item) {
             Assert::notNull($item->ticket);
             foreach ($item->ticket->watchers as $user) {
                 $user->notify(new TicketCommented($item));
             }
         });
+        */
     }
 
     public function user(): BelongsTo

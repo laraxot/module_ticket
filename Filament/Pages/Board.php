@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Pages;
 
+use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -12,6 +14,9 @@ use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 use Modules\Ticket\Models\Project;
 
+/**
+ * @property ComponentContainer $form
+ */
 class Board extends Page implements HasForms
 {
     use InteractsWithForms;
@@ -60,9 +65,9 @@ class Board extends Page implements HasForms
                                 ->reactive()
                                 ->afterStateUpdated(fn () => $this->search())
                                 ->helperText(__("Choose a project to show it's board"))
-                                ->options(fn () => Project::where('owner_id', auth()->user()->id)
+                                ->options(fn () => Project::where('owner_id', authId())
                                     ->orWhereHas('users', function ($query) {
-                                        return $query->where('users.id', auth()->user()->id);
+                                        return $query->where('users.id', authId());
                                     })->pluck('name', 'id')->toArray()),
                             */
                         ]),

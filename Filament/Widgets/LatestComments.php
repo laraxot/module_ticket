@@ -40,12 +40,12 @@ class LatestComments extends BaseWidget
         return TicketComment::query()
             ->limit(5)
             ->whereHas('ticket', function ($query) {
-                return $query->where('owner_id', auth()->user()->id)
-                    ->orWhere('responsible_id', auth()->user()->id)
+                return $query->where('owner_id', authId())
+                    ->orWhere('responsible_id', authId())
                     ->orWhereHas('project', function ($query) {
-                        return $query->where('owner_id', auth()->user()->id)
+                        return $query->where('owner_id', authId())
                             ->orWhereHas('users', function ($query) {
-                                return $query->where('users.id', auth()->user()->id);
+                                return $query->where('users.id', authId());
                             });
                     });
             })

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Ticket\Filament\Pages;
 
 use Carbon\Carbon;
+use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -13,6 +14,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Modules\Ticket\Models\Epic;
 use Modules\Ticket\Models\Project;
 
+/**
+ * @property ComponentContainer $form
+ */
 class RoadMap extends Page implements HasForms
 {
     use InteractsWithForms;
@@ -25,7 +29,7 @@ class RoadMap extends Page implements HasForms
 
     protected static ?int $navigationSort = 5;
 
-    public $project;
+    public Project $project;
 
     public ?Epic $epic = null;
 
@@ -126,9 +130,9 @@ class RoadMap extends Page implements HasForms
     private function projectQuery(): Builder
     {
         return Project::where(function ($query) {
-            return $query->where('owner_id', auth()->user()->id)
+            return $query->where('owner_id', authId())
                 // ->orWhereHas('users', function ($query) {
-                //    return $query->where('users.id', auth()->user()->id);
+                //    return $query->where('users.id', authId());
                 // })
             ;
         });

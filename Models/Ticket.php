@@ -19,11 +19,88 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
  * Modules\Ticket\Models\Ticket.
  *
- * @property string $name
- * @property string $code
- * @property int $sprint_id
- * @property int $epic_id
- * @property int $status_id
+ * @property string                                                                                                     $name
+ * @property int                                                                                                        $id
+ * @property string                                                                                                     $content
+ * @property int                                                                                                        $owner_id
+ * @property int|null                                                                                                   $responsible_id
+ * @property int                                                                                                        $status_id
+ * @property string|null                                                                                                $code
+ * @property string|null                                                                                                $ticket_prefix
+ * @property int                                                                                                        $order
+ * @property int                                                                                                        $priority_id
+ * @property int|null                                                                                                   $project_id
+ * @property float|null                                                                                                 $estimation
+ * @property int|null                                                                                                   $epic_id
+ * @property int|null                                                                                                   $sprint_id
+ * @property \Illuminate\Support\Carbon|null                                                                            $deleted_at
+ * @property \Illuminate\Support\Carbon|null                                                                            $created_at
+ * @property \Illuminate\Support\Carbon|null                                                                            $updated_at
+ * @property int|null                                                                                                   $type_id
+ * @property string|null                                                                                                $latitude
+ * @property string|null                                                                                                $longitude
+ * @property string|null                                                                                                $updated_by
+ * @property string|null                                                                                                $created_by
+ * @property string|null                                                                                                $deleted_by
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\TicketActivity>                       $activities
+ * @property int|null                                                                                                   $activities_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\TicketComment>                        $comments
+ * @property int|null                                                                                                   $comments_count
+ * @property mixed                                                                                                      $completude_percentage
+ * @property Epic|null                                                                                                  $epic
+ * @property mixed                                                                                                      $estimation_for_humans
+ * @property mixed                                                                                                      $estimation_in_seconds
+ * @property mixed                                                                                                      $estimation_progress
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\TicketHour>                           $hours
+ * @property int|null                                                                                                   $hours_count
+ * @property \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property int|null                                                                                                   $media_count
+ * @property \Modules\User\Models\User|null                                                                             $owner
+ * @property TicketPriority|null                                                                                        $priority
+ * @property Project|null                                                                                               $project
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\TicketRelation>                       $relations
+ * @property int|null                                                                                                   $relations_count
+ * @property \Modules\User\Models\User|null                                                                             $responsible
+ * @property Sprint|null                                                                                                $sprint
+ * @property Sprint|null                                                                                                $sprints
+ * @property TicketStatus|null                                                                                          $status
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User>                                   $subscribers
+ * @property int|null                                                                                                   $subscribers_count
+ * @property mixed                                                                                                      $total_logged_hours
+ * @property mixed                                                                                                      $total_logged_in_hours
+ * @property mixed                                                                                                      $total_logged_seconds
+ * @property TicketType|null                                                                                            $type
+ *
+ * @method static \Modules\Ticket\Database\Factories\TicketFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereEpicId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereEstimation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereOwnerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     wherePriorityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereResponsibleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereSprintId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereStatusId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereTicketPrefix($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     withoutTrashed()
  *
  * @mixin \Eloquent
  */
@@ -37,6 +114,19 @@ class Ticket extends BaseModel implements HasMedia
         'priority_id', 'estimation', 'epic_id', 'sprint_id',
         'latitude', 'longitude', // GEO
     ];
+
+    protected $appends = [
+        'estimationInSeconds',
+        'estimationProgress',
+    ];
+
+    public function casts(): array
+    {
+        return [
+            'estimationInSeconds' => 'int',
+            'estimationProgress' => 'float',
+        ];
+    }
 
     public static function boot()
     {
@@ -61,28 +151,30 @@ class Ticket extends BaseModel implements HasMedia
         });
 
         static::updating(function (Ticket $item) {
-            $old = Ticket::where('id', $item->id)->first();
+            $old = Ticket::firstWhere(['id' => $item->id]);
 
             // Ticket activity based on status
-            $oldStatus = $old->status_id;
+            $oldStatus = $old?->status_id;
             if ($oldStatus != $item->status_id) {
                 Assert::notNull(auth()->user());
                 TicketActivity::create([
                     'ticket_id' => $item->id,
                     'old_status_id' => $oldStatus,
                     'new_status_id' => $item->status_id,
-                    'user_id' => auth()->user()->id,
+                    'user_id' => authId(),
                 ]);
+                /*
                 foreach ($item->watchers as $user) {
                     $user->notify(new TicketStatusUpdated($item));
                 }
+                    */
             }
 
             // Ticket sprint update
-            $oldSprint = $old->sprint_id;
+            $oldSprint = $old?->sprint_id;
             if ($oldSprint && ! $item->sprint_id) {
                 Ticket::where('id', $item->id)->update(['epic_id' => null]);
-            } elseif ($item->sprint_id && $item->sprint->epic_id) {
+            } elseif ($item->sprint_id && $item->sprint?->epic_id) {
                 Ticket::where('id', $item->id)->update(['epic_id' => $item->sprint->epic_id]);
             }
         });
@@ -214,7 +306,7 @@ class Ticket extends BaseModel implements HasMedia
     {
         return new Attribute(
             get: function () {
-                return CarbonInterval::seconds($this->estimationInSeconds)->cascade()->forHumans();
+                return CarbonInterval::seconds($this->estimation_in_seconds)->cascade()->forHumans();
             }
         );
     }
@@ -222,7 +314,7 @@ class Ticket extends BaseModel implements HasMedia
     public function estimationInSeconds(): Attribute
     {
         return new Attribute(
-            get: function () {
+            get: function (): ?int {
                 if (! $this->estimation) {
                     return null;
                 }
@@ -235,7 +327,7 @@ class Ticket extends BaseModel implements HasMedia
     public function estimationProgress(): Attribute
     {
         return new Attribute(
-            get: function () {
+            get: function (): float {
                 return (($this->totalLoggedSeconds ?? 0) / ($this->estimationInSeconds ?? 1)) * 100;
             }
         );

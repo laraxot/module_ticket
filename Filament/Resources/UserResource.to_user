@@ -4,7 +4,7 @@ namespace Modules\Ticket\Filament\Resources;
 
 use Modules\Ticket\Filament\Resources\UserResource\Pages;
 use Modules\Ticket\Filament\Resources\UserResource\RelationManagers;
-use Modules\Ticket\Models\User;
+use Modules\User\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Pages\CreateRecord;

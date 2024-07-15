@@ -6,16 +6,44 @@ namespace Modules\Ticket\Models;
 
 use Webmozart\Assert\Assert;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Modules\Ticket\Models\TicketStatus.
+ * 
  *
- * @property string $name
- * @property bool $is_default
- * @property int $project_id
- * @property int $order
- *
+ * @property int                                                                          $id
+ * @property string                                                                       $name
+ * @property string                                                                       $color
+ * @property int                                                                          $is_default
+ * @property int                                                                          $order
+ * @property int|null                                                                     $project_id
+ * @property \Illuminate\Support\Carbon|null                                              $deleted_at
+ * @property \Illuminate\Support\Carbon|null                                              $created_at
+ * @property \Illuminate\Support\Carbon|null                                              $updated_at
+ * @property string|null                                                                  $updated_by
+ * @property string|null                                                                  $created_by
+ * @property string|null                                                                  $deleted_by
+ * @property Project|null                                                                 $project
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\Ticket> $tickets
+ * @property int|null                                                                     $tickets_count
+ * @method static \Modules\Ticket\Database\Factories\TicketStatusFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     whereIsDefault($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     withoutTrashed()
  * @mixin \Eloquent
  */
 class TicketStatus extends BaseModel
