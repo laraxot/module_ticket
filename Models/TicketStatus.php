@@ -6,6 +6,7 @@ namespace Modules\Ticket\Models;
 
 use Webmozart\Assert\Assert;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 
