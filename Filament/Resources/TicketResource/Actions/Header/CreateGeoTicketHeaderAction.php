@@ -36,16 +36,16 @@ class CreateGeoTicketHeaderAction extends Action
             // ])
             ->form([
                 TextInput::make('name')
-                                            ->label(__('Ticket name'))
-                                            ->required()
+                    ->label(__('Ticket name'))
+                    ->required()
 
-                                            ->maxLength(255),
+                    ->maxLength(255),
                 Forms\Components\Select::make('type_id')
-                                            ->label(__('Ticket type'))
-                                            ->searchable()
-                                            ->options(fn () => TicketType::all()->pluck('name', 'id')->toArray())
-                                            ->default(fn () => TicketType::where('is_default', true)->first()?->id)
-                                            ->required(),
+                    ->label(__('Ticket type'))
+                    ->searchable()
+                    ->options(fn () => TicketType::all()->pluck('name', 'id')->toArray())
+                    ->default(fn () => TicketType::where('is_default', true)->first()?->id)
+                    ->required(),
 
                 Forms\Components\Select::make('priority_id')
                     ->label(__('Ticket priority'))
@@ -55,9 +55,9 @@ class CreateGeoTicketHeaderAction extends Action
                     ->required(),
 
                 Forms\Components\RichEditor::make('content')
-                            ->label(__('Ticket content'))
-                            ->required()
-                            ->columnSpan(2),
+                    ->label(__('Ticket content'))
+                    ->required()
+                    ->columnSpan(2),
 
                 TextInput::make('latitude')
                 // ->hiddenLabel()

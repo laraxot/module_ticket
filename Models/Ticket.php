@@ -140,44 +140,44 @@ class Ticket extends BaseModel implements HasMedia
             $item->order = $order + 1;
         });
         */
-        static::created(function (Ticket $item) {
-            Assert::notNull($item->sprint);
-            if ($item->sprint_id && $item->sprint->epic_id) {
-                Ticket::where('id', $item->id)->update(['epic_id' => $item->sprint->epic_id]);
-            }
-            foreach ($item->watchers ?? [] as $user) {
-                $user->notify(new TicketCreated($item));
-            }
-        });
+        // static::created(function (Ticket $item) {
+        //     Assert::notNull($item->sprint);
+        //     if ($item->sprint_id && $item->sprint->epic_id) {
+        //         Ticket::where('id', $item->id)->update(['epic_id' => $item->sprint->epic_id]);
+        //     }
+        //     foreach ($item->watchers ?? [] as $user) {
+        //         $user->notify(new TicketCreated($item));
+        //     }
+        // });
 
-        static::updating(function (Ticket $item) {
-            $old = Ticket::firstWhere(['id' => $item->id]);
+        // static::updating(function (Ticket $item) {
+        //     $old = Ticket::firstWhere(['id' => $item->id]);
 
-            // Ticket activity based on status
-            $oldStatus = $old?->status_id;
-            if ($oldStatus != $item->status_id) {
-                Assert::notNull(auth()->user());
-                TicketActivity::create([
-                    'ticket_id' => $item->id,
-                    'old_status_id' => $oldStatus,
-                    'new_status_id' => $item->status_id,
-                    'user_id' => authId(),
-                ]);
-                /*
-                foreach ($item->watchers as $user) {
-                    $user->notify(new TicketStatusUpdated($item));
-                }
-                    */
-            }
+        //     // Ticket activity based on status
+        //     $oldStatus = $old?->status_id;
+        //     if ($oldStatus != $item->status_id) {
+        //         Assert::notNull(auth()->user());
+        //         TicketActivity::create([
+        //             'ticket_id' => $item->id,
+        //             'old_status_id' => $oldStatus,
+        //             'new_status_id' => $item->status_id,
+        //             'user_id' => authId(),
+        //         ]);
+        //         /*
+        //         foreach ($item->watchers as $user) {
+        //             $user->notify(new TicketStatusUpdated($item));
+        //         }
+        //             */
+        //     }
 
-            // Ticket sprint update
-            $oldSprint = $old?->sprint_id;
-            if ($oldSprint && ! $item->sprint_id) {
-                Ticket::where('id', $item->id)->update(['epic_id' => null]);
-            } elseif ($item->sprint_id && $item->sprint?->epic_id) {
-                Ticket::where('id', $item->id)->update(['epic_id' => $item->sprint->epic_id]);
-            }
-        });
+        //     // Ticket sprint update
+        //     $oldSprint = $old?->sprint_id;
+        //     if ($oldSprint && ! $item->sprint_id) {
+        //         Ticket::where('id', $item->id)->update(['epic_id' => null]);
+        //     } elseif ($item->sprint_id && $item->sprint?->epic_id) {
+        //         Ticket::where('id', $item->id)->update(['epic_id' => $item->sprint->epic_id]);
+        //     }
+        // });
     }
 
     public function owner(): BelongsTo
