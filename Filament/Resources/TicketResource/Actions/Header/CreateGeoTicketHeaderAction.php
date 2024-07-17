@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Resources\TicketResource\Actions\Header;
 
-use Dotswan\MapPicker\Fields\Map;
-use Filament\Actions\Action;
 use Filament\Forms;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Set;
-use Illuminate\Support\Facades\Gate;
+use Filament\Actions\Action;
+use Dotswan\MapPicker\Fields\Map;
 use Modules\Ticket\Models\Ticket;
-use Modules\Ticket\Models\TicketPriority;
+use Illuminate\Support\Facades\Gate;
 use Modules\Ticket\Models\TicketType;
+use Filament\Forms\Components\TextInput;
+use Modules\Ticket\Models\TicketPriority;
+use Modules\Ticket\Enums\GeoTicketStatusEnum;
 use Modules\Xot\Filament\Traits\NavigationActionLabelTrait;
 
 class CreateGeoTicketHeaderAction extends Action
@@ -68,6 +69,8 @@ class CreateGeoTicketHeaderAction extends Action
                 // ->hiddenLabel()
                 // ->hidden()
                 ,
+                Select::make('status')
+                    ->options(GeoTicketStatusEnum::class),
                 Map::make('location')
                    ->label('Location')
                    ->columnSpanFull()
