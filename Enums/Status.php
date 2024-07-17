@@ -8,8 +8,13 @@ use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 
-// Nuovo: Il ticket è stato appena creato e non è ancora stato preso in carico.
-// In Attesa di Assegnazione: Il ticket è in attesa di essere assegnato a un responsabile.
+// Nuovo: Il ticket è stato appena creato e non è ancora stato controllato per la visualizzazione.
+// In Attesa di Controllo: Il ticket è in attesa di essere controllato prima della visualizzazione.
+// Approvato: il ticket è stato approvato per poter essere visualizzato
+// Chiuso: Il ticket è stato risolto con successo e chiuso.
+
+
+
 // Assegnato: Il ticket è stato assegnato a un responsabile specifico.
 // In Lavorazione: Il responsabile sta attualmente lavorando sul ticket.
 // In Attesa di Informazioni: Il ticket è in attesa di ulteriori informazioni da parte del richiedente o di terze parti.
