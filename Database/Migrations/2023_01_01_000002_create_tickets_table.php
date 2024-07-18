@@ -50,6 +50,9 @@ class CreateTicketsTable extends XotBaseMigration
                 if (! $this->hasColumn('longitude')) {
                     $table->decimal('longitude', 20, 18)->nullable();
                 }
+                if (! $this->hasColumn('status')) {
+                    $table->string('status')->nullable();
+                }
 
                 $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }

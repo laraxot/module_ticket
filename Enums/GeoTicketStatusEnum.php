@@ -28,40 +28,40 @@ use Filament\Support\Contracts\HasLabel;
 // Posticipato: L'azione sul ticket è stata posticipata a una data successiva.
 // Duplicato: Il ticket è stato identificato come un duplicato di un altro ticket già esistente.
 
-enum Status: string implements HasColor, HasIcon, HasLabel
+enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
 {
-    case Active = 'active';
-    case Inactive = 'inactive';
-    case Trashed = 'trashed';
-    case One = '1';
+    case NewTicket = 'new';
+    case WaitingForCheck = 'Waiting for Check';
+    case Approved = 'Approved';
+    case Closed = 'Closed';
 
     public function getColor(): string|array|null
     {
         return match ($this) {
-            self::Active => 'success',
-            self::Inactive => 'warning',
-            self::Trashed => 'danger',
-            self::One => 'danger',
+            self::NewTicket => 'success',
+            self::WaitingForCheck => 'warning',
+            self::Approved => 'danger',
+            self::Closed => 'danger',
         };
     }
 
     public function getIcon(): ?string
     {
         return match ($this) {
-            self::Active => 'heroicon-o-check-circle',
-            self::Inactive => 'heroicon-o-document',
-            self::Trashed => 'heroicon-o-x-circle',
-            self::One => 'heroicon-o-x-circle',
+            self::NewTicket => 'heroicon-o-check-circle',
+            self::WaitingForCheck => 'heroicon-o-document',
+            self::Approved => 'heroicon-o-x-circle',
+            self::Closed => 'heroicon-o-x-circle',
         };
     }
 
     public function getLabel(): ?string
     {
         return match ($this) {
-            self::Active => __('job::schedule.status.active'),
-            self::Inactive => __('job::schedule.status.inactive'),
-            self::Trashed => __('job::schedule.status.trashed'),
-            self::One => __('job::schedule.status.one'),
+            self::NewTicket => 'New Ticket',
+            self::WaitingForCheck => 'Waiting For Check',
+            self::Approved => 'Approved',
+            self::Closed => 'Closed',
         };
     }
 }

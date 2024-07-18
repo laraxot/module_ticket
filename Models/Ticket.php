@@ -9,6 +9,7 @@ use Webmozart\Assert\Assert;
 use Modules\Xot\Datas\XotData;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Modules\Ticket\Enums\GeoTicketStatusEnum;
 use Modules\Ticket\Notifications\TicketCreated;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -112,19 +113,24 @@ class Ticket extends BaseModel implements HasMedia
         'name', 'content', 'owner_id', 'responsible_id',
         'status_id', 'project_id', 'code', 'order', 'type_id',
         'priority_id', 'estimation', 'epic_id', 'sprint_id',
-        'latitude', 'longitude', // GEO
+        'latitude', 'longitude', 'status' // GEO
     ];
 
     protected $appends = [
-        'estimationInSeconds',
-        'estimationProgress',
+        // 'estimationInSeconds',
+        // 'estimationProgress',
     ];
+
+    // protected $casts = [
+        
+    // ];
 
     public function casts(): array
     {
         return [
             'estimationInSeconds' => 'int',
             'estimationProgress' => 'float',
+            'status' =>  GeoTicketStatusEnum::class,
         ];
     }
 
@@ -194,10 +200,10 @@ class Ticket extends BaseModel implements HasMedia
         return $this->belongsTo($user_class, 'responsible_id', 'id');
     }
 
-    public function status(): BelongsTo
-    {
-        return $this->belongsTo(TicketStatus::class, 'status_id', 'id')->withTrashed();
-    }
+    // public function status(): BelongsTo
+    // {
+    //     return $this->belongsTo(TicketStatus::class, 'status_id', 'id')->withTrashed();
+    // }
 
     public function project(): BelongsTo
     {

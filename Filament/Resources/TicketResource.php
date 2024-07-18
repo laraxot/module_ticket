@@ -6,18 +6,19 @@ namespace Modules\Ticket\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Pages\CreateRecord;
-use Filament\Resources\Pages\EditRecord;
-use Filament\Resources\Resource;
-use Modules\Ticket\Filament\Resources\TicketResource\Pages;
+use Modules\User\Models\User;
 use Modules\Ticket\Models\Epic;
-use Modules\Ticket\Models\Project;
+use Filament\Resources\Resource;
 use Modules\Ticket\Models\Ticket;
+use Modules\Ticket\Models\Project;
+use Modules\Ticket\Models\TicketType;
+use Modules\Ticket\Models\TicketStatus;
+use Filament\Resources\Pages\EditRecord;
 use Modules\Ticket\Models\TicketPriority;
 use Modules\Ticket\Models\TicketRelation;
-use Modules\Ticket\Models\TicketStatus;
-use Modules\Ticket\Models\TicketType;
-use Modules\User\Models\User;
+use Filament\Resources\Pages\CreateRecord;
+use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Modules\Ticket\Filament\Resources\TicketResource\Pages;
 
 class TicketResource extends Resource
 {
@@ -126,38 +127,43 @@ class TicketResource extends Resource
                                     ->columns(3)
                                     ->columnSpan(2)
                                     ->schema([
-                                        Forms\Components\Select::make('status_id')
-                                            ->label(__('Ticket status'))
-                                            ->searchable()
-                                            ->options(function ($get) {
-                                                $project = Project::where('id', $get('project_id'))->first();
-                                                if ('custom' === $project?->status_type) {
-                                                    return TicketStatus::where('project_id', $project->id)
-                                                        ->get()
-                                                        ->pluck('name', 'id')
-                                                        ->toArray();
-                                                } else {
-                                                    return TicketStatus::whereNull('project_id')
-                                                        ->get()
-                                                        ->pluck('name', 'id')
-                                                        ->toArray();
-                                                }
-                                            })
-                                            ->default(function ($get) {
-                                                $project = Project::where('id', $get('project_id'))->first();
-                                                if ('custom' === $project?->status_type) {
-                                                    return TicketStatus::where('project_id', $project->id)
-                                                        ->where('is_default', true)
-                                                        ->first()
-                                                        ?->id;
-                                                } else {
-                                                    return TicketStatus::whereNull('project_id')
-                                                        ->where('is_default', true)
-                                                        ->first()
-                                                        ?->id;
-                                                }
-                                            })
-                                            ->required(),
+                                        // Forms\Components\Select::make('status_id')
+                                        //     ->label(__('Ticket status'))
+                                        //     ->searchable()
+                                        //     ->options(function ($get) {
+                                        //         $project = Project::where('id', $get('project_id'))->first();
+                                        //         if ('custom' === $project?->status_type) {
+                                        //             return TicketStatus::where('project_id', $project->id)
+                                        //                 ->get()
+                                        //                 ->pluck('name', 'id')
+                                        //                 ->toArray();
+                                        //         } else {
+                                        //             return TicketStatus::whereNull('project_id')
+                                        //                 ->get()
+                                        //                 ->pluck('name', 'id')
+                                        //                 ->toArray();
+                                        //         }
+                                        //     })
+                                        //     ->default(function ($get) {
+                                        //         $project = Project::where('id', $get('project_id'))->first();
+                                        //         if ('custom' === $project?->status_type) {
+                                        //             return TicketStatus::where('project_id', $project->id)
+                                        //                 ->where('is_default', true)
+                                        //                 ->first()
+                                        //                 ?->id;
+                                        //         } else {
+                                        //             return TicketStatus::whereNull('project_id')
+                                        //                 ->where('is_default', true)
+                                        //                 ->first()
+                                        //                 ?->id;
+                                        //         }
+                                        //     })
+                                        //     ->required(),
+
+
+                                        Forms\Components\Select::make('status')
+                                            ->options(GeoTicketStatusEnum::class),
+
 
                                         Forms\Components\Select::make('type_id')
                                             ->label(__('Ticket type'))
@@ -180,15 +186,15 @@ class TicketResource extends Resource
                             ->required()
                             ->columnSpan(2),
 
-                        Forms\Components\Grid::make()
-                            ->columnSpan(2)
-                            ->columns(12)
-                            ->schema([
-                                Forms\Components\TextInput::make('estimation')
-                                    ->label(__('Estimation time'))
-                                    ->numeric()
-                                    ->columnSpan(2),
-                            ]),
+                        // Forms\Components\Grid::make()
+                        //     ->columnSpan(2)
+                        //     ->columns(12)
+                        //     ->schema([
+                        //         Forms\Components\TextInput::make('estimation')
+                        //             ->label(__('Estimation time'))
+                        //             ->numeric()
+                        //             ->columnSpan(2),
+                        //     ]),
 
                         Forms\Components\Repeater::make('relations')
                             ->itemLabel(function (array $state) {
