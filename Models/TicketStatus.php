@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use Webmozart\Assert\Assert;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Webmozart\Assert\Assert;
 
 /**
- * 
- *
  * @property int                                                                          $id
  * @property string                                                                       $name
  * @property string                                                                       $color
@@ -26,6 +24,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Project|null                                                                 $project
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\Ticket> $tickets
  * @property int|null                                                                     $tickets_count
+ *
  * @method static \Modules\Ticket\Database\Factories\TicketStatusFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     newQuery()
@@ -45,6 +44,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketStatus     withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class TicketStatus extends BaseModel

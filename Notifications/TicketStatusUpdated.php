@@ -12,7 +12,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Modules\Ticket\Models\Ticket;
 use Modules\Ticket\Models\TicketActivity;
-use Modules\User\Models\User;
+use Modules\Xot\Contracts\UserContract;
 use Webmozart\Assert\Assert;
 
 class TicketStatusUpdated extends Notification implements ShouldQueue
@@ -68,7 +68,7 @@ class TicketStatusUpdated extends Notification implements ShouldQueue
             ->action(__('View details'), route('filament.resources.tickets.share', $this->ticket->code));
     }
 
-    public function toDatabase(User $notifiable): array
+    public function toDatabase(UserContract $notifiable): array
     {
         return FilamentNotification::make()
             ->title(__('Ticket status updated'))

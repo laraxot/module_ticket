@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use Webmozart\Assert\Assert;
-use Modules\Xot\Datas\XotData;
-use Modules\Ticket\Notifications\TicketCommented;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Ticket\Notifications\TicketCommented;
+use Modules\Xot\Datas\XotData;
+use Webmozart\Assert\Assert;
 
 /**
- * 
- *
  * @property int                             $id
  * @property int                             $ticket_id
  * @property int                             $user_id
@@ -24,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null                     $deleted_by
  * @property Ticket|null                     $ticket
  * @property \Modules\User\Models\User|null  $user
+ *
  * @method static \Modules\Ticket\Database\Factories\TicketCommentFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     newQuery()
@@ -41,6 +40,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class TicketComment extends BaseModel

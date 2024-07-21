@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Modules\Ticket\Models;
 
 use Carbon\CarbonInterval;
-use Webmozart\Assert\Assert;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Modules\Ticket\Notifications\TicketCreated;
+use Modules\Ticket\Notifications\TicketStatusUpdated;
 use Modules\Xot\Datas\XotData;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Modules\Ticket\Enums\GeoTicketStatusEnum;
-use Modules\Ticket\Notifications\TicketCreated;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Modules\Ticket\Notifications\TicketStatusUpdated;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Webmozart\Assert\Assert;
 
 /**
  * Modules\Ticket\Models\Ticket.
@@ -113,7 +113,7 @@ class Ticket extends BaseModel implements HasMedia
         'name', 'content', 'owner_id', 'responsible_id',
         'status_id', 'project_id', 'code', 'order', 'type_id',
         'priority_id', 'estimation', 'epic_id', 'sprint_id',
-        'latitude', 'longitude', 'status' // GEO
+        'latitude', 'longitude', 'status', // GEO
     ];
 
     protected $appends = [
@@ -122,7 +122,7 @@ class Ticket extends BaseModel implements HasMedia
     ];
 
     // protected $casts = [
-        
+
     // ];
 
     public function casts(): array
@@ -130,7 +130,7 @@ class Ticket extends BaseModel implements HasMedia
         return [
             'estimationInSeconds' => 'int',
             'estimationProgress' => 'float',
-            'status' =>  GeoTicketStatusEnum::class,
+            'status' => GeoTicketStatusEnum::class,
         ];
     }
 

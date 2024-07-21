@@ -113,7 +113,7 @@ trait KanbanScrumHelper
         if ('scrum' === $this->project->type) {
             $query->where('sprint_id', $this->project->currentSprint->id);
         }
-        $query->with(['project', 'owner', 'responsible', 'status', 'type', 'priority', 'epic']);
+        $query->with(['project', 'owner', 'responsible', /* 'status', */ 'type', 'priority', 'epic']);
         $query->where('project_id', $this->project->id);
         if (sizeof($this->profiles)) {
             $query->where(function ($query) {

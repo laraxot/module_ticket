@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Xot\Datas\XotData;
 
 /**
- * 
+ *
  *
  * @property string                          $id
  * @property int                             $user_id

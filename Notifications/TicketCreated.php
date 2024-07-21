@@ -12,6 +12,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Modules\Ticket\Models\Ticket;
 use Modules\User\Models\User;
+use Modules\Xot\Contracts\UserContract;
 
 class TicketCreated extends Notification implements ShouldQueue
 {
@@ -49,17 +50,17 @@ class TicketCreated extends Notification implements ShouldQueue
         return (new MailMessage())
             ->line(__('A new ticket has just been created.'))
             ->line('- '.__('Ticket name:').' '.$this->ticket->name)
-            ->line('- '.__('Project:').' '.$this->ticket->project->name)
-            ->line('- '.__('Owner:').' '.$this->ticket->owner->name)
-            ->line('- '.__('Responsible:').' '.$this->ticket->responsible?->name ?? '-')
-            ->line('- '.__('Status:').' '.$this->ticket->status->name)
-            ->line('- '.__('Type:').' '.$this->ticket->type->name)
-            ->line('- '.__('Priority:').' '.$this->ticket->priority->name)
+            ->line('- '.__('Project:').' '.$this->ticket->project?->name)
+            ->line('- '.__('Owner:').' '.$this->ticket->owner?->name)
+            ->line('- '.__('Responsible:').' '.$this->ticket->responsible?->name)
+            ->line('- '.__('Status:').' '.$this->ticket->status?->name)
+            ->line('- '.__('Type:').' '.$this->ticket->type?->name)
+            ->line('- '.__('Priority:').' '.$this->ticket->priority?->name)
             ->line(__('See more details of this ticket by clicking on the button below:'))
             ->action(__('View details'), route('filament.resources.tickets.share', $this->ticket->code));
     }
 
-    public function toDatabase(User $notifiable): array
+    public function toDatabase(UserContract $notifiable): array
     {
         return FilamentNotification::make()
             ->title(__('New ticket created'))
