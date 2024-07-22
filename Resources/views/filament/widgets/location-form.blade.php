@@ -1,7 +1,6 @@
-
 <x-filament-widgets::widget >
 
-    {{ $this->form }} 
+    {{ $this->form }}
 
 
     {{-- Lat-lng <br/>
