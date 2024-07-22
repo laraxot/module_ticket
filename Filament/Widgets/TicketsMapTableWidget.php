@@ -4,30 +4,28 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Widgets;
 
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Set;
-use Filament\Actions\Action;
+use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
+use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
+use Cheesegrits\FilamentGoogleMaps\Widgets\MapTableWidget;
 use Dotswan\MapPicker\Fields\Map;
-use Modules\Ticket\Models\Ticket;
+use Filament\Actions\Action;
 use Filament\Actions\StaticAction;
-use Filament\Support\Enums\MaxWidth;
-use Illuminate\Support\Facades\Auth;
-use Modules\Ticket\Models\TicketType;
+use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
-use Filament\Tables\Actions\CreateAction;
-use Illuminate\Database\Eloquent\Builder;
-use Modules\Ticket\Models\TicketPriority;
+use Filament\Forms\Set;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Support\Enums\MaxWidth;
+use Filament\Tables;
 use Filament\Tables\Actions\Action as LoginAction;
-use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
-use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
-use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
-use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
-use Cheesegrits\FilamentGoogleMaps\Widgets\MapTableWidget;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Actions\CreateAction;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
+use Modules\Ticket\Filament\Resources\GeoTicketResource\Pages\ListGeoTickets;
+use Modules\Ticket\Models\Ticket;
+use Modules\Ticket\Models\TicketPriority;
+use Modules\Ticket\Models\TicketType;
 
 class TicketsMapTableWidget extends MapTableWidget
 {
@@ -84,40 +82,12 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableColumns(): array
     {
-        return [
-            Tables\Columns\TextColumn::make('name')
-                ->searchable(),
-            Tables\Columns\TextColumn::make('priority.name')
-                ->searchable(),
-            Tables\Columns\TextColumn::make('type.name')
-                ->searchable(),
-            Tables\Columns\TextColumn::make('latitude')
-                ->searchable(),
-            Tables\Columns\TextColumn::make('longitude')
-                ->searchable(),
-            // Tables\Columns\TextColumn::make('street')
-            //     ->searchable(),
-            // Tables\Columns\TextColumn::make('city')
-            //     ->searchable()
-            //     ->sortable(),
-            // Tables\Columns\TextColumn::make('state')
-            //     ->searchable()
-            //     ->sortable(),
-            // Tables\Columns\TextColumn::make('zip'),
-            SpatieMediaLibraryImageColumn::make('images')
-                // ->conversion('thumb')
-                ->collection('ticket'),
-        ];
+        return app(ListGeoTickets::class)->getTableColumns();
     }
 
     protected function getTableFilters(): array
     {
-        return [
-            RadiusFilter::make('location')
-                ->section('Radius Filter')
-                ->selectUnit(),
-            MapIsFilter::make('map'),
-        ];
+        return app(ListGeoTickets::class)->getTableFilters();
     }
 
     protected function getTableRecordAction(): ?string
@@ -127,7 +97,7 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableHeaderActions(): array
     {
-        if(Auth::guest()){
+        if (Auth::guest()) {
             return [
                 LoginAction::make('Nuovo')
                     ->modalHeading('Devi loggarti per poter creare un ticket')
@@ -136,7 +106,7 @@ class TicketsMapTableWidget extends MapTableWidget
                     ->modalWidth(MaxWidth::Medium)
                     ->modalSubmitAction(false),
             ];
-        }else{
+        } else {
             return [
                 CreateAction::make()
                     ->form($this->getFormSchema())
@@ -144,10 +114,8 @@ class TicketsMapTableWidget extends MapTableWidget
                     ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
                     ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
             ];
-    
         }
 
-        
         // return [
         //     CreateAction::make()
 
@@ -160,6 +128,8 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableActions(): array
     {
+        return app(ListGeoTickets::class)->getTableActions();
+        /*
         return [
             Tables\Actions\ViewAction::make()
                 ->form($this->getFormSchema()),
@@ -169,6 +139,7 @@ class TicketsMapTableWidget extends MapTableWidget
                 ->zoom(fn () => 14),
             RadiusAction::make('location'),
         ];
+        */
     }
 
     protected function getTableRecordsPerPageSelectOptions(): array

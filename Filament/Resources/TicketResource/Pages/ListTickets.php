@@ -29,7 +29,7 @@ class ListTickets extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
-            CreateGeoTicketHeaderAction::make('create-geo'),
+            // CreateGeoTicketHeaderAction::make('create-geo'),
         ];
     }
 

@@ -53,6 +53,12 @@ class CreateTicketsTable extends XotBaseMigration
                 if (! $this->hasColumn('status')) {
                     $table->string('status')->nullable();
                 }
+                if (! $this->hasColumn('type')) {
+                    $table->string('type')->nullable();
+                }
+                if (! $this->hasColumn('priority')) {
+                    $table->string('priority')->nullable();
+                }
 
                 $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }

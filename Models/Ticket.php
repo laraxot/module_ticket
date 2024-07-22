@@ -111,9 +111,11 @@ class Ticket extends BaseModel implements HasMedia
 
     protected $fillable = [
         'name', 'content', 'owner_id', 'responsible_id',
-        'status_id', 'project_id', 'code', 'order', 'type_id',
-        'priority_id', 'estimation', 'epic_id', 'sprint_id',
-        'latitude', 'longitude', 'status', // GEO
+        'project_id', 'code', 'order',
+        'estimation', 'epic_id', 'sprint_id',
+        'latitude', 'longitude', // GEO
+        'status_id', 'type_id', 'priority_id',
+        'status', 'type', 'priority',
     ];
 
     protected $appends = [
@@ -130,7 +132,7 @@ class Ticket extends BaseModel implements HasMedia
         return [
             'estimationInSeconds' => 'int',
             'estimationProgress' => 'float',
-            'status' => GeoTicketStatusEnum::class,
+            // 'status' => GeoTicketStatusEnum::class, // in geoticket.php
         ];
     }
 

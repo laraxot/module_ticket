@@ -131,16 +131,16 @@ enum GeoTicketTypeEnum: string implements HasColor, HasIcon, HasLabel
     public function getIcon(): ?string
     {
         return match ($this) {
-            self::ROAD_MAINTENANCE => '🛤️',
-            self::PUBLIC_LIGHTING => '💡',
-            self::WASTE_COLLECTION => '🗑️',
-            self::PARKS_AND_GARDENS => '🌳',
-            self::SEWAGE_AND_DRAINAGE => '🚰',
-            self::PUBLIC_BUILDINGS => '🏢',
-            self::ENVIRONMENTAL_REPORTS => '🌍',
-            self::PUBLIC_TRANSPORT => '🚍',
-            self::URBAN_FURNITURE => '🪑',
-            self::PUBLIC_SAFETY => '🛡️',
+            self::ROAD_MAINTENANCE => 'heroicon-o-wrench',
+            self::PUBLIC_LIGHTING => 'heroicon-o-light-bulb',
+            self::WASTE_COLLECTION => 'heroicon-o-trash',
+            self::PARKS_AND_GARDENS => 'heroicon-o-sparkles',
+            self::SEWAGE_AND_DRAINAGE => 'heroicon-o-archive',
+            self::PUBLIC_BUILDINGS => 'heroicon-o-office-building',
+            self::ENVIRONMENTAL_REPORTS => 'heroicon-o-globe',
+            self::PUBLIC_TRANSPORT => 'heroicon-o-bus',
+            self::URBAN_FURNITURE => 'heroicon-o-couch',
+            self::PUBLIC_SAFETY => 'heroicon-o-shield-check',
         };
     }
 }

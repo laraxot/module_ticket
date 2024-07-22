@@ -47,4 +47,9 @@ enum TicketPriorityEnum: string implements HasColor, HasIcon, HasLabel
             // default => 'Unknown',
         };
     }
+
+    public static function default(): static
+    {
+        return self::LOW;
+    }
 }
