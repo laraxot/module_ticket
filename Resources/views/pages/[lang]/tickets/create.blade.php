@@ -14,11 +14,13 @@ new class extends Component
 
     <div class="w-full">
 
-        <x-ui.marketing.breadcrumbs :crumbs="[['text' => 'About']]" />
-        <div class="w-full" >
+        <x-ui.marketing.breadcrumbs :crumbs="[['text' => 'Tickets'],['text' => 'Create']]" />
+        <div class="w-full p-10" >
+
             <h1>IT WORKS</h1>
             <br/>
             @livewire(\Modules\Ticket\Filament\Widgets\CreateGeoTicketWidget::class)
+
         </div>
     </div>
 </x-layouts.marketing>
