@@ -4,7 +4,7 @@ use function Laravel\Folio\{middleware, name};
 use Livewire\Volt\Component;
 
 name('ticket.prova');
-middleware(['auth', 'verified']);
+middleware(['auth']);
 
 new class extends Component
 {
