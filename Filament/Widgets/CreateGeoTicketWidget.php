@@ -7,10 +7,11 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Widgets;
 
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
+use Modules\Ticket\Models\Ticket;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Widgets\Widget as BaseWidget;
+use Filament\Forms\Concerns\InteractsWithForms;
 use Modules\Ticket\Filament\Resources\GeoTicketResource;
 
 class CreateGeoTicketWidget extends BaseWidget implements HasForms
@@ -40,6 +41,7 @@ class CreateGeoTicketWidget extends BaseWidget implements HasForms
 
     public function create(): void
     {
-        dd($this->form->getState());
+        Ticket::create($this->form->getState());
+        redirect('/');
     }
 }
