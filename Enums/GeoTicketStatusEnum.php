@@ -67,6 +67,7 @@ use Filament\Support\Contracts\HasLabel;
 enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
 {
     case NEW = 'new';
+    case PENDING = 'in_pending';
     case IN_REVIEW = 'in_review';
     case IN_PROGRESS = 'in_progress';
     case ON_HOLD = 'on_hold';
@@ -78,6 +79,7 @@ enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     {
         return match ($this) {
             self::NEW => 'yellow',
+            self::PENDING => 'yellow',
             self::IN_REVIEW => 'blue',
             self::IN_PROGRESS => 'orange',
             self::ON_HOLD => 'red',
@@ -91,6 +93,7 @@ enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     {
         return match ($this) {
             self::NEW => 'heroicon-o-plus-circle',
+            self::PENDING => 'heroicon-o-plus-circle',
             self::IN_REVIEW => 'heroicon-o-clock',
             self::IN_PROGRESS => 'heroicon-o-refresh',
             self::ON_HOLD => 'heroicon-o-pause',
@@ -104,6 +107,7 @@ enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     {
         return match ($this) {
             self::NEW => 'New',
+            self::PENDING => 'Pending',
             self::IN_REVIEW => 'In Review',
             self::IN_PROGRESS => 'In Progress',
             self::ON_HOLD => 'On Hold',
