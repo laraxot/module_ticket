@@ -135,7 +135,7 @@ enum GeoTicketTypeEnum: string implements HasColor, HasIcon, HasLabel
             self::PUBLIC_LIGHTING => 'heroicon-o-light-bulb',
             self::WASTE_COLLECTION => 'heroicon-o-trash',
             self::PARKS_AND_GARDENS => 'heroicon-o-sparkles',
-            self::SEWAGE_AND_DRAINAGE => 'heroicon-o-archive',
+            self::SEWAGE_AND_DRAINAGE => 'heroicon-o-archive-box',
             self::PUBLIC_BUILDINGS => 'heroicon-o-building-office',
             self::ENVIRONMENTAL_REPORTS => 'heroicon-o-globe',
             self::PUBLIC_TRANSPORT => 'heroicon-o-bus',

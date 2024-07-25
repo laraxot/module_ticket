@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Modules\Ticket\Models\Ticket;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Widgets\Widget as BaseWidget;
+use Modules\Ticket\Events\TicketCreatedEvent;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Modules\Ticket\Filament\Resources\GeoTicketResource;
 
@@ -41,7 +42,8 @@ class CreateGeoTicketWidget extends BaseWidget implements HasForms
 
     public function create(): void
     {
-        Ticket::create($this->form->getState());
+        $ticket = Ticket::create($this->form->getState());
+        TicketCreatedEvent::dispatch($ticket);
         redirect('/');
     }
 }
