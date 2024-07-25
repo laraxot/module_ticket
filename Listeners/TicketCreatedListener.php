@@ -6,6 +6,7 @@ use Modules\Ticket\Models\Ticket;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Modules\Ticket\Events\TicketCreatedEvent;
 
 class TicketCreatedListener
 {
@@ -20,12 +21,10 @@ class TicketCreatedListener
     /**
      * Handle the event.
      */
-    public function handle(Ticket $event): void
+    public function handle(TicketCreatedEvent $event): void
     {
         $status = GeoTicketStatusEnum::PENDING;
-        // dddx([GeoTicketStatusEnum::PENDING, $status->value, $status->getLabel()]);
         $ticket = $event->ticket;
         $ticket->setStatus($status->value, 'creazione nuovo ticket');
-        // dddx($ticket->status);
     }
 }
