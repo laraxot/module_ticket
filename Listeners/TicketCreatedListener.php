@@ -1,10 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Listeners;
 
-use Modules\Ticket\Models\Ticket;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Modules\Ticket\Enums\GeoTicketStatusEnum;
 use Modules\Ticket\Events\TicketCreatedEvent;
 
@@ -15,7 +14,6 @@ class TicketCreatedListener
      */
     public function __construct()
     {
-        //
     }
 
     /**

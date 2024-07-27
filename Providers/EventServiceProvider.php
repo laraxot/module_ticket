@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Providers;
 
+use DutchCodingCompany\FilamentSocialite\Events\Registered as SocialRegistered;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Modules\Ticket\Events\TicketCreatedEvent;
 use Modules\Ticket\Listeners\SocialRegistration;
 use Modules\Ticket\Listeners\TicketCreatedListener;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
-use DutchCodingCompany\FilamentSocialite\Events\Registered as SocialRegistered;
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {

@@ -7,8 +7,6 @@ namespace Modules\Ticket\Models;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
- *
  * @property int                                                                           $id
  * @property string                                                                        $name
  * @property string                                                                        $color
@@ -22,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null                                                                   $deleted_by
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\Project> $projects
  * @property int|null                                                                      $projects_count
+ *
  * @method static \Modules\Ticket\Database\Factories\ProjectStatusFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatus     newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatus     newQuery()
@@ -40,6 +39,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatus     whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatus     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatus     withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class ProjectStatus extends BaseModel

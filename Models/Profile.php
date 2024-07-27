@@ -34,6 +34,7 @@ use Modules\User\Models\User;
  * @property Collection<int, Role>       $roles
  * @property int|null                    $roles_count
  * @property User|null                   $user
+ *
  * @method static CachedBuilder|Profile   all($columns = [])
  * @method static CachedBuilder|Profile   avg($column)
  * @method static CachedBuilder|Profile   cache(array $tags = [])
@@ -57,6 +58,7 @@ use Modules\User\Models\User;
  * @method static CachedBuilder|Profile   sum($column)
  * @method static CachedBuilder|Profile   truncate()
  * @method static CachedBuilder|BaseModel withCacheCooldownSeconds(?int $seconds = null)
+ *
  * @property int         $id
  * @property string|null $first_name
  * @property string|null $last_name
@@ -64,6 +66,7 @@ use Modules\User\Models\User;
  * @property Carbon|null $updated_at
  * @property string|null $updated_by
  * @property string|null $created_by
+ *
  * @method static Builder|Profile whereCreatedAt($value)
  * @method static Builder|Profile whereCreatedBy($value)
  * @method static Builder|Profile whereFirstName($value)
@@ -71,6 +74,7 @@ use Modules\User\Models\User;
  * @method static Builder|Profile whereLastName($value)
  * @method static Builder|Profile whereUpdatedAt($value)
  * @method static Builder|Profile whereUpdatedBy($value)
+ *
  * @property Collection<int, Project>                                                                                      $favoriteProjects
  * @property int|null                                                                                                      $favorite_projects_count
  * @property Collection<int, TicketHour>                                                                                   $hours
@@ -109,6 +113,7 @@ use Modules\User\Models\User;
  * @property Collection<int, \Modules\User\Models\Team>                                                                    $teams
  * @property int|null                                                                                                      $teams_count
  * @property string|null                                                                                                   $user_name
+ *
  * @method static \Modules\Ticket\Database\Factories\ProfileFactory factory($count = null, $state = [])
  * @method static Builder|Profile                                   whereCredits($value)
  * @method static Builder|Profile                                   whereDeletedAt($value)
@@ -120,8 +125,10 @@ use Modules\User\Models\User;
  * @method static Builder|BaseProfile                               withExtraAttributes()
  * @method static Builder|BaseProfile                               withoutPermission($permissions)
  * @method static Builder|BaseProfile                               withoutRole($roles, $guard = null)
- * @property-read \Modules\User\Models\DeviceUser $pivot
- * @property-read \Modules\User\Models\Membership $membership
+ *
+ * @property \Modules\User\Models\DeviceUser $pivot
+ * @property \Modules\User\Models\Membership $membership
+ *
  * @mixin \Eloquent
  */
 class Profile extends UserBaseProfile

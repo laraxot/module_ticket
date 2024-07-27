@@ -11,9 +11,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * Modules\Ticket\Models\ProfileProject.
  *
  * @property Project|null $project
+ *
  * @method static Builder|ProfileProject newModelQuery()
  * @method static Builder|ProfileProject newQuery()
  * @method static Builder|ProfileProject query()
+ *
  * @property Profile|null                    $profile
  * @property string                          $id
  * @property string|null                     $user_id
@@ -26,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null                     $created_by
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property string|null                     $deleted_by
+ *
  * @method static Builder|ProfileProject whereCreatedAt($value)
  * @method static Builder|ProfileProject whereCreatedBy($value)
  * @method static Builder|ProfileProject whereDeletedAt($value)
@@ -37,6 +40,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static Builder|ProfileProject whereUpdatedAt($value)
  * @method static Builder|ProfileProject whereUpdatedBy($value)
  * @method static Builder|ProfileProject whereUserId($value)
+ *
  * @mixin \Eloquent
  */
 class ProfileProject extends BasePivot

@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Notifications;
 
-use Webmozart\Assert\Assert;
-use Illuminate\Bus\Queueable;
-use Modules\User\Models\User;
-use Modules\Ticket\Models\TicketComment;
 use Filament\Notifications\Actions\Action;
-use Illuminate\Notifications\Notification;
+use Filament\Notifications\Notification as FilamentNotification;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Filament\Notifications\Notification as FilamentNotification;
+use Illuminate\Notifications\Notification;
+use Modules\Ticket\Models\TicketComment;
+use Modules\User\Models\User;
+use Webmozart\Assert\Assert;
 
 class TicketCommented extends Notification implements ShouldQueue
 {

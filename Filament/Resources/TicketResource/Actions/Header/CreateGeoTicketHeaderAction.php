@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Resources\TicketResource\Actions\Header;
 
-use Filament\Forms;
-use Filament\Forms\Set;
-use Filament\Actions\Action;
 use Dotswan\MapPicker\Fields\Map;
-use Modules\Ticket\Models\Ticket;
-use Illuminate\Support\Facades\Gate;
+use Filament\Actions\Action;
+use Filament\Forms;
 use Filament\Forms\Components\Select;
-use Modules\Ticket\Models\TicketType;
 use Filament\Forms\Components\TextInput;
-use Modules\Ticket\Models\TicketPriority;
+use Filament\Forms\Set;
+use Illuminate\Support\Facades\Gate;
 use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Modules\Ticket\Models\Ticket;
+use Modules\Ticket\Models\TicketPriority;
+use Modules\Ticket\Models\TicketType;
 use Modules\Xot\Filament\Traits\NavigationActionLabelTrait;
 
 class CreateGeoTicketHeaderAction extends Action
@@ -42,14 +42,14 @@ class CreateGeoTicketHeaderAction extends Action
                     ->required()
 
                     ->maxLength(255),
-                Forms\Components\Select::make('type_id')
+                Select::make('type_id')
                     ->label(__('Ticket type'))
                     ->searchable()
                     ->options(fn () => TicketType::all()->pluck('name', 'id')->toArray())
                     ->default(fn () => TicketType::where('is_default', true)->first()?->id)
                     ->required(),
 
-                Forms\Components\Select::make('priority_id')
+                Select::make('priority_id')
                     ->label(__('Ticket priority'))
                     ->searchable()
                     ->options(fn () => TicketPriority::all()->pluck('name', 'id')->toArray())

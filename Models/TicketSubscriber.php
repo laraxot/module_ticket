@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use Modules\Xot\Datas\XotData;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Xot\Datas\XotData;
 
 /**
- * 
- *
  * @property int                             $id
  * @property int                             $user_id
  * @property int                             $ticket_id
@@ -20,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property string|null                     $deleted_by
  * @property Ticket|null                     $ticket
+ *
  * @method static \Modules\Ticket\Database\Factories\TicketSubscriberFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|TicketSubscriber     newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketSubscriber     newQuery()
@@ -36,7 +35,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|TicketSubscriber     whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketSubscriber     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketSubscriber     withoutTrashed()
+ *
  * @property \Modules\User\Models\User|null $user
+ *
  * @mixin \Eloquent
  */
 class TicketSubscriber extends BaseModel
