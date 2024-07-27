@@ -6,19 +6,19 @@ namespace Modules\Ticket\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Forms\Form;
-use Modules\User\Models\User;
-use Modules\Ticket\Models\Epic;
-use Filament\Resources\Resource;
-use Modules\Ticket\Models\Ticket;
-use Modules\Ticket\Models\Project;
-use Modules\Ticket\Models\TicketType;
-use Modules\Ticket\Models\TicketStatus;
-use Filament\Resources\Pages\EditRecord;
-use Modules\Ticket\Models\TicketPriority;
-use Modules\Ticket\Models\TicketRelation;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Resource;
 use Modules\Ticket\Enums\GeoTicketStatusEnum;
 use Modules\Ticket\Filament\Resources\TicketResource\Pages;
+use Modules\Ticket\Models\Epic;
+use Modules\Ticket\Models\Project;
+use Modules\Ticket\Models\Ticket;
+use Modules\Ticket\Models\TicketPriority;
+use Modules\Ticket\Models\TicketRelation;
+use Modules\Ticket\Models\TicketStatus;
+use Modules\Ticket\Models\TicketType;
+use Modules\User\Models\User;
 
 class TicketResource extends Resource
 {
@@ -160,10 +160,8 @@ class TicketResource extends Resource
                                         //     })
                                         //     ->required(),
 
-
                                         Forms\Components\Select::make('status')
                                             ->options(GeoTicketStatusEnum::class),
-
 
                                         Forms\Components\Select::make('type_id')
                                             ->label(__('Ticket type'))

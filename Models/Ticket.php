@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace Modules\Ticket\Models;
 
 use Carbon\CarbonInterval;
-use Webmozart\Assert\Assert;
-use Modules\Xot\Datas\XotData;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\ModelStatus\HasStatuses;
-use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Ticket\Enums\GeoTicketStatusEnum;
 use Modules\Ticket\Notifications\TicketCreated;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Ticket\Notifications\TicketStatusUpdated;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Modules\Xot\Datas\XotData;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\ModelStatus\HasStatuses;
+use Webmozart\Assert\Assert;
 
 /**
  * Modules\Ticket\Models\Ticket.

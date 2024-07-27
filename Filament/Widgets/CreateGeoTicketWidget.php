@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Widgets;
 
-use Filament\Forms\Form;
-use Modules\Ticket\Models\Ticket;
+use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Form;
 use Filament\Widgets\Widget as BaseWidget;
 use Modules\Ticket\Events\TicketCreatedEvent;
-use Filament\Forms\Concerns\InteractsWithForms;
 use Modules\Ticket\Filament\Resources\GeoTicketResource;
+use Modules\Ticket\Models\Ticket;
 
 class CreateGeoTicketWidget extends BaseWidget implements HasForms
 {
