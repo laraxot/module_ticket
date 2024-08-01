@@ -18,7 +18,6 @@ new class extends Component
         <x-ui.marketing.breadcrumbs :crumbs="[['text' => 'Tickets'],['text' => 'Create']]" />
         <div class="w-full p-10" >
 
-            <h1>IT WORKS</h1>
             <br/>
             @livewire(\Modules\Ticket\Filament\Widgets\CreateGeoTicketWidget::class)
 
