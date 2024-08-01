@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\HtmlString;
 use Modules\Ticket\Models\TicketComment;
 
+/**
+ * @property \Filament\Forms\ComponentContainer $form
+ */
 class LatestComments extends BaseWidget
 {
     protected static ?int $sort = 8;

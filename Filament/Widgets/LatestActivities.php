@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\HtmlString;
 use Modules\Ticket\Models\TicketActivity;
 
+/**
+ * @property \Filament\Forms\ComponentContainer $form
+ */
 class LatestActivities extends BaseWidget
 {
     protected static ?int $sort = 9;

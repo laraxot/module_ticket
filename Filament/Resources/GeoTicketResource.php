@@ -85,8 +85,10 @@ class GeoTicketResource extends XotBaseResource
                        'lng' => -3.7038,
                    ])
                    ->afterStateUpdated(function (Set $set, ?array $state): void {
-                       $set('latitude', $state['lat']);
-                       $set('longitude', $state['lng']);
+                       if (is_array($state)) {
+                           $set('latitude', $state['lat']);
+                           $set('longitude', $state['lng']);
+                       }
                    })
                    ->afterStateHydrated(function ($state, $record, Set $set): void {
                        $set('location', ['lat' => $record?->latitude, 'lng' => $record?->longitude]);

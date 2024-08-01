@@ -19,6 +19,9 @@ use Modules\Ticket\Filament\Resources\GeoTicketResource\Pages\ListGeoTickets;
 use Modules\Ticket\Models\GeoTicket;
 use Modules\Ticket\Models\Ticket;
 
+/**
+ * @property \Filament\Forms\ComponentContainer $form
+ */
 class TicketsMapTableWidget extends MapTableWidget
 {
     protected static ?string $heading = 'Location Map';

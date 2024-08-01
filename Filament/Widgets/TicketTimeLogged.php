@@ -7,6 +7,9 @@ namespace Modules\Ticket\Filament\Widgets;
 use Filament\Widgets\BarChartWidget;
 use Modules\Ticket\Models\Ticket;
 
+/**
+ * @property \Filament\Forms\ComponentContainer $form
+ */
 class TicketTimeLogged extends BarChartWidget
 {
     protected static ?string $heading = 'Chart';

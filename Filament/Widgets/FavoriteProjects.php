@@ -8,6 +8,9 @@ use Filament\Forms\Components\Section;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Illuminate\Support\HtmlString;
 
+/**
+ * @property \Filament\Forms\ComponentContainer $form
+ */
 class FavoriteProjects extends BaseWidget
 {
     protected static ?int $sort = 1;

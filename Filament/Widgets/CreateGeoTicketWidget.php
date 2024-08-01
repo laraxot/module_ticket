@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Widgets;
 
+use Filament\Forms\ComponentContainer;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
@@ -15,6 +16,9 @@ use Modules\Ticket\Events\TicketCreatedEvent;
 use Modules\Ticket\Filament\Resources\GeoTicketResource;
 use Modules\Ticket\Models\Ticket;
 
+/**
+ * @property ComponentContainer $form
+ */
 class CreateGeoTicketWidget extends BaseWidget implements HasForms
 {
     use InteractsWithForms;

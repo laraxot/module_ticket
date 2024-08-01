@@ -7,6 +7,9 @@ namespace Modules\Ticket\Filament\Widgets;
 use Filament\Widgets\DoughnutChartWidget;
 use Modules\Ticket\Models\TicketPriority;
 
+/**
+ * @property \Filament\Forms\ComponentContainer $form
+ */
 class TicketsByPriority extends DoughnutChartWidget
 {
     protected static ?int $sort = 3;

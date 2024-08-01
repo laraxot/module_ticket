@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\HtmlString;
 use Modules\Ticket\Models\Ticket;
 
+/**
+ * @property \Filament\Forms\ComponentContainer $form
+ */
 class LatestTickets extends BaseWidget
 {
     protected static ?int $sort = 6;
