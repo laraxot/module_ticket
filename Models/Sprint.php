@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * 
+ *
  * @property int                                                                          $id
  * @property string                                                                       $name
  * @property \Illuminate\Support\Carbon                                                   $starts_at
@@ -29,7 +31,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property mixed                                                                        $remaining
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\Ticket> $tickets
  * @property int|null                                                                     $tickets_count
- *
  * @method static \Modules\Ticket\Database\Factories\SprintFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Sprint     newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Sprint     newQuery()
@@ -52,7 +53,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Sprint     whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sprint     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Sprint     withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Sprint extends BaseModel

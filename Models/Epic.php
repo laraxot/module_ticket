@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
+ * 
+ *
  * @property int                                                                          $id
  * @property int|null                                                                     $parent_id
  * @property int                                                                          $project_id
@@ -26,7 +28,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property Sprint|null                                                                  $sprint
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\Ticket> $tickets
  * @property int|null                                                                     $tickets_count
- *
  * @method static \Modules\Ticket\Database\Factories\EpicFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Epic     newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Epic     newQuery()
@@ -46,7 +47,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|Epic     whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Epic     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Epic     withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Epic extends BaseModel
