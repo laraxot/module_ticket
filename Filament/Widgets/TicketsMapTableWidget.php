@@ -92,6 +92,8 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableHeaderActions(): array
     {
+        return [];
+
         /*
         if (Auth::guest()) {
             return [
