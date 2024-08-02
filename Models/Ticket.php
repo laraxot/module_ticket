@@ -72,6 +72,7 @@ use Webmozart\Assert\Assert;
  * @property mixed                                                                                                      $total_logged_in_hours
  * @property mixed                                                                                                      $total_logged_seconds
  * @property TicketType|null                                                                                            $type
+ *
  * @method static \Modules\Ticket\Database\Factories\TicketFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     newQuery()
@@ -102,10 +103,13 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     withoutTrashed()
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\ModelStatus\Status> $statuses
- * @property-read int|null $statuses_count
+ *
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Spatie\ModelStatus\Status> $statuses
+ * @property int|null                                                                  $statuses_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket currentStatus(...$names)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket otherCurrentStatus(...$names)
+ *
  * @mixin \Eloquent
  */
 class Ticket extends BaseModel implements HasMedia

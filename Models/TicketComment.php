@@ -10,8 +10,6 @@ use Modules\Xot\Datas\XotData;
 use Webmozart\Assert\Assert;
 
 /**
- * 
- *
  * @property int                             $id
  * @property int                             $ticket_id
  * @property int                             $user_id
@@ -24,6 +22,7 @@ use Webmozart\Assert\Assert;
  * @property string|null                     $deleted_by
  * @property Ticket|null                     $ticket
  * @property \Modules\User\Models\User|null  $user
+ *
  * @method static \Modules\Ticket\Database\Factories\TicketCommentFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     newQuery()
@@ -41,6 +40,7 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketComment     withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class TicketComment extends BaseModel
