@@ -92,6 +92,7 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableHeaderActions(): array
     {
+        /*
         if (Auth::guest()) {
             return [
                 LoginAction::make('Nuovo')
@@ -101,24 +102,16 @@ class TicketsMapTableWidget extends MapTableWidget
                     ->modalWidth(MaxWidth::Medium)
                     ->modalSubmitAction(false),
             ];
-        } else {
-            return [
-                CreateAction::make()
-                    ->form($this->getFormSchema())
-                    ->createAnother(false)
-                    ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
-                    ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
-            ];
         }
 
-        // return [
-        //     CreateAction::make()
-
-        //     ->form($this->getFormSchema())
-        //     ->createAnother(false)
-        //     ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
-        //     ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
-        // ];
+        return [
+            CreateAction::make()
+                ->form($this->getFormSchema())
+                ->createAnother(false)
+                ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
+                ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
+        ];
+        */
     }
 
     protected function getTableActions(): array
