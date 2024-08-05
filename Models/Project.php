@@ -191,6 +191,7 @@ class Project extends Model implements HasMedia
         );
     }
 
+    /*
     public function nextSprint(): Attribute
     {
         return new Attribute(
@@ -208,4 +209,5 @@ class Project extends Model implements HasMedia
             }
         );
     }
+    */
 }

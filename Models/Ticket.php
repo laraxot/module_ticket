@@ -326,7 +326,7 @@ class Ticket extends BaseModel implements HasMedia
             }
         );
     }
-
+    /*
     public function estimationInSeconds(): Attribute
     {
         return new Attribute(
@@ -339,7 +339,9 @@ class Ticket extends BaseModel implements HasMedia
             }
         );
     }
+    */
 
+    /*
     public function estimationProgress(): Attribute
     {
         return new Attribute(
@@ -348,13 +350,17 @@ class Ticket extends BaseModel implements HasMedia
             }
         );
     }
+    */
 
+    /*
     public function completudePercentage(): Attribute
     {
         return new Attribute(
             get: fn () => $this->estimationProgress
         );
     }
+
+    */
 
     public static function getLatLngAttributes(): array
     {
