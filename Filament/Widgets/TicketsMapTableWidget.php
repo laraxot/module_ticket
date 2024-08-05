@@ -109,6 +109,7 @@ class TicketsMapTableWidget extends MapTableWidget
             ];
         }
 
+        /*
         return [
             CreateAction::make()
                 ->form($this->getFormSchema())
