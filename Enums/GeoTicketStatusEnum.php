@@ -13,7 +13,7 @@ use Filament\Support\Contracts\HasLabel;
 
 enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
 {
-    case NEW = 'new';
+    // case NEW = 'new';
     case PENDING = 'pending';
     case IN_REVIEW = 'in_review';
     case IN_PROGRESS = 'in_progress';
@@ -25,7 +25,7 @@ enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     public function getColor(): string|array|null
     {
         return match ($this) {
-            self::NEW => 'yellow',
+            // self::NEW => 'yellow',
             self::PENDING => 'yellow',
             self::IN_REVIEW => 'blue',
             self::IN_PROGRESS => 'orange',
@@ -39,7 +39,7 @@ enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     public function getIcon(): ?string
     {
         return match ($this) {
-            self::NEW => 'heroicon-o-plus-circle',
+            // self::NEW => 'heroicon-o-plus-circle',
             self::PENDING => 'heroicon-o-plus-circle',
             self::IN_REVIEW => 'heroicon-o-clock',
             self::IN_PROGRESS => 'heroicon-o-refresh',
@@ -53,7 +53,7 @@ enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     public function getLabel(): ?string
     {
         return match ($this) {
-            self::NEW => 'New',
+            // self::NEW => 'New',
             self::PENDING => 'Pending',
             self::IN_REVIEW => 'In Review',
             self::IN_PROGRESS => 'In Progress',
@@ -63,5 +63,17 @@ enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
             self::REOPENED => 'Reopened',
             // default => 'Unknown',
         };
+    }
+
+    public static function canViewByAll(): array
+    {
+        return [
+            // self::PENDING,
+            self::IN_PROGRESS,
+            self::ON_HOLD,
+            self::RESOLVED,
+            self::CLOSED,
+            self::REOPENED,
+        ];
     }
 }

@@ -14,6 +14,7 @@ use Filament\Tables\Actions\Action as LoginAction;
 use Filament\Tables\Actions\CreateAction;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Modules\Ticket\Enums\GeoTicketStatusEnum;
 use Modules\Ticket\Filament\Resources\GeoTicketResource;
 use Modules\Ticket\Filament\Resources\GeoTicketResource\Pages\ListGeoTickets;
 use Modules\Ticket\Models\GeoTicket;
@@ -71,8 +72,11 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableQuery(): Builder
     {
-        // dddx(Ticket::query()->latest()->first());
-        return GeoTicket::query()->latest();
+        // return GeoTicket::query()->latest();
+        return GeoTicket::currentStatus(GeoTicketStatusEnum::canViewByAll())
+        ->orWhere('created_by', authId())
+        ->orWhere('updated_by', authId())
+        ->latest();
     }
 
     protected function getTableColumns(): array
