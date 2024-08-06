@@ -13,6 +13,7 @@ use Filament\Resources\Pages\ListRecords;
 use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Table;
+use Modules\Ticket\Enums\GeoTicketStatusEnum;
 use Modules\Ticket\Filament\Resources\GeoTicketResource;
 
 class ListGeoTickets extends ListRecords
@@ -49,7 +50,17 @@ class ListGeoTickets extends ListRecords
     public function getTableColumns(): array
     {
         return [
-            Tables\Columns\TextColumn::make('status'),
+            Tables\Columns\TextColumn::make('id'),
+            Tables\Columns\TextColumn::make('status')
+
+            ->default(function ($record) {
+                $status = $record->status();
+                if (null == $status) {
+                    return null;
+                }
+
+                return GeoTicketStatusEnum::from($status->name);
+            }),
             Tables\Columns\TextColumn::make('name')
                 ->searchable(),
             // Tables\Columns\TextColumn::make('priority.name')

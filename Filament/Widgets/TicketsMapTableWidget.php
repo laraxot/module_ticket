@@ -132,19 +132,26 @@ class TicketsMapTableWidget extends MapTableWidget
         $data = [];
 
         foreach ($locations as $location) {
+            // dddx($location->getIconData());
             $data[] = [
                 'location' => [
-                    'lat' => $location->lat ? round(floatval($location->lat), static::$precision ?? 8) : 0,
-                    'lng' => $location->lng ? round(floatval($location->lng), static::$precision ?? 8) : 0,
+                    // 'lat' => $location->lat ? round(floatval($location->lat), static::$precision ?? 8) : 0,
+                    // 'lng' => $location->lng ? round(floatval($location->lng), static::$precision ?? 8) : 0,
+                    'lat' => floatval($location->latitude),
+                    'lng' => floatval($location->longitude),
                 ],
-                'label' => $location->formatted_address,
+                // 'label' => $location->formatted_address,
+                'label' => $location->name,
                 'id' => $location->id,
+                /*
                 'icon' => [
                     // 'url' => url('images/dealership.svg'),
                     'url' => url('images/fire.svg'),
                     'type' => 'svg',
                     'scale' => [35, 35],
                 ],
+                */
+                'icon' => $location->getIconData(),
             ];
         }
 

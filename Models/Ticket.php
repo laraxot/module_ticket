@@ -131,10 +131,6 @@ class Ticket extends BaseModel implements HasMedia
         // 'estimationProgress',
     ];
 
-    // protected $casts = [
-
-    // ];
-
     public function casts(): array
     {
         return [
@@ -361,12 +357,4 @@ class Ticket extends BaseModel implements HasMedia
     }
 
     */
-
-    public static function getLatLngAttributes(): array
-    {
-        return [
-            'lat' => 'lat',
-            'lng' => 'lng',
-        ];
-    }
 }

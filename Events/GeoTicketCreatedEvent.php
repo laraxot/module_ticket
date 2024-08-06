@@ -1,0 +1,37 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Ticket\Events;
+
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+use Modules\Ticket\Models\GeoTicket;
+
+class GeoTicketCreatedEvent
+{
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
+
+    /**
+     * Create a new event instance.
+     */
+    public function __construct(
+        public GeoTicket $ticket
+    ) {
+    }
+
+    /*
+     * Get the channels the event should be broadcast on.
+     */
+    // public function broadcastOn(): array
+    // {
+    //     return [
+    //         new PrivateChannel('channel-name'),
+    //     ];
+    // }
+}

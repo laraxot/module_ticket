@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
+use Illuminate\Support\Str;
 use Modules\Ticket\Enums\GeoTicketStatusEnum;
 use Modules\Ticket\Enums\GeoTicketTypeEnum;
 use Modules\Ticket\Enums\TicketPriorityEnum;
+use Modules\Xot\Services\FileService;
 
 /**
  * @property int                                                                                                        $id
@@ -111,6 +113,29 @@ class GeoTicket extends Ticket
             'type' => GeoTicketTypeEnum::class,
         ];
 
-        return array_merge($data, $my);
+        $res = array_merge($data, $my);
+
+        return $res;
+    }
+
+    public function getIconData(): array
+    {
+        $url = $this->type->getIcon();
+        $url = Str::of($url)->after('heroicon-o-')->append('.svg')->toString();
+        $url = FileService::asset('ui::svg/'.$url);
+
+        return [
+            'url' => $url,
+            'type' => 'svg',
+            'scale' => [35, 35],
+        ];
+    }
+
+    public static function getLatLngAttributes(): array
+    {
+        return [
+            'lat' => 'latitude',
+            'lng' => 'longitude',
+        ];
     }
 }

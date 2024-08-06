@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Ticket\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Modules\Ticket\Events\GeoTicketCreatedEvent;
+use Modules\Ticket\Listeners\GeoTicketCreatedListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -11,7 +15,11 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array<string, array<int, string>>
      */
-    protected $listen = [];
+    protected $listen = [
+        GeoTicketCreatedEvent::class => [
+            GeoTicketCreatedListener::class,
+        ],
+    ];
 
     /**
      * Indicates if events should be discovered.
@@ -22,11 +30,8 @@ class EventServiceProvider extends ServiceProvider
 
     /**
      * Configure the proper event listeners for email verification.
-     *
-     * @return void
      */
     protected function configureEmailVerification(): void
     {
-
     }
 }
