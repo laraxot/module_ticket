@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Resources\GeoTicketResource\Pages;
 
-use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
-use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
-use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
-use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
+use Filament\Tables;
 use Filament\Actions;
+use Filament\Tables\Table;
+use Modules\Ticket\Models\GeoTicket;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
-use Filament\Tables;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
-use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Modules\Ticket\Filament\Actions\ChangeStatus;
+use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
+use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
+use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
+use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
 use Modules\Ticket\Filament\Resources\GeoTicketResource;
-use Modules\Ticket\Models\GeoTicket;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class ListGeoTickets extends ListRecords
 {
@@ -103,6 +104,7 @@ class ListGeoTickets extends ListRecords
             GoToAction::make()
                 ->zoom(fn () => 14),
             RadiusAction::make('location'),
+            ChangeStatus::make(),
         ];
     }
 

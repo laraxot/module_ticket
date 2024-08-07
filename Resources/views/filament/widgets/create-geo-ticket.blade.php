@@ -9,9 +9,10 @@
         <x-filament::button 
             class="w-full py-4 bg-blue-500 hover:bg-blue-700"
             type="submit"
+            form="create"
         >
         Click here to submit a new ticket
-    </x-filament::button>
+        </x-filament::button>
     </form>
 
     <x-filament-actions::modals />
