@@ -19,6 +19,7 @@ use Modules\Ticket\Enums\GeoTicketStatusEnum;
 use Modules\Ticket\Filament\Actions\ChangeStatus;
 use Modules\Ticket\Filament\Resources\GeoTicketResource;
 use Modules\Ticket\Models\GeoTicket;
+use Modules\UI\Filament\Tables\Columns\GroupColumn;
 
 class ListGeoTickets extends ListRecords
 {
@@ -55,6 +56,14 @@ class ListGeoTickets extends ListRecords
     {
         return [
             Tables\Columns\TextColumn::make('id'),
+
+            Tables\Columns\TextColumn::make('name')
+                ->searchable(),
+
+            // Tables\Columns\TextColumn::make('priority.name')
+            //    ->searchable(),
+            // GroupColumn::make('stati')->schema([
+            /* -- e' nei tabs
             Tables\Columns\TextColumn::make('status')
 
             ->default(function ($record) {
@@ -65,16 +74,14 @@ class ListGeoTickets extends ListRecords
 
                 return GeoTicketStatusEnum::from($status->name);
             }),
-            Tables\Columns\TextColumn::make('name')
-                ->searchable(),
-            // Tables\Columns\TextColumn::make('priority.name')
-            //    ->searchable(),
+            */
             Tables\Columns\TextColumn::make('priority')
                 ->searchable(),
             // Tables\Columns\TextColumn::make('type.name')
             //    ->searchable(),
             Tables\Columns\TextColumn::make('type')
                 ->searchable(),
+            // ]),
             // Tables\Columns\TextColumn::make('latitude')
             //    ->searchable(),
             // Tables\Columns\TextColumn::make('longitude')
