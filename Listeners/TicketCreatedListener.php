@@ -24,5 +24,7 @@ class TicketCreatedListener
         $status = GeoTicketStatusEnum::PENDING;
         $ticket = $event->ticket;
         $ticket->setStatus($status->value, 'creazione nuovo ticket');
+        $ticket->save();
+        dddx($ticket);
     }
 }

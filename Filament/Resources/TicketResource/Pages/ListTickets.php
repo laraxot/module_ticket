@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Resources\TicketResource\Pages;
 
-use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
 use Filament\Tables;
+use Filament\Actions;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\HtmlString;
-use Modules\Ticket\Filament\Resources\TicketResource;
-use Modules\Ticket\Filament\Resources\TicketResource\Actions\Header\CreateGeoTicketHeaderAction;
-use Modules\Ticket\Models\TicketPriority;
-use Modules\Ticket\Models\TicketStatus;
 use Modules\Ticket\Models\TicketType;
+use Modules\Ticket\Models\TicketStatus;
+use Filament\Resources\Pages\ListRecords;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Ticket\Models\TicketPriority;
+use Modules\Ticket\Filament\Resources\TicketResource;
+use Modules\Ticket\Filament\Resources\GeoTicketResource\Pages\ListGeoTickets;
+use Modules\Ticket\Filament\Resources\TicketResource\Actions\Header\CreateGeoTicketHeaderAction;
 
 class ListTickets extends ListRecords
 {
@@ -44,71 +45,73 @@ class ListTickets extends ListRecords
 
     public function getTableColumns(bool $withProject = true): array
     {
-        $columns = [];
-        if ($withProject) {
-            $columns[] = Tables\Columns\TextColumn::make('project.name')
-                ->label(__('Project'))
-                ->sortable()
-                ->searchable();
-        }
-        $columns = array_merge($columns, [
-            Tables\Columns\TextColumn::make('name')
-                ->label(__('Ticket name'))
-                ->sortable()
-                ->searchable(),
+        return app(ListGeoTickets::class)->getTableColumns();
 
-            Tables\Columns\TextColumn::make('owner.name')
-                ->label(__('Owner'))
-                ->sortable()
-                ->formatStateUsing(fn ($record) => view('ticket::components.user-avatar', ['user' => $record->owner]))
-                ->searchable(),
+        // $columns = [];
+        // if ($withProject) {
+        //     $columns[] = Tables\Columns\TextColumn::make('project.name')
+        //         ->label(__('Project'))
+        //         ->sortable()
+        //         ->searchable();
+        // }
+        // $columns = array_merge($columns, [
+        //     Tables\Columns\TextColumn::make('name')
+        //         ->label(__('Ticket name'))
+        //         ->sortable()
+        //         ->searchable(),
 
-            Tables\Columns\TextColumn::make('responsible.name')
-                ->label(__('Responsible'))
-                ->sortable()
-                ->formatStateUsing(fn ($record) => view('ticket::components.user-avatar', ['user' => $record->responsible]))
-                ->searchable(),
+        //     Tables\Columns\TextColumn::make('owner.name')
+        //         ->label(__('Owner'))
+        //         ->sortable()
+        //         ->formatStateUsing(fn ($record) => view('ticket::components.user-avatar', ['user' => $record->owner]))
+        //         ->searchable(),
 
-            Tables\Columns\TextColumn::make('status.name')
-                ->label(__('Status'))
-                ->formatStateUsing(fn ($record) => new HtmlString('
-                            <div class="flex items-center gap-2 mt-1">
-                                <span class="filament-tables-color-column relative flex h-6 w-6 rounded-md"
-                                    style="background-color: '.$record->status->color.'"></span>
-                                <span>'.$record->status->name.'</span>
-                            </div>
-                        '))
-                ->sortable()
-                ->searchable(),
+        //     Tables\Columns\TextColumn::make('responsible.name')
+        //         ->label(__('Responsible'))
+        //         ->sortable()
+        //         ->formatStateUsing(fn ($record) => view('ticket::components.user-avatar', ['user' => $record->responsible]))
+        //         ->searchable(),
 
-            Tables\Columns\TextColumn::make('type.name')
-                ->label(__('Type'))
-                ->formatStateUsing(
-                    fn ($record) => view('ticket::partials.filament.resources.ticket-type', ['state' => $record->type])
-                )
-                ->sortable()
-                ->searchable(),
+        //     Tables\Columns\TextColumn::make('status.name')
+        //         ->label(__('Status'))
+        //         ->formatStateUsing(fn ($record) => new HtmlString('
+        //                     <div class="flex items-center gap-2 mt-1">
+        //                         <span class="filament-tables-color-column relative flex h-6 w-6 rounded-md"
+        //                             style="background-color: '.$record->status->color.'"></span>
+        //                         <span>'.$record->status->name.'</span>
+        //                     </div>
+        //                 '))
+        //         ->sortable()
+        //         ->searchable(),
 
-            Tables\Columns\TextColumn::make('priority.name')
-                ->label(__('Priority'))
-                ->formatStateUsing(fn ($record) => new HtmlString('
-                            <div class="flex items-center gap-2 mt-1">
-                                <span class="filament-tables-color-column relative flex h-6 w-6 rounded-md"
-                                    style="background-color: '.$record->priority->color.'"></span>
-                                <span>'.$record->priority->name.'</span>
-                            </div>
-                        '))
-                ->sortable()
-                ->searchable(),
+        //     Tables\Columns\TextColumn::make('type.name')
+        //         ->label(__('Type'))
+        //         ->formatStateUsing(
+        //             fn ($record) => view('ticket::partials.filament.resources.ticket-type', ['state' => $record->type])
+        //         )
+        //         ->sortable()
+        //         ->searchable(),
 
-            Tables\Columns\TextColumn::make('created_at')
-                ->label(__('Created at'))
-                ->dateTime()
-                ->sortable()
-                ->searchable(),
-        ]);
+        //     Tables\Columns\TextColumn::make('priority.name')
+        //         ->label(__('Priority'))
+        //         ->formatStateUsing(fn ($record) => new HtmlString('
+        //                     <div class="flex items-center gap-2 mt-1">
+        //                         <span class="filament-tables-color-column relative flex h-6 w-6 rounded-md"
+        //                             style="background-color: '.$record->priority->color.'"></span>
+        //                         <span>'.$record->priority->name.'</span>
+        //                     </div>
+        //                 '))
+        //         ->sortable()
+        //         ->searchable(),
 
-        return $columns;
+        //     Tables\Columns\TextColumn::make('created_at')
+        //         ->label(__('Created at'))
+        //         ->dateTime()
+        //         ->sortable()
+        //         ->searchable(),
+        // ]);
+
+        // return $columns;
     }
 
     public function getTableFilters(): array

@@ -121,6 +121,8 @@ enum GeoTicketTypeEnum: string implements HasColor, HasIcon, HasLabel
         return match ($this) {
             self::ROAD_MAINTENANCE => '#ff9800',
             self::PUBLIC_LIGHTING => '#fbc02d',
+            // 50 => '254, 242, 242',
+            // self::PUBLIC_LIGHTING => 'green',
             self::WASTE_COLLECTION => '#4caf50',
             self::PARKS_AND_GARDENS => '#8bc34a',
             self::SEWAGE_AND_DRAINAGE => '#2196f3',

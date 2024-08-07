@@ -4,16 +4,21 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Resources\GeoTicketResource\Pages;
 
-use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
-use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
-use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
-use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
-use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
 use Filament\Tables;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Actions;
 use Filament\Tables\Table;
+use Modules\Ticket\Models\GeoTicket;
+use Filament\Resources\Components\Tab;
+use Filament\Resources\Pages\ListRecords;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Modules\Ticket\Filament\Actions\ChangeStatus;
+use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
+use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
+use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
+use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
 use Modules\Ticket\Filament\Resources\GeoTicketResource;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class ListGeoTickets extends ListRecords
 {
@@ -49,7 +54,17 @@ class ListGeoTickets extends ListRecords
     public function getTableColumns(): array
     {
         return [
-            Tables\Columns\TextColumn::make('status'),
+            Tables\Columns\TextColumn::make('id'),
+            Tables\Columns\TextColumn::make('status')
+
+            ->default(function ($record) {
+                $status = $record->status();
+                if (null == $status) {
+                    return null;
+                }
+
+                return GeoTicketStatusEnum::from($status->name);
+            }),
             Tables\Columns\TextColumn::make('name')
                 ->searchable(),
             // Tables\Columns\TextColumn::make('priority.name')
@@ -89,6 +104,7 @@ class ListGeoTickets extends ListRecords
             GoToAction::make()
                 ->zoom(fn () => 14),
             RadiusAction::make('location'),
+            ChangeStatus::make(),
         ];
     }
 
@@ -110,5 +126,28 @@ class ListGeoTickets extends ListRecords
             ->actions($this->getTableActions())
             // ->bulkActions()
         ;
+    }
+
+    public function getTabs(): array
+    {
+        // foreach (GeoTicket::get() as $item) {
+        //    $item->status = $item->status()?->name ?? GeoTicketStatusEnum::PENDING;
+        //    $item->save();
+        // }
+
+        $statuses = GeoTicketStatusEnum::cases();
+
+        $res = [];
+
+        foreach ($statuses as $status) {
+            $k = $status->value;
+            $v = Tab::make($status->getLabel())
+                ->icon($status->getIcon())
+                ->badge(GeoTicket::where('status', $status)->count())
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('status', $status));
+            $res[$k] = $v;
+        }
+
+        return $res;
     }
 }

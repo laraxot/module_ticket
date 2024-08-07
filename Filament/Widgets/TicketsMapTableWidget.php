@@ -14,6 +14,7 @@ use Filament\Tables\Actions\Action as LoginAction;
 use Filament\Tables\Actions\CreateAction;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Modules\Ticket\Enums\GeoTicketStatusEnum;
 use Modules\Ticket\Filament\Resources\GeoTicketResource;
 use Modules\Ticket\Filament\Resources\GeoTicketResource\Pages\ListGeoTickets;
 use Modules\Ticket\Models\GeoTicket;
@@ -71,8 +72,11 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableQuery(): Builder
     {
-        // dddx(Ticket::query()->latest()->first());
-        return GeoTicket::query()->latest();
+        // return GeoTicket::query()->latest();
+        return GeoTicket::currentStatus(GeoTicketStatusEnum::canViewByAll())
+        ->orWhere('created_by', authId())
+        ->orWhere('updated_by', authId())
+        ->latest();
     }
 
     protected function getTableColumns(): array
@@ -132,19 +136,26 @@ class TicketsMapTableWidget extends MapTableWidget
         $data = [];
 
         foreach ($locations as $location) {
+            // dddx($location->getIconData());
             $data[] = [
                 'location' => [
-                    'lat' => $location->lat ? round(floatval($location->lat), static::$precision) : 0,
-                    'lng' => $location->lng ? round(floatval($location->lng), static::$precision) : 0,
+                    // 'lat' => $location->lat ? round(floatval($location->lat), static::$precision ?? 8) : 0,
+                    // 'lng' => $location->lng ? round(floatval($location->lng), static::$precision ?? 8) : 0,
+                    'lat' => floatval($location->latitude),
+                    'lng' => floatval($location->longitude),
                 ],
-                'label' => $location->formatted_address,
+                // 'label' => $location->formatted_address,
+                'label' => $location->name,
                 'id' => $location->id,
+                /*
                 'icon' => [
                     // 'url' => url('images/dealership.svg'),
                     'url' => url('images/fire.svg'),
                     'type' => 'svg',
                     'scale' => [35, 35],
                 ],
+                */
+                'icon' => $location->getIconData(),
             ];
         }
 

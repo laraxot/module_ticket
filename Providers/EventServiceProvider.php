@@ -4,49 +4,34 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Providers;
 
-use DutchCodingCompany\FilamentSocialite\Events\Registered as SocialRegistered;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Modules\Ticket\Events\TicketCreatedEvent;
-use Modules\Ticket\Listeners\SocialRegistration;
-use Modules\Ticket\Listeners\TicketCreatedListener;
+use Modules\Ticket\Events\GeoTicketCreatedEvent;
+use Modules\Ticket\Listeners\GeoTicketCreatedListener;
 
 class EventServiceProvider extends ServiceProvider
 {
     /**
-     * The event to listener mappings for the application.
+     * The event handler mappings for the application.
      *
      * @var array<string, array<int, string>>
      */
     protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
-        ],
-        // SocialRegistered::class => [
-        //     SocialRegistration::class
-        // ]
-        TicketCreatedEvent::class => [
-            TicketCreatedListener::class,
+        GeoTicketCreatedEvent::class => [
+            GeoTicketCreatedListener::class,
         ],
     ];
 
     /**
-     * Register any events for your application.
+     * Indicates if events should be discovered.
      *
-     * @return void
+     * @var bool
      */
-    public function boot()
-    {
-    }
+    protected static $shouldDiscoverEvents = true;
 
     /**
-     * Determine if events and listeners should be automatically discovered.
-     *
-     * @return bool
+     * Configure the proper event listeners for email verification.
      */
-    public function shouldDiscoverEvents()
+    protected function configureEmailVerification(): void
     {
-        return false;
     }
 }
