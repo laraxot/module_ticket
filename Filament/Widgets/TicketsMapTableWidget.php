@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Widgets;
 
-use Cheesegrits\FilamentGoogleMaps\Widgets\MapTableWidget;
 use Filament\Actions\Action;
+use Filament\Facades\Filament;
+use Modules\Ticket\Models\Ticket;
 use Filament\Actions\StaticAction;
-use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Support\Enums\MaxWidth;
-use Filament\Tables\Actions\Action as LoginAction;
+use Illuminate\Support\Facades\Auth;
+use Modules\Ticket\Models\GeoTicket;
 use Filament\Tables\Actions\CreateAction;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
-use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Tables\Actions\Action as LoginAction;
 use Modules\Ticket\Filament\Resources\GeoTicketResource;
+use Cheesegrits\FilamentGoogleMaps\Widgets\MapTableWidget;
 use Modules\Ticket\Filament\Resources\GeoTicketResource\Pages\ListGeoTickets;
-use Modules\Ticket\Models\GeoTicket;
-use Modules\Ticket\Models\Ticket;
 
 /**
  * @property \Filament\Forms\ComponentContainer $form
@@ -72,11 +72,10 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableQuery(): Builder
     {
-        // return GeoTicket::query()->latest();
-        return GeoTicket::currentStatus(GeoTicketStatusEnum::canViewByAll())
-        ->orWhere('created_by', authId())
-        ->orWhere('updated_by', authId())
-        ->latest();
+        return GeoTicket::query()
+            ->where('created_by', Filament::auth()->id())
+            ->excludePending()
+            ->latest();
     }
 
     protected function getTableColumns(): array
@@ -97,17 +96,25 @@ class TicketsMapTableWidget extends MapTableWidget
     protected function getTableHeaderActions(): array
     {
         return [];
-        /*
-        if (Auth::guest()) {
-            return [
-                LoginAction::make('Nuovo')
-                    ->modalHeading('Devi loggarti per poter creare un ticket')
-                    ->modalContent(view('ticket::filament.widgets.login'))
-                    ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'])
-                    ->modalWidth(MaxWidth::Medium)
-                    ->modalSubmitAction(false),
-            ];
-        }
+
+        // if (Auth::guest()) {
+        //     return [
+        //         LoginAction::make('Nuovo')
+        //             ->modalHeading('Devi loggarti per poter creare un ticket')
+        //             ->modalContent(view('ticket::filament.widgets.login'))
+        //             ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'])
+        //             ->modalWidth(MaxWidth::Medium)
+        //             ->modalSubmitAction(false),
+        //     ];
+        // } else {
+        //     return [
+        //         CreateAction::make()
+        //             ->form($this->getFormSchema())
+        //             ->createAnother(false)
+        //             ->modalSubmitAction(fn (StaticAction $action) => $action->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']))
+        //             ->extraAttributes(['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']),
+        //     ];
+        // }
 
         /*
         return [
@@ -137,26 +144,19 @@ class TicketsMapTableWidget extends MapTableWidget
         $data = [];
 
         foreach ($locations as $location) {
-            // dddx($location->getIconData());
             $data[] = [
                 'location' => [
-                    // 'lat' => $location->lat ? round(floatval($location->lat), static::$precision ?? 8) : 0,
-                    // 'lng' => $location->lng ? round(floatval($location->lng), static::$precision ?? 8) : 0,
-                    'lat' => floatval($location->latitude),
-                    'lng' => floatval($location->longitude),
+                    'lat' => $location->lat ? round(floatval($location->lat), static::$precision) : 0,
+                    'lng' => $location->lng ? round(floatval($location->lng), static::$precision) : 0,
                 ],
-                // 'label' => $location->formatted_address,
-                'label' => $location->name,
+                'label' => $location->formatted_address,
                 'id' => $location->id,
-                /*
                 'icon' => [
                     // 'url' => url('images/dealership.svg'),
                     'url' => url('images/fire.svg'),
                     'type' => 'svg',
                     'scale' => [35, 35],
                 ],
-                */
-                'icon' => $location->getIconData(),
             ];
         }
 

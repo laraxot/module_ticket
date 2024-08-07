@@ -68,12 +68,19 @@ enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     public static function canViewByAll(): array
     {
         return [
-            // self::PENDING,
-            self::IN_PROGRESS,
             self::ON_HOLD,
             self::RESOLVED,
             self::CLOSED,
-            self::REOPENED,
+            self::REOPENED
+        ];
+    }
+
+    public static function canNoViewByAll(): array
+    {
+        return [
+            self::PENDING,
+            self::IN_REVIEW,
+            self::IN_PROGRESS,
         ];
     }
 }
