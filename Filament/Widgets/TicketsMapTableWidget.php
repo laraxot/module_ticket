@@ -74,7 +74,7 @@ class TicketsMapTableWidget extends MapTableWidget
     {
         return GeoTicket::query()
             ->where('created_by', Filament::auth()->id())
-            ->excludePending()
+            // ->excludePending()
             ->latest();
     }
 

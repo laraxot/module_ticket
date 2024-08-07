@@ -25,6 +25,5 @@ class GeoTicketCreatedListener
         $ticket = $event->ticket;
         $ticket->setStatus($status->value, 'creazione nuovo ticket');
         $ticket->save();
-        dddx($ticket->status());
     }
 }
