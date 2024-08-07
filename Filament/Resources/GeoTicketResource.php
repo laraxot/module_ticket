@@ -13,6 +13,8 @@ use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
+use Filament\Pages\Page;
+use Filament\Pages\SubNavigationPosition;
 use Modules\Ticket\Enums\GeoTicketTypeEnum;
 use Modules\Ticket\Enums\TicketPriorityEnum;
 use Modules\Ticket\Filament\Resources\GeoTicketResource\Pages;
@@ -26,6 +28,8 @@ class GeoTicketResource extends XotBaseResource
     protected static ?string $model = GeoTicket::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-europe-africa';
+
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     public static function getFormSchema(): array
     {
@@ -143,7 +147,20 @@ class GeoTicketResource extends XotBaseResource
         return [
             'index' => Pages\ListGeoTickets::route('/'),
             'create' => Pages\CreateGeoTicket::route('/create'),
+            'view' => Pages\ViewGeoTicket::route('/{record}'),
+            'statuses' => Pages\ManageGeoTicketStatuses::route('/{record}/statuses'),
             'edit' => Pages\EditGeoTicket::route('/{record}/edit'),
         ];
+    }
+
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            // Pages\ListGeoTickets::class,
+            // Pages\CreateGeoTicket::class,
+            Pages\ViewGeoTicket::class,
+            Pages\EditGeoTicket::class,
+            Pages\ManageGeoTicketStatuses::class,
+        ]);
     }
 }
