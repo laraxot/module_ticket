@@ -9,12 +9,15 @@ use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
 use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
 use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
 use Filament\Actions;
+use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Modules\Ticket\Enums\GeoTicketStatusEnum;
 use Modules\Ticket\Filament\Resources\GeoTicketResource;
+use Modules\Ticket\Models\GeoTicket;
 
 class ListGeoTickets extends ListRecords
 {
@@ -121,5 +124,28 @@ class ListGeoTickets extends ListRecords
             ->actions($this->getTableActions())
             // ->bulkActions()
         ;
+    }
+
+    public function getTabs(): array
+    {
+        // foreach (GeoTicket::get() as $item) {
+        //    $item->status = $item->status()?->name ?? GeoTicketStatusEnum::PENDING;
+        //    $item->save();
+        // }
+
+        $statuses = GeoTicketStatusEnum::cases();
+
+        $res = [];
+
+        foreach ($statuses as $status) {
+            $k = $status->value;
+            $v = Tab::make($status->getLabel())
+                ->icon($status->getIcon())
+                ->badge(GeoTicket::where('status', $status)->count())
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('status', $status));
+            $res[$k] = $v;
+        }
+
+        return $res;
     }
 }

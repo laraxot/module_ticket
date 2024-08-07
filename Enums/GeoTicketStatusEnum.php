@@ -40,13 +40,14 @@ enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     {
         return match ($this) {
             // self::NEW => 'heroicon-o-plus-circle',
-            self::PENDING => 'heroicon-o-plus-circle',
+            // self::PENDING => 'heroicon-o-plus-circle',
+            self::PENDING => 'icon-hourglass',
             self::IN_REVIEW => 'heroicon-o-clock',
-            self::IN_PROGRESS => 'heroicon-o-refresh',
+            self::IN_PROGRESS => 'heroicon-o-arrow-path',
             self::ON_HOLD => 'heroicon-o-pause',
             self::RESOLVED => 'heroicon-o-check-circle',
             self::CLOSED => 'heroicon-o-x-circle',
-            self::REOPENED => 'heroicon-o-reply',
+            self::REOPENED => 'heroicon-o-arrow-uturn-left',
         };
     }
 
@@ -71,7 +72,7 @@ enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
             self::ON_HOLD,
             self::RESOLVED,
             self::CLOSED,
-            self::REOPENED
+            self::REOPENED,
         ];
     }
 
