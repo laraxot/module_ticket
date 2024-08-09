@@ -3,7 +3,7 @@
 use function Laravel\Folio\{middleware, name};
 use Livewire\Volt\Component;
 
-name('ticket.prova');
+name('ticket.create');
 middleware(['auth']);
 
 new class extends Component
