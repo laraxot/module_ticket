@@ -7,21 +7,23 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Resources;
 
-use Dotswan\MapPicker\Fields\Map;
+use Closure;
 use Filament\Forms;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
+use Filament\Forms\Form;
 use Filament\Pages\Page;
+use Dotswan\MapPicker\Fields\Map;
+use Modules\Ticket\Models\GeoTicket;
+use Modules\Ticket\Models\TicketType;
+use Filament\Forms\Components\TextInput;
 use Filament\Pages\SubNavigationPosition;
+use Modules\Ticket\Models\TicketPriority;
 use Modules\Ticket\Enums\GeoTicketTypeEnum;
 use Modules\Ticket\Enums\TicketPriorityEnum;
-use Modules\Ticket\Filament\Resources\GeoTicketResource\Pages;
-use Modules\Ticket\Models\GeoTicket;
-use Modules\Ticket\Models\TicketPriority;
-use Modules\Ticket\Models\TicketType;
 use Modules\Xot\Filament\Resources\XotBaseResource;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Modules\Ticket\Filament\Resources\GeoTicketResource\Pages;
 
 class GeoTicketResource extends XotBaseResource
 {
@@ -103,6 +105,17 @@ class GeoTicketResource extends XotBaseResource
                        'border-radius: 50px',
                    ])
                    */
+                    ->rules([
+                        fn (Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get) {
+                            // dddx([$attribute, $value, $get]);
+                            // if ($get('other_field') === 'foo' && $value !== 'bar') {
+                            //     $fail("The {$attribute} is invalid.");
+                            // }
+
+                            // $coordinateArray = GeoTicket::select('latitude', 'longitude')->get()->toArray();
+                            // dddx($coordinateArray);
+                        },
+                    ])
                    ->liveLocation()
                    ->showMarker()
                    ->markerColor('#22c55eff')
