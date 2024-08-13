@@ -21,7 +21,8 @@ use Filament\Pages\SubNavigationPosition;
 use Modules\Ticket\Models\TicketPriority;
 use Modules\Ticket\Enums\GeoTicketTypeEnum;
 use Modules\Ticket\Enums\TicketPriorityEnum;
-use Modules\Geo\Actions\FilterCoordinatesInRadius;
+
+use Modules\Geo\Rules\FilterCoordinatesInRadius;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Modules\Ticket\Filament\Resources\GeoTicketResource\Pages;
@@ -106,29 +107,7 @@ class GeoTicketResource extends XotBaseResource
                        'border-radius: 50px',
                    ])
                    */
-                    ->rules([
-                        fn (Get $get): Closure => function (string $attribute, array $value, Closure $fail) use ($get) {
-                            $coordinatesArray = GeoTicket::select('id','latitude', 'longitude')->get()->toArray();
-                            $ticket_vicini = app(FilterCoordinatesInRadius::class)->execute($value['lat'], $value['lng'], $coordinatesArray, 1);
-
-                            // dddx(count($ticket_vicini));
-                            if(count($ticket_vicini) > 0){
-                                $fail("Ci sono già ".(string) count($ticket_vicini)." in questa posizione");
-                            }
-
-                            // dddx([
-                            //     app(FilterCoordinatesInRadius::class)->execute($value['lat'], $value['lng'], $coordinatesArray, 1)
-                            // ]);
-
-
-                            // if ($get('other_field') === 'foo' && $value !== 'bar') {
-                            //     $fail("The {$attribute} is invalid.");
-                            // }
-
-                            // $coordinateArray = GeoTicket::select('latitude', 'longitude')->get()->toArray();
-                            // dddx($coordinateArray);
-                        },
-                    ])
+                   ->rules([new FilterCoordinatesInRadius()])
                    ->liveLocation()
                    ->showMarker()
                    ->markerColor('#22c55eff')
