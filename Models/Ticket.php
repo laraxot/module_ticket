@@ -22,6 +22,7 @@ use Webmozart\Assert\Assert;
  * Modules\Ticket\Models\Ticket.
  *
  * @property string                                                                                                     $name
+ * @property string                                                                                                     $slug
  * @property int                                                                                                        $id
  * @property string                                                                                                     $content
  * @property int                                                                                                        $owner_id
@@ -123,7 +124,7 @@ class Ticket extends BaseModel implements HasMedia
         'estimation', 'epic_id', 'sprint_id',
         'latitude', 'longitude', // GEO
         'status_id', 'type_id', 'priority_id',
-        'status', 'type', 'priority',
+        'status', 'type', 'priority', 'slug'
     ];
 
     protected $appends = [

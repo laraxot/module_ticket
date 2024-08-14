@@ -59,6 +59,9 @@ class CreateTicketsTable extends XotBaseMigration
                 if (! $this->hasColumn('priority')) {
                     $table->string('priority')->nullable();
                 }
+                if (! $this->hasColumn('slug')) {
+                    $table->string('slug')->unique();
+                }
 
                 $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }

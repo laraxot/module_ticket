@@ -13,6 +13,7 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Forms\Form;
 use Filament\Pages\Page;
+use Illuminate\Support\Str;
 use Dotswan\MapPicker\Fields\Map;
 use Modules\Ticket\Models\GeoTicket;
 use Modules\Ticket\Models\TicketType;
@@ -20,8 +21,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Pages\SubNavigationPosition;
 use Modules\Ticket\Models\TicketPriority;
 use Modules\Ticket\Enums\GeoTicketTypeEnum;
-use Modules\Ticket\Enums\TicketPriorityEnum;
 
+use Modules\Ticket\Enums\TicketPriorityEnum;
 use Modules\Geo\Rules\FilterCoordinatesInRadius;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -44,7 +45,16 @@ class GeoTicketResource extends XotBaseResource
                     ->label(__('Ticket name'))
                     ->columnSpanfull()
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->afterStateUpdated(static function ($set, $get, $state) {
+                        if ($get('slug')) {
+                            return;
+                        }
+                        $set('slug', Str::slug($state));
+                    }),
+                    Forms\Components\TextInput::make('slug')
+                    ->columnSpan(1)
+                    ->required(),
                 /*
                 Forms\Components\Select::make('type_id')
                     ->label(__('Ticket type'))

@@ -105,7 +105,8 @@ class ListGeoTickets extends ListRecords
     {
         return [
             Tables\Actions\ViewAction::make()
-                ->form($this->getFormSchema()),
+                ->url(fn (GeoTicket $record): string => route('geo_ticket_slug.show', ['geo_ticket_slug' => $record->slug]))
+                ->openUrlInNewTab(),
             Tables\Actions\EditAction::make()
                 ->form($this->getFormSchema()),
             GoToAction::make()
