@@ -18,6 +18,17 @@ render(function (View $view, string $geo_ticket_slug) {
 ?>
 <x-layouts.marketing>
     
-    page ticket show wip
-    {{-- @component("ui::components.blocks.title", $block['data'] ?? []) @endcomponent --}}
+    @component("ui::components.blocks.title.v2",['text' => $ticket->name, 'level' => 'h6']) @endcomponent
+
+
+    @php
+        $data = [
+            'title' => 'my title',
+            'subtitle' => null
+        ];
+    @endphp 
+
+    @component("ui::components.blocks.images_gallery.v1", ['data' => $data]) @endcomponent
+
+
 </x-layouts.marketing>
