@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Modules\Ticket\Models;
 
 use Illuminate\Support\Str;
-use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Webmozart\Assert\Assert;
+use Modules\Xot\Services\FileService;
 use Modules\Ticket\Enums\GeoTicketTypeEnum;
 use Modules\Ticket\Enums\TicketPriorityEnum;
-use Modules\Xot\Services\FileService;
+use Modules\Ticket\Enums\GeoTicketStatusEnum;
 
 /**
  * @property int                                                                                                        $id
@@ -120,8 +121,12 @@ class GeoTicket extends Ticket
 
     public function getIconData(): array
     {
+        Assert::notNull($this->type, '['.__LINE__.']['.__FILE__.']');
+        Assert::isInstanceOf($this->type, GeoTicketTypeEnum::class, '['.__LINE__.']['.__FILE__.']');
         $url = $this->type->getIcon();
+        // dddx($url); // ui-globe
         $url = Str::of($url)->after('heroicon-o-')->append('.svg')->toString();
+        // dddx($url);
         $url = FileService::asset('ui::svg/'.$url);
 
         return [

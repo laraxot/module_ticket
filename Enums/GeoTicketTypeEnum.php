@@ -143,9 +143,9 @@ enum GeoTicketTypeEnum: string implements HasColor, HasIcon, HasLabel
             self::PARKS_AND_GARDENS => 'heroicon-o-sparkles',
             self::SEWAGE_AND_DRAINAGE => 'heroicon-o-archive-box',
             self::PUBLIC_BUILDINGS => 'heroicon-o-building-office',
-            self::ENVIRONMENTAL_REPORTS => 'heroicon-o-globe',
-            self::PUBLIC_TRANSPORT => 'heroicon-o-bus',
-            self::URBAN_FURNITURE => 'heroicon-o-couch',
+            self::ENVIRONMENTAL_REPORTS => 'heroicon-o-globe-alt',
+            self::PUBLIC_TRANSPORT => 'fas-bus',
+            self::URBAN_FURNITURE => 'fas-couch',
             self::PUBLIC_SAFETY => 'heroicon-o-shield-check',
         };
     }

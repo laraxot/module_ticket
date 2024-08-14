@@ -41,7 +41,7 @@ enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
         return match ($this) {
             // self::NEW => 'heroicon-o-plus-circle',
             // self::PENDING => 'heroicon-o-plus-circle',
-            self::PENDING => 'icon-hourglass',
+            self::PENDING => 'ui-hourglass',
             self::IN_REVIEW => 'heroicon-o-clock',
             self::IN_PROGRESS => 'heroicon-o-arrow-path',
             self::ON_HOLD => 'heroicon-o-pause',
