@@ -1,29 +1,24 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php
 
-    {!! $_theme->metatags() !!}
-    <!-- Used to add dark mode right away, adding here prevents any flicker -->
-    <script>
-        if (typeof(Storage) !== "undefined") {
-            if(localStorage.getItem('dark_mode') && localStorage.getItem('dark_mode') == 'true'){
-                document.documentElement.classList.add('dark');
-            }
-        }
-    </script>
-    <style>
-        [x-cloak] {
-            display: none !important;
-        }
-    </style>
-    @filamentStyles
-    @vite(['Resources/css/app.css'],'themes/Sixteen/dist')
+use Modules\Ticket\Models\GeoTicket;
+use Illuminate\Support\Arr;
+use Illuminate\View\View;
+use function Laravel\Folio\{withTrashed,middleware, name,render};
 
-</head>
-<body class="min-h-screen antialiased bg-white dark:bg-gradient-to-b dark:from-gray-950 dark:to-gray-900">
-    <div class="max-w-full sm:max-w-lg w-full bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 sm:p-6 mx-auto mt-4 sm:mt-10">
+withTrashed();
+name('geo_ticket_slug.show');
+//middleware(['auth', 'verified']);
+
+render(function (View $view, string $geo_ticket_slug) {
+    $ticket = GeoTicket::firstWhere(['slug' => $geo_ticket_slug]);
+    return $view->with('ticket', $ticket);
+});
+
+
+?>
+<x-layouts.marketing>
+    
+    <div class="w-full h-full min-h-screen bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 sm:p-6 mx-auto">
         <h1 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-4">Ticket #12345</h1>
         <p class="text-gray-600 dark:text-gray-300 mb-4">Questo è un esempio di ticket. Qui puoi inserire la descrizione del problema o della richiesta associata al ticket.</p>
 
@@ -73,24 +68,5 @@
         </div>
     </div>
 
-    <livewire:toast />
-    @livewire('notifications')
-    @filamentScripts
-    @vite(['Resources/js/app.js'],'themes/Sixteen/dist')
-    <link rel="stylesheet" type="text/css" href="{{asset('vendor/cookie-consent/css/cookie-consent.css')}}">
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    </script>
-</body>
-</html>
+
+</x-layouts.marketing>
