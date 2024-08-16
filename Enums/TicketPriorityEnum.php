@@ -55,4 +55,18 @@ enum TicketPriorityEnum: string implements HasColor, HasIcon, HasLabel
     {
         return self::LOW;
     }
+
+    public static function getArrayValueLabelIcon(): array
+    {
+        $priorities = [];
+        foreach (self::cases() as $item) {
+            $priorities[$item->value] = [
+                'label' => $item->getLabel(), 
+                'icon' => $item->getIcon(),
+                'color' => $item->getColor()
+            ];
+        }
+
+        return $priorities;
+    }
 }

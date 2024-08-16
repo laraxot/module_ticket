@@ -84,4 +84,18 @@ enum GeoTicketStatusEnum: string implements HasColor, HasIcon, HasLabel
             self::IN_PROGRESS,
         ];
     }
+
+    public static function getArrayValueLabelIcon(): array
+    {
+        $statuses = [];
+        foreach (self::cases() as $item) {
+            $statuses[$item->value] = [
+                'label' => $item->getLabel(), 
+                'icon' => $item->getIcon(),
+                'color' => $item->getColor()
+            ];
+        }
+
+        return $statuses;
+    }
 }

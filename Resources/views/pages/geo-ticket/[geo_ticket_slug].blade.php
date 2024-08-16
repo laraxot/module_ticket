@@ -3,6 +3,8 @@
 use Modules\Ticket\Models\GeoTicket;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
+use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Modules\Ticket\Enums\TicketPriorityEnum;
 use function Laravel\Folio\{withTrashed,middleware, name,render};
 
 withTrashed();
@@ -11,7 +13,13 @@ name('geo_ticket_slug.show');
 
 render(function (View $view, string $geo_ticket_slug) {
     $ticket = GeoTicket::firstWhere(['slug' => $geo_ticket_slug]);
-    return $view->with('ticket', $ticket);
+    $medias = $ticket->getMedia('ticket');
+
+    $statuses = GeoTicketStatusEnum::getArrayValueLabelIcon();
+    $priorities = TicketPriorityEnum::getArrayValueLabelIcon();
+    $priority = $ticket->priority;
+
+    return $view->with(['ticket' => $ticket, 'medias' => $medias, 'statuses' => $statuses, 'priorities' => $priorities, 'priority_ticket' => $ticket->priority]);
 });
 
 
@@ -39,8 +47,19 @@ render(function (View $view, string $geo_ticket_slug) {
 
             <div class="flex items-center justify-center">
                 <div class="ml-2">
-                    <p class="text-sm text-gray-600 dark:text-gray-500">Posted on {{ $ticket->created_at->format('M d, Y') }}</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-500">Creato il {{ $ticket->created_at->format('M d, Y') }}</p>
                 </div>
+            </div>
+
+            <div class="mb-4 flex items-center justify-center">
+                <span class="font-semibold text-gray-800 dark:text-gray-200">Priorità:</span>
+                <span class="text-500 font-medium" 
+                    style="color:{{ $priorities[$priority_ticket->value]['color'] }}"
+                    >
+                    {{ $priorities[$priority_ticket->value]['label'] }}</span>
+                /
+                <span class="font-semibold text-gray-800 dark:text-gray-200">Stato:</span>
+                <span class="text-500 font-medium" style="color:{{ $statuses[$ticket->status]['color'] }}">{{ $statuses[$ticket->status]['label'] }}</span>
             </div>
 
             {{-- @if ($ticket->image)
@@ -50,7 +69,7 @@ render(function (View $view, string $geo_ticket_slug) {
             <div id="default-carousel" class="relative w-full" data-carousel="slide">
                 <!-- Carousel wrapper -->
                 <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-                    @foreach($ticket->getMedia('ticket') as $image)
+                    @foreach($medias as $image)
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
                             <img src="{{ $image->getFullUrl() }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                         </div>
@@ -58,7 +77,7 @@ render(function (View $view, string $geo_ticket_slug) {
                 </div>
                 <!-- Slider indicators -->
                 <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-                    @foreach($ticket->getMedia('ticket') as $key => $image)
+                    @foreach($medias as $key => $image)
                         <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide {{ $key }}" data-carousel-slide-to="{{ $key }}"></button>
                     @endforeach
                 </div>
