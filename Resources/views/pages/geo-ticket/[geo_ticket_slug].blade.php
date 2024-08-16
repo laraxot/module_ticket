@@ -17,56 +17,75 @@ render(function (View $view, string $geo_ticket_slug) {
 
 ?>
 <x-layouts.marketing>
-    
-    <div class="w-full h-full min-h-screen bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 sm:p-6 mx-auto">
-        <h1 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-4">Ticket #12345</h1>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Questo è un esempio di ticket. Qui puoi inserire la descrizione del problema o della richiesta associata al ticket.</p>
 
-        <div class="mb-4">
-            <span class="font-semibold text-gray-800 dark:text-gray-200">Priorità:</span>
-            <span class="text-yellow-500 font-medium">Alta</span>
-        </div>
+    <x-ui.marketing.breadcrumbs :crumbs="[
+        [
+            'href' => '/blog',
+            'text' => 'Blog'
+        ],
+        [
+            'text' => $ticket->name
+        ]
+    ]" />
 
-        <div class="mb-4">
-            <span class="font-semibold text-gray-800 dark:text-gray-200">Stato:</span>
-            <span class="text-green-500 font-medium">In corso</span>
-        </div>
+    <article class="relative w-full h-auto mx-auto prose-sm prose md:prose-2xl dark:prose-invert">
+        <div class="py-6 mx-auto heading md:py-12 lg:w-full md:text-center">
 
-        <div class="mb-4">
-            <span class="font-semibold text-gray-800 dark:text-gray-200">Assegnato a:</span>
-            <span class="text-gray-700 dark:text-gray-400">Mario Rossi</span>
-        </div>
+            <div class="flex flex-col items-center justify-center mt-4 mb-0">
+                <h1 class="!mb-0 font-sans text-4xl font-bold heading md:text-6xl dark:text-white md:leading-tight">
+                    {{ $ticket->name }}
+                </h1>
+            </div>
 
-        <button class="bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-600 mb-6 w-full">
-            Risolvi Ticket
-        </button>
-
-        <!-- Slider di Immagini -->
-        <div>
-            <h2 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-4">Immagini</h2>
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="https://via.placeholder.com/300" alt="Immagine 1" class="w-full h-auto object-cover rounded-lg">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://via.placeholder.com/300" alt="Immagine 2" class="w-full h-auto object-cover rounded-lg">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://via.placeholder.com/300" alt="Immagine 3" class="w-full h-auto object-cover rounded-lg">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://via.placeholder.com/300" alt="Immagine 4" class="w-full h-auto object-cover rounded-lg">
-                    </div>
+            <div class="flex items-center justify-center">
+                <div class="ml-2">
+                    <p class="text-sm text-gray-600 dark:text-gray-500">Posted on {{ $ticket->created_at->format('M d, Y') }}</p>
                 </div>
-                <!-- Aggiunta di controlli di navigazione -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <!-- Aggiunta di paginazione -->
-                <div class="swiper-pagination"></div>
+            </div>
+
+            {{-- @if ($ticket->image)
+                <img src="@if(str_starts_with($ticket->image, 'https') || str_starts_with($ticket->image, 'http')){{ $ticket->image }}@else{{ asset('storage/' . $ticket->image) }}@endif" alt="{{ $ticket->title }}" class="w-full mx-auto mt-4">
+            @endif --}}
+
+            <div id="default-carousel" class="relative w-full" data-carousel="slide">
+                <!-- Carousel wrapper -->
+                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                    @foreach($ticket->getMedia('ticket') as $image)
+                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                            <img src="{{ $image->getFullUrl() }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                        </div>
+                    @endforeach
+                </div>
+                <!-- Slider indicators -->
+                <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                    @foreach($ticket->getMedia('ticket') as $key => $image)
+                        <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide {{ $key }}" data-carousel-slide-to="{{ $key }}"></button>
+                    @endforeach
+                </div>
+                <!-- Slider controls -->
+                <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                        </svg>
+                        <span class="sr-only">Previous</span>
+                    </span>
+                </button>
+                <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                        <span class="sr-only">Next</span>
+                    </span>
+                </button>
+            </div>
+
+            <div class="flex items-center justify-center mt-4 text-left">
+                <div class="max-w-full -mt-5 text-lg text-gray-600 whitespace-pre-line dark:text-gray-300">
+                    {!! $ticket->content !!}
+                </div>
             </div>
         </div>
-    </div>
-
-
+    </article>
 </x-layouts.marketing>
