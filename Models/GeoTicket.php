@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Modules\Ticket\Models;
 
 use Illuminate\Support\Str;
-use Webmozart\Assert\Assert;
-use Modules\Xot\Services\FileService;
+use Modules\Ticket\Enums\GeoTicketStatusEnum;
 use Modules\Ticket\Enums\GeoTicketTypeEnum;
 use Modules\Ticket\Enums\TicketPriorityEnum;
-use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Modules\Xot\Services\FileService;
+use Webmozart\Assert\Assert;
 
 /**
  * @property int                                                                                                        $id

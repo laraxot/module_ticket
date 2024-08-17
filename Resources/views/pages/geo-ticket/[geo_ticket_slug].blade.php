@@ -15,11 +15,29 @@ render(function (View $view, string $geo_ticket_slug) {
     $ticket = GeoTicket::firstWhere(['slug' => $geo_ticket_slug]);
     $medias = $ticket->getMedia('ticket');
 
-    $statuses = GeoTicketStatusEnum::getArrayValueLabelIcon();
-    $priorities = TicketPriorityEnum::getArrayValueLabelIcon();
-    $priority = $ticket->priority;
+    //$statuses = GeoTicketStatusEnum::getArrayValueLabelIcon();
+    //$priorities = TicketPriorityEnum::getArrayValueLabelIcon();
+    //$priority = $ticket->priority;
+    if($ticket->status==""){
+        $ticket->setStatus(GeoTicketStatusEnum::PENDING->value);
+        $up=tap($ticket)->update([
+            'status'=>GeoTicketStatusEnum::PENDING
+        ]);
+        
+        
+    }
+    
+    $status=GeoTicketStatusEnum::from($ticket->status);
+    
 
-    return $view->with(['ticket' => $ticket, 'medias' => $medias, 'statuses' => $statuses, 'priorities' => $priorities, 'priority_ticket' => $ticket->priority]);
+    return $view->with([
+        'ticket' => $ticket, 
+        'medias' => $medias, 
+        'status' => $status,
+        //'statuses' => $statuses, 
+        //'priorities' => $priorities, 
+        //'priority_ticket' => $ticket->priority
+    ]);
 });
 
 
@@ -52,14 +70,24 @@ render(function (View $view, string $geo_ticket_slug) {
             </div>
 
             <div class="mb-4 flex items-center justify-center">
+                <x-filament::icon
+                    icon="{{ $ticket->priority->getIcon() }}"
+                    wire:target="search"
+                    class="h-5 w-5 text-gray-500 dark:text-gray-400"
+                />
                 <span class="font-semibold text-gray-800 dark:text-gray-200">Priorità:</span>
                 <span class="text-500 font-medium" 
-                    style="color:{{ $priorities[$priority_ticket->value]['color'] }}"
+                    style="color:{{ $ticket->priority->getColor() }}"
                     >
-                    {{ $priorities[$priority_ticket->value]['label'] }}</span>
+                    {{ $ticket->priority->getLabel() }}</span>
                 /
+                <x-filament::icon
+                    icon="{{ $status->getIcon() }}"
+                    wire:target="search"
+                    class="h-5 w-5 text-gray-500 dark:text-gray-400"
+                />
                 <span class="font-semibold text-gray-800 dark:text-gray-200">Stato:</span>
-                <span class="text-500 font-medium" style="color:{{ $statuses[$ticket->status]['color'] }}">{{ $statuses[$ticket->status]['label'] }}</span>
+                <span class="text-500 font-medium" style="color:{{ $status->getColor() }}">{{ $status->getLabel() }}</span>
             </div>
 
             {{-- @if ($ticket->image)

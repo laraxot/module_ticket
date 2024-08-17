@@ -9,13 +9,15 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Illuminate\Support\Str;
 use Modules\Ticket\Notifications\TicketCreated;
 use Modules\Ticket\Notifications\TicketStatusUpdated;
 use Modules\Xot\Datas\XotData;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\ModelStatus\HasStatuses;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Webmozart\Assert\Assert;
 
 /**
@@ -117,14 +119,16 @@ class Ticket extends BaseModel implements HasMedia
 {
     use InteractsWithMedia;
     use HasStatuses;
+    use HasSlug;
 
     protected $fillable = [
         'name', 'content', 'owner_id', 'responsible_id',
         'project_id', 'code', 'order',
         'estimation', 'epic_id', 'sprint_id',
         'latitude', 'longitude', // GEO
-        'status_id', 'type_id', 'priority_id',
-        'status', 'type', 'priority', 'slug'
+        // 'status_id', 'type_id', 'priority_id', //OLD
+        'status', 'type', 'priority',
+        'slug',
     ];
 
     protected $appends = [
@@ -137,8 +141,31 @@ class Ticket extends BaseModel implements HasMedia
         return [
             'estimationInSeconds' => 'int',
             'estimationProgress' => 'float',
-            // 'status' => GeoTicketStatusEnum::class, // in geoticket.php
         ];
+    }
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            // ->generateSlugsFrom(['type', 'name'])
+            ->saveSlugsTo('slug')
+            ->slugsShouldBeNoLongerThan(50)
+            ->usingSeparator('_');
+    }
+
+    public function getSlugAttribute(?string $value): ?string
+    {
+        if (null != $value) {
+            return $value;
+        }
+        $value = Str::of($this->name)->slug()->toString();
+        $this->update(['slug' => $value]);
+
+        return $value;
     }
 
     public static function boot()

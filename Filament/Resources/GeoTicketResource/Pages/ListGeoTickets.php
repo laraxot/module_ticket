@@ -59,6 +59,9 @@ class ListGeoTickets extends ListRecords
 
             Tables\Columns\TextColumn::make('name')
                 ->searchable(),
+            Tables\Columns\TextColumn::make('slug')
+                ->searchable()
+                ->default(fn ($record) => dddx($record->slug)),
 
             // Tables\Columns\TextColumn::make('priority.name')
             //    ->searchable(),
