@@ -1,15 +1,29 @@
 {
-    "name": "nwidart/ticket",
+    "name": "laraxot/module_ticket_fila3",
     "description": "",
-    "authors": [
-        {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
-        }
+    "keywords": [
+        "laraxot",
+        "laravel",
+        "filament",
+        "module_ticket",
+        "Laravel",
+        "Ticket module"
     ],
+    "homepage": "https://github.com/laraxot/module_ticket_fila3",
+    "license": "MIT",
+    "authors": [{
+        "name": "Marco Xot",
+        "email": "marco.sottana@gmail.com",
+        "role": "Developer"
+    }],
+    "require": {
+    },
     "extra": {
         "laravel": {
-            "providers": [],
+            "providers": [
+                "Modules\\Ticket\\Providers\\TicketServiceProvider",
+                "Modules\\Ticket\\Providers\\Filament\\AdminPanelProvider"
+            ],
             "aliases": {
 
             }
@@ -26,5 +40,16 @@
         "psr-4": {
             "Modules\\Ticket\\Tests\\": "tests/"
         }
-    }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true,
+            "pestphp/pest-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "wikimedia/composer-merge-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
