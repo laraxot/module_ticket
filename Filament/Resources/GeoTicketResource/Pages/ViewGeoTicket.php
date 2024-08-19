@@ -20,13 +20,13 @@ class ViewGeoTicket extends ViewRecord
         ];
     }
 
-    public static function getRecordSubNavigation(Page $page): array
-    {
-        dddx('a');
+    // public static function getRecordSubNavigation(Page $page): array
+    // {
+    //    dddx('a');
 
-        return $page->generateNavigationItems([
-            // ...
-            Pages\ViewCustomerContact::class,
-        ]);
-    }
+    //    return $page->generateNavigationItems([
+    // ...
+    //        Pages\ViewCustomerContact::class,
+    //    ]);
+    // }
 }
