@@ -74,9 +74,9 @@ class TicketsMapTableWidget extends MapTableWidget
     {
         // return GeoTicket::query()->latest();
         return GeoTicket::currentStatus(GeoTicketStatusEnum::canViewByAll())
-        ->orWhere('created_by', authId())
-        ->orWhere('updated_by', authId())
-        ->latest();
+            ->orWhere('created_by', authId())
+            ->orWhere('updated_by', authId())
+            ->latest();
     }
 
     protected function getTableColumns(): array

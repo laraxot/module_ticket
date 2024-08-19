@@ -22,8 +22,7 @@ class GeoTicketCreatedEvent
      */
     public function __construct(
         public GeoTicket $ticket
-    ) {
-    }
+    ) {}
 
     /*
      * Get the channels the event should be broadcast on.

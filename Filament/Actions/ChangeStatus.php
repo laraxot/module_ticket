@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Actions;
 
-use Filament\Tables\Actions\Action;
-use Modules\Ticket\Models\GeoTicket;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Actions\Action;
 use Modules\Ticket\Actions\ChangeStatus as ActionChangeStatus;
 use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Modules\Ticket\Models\GeoTicket;
 
 class ChangeStatus extends Action
 {
@@ -29,15 +29,14 @@ class ChangeStatus extends Action
                     ->required(),
                 TextInput::make('reason')
                     ->label('Per quale motivo stai modificando lo stato?')
-                    ->required()
+                    ->required(),
             ])
             ->label('Change Status')
             ->icon('ui-status')
             ->tooltip('Change Status')
             ->modalHeading('Modifica Status')
             // ->requiresConfirmation()
-            ->modalSubmitActionLabel('Modifica')
-        ;
+            ->modalSubmitActionLabel('Modifica');
     }
 
     public static function getDefaultName(): ?string

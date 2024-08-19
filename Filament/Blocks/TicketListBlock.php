@@ -34,9 +34,9 @@ class TicketListBlock
                     ->label('Sotto Titolo')
                     ->helperText('Inserisci un sotto titolo '),
                 TextInput::make('method')
-                        ->label('$_theme->{$method}')
-                        ->hint('Inserisci il nome del metodo da richiamare nel tema')
-                        ->required(),
+                    ->label('$_theme->{$method}')
+                    ->hint('Inserisci il nome del metodo da richiamare nel tema')
+                    ->required(),
                 /*
                 Select::make('type')
                     ->label('Type')
@@ -54,6 +54,6 @@ class TicketListBlock
                     ->required(),
             ])
             ->label('Lista Ticket')
-            ->columns('form' === $context ? 3 : 1);
+            ->columns($context === 'form' ? 3 : 1);
     }
 }

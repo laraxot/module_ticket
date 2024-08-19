@@ -134,16 +134,15 @@ class ListGeoTickets extends ListRecords
         return $table
             ->columns($this->getTableColumns())
             ->filters($this->getTableFilters())
-            ->actions($this->getTableActions())
-            // ->bulkActions()
-        ;
+            ->actions($this->getTableActions());
+        // ->bulkActions()
     }
 
     public function getTabs(): array
     {
         foreach (GeoTicket::where('status', null)->get() as $item) {
             $status = $item->status()?->name;
-            if (null == $status) {
+            if ($status == null) {
                 $status = GeoTicketStatusEnum::PENDING;
                 $item->setStatus($status->value);
             }

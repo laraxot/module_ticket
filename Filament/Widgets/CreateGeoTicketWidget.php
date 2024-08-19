@@ -22,7 +22,9 @@ use Modules\Ticket\Models\GeoTicket;
 class CreateGeoTicketWidget extends BaseWidget implements HasForms
 {
     use InteractsWithForms;
+
     protected static string $view = 'ticket::filament.widgets.create-geo-ticket';
+
     protected int|string|array $columnSpan = 'full';
 
     public ?array $data = [];

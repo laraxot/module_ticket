@@ -22,6 +22,7 @@ abstract class BaseModel extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     // use Searchable;
     // use Cachable;
     use Updater;
@@ -34,6 +35,7 @@ abstract class BaseModel extends Model
      * @var bool
      */
     public static $snakeAttributes = true;
+
     /** @var int */
     protected $perPage = 30;
 
