@@ -54,85 +54,69 @@ render(function (View $view, string $geo_ticket_slug) {
         ]
     ]" />
 
-    <article class="relative w-full h-auto mx-auto prose-sm prose md:prose-2xl dark:prose-invert">
-        <div class="py-6 mx-auto heading md:py-12 lg:w-full md:text-center">
-
-            <div class="flex flex-col items-center justify-center mt-4 mb-0">
-                <h1 class="!mb-0 font-sans text-4xl font-bold heading md:text-6xl dark:text-white md:leading-tight">
-                    {{ $ticket->name }}
-                </h1>
+    <article class="container max-w-6xl p-4 mx-auto space-y-8">
+        
+        <section>
+            <div class="relative flex w-full gap-6 pb-4 overflow-x-auto snap-x">
+                @for($i = 0; $i < 5; $i++)
+                    <div class="snap-center shrink-0">
+                        <img class="object-cover h-64 rounded shadow-lg aspect-video" src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+                    </div>
+                @endfor
             </div>
+        </section>
 
-            <div class="flex items-center justify-center">
-                <div class="ml-2">
-                    <p class="text-sm text-gray-600 dark:text-gray-500">Creato il {{ $ticket->created_at->format('M d, Y') }}</p>
-                </div>
-            </div>
-
-            <div class="mb-4 flex items-center justify-center">
-                <x-filament::icon
-                    icon="{{ $ticket->priority->getIcon() }}"
-                    wire:target="search"
-                    class="h-5 w-5 text-gray-500 dark:text-gray-400"
-                />
-                <span class="font-semibold text-gray-800 dark:text-gray-200">Priorità:</span>
-                <span class="text-500 font-medium" 
-                    style="color:{{ $ticket->priority->getColor() }}"
-                    >
-                    {{ $ticket->priority->getLabel() }}</span>
-                /
-                <x-filament::icon
-                    icon="{{ $status->getIcon() }}"
-                    wire:target="search"
-                    class="h-5 w-5 text-gray-500 dark:text-gray-400"
-                />
-                <span class="font-semibold text-gray-800 dark:text-gray-200">Stato:</span>
-                <span class="text-500 font-medium" style="color:{{ $status->getColor() }}">{{ $status->getLabel() }}</span>
-            </div>
-
-            {{-- @if ($ticket->image)
-                <img src="@if(str_starts_with($ticket->image, 'https') || str_starts_with($ticket->image, 'http')){{ $ticket->image }}@else{{ asset('storage/' . $ticket->image) }}@endif" alt="{{ $ticket->title }}" class="w-full mx-auto mt-4">
-            @endif --}}
-
-            <div id="default-carousel" class="relative w-full" data-carousel="slide">
-                <!-- Carousel wrapper -->
-                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-                    @foreach($medias as $image)
-                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src="{{ $image->getFullUrl() }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        <div class="grid lg:grid-cols-3">
+            <div class="space-y-6 lg:col-span-2">
+                <section class="flex flex-col justify-center space-y-2">
+                    <div>
+                        <p>By <strong>Marco Xot</strong> at {{ $ticket->created_at->isoFormat('LLL') }}</p>
+                    </div>
+                    <h1 class="text-4xl font-bold heading md:text-6xl dark:text-white md:leading-tight">
+                        {{ $ticket->name }}
+                    </h1>
+                    <div class="flex space-x-4">
+                        <div class="flex items-center px-4 py-2 space-x-1 text-sm text-orange-600 border rounded-full bg-orange-500/20 border-orange-500/30">
+                            <x-filament::icon icon="{{ $ticket->priority->getIcon() }}" class="size-4" />
+                            <span>Priorità</span>
+                            <span class="font-semibold"> {{ $ticket->priority->getLabel() }}</span>
                         </div>
-                    @endforeach
-                </div>
-                <!-- Slider indicators -->
-                <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-                    @foreach($medias as $key => $image)
-                        <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide {{ $key }}" data-carousel-slide-to="{{ $key }}"></button>
-                    @endforeach
-                </div>
-                <!-- Slider controls -->
-                <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                        </svg>
-                        <span class="sr-only">Previous</span>
-                    </span>
-                </button>
-                <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                        </svg>
-                        <span class="sr-only">Next</span>
-                    </span>
-                </button>
-            </div>
-
-            <div class="flex items-center justify-center mt-4 text-left">
-                <div class="max-w-full -mt-5 text-lg text-gray-600 whitespace-pre-line dark:text-gray-300">
+                        <div class="flex items-center px-4 py-2 space-x-1 text-sm text-blue-600 border rounded-full bg-blue-500/20 border-blue-500/30">
+                            <x-filament::icon icon="{{ $status->getIcon() }}" class="size-4" />
+                            <span>Stato</span>
+                            <span class="font-semibold"> {{ $status->getLabel() }}</span>
+                        </div>
+                    </div>
+                </section>
+        
+                <section class="prose-sm prose md:prose-lg">
                     {!! $ticket->content !!}
-                </div>
+                </section>
             </div>
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">Timeline</h2>
+                <div>
+                    <ol class="relative border-gray-200 border-s dark:border-gray-700">                  
+                        <li class="mb-10 ms-4">
+                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                            <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">March 2024</time>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Expedita fugiat quos! Facere, maxime?</h3>
+                            <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">Rerum quod voluptatum similique architecto alias temporibus delectus sunt explicabo! Sint!</p>
+                            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700">
+                                <span>Learn more</span>
+                                <x-filament::icon icon="heroicon-o-arrow-right" class="size-4" />
+                            </a>
+                        </li>
+                        <li class="mb-10 ms-4">
+                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                            <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Jan 2024</time>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Odit unde aspernatur corporis recusandae.</h3>
+                            <p class="text-base font-normal text-gray-500 dark:text-gray-400">Obcaecati, unde nobis perspiciatis doloribus natus sed deleniti sapiente error suscipit voluptates esse dolor dicta non officia ipsa asperiores eum fugit repellat.</p>
+                        </li>
+                    </ol>
+                </div>
+            </section>
         </div>
+        
     </article>
 </x-layouts.marketing>

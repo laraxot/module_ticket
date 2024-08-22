@@ -29,6 +29,28 @@ enum TicketPriorityEnum: string implements HasColor, HasIcon, HasLabel
         };
     }
 
+    public function getTextColor(): string|array|null
+    {
+        return match ($this) {
+            self::LOW => 'text-green-500',
+            self::MEDIUM => 'text-yellow-500',
+            self::HIGH => 'text-orange-500',
+            self::CRITICAL => 'text-red-500',
+            // default => 'gray',
+        };
+    }
+
+    public function getBgColor(): string|array|null
+    {
+        return match ($this) {
+            self::LOW => 'bg-green-500',
+            self::MEDIUM => 'bg-yellow-500',
+            self::HIGH => 'bg-danger-500',
+            self::CRITICAL => 'bg-red-500',
+            // default => 'gray',
+        };
+    }
+
     public function getIcon(): ?string
     {
         return match ($this) {
