@@ -6,11 +6,10 @@ use Illuminate\Database\Schema\Blueprint;
 use Modules\Ticket\Models\Epic;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
-/**
+/*
  * Class .
  */
-class CreateTicketEpicsTable extends XotBaseMigration
-{
+return new class() extends XotBaseMigration {
     protected ?string $model_class = Epic::class;
 
     /**
@@ -39,4 +38,4 @@ class CreateTicketEpicsTable extends XotBaseMigration
             }
         );
     }
-}
+};

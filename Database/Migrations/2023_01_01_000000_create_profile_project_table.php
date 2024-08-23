@@ -6,11 +6,10 @@ use Illuminate\Database\Schema\Blueprint;
 use Modules\Ticket\Models\ProfileProject;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
-/**
+/*
  * Class .
  */
-class CreateProfileProjectTable extends XotBaseMigration
-{
+return new class() extends XotBaseMigration {
     protected ?string $model_class = ProfileProject::class;
 
     /**
@@ -38,4 +37,4 @@ class CreateProfileProjectTable extends XotBaseMigration
             }
         );
     }
-}
+};

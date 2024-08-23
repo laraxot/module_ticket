@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Database\Seeders;
+namespace Modules\Ticket\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Modules\Ticket\Models\Activity;

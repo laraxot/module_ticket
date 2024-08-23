@@ -6,11 +6,10 @@ use Illuminate\Database\Schema\Blueprint;
 use Modules\Ticket\Models\Sprint;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
-/**
+/*
  * Class .
  */
-class CreateTicketSprintsTable extends XotBaseMigration
-{
+return new class() extends XotBaseMigration {
     protected ?string $model_class = Sprint::class;
 
     /**
@@ -44,4 +43,4 @@ class CreateTicketSprintsTable extends XotBaseMigration
             }
         );
     }
-}
+};
