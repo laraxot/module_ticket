@@ -43,7 +43,7 @@ render(function (View $view, string $geo_ticket_slug) {
 
 ?>
 <x-layouts.marketing>
-
+    <x-comments::styles />
     <x-ui.marketing.breadcrumbs :crumbs="[
         [
             'href' => '/blog',
@@ -92,6 +92,20 @@ render(function (View $view, string $geo_ticket_slug) {
                 <section class="prose-sm prose md:prose-lg">
                     {!! $ticket->content !!}
                 </section>
+
+                @auth
+                    <livewire:comments :model="$ticket"/>
+                @endauth
+
+                @guest
+                    <livewire:comments read-only :model="$ticket"/>
+
+                    <p class="comments-no-comment-yet">
+                        Log in to make a comment...
+                    </p>
+                @endguest
+
+
             </div>
             <section class="space-y-4">
                 <h2 class="text-2xl font-bold">Timeline</h2>

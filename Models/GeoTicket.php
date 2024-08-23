@@ -12,6 +12,8 @@ use Modules\Xot\Services\FileService;
 use Webmozart\Assert\Assert;
 
 /**
+ * 
+ *
  * @property int $id
  * @property string $name
  * @property string $content
@@ -65,7 +67,6 @@ use Webmozart\Assert\Assert;
  * @property mixed $total_logged_hours
  * @property mixed $total_logged_in_hours
  * @property mixed $total_logged_seconds
- *
  * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket currentStatus(...$names)
  * @method static \Modules\Ticket\Database\Factories\GeoTicketFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket newModelQuery()
@@ -98,16 +99,15 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket withoutTrashed()
- *
  * @property string|null $slug
  * @property-read \Modules\Fixcity\Models\Profile|null $creator
  * @property-read \Modules\Fixcity\Models\Profile|null $updater
- *
  * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket wherePriority($value)
  * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket whereType($value)
- *
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Comments\Models\CommentNotificationSubscription> $notificationSubscriptions
+ * @property-read int|null $notification_subscriptions_count
  * @mixin \Eloquent
  */
 class GeoTicket extends Ticket

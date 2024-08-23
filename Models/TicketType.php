@@ -7,6 +7,8 @@ namespace Modules\Ticket\Models;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * 
+ *
  * @property int $id
  * @property string $name
  * @property string $icon
@@ -20,7 +22,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $deleted_by
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\Ticket> $tickets
  * @property int|null $tickets_count
- *
  * @method static \Modules\Ticket\Database\Factories\TicketTypeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|TicketType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketType newQuery()
@@ -39,10 +40,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|TicketType whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketType withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketType withoutTrashed()
- *
  * @property-read \Modules\Fixcity\Models\Profile|null $creator
  * @property-read \Modules\Fixcity\Models\Profile|null $updater
- *
  * @mixin \Eloquent
  */
 class TicketType extends BaseModel

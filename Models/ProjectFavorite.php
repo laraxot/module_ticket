@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Xot\Datas\XotData;
 
 /**
+ * 
+ *
  * @property string $id
  * @property int $user_id
  * @property int $project_id
@@ -19,7 +21,6 @@ use Modules\Xot\Datas\XotData;
  * @property string|null $deleted_by
  * @property Project|null $project
  * @property \Modules\User\Models\User|null $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectFavorite newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectFavorite newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectFavorite query()
@@ -32,10 +33,8 @@ use Modules\Xot\Datas\XotData;
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectFavorite whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectFavorite whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectFavorite whereUserId($value)
- *
  * @property-read \Modules\Fixcity\Models\Profile|null $creator
  * @property-read \Modules\Fixcity\Models\Profile|null $updater
- *
  * @mixin \Eloquent
  */
 class ProjectFavorite extends BasePivot

@@ -7,6 +7,8 @@ namespace Modules\Ticket\Models;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * 
+ *
  * @property int $id
  * @property string $name
  * @property string $color
@@ -19,7 +21,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $deleted_by
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\Ticket> $tickets
  * @property int|null $tickets_count
- *
  * @method static \Modules\Ticket\Database\Factories\TicketPriorityFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|TicketPriority newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketPriority newQuery()
@@ -37,10 +38,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|TicketPriority whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketPriority withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketPriority withoutTrashed()
- *
  * @property-read \Modules\Fixcity\Models\Profile|null $creator
  * @property-read \Modules\Fixcity\Models\Profile|null $updater
- *
  * @mixin \Eloquent
  */
 class TicketPriority extends BaseModel
