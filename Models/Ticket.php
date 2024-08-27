@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Modules\Ticket\Enums\TicketPriorityEnum;
 use Modules\Ticket\Enums\TicketStatusEnum;
 use Modules\Ticket\Enums\TicketTypeEnum;
-use Modules\Ticket\Enums\TicketPriorityEnum;
 use Modules\Ticket\Notifications\TicketCreated;
 use Modules\Ticket\Notifications\TicketStatusUpdated;
 use Modules\Xot\Datas\XotData;
@@ -66,20 +66,20 @@ use Webmozart\Assert\Assert;
  * @property \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
  * @property int|null                                                                                                   $media_count
  * @property \Modules\User\Models\User|null                                                                             $owner
- * @property TicketPriorityEnum|null                                                                                        $priority
+ * @property TicketPriorityEnum|null                                                                                    $priority
  * @property Project|null                                                                                               $project
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\TicketRelation>                       $relations
  * @property int|null                                                                                                   $relations_count
  * @property \Modules\User\Models\User|null                                                                             $responsible
  * @property Sprint|null                                                                                                $sprint
  * @property Sprint|null                                                                                                $sprints
- * @property TicketStatusEnum|null                                                                                          $status
+ * @property TicketStatusEnum|null                                                                                      $status
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User>                                   $subscribers
  * @property int|null                                                                                                   $subscribers_count
  * @property mixed                                                                                                      $total_logged_hours
  * @property mixed                                                                                                      $total_logged_in_hours
  * @property mixed                                                                                                      $total_logged_seconds
- * @property TicketTypeEnum|null                                                                                            $type
+ * @property TicketTypeEnum|null                                                                                        $type
  *
  * @method static \Modules\Ticket\Database\Factories\TicketFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     newModelQuery()
@@ -172,7 +172,7 @@ class Ticket extends BaseModel implements HasMedia
 
         Assert::isInstanceOf($this->type, TicketTypeEnum::class, '['.__LINE__.']['.__FILE__.']');
         $url = $this->type->getIcon();
-        $url = Str::of((string)$url)->after('heroicon-o-')->append('.svg')->toString();
+        $url = Str::of((string) $url)->after('heroicon-o-')->append('.svg')->toString();
         $url = FileService::asset('ui::svg/'.$url);
 
         return [
@@ -311,14 +311,14 @@ class Ticket extends BaseModel implements HasMedia
          return $this->hasMany(TicketComment::class, 'ticket_id', 'id');
      }
          */
-
+    /*-- e' in comment
     public function subscribers(): BelongsToMany
     {
         $user_class = XotData::make()->getUserClass();
 
         return $this->belongsToMany($user_class, 'ticket_subscribers', 'ticket_id', 'user_id');
     }
-
+    */
     public function relations(): HasMany
     {
         return $this->hasMany(TicketRelation::class, 'ticket_id', 'id');
