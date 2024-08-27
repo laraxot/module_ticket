@@ -42,7 +42,7 @@ abstract class BaseModel extends Model
     /** @var string */
     protected $connection = 'ticket';
 
-    /** @var array<int, string> */
+    /** @var list<string> */
     protected $fillable = ['id'];
 
     /** @return array<string, string> */
@@ -64,7 +64,7 @@ abstract class BaseModel extends Model
     /** @var bool */
     public $incrementing = true;
 
-    /** @var array<int, string> */
+    /** @var list<string> */
     protected $hidden = [
         // 'password'
     ];

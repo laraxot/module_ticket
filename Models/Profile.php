@@ -129,7 +129,7 @@ class Profile extends UserBaseProfile
     /** @var string */
     protected $connection = 'ticket';
 
-    /** @var array<int, string> */
+    /** @var list<string> */
     protected $fillable = ['id', 'user_id', 'phone', 'email', 'bio'];
 
     // ------- RELATIONSHIP ----------
