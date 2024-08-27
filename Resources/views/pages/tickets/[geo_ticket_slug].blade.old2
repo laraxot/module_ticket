@@ -1,6 +1,6 @@
 <?php
 
-use Modules\Ticket\Models\GeoTicket;
+use Modules\Ticket\Models\Ticket;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use function Laravel\Folio\{withTrashed,middleware, name,render};
@@ -10,7 +10,7 @@ name('geo_ticket_slug.show');
 //middleware(['auth', 'verified']);
 
 render(function (View $view, string $geo_ticket_slug) {
-    $ticket = GeoTicket::firstWhere(['slug' => $geo_ticket_slug]);
+    $ticket = Ticket::firstWhere(['slug' => $geo_ticket_slug]);
 
 
     dddx($ticket);
@@ -22,7 +22,7 @@ render(function (View $view, string $geo_ticket_slug) {
 
 ?>
 <x-layouts.marketing>
-    
+
     <div class="w-full h-full min-h-screen bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 sm:p-6 mx-auto">
         <h1 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-4">{{-- Ticket#12345 --}}{{ $ticket->name }} # {{ $ticket->id }}</h1>
         <p class="text-gray-600 dark:text-gray-300 mb-4">{!! $ticket->content !!}</p>
@@ -46,7 +46,7 @@ render(function (View $view, string $geo_ticket_slug) {
             Risolvi Ticket
         </button>
 
-        
+
 
         <div id="default-carousel" class="relative w-full" data-carousel="slide">
             <!-- Carousel wrapper -->

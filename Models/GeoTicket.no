@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Modules\Ticket\Enums\TicketStatusEnum;
 
 /**
  * @property int                                                                                                        $id
@@ -30,7 +30,7 @@ use Modules\Ticket\Enums\GeoTicketStatusEnum;
  * @property string|null                                                                                                $updated_by
  * @property string|null                                                                                                $created_by
  * @property string|null                                                                                                $deleted_by
- * @property GeoTicketStatusEnum                                                                                        $status
+ * @property TicketStatusEnum                                                                                        $status
  * @property TicketPriority|null                                                                                        $priority
  * @property TicketType|null                                                                                            $type
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\TicketActivity>                       $activities
@@ -61,54 +61,54 @@ use Modules\Ticket\Enums\GeoTicketStatusEnum;
  * @property mixed                                                                                                      $total_logged_in_hours
  * @property mixed                                                                                                      $total_logged_seconds
  *
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     currentStatus(...$names)
- * @method static \Modules\Ticket\Database\Factories\GeoTicketFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     otherCurrentStatus(...$names)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     query()
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereEpicId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereEstimation($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereLatitude($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereLongitude($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereOwnerId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     wherePriorityId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereProjectId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereResponsibleId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereSprintId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereStatusId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereTicketPrefix($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereTypeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket     withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     currentStatus(...$names)
+ * @method static \Modules\Ticket\Database\Factories\TicketFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     otherCurrentStatus(...$names)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereEpicId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereEstimation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereOwnerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     wherePriorityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereResponsibleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereSprintId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereStatusId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereTicketPrefix($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket     withoutTrashed()
  *
  * @property string|null                          $slug
  * @property \Modules\Fixcity\Models\Profile|null $creator
  * @property \Modules\Fixcity\Models\Profile|null $updater
  *
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket wherePriority($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|GeoTicket whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket wherePriority($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereType($value)
  *
  * @property \Illuminate\Database\Eloquent\Collection<int, \Spatie\Comments\Models\CommentNotificationSubscription> $notificationSubscriptions
  * @property int|null                                                                                               $notification_subscriptions_count
  *
  * @mixin \Eloquent
  */
-class GeoTicket extends Ticket
+class Ticket extends Ticket
 {
     protected $table = 'tickets';
 }

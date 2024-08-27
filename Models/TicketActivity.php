@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Xot\Datas\XotData;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $ticket_id
@@ -61,6 +61,7 @@ class TicketActivity extends BaseModel
         return $this->belongsTo(Ticket::class, 'ticket_id', 'id')->withTrashed();
     }
 
+    /*
     public function oldStatus(): BelongsTo
     {
         return $this->belongsTo(TicketStatus::class, 'old_status_id', 'id')->withTrashed();
@@ -70,7 +71,7 @@ class TicketActivity extends BaseModel
     {
         return $this->belongsTo(TicketStatus::class, 'new_status_id', 'id')->withTrashed();
     }
-
+    */
     public function user(): BelongsTo
     {
         $user_class = XotData::make()->getUserClass();

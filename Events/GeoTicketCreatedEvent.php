@@ -9,9 +9,9 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Modules\Ticket\Models\GeoTicket;
+use Modules\Ticket\Models\Ticket;
 
-class GeoTicketCreatedEvent
+class TicketCreatedEvent
 {
     use Dispatchable;
     use InteractsWithSockets;
@@ -21,7 +21,7 @@ class GeoTicketCreatedEvent
      * Create a new event instance.
      */
     public function __construct(
-        public GeoTicket $ticket
+        public Ticket $ticket
     ) {}
 
     /*

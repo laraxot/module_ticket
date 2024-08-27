@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Modules\Ticket\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Modules\Ticket\Events\GeoTicketCreatedEvent;
-use Modules\Ticket\Listeners\GeoTicketCreatedListener;
+use Modules\Ticket\Events\TicketCreatedEvent;
+use Modules\Ticket\Listeners\TicketCreatedListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -16,8 +16,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array<string, array<int, string>>
      */
     protected $listen = [
-        GeoTicketCreatedEvent::class => [
-            GeoTicketCreatedListener::class,
+        TicketCreatedEvent::class => [
+            TicketCreatedListener::class,
         ],
     ];
 

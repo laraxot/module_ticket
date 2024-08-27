@@ -1,9 +1,9 @@
 <?php
 
-use Modules\Ticket\Models\GeoTicket;
+use Modules\Ticket\Models\Ticket;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
-use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Modules\Ticket\Enums\TicketStatusEnum;
 use Modules\Ticket\Enums\TicketPriorityEnum;
 use function Laravel\Folio\{withTrashed,middleware, name,render};
 
@@ -12,30 +12,30 @@ name('geo_ticket_slug.show');
 //middleware(['auth', 'verified']);
 
 render(function (View $view, string $geo_ticket_slug) {
-    $ticket = GeoTicket::firstWhere(['slug' => $geo_ticket_slug]);
+    $ticket = Ticket::firstWhere(['slug' => $geo_ticket_slug]);
     $medias = $ticket->getMedia('ticket');
 
-    //$statuses = GeoTicketStatusEnum::getArrayValueLabelIcon();
+    //$statuses = TicketStatusEnum::getArrayValueLabelIcon();
     //$priorities = TicketPriorityEnum::getArrayValueLabelIcon();
     //$priority = $ticket->priority;
     if($ticket->status==""){
-        $ticket->setStatus(GeoTicketStatusEnum::PENDING->value);
+        $ticket->setStatus(TicketStatusEnum::PENDING->value);
         $up=tap($ticket)->update([
-            'status'=>GeoTicketStatusEnum::PENDING
+            'status'=>TicketStatusEnum::PENDING
         ]);
-        
-        
+
+
     }
-    
-    $status=GeoTicketStatusEnum::from($ticket->status);
-    
+
+    $status=TicketStatusEnum::from($ticket->status);
+
 
     return $view->with([
-        'ticket' => $ticket, 
-        'medias' => $medias, 
+        'ticket' => $ticket,
+        'medias' => $medias,
         'status' => $status,
-        //'statuses' => $statuses, 
-        //'priorities' => $priorities, 
+        //'statuses' => $statuses,
+        //'priorities' => $priorities,
         //'priority_ticket' => $ticket->priority
     ]);
 });
@@ -55,7 +55,7 @@ render(function (View $view, string $geo_ticket_slug) {
     ]" />
 
     <article class="container max-w-6xl p-4 mx-auto space-y-8">
-        
+
         <section>
             <div class="relative flex w-full gap-6 pb-4 overflow-x-auto snap-x">
                 @for($i = 0; $i < 5; $i++)
@@ -88,7 +88,7 @@ render(function (View $view, string $geo_ticket_slug) {
                         </div>
                     </div>
                 </section>
-        
+
                 <section class="prose-sm prose md:prose-lg">
                     {!! $ticket->content !!}
                 </section>
@@ -110,7 +110,7 @@ render(function (View $view, string $geo_ticket_slug) {
             <section class="space-y-4">
                 <h2 class="text-2xl font-bold">Timeline</h2>
                 <div>
-                    <ol class="relative border-gray-200 border-s dark:border-gray-700">                  
+                    <ol class="relative border-gray-200 border-s dark:border-gray-700">
                         <li class="mb-10 ms-4">
                             <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                             <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">March 2024</time>
@@ -131,6 +131,6 @@ render(function (View $view, string $geo_ticket_slug) {
                 </div>
             </section>
         </div>
-        
+
     </article>
 </x-layouts.marketing>

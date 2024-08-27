@@ -16,7 +16,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -114,11 +114,12 @@ class Project extends Model implements HasMedia
         return $this->hasMany(Ticket::class, 'project_id', 'id');
     }
 
+    /*
     public function statuses(): HasMany
     {
         return $this->hasMany(TicketStatus::class, 'project_id', 'id');
     }
-
+    */
     public function epics(): HasMany
     {
         return $this->hasMany(Epic::class, 'project_id', 'id');

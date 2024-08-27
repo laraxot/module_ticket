@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Modules\Ticket\Filament\Resources\GeoTicketResource\Pages;
+namespace Modules\Ticket\Filament\Resources\TicketResource\Pages;
 
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
-use Modules\Ticket\Filament\Resources\GeoTicketResource;
+use Modules\Ticket\Filament\Resources\TicketResource;
 
-class EditGeoTicket extends EditRecord
+class EditTicket extends EditRecord
 {
-    protected static string $resource = GeoTicketResource::class;
+    protected static string $resource = TicketResource::class;
 
     protected function getHeaderActions(): array
     {

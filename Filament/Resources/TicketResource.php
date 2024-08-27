@@ -17,17 +17,17 @@ use Filament\Pages\Page;
 use Filament\Pages\SubNavigationPosition;
 use Illuminate\Support\Str;
 use Modules\Geo\Rules\FilterCoordinatesInRadius;
-use Modules\Ticket\Enums\GeoTicketTypeEnum;
+use Modules\Ticket\Enums\TicketTypeEnum;
 use Modules\Ticket\Enums\TicketPriorityEnum;
-use Modules\Ticket\Filament\Resources\GeoTicketResource\Pages;
-use Modules\Ticket\Models\GeoTicket;
+use Modules\Ticket\Filament\Resources\TicketResource\Pages;
+use Modules\Ticket\Models\Ticket;
 use Modules\Ticket\Models\TicketPriority;
 use Modules\Ticket\Models\TicketType;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 
-class GeoTicketResource extends XotBaseResource
+class TicketResource extends XotBaseResource
 {
-    protected static ?string $model = GeoTicket::class;
+    protected static ?string $model = Ticket::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-europe-africa';
 
@@ -63,7 +63,7 @@ class GeoTicketResource extends XotBaseResource
                     Forms\Components\Select::make('type')
                         ->label(__('Ticket type'))
                         ->searchable()
-                        ->options(GeoTicketTypeEnum::class),
+                        ->options(TicketTypeEnum::class),
                     /*
                 Forms\Components\Select::make('priority_id')
                     ->label(__('Ticket priority'))
@@ -157,22 +157,22 @@ class GeoTicketResource extends XotBaseResource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListGeoTickets::route('/'),
-            'create' => Pages\CreateGeoTicket::route('/create'),
-            'view' => Pages\ViewGeoTicket::route('/{record}'),
-            'statuses' => Pages\ManageGeoTicketStatuses::route('/{record}/statuses'),
-            'edit' => Pages\EditGeoTicket::route('/{record}/edit'),
+            'index' => Pages\ListTickets::route('/'),
+            'create' => Pages\CreateTicket::route('/create'),
+            'view' => Pages\ViewTicket::route('/{record}'),
+            'statuses' => Pages\ManageTicketStatuses::route('/{record}/statuses'),
+            'edit' => Pages\EditTicket::route('/{record}/edit'),
         ];
     }
 
     public static function getRecordSubNavigation(Page $page): array
     {
         return $page->generateNavigationItems([
-            // Pages\ListGeoTickets::class,
-            // Pages\CreateGeoTicket::class,
-            Pages\ViewGeoTicket::class,
-            Pages\EditGeoTicket::class,
-            Pages\ManageGeoTicketStatuses::class,
+            // Pages\ListTickets::class,
+            // Pages\CreateTicket::class,
+            Pages\ViewTicket::class,
+            Pages\EditTicket::class,
+            Pages\ManageTicketStatuses::class,
         ]);
     }
 }

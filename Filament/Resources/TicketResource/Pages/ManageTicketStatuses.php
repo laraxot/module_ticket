@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Modules\Ticket\Filament\Resources\GeoTicketResource\Pages;
+namespace Modules\Ticket\Filament\Resources\TicketResource\Pages;
 
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Pages\ManageRelatedRecords;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Modules\Ticket\Filament\Resources\GeoTicketResource;
+use Modules\Ticket\Filament\Resources\TicketResource;
 
-class ManageGeoTicketStatuses extends ManageRelatedRecords
+class ManageTicketStatuses extends ManageRelatedRecords
 {
-    protected static string $resource = GeoTicketResource::class;
+    protected static string $resource = TicketResource::class;
 
     protected static string $relationship = 'statuses';
 

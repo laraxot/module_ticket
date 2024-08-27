@@ -8,8 +8,8 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Actions\Action;
 use Modules\Ticket\Actions\ChangeStatus as ActionChangeStatus;
-use Modules\Ticket\Enums\GeoTicketStatusEnum;
-use Modules\Ticket\Models\GeoTicket;
+use Modules\Ticket\Enums\TicketStatusEnum;
+use Modules\Ticket\Models\Ticket;
 
 class ChangeStatus extends Action
 {
@@ -19,13 +19,13 @@ class ChangeStatus extends Action
 
         $this->translateLabel()
             ->action(
-                function (GeoTicket $record, array $data): void {
+                function (Ticket $record, array $data): void {
                     app(ActionChangeStatus::class)->execute($record, $data['status'], $data['reason']);
                 }
             )
             ->form([
                 Select::make('status')
-                    ->options(GeoTicketStatusEnum::class)
+                    ->options(TicketStatusEnum::class)
                     ->required(),
                 TextInput::make('reason')
                     ->label('Per quale motivo stai modificando lo stato?')

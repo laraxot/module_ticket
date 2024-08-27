@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Listeners;
 
-use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Modules\Ticket\Enums\TicketStatusEnum;
 use Modules\Ticket\Events\TicketCreatedEvent;
 
 class TicketCreatedListener
@@ -19,7 +19,7 @@ class TicketCreatedListener
      */
     public function handle(TicketCreatedEvent $event): void
     {
-        $status = GeoTicketStatusEnum::PENDING;
+        $status = TicketStatusEnum::PENDING;
         $ticket = $event->ticket;
         $ticket->setStatus($status->value, 'creazione nuovo ticket');
         $ticket->save();

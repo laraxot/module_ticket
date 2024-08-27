@@ -14,10 +14,9 @@ use Filament\Tables\Actions\Action as LoginAction;
 use Filament\Tables\Actions\CreateAction;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use Modules\Ticket\Enums\GeoTicketStatusEnum;
-use Modules\Ticket\Filament\Resources\GeoTicketResource;
-use Modules\Ticket\Filament\Resources\GeoTicketResource\Pages\ListGeoTickets;
-use Modules\Ticket\Models\GeoTicket;
+use Modules\Ticket\Enums\TicketStatusEnum;
+use Modules\Ticket\Filament\Resources\TicketResource;
+use Modules\Ticket\Filament\Resources\TicketResource\Pages\ListTickets;
 use Modules\Ticket\Models\Ticket;
 
 /**
@@ -72,8 +71,8 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableQuery(): Builder
     {
-        // return GeoTicket::query()->latest();
-        return GeoTicket::currentStatus(GeoTicketStatusEnum::canViewByAll())
+        // return Ticket::query()->latest();
+        return Ticket::currentStatus(TicketStatusEnum::canViewByAll())
             ->orWhere('created_by', authId())
             ->orWhere('updated_by', authId())
             ->latest();
@@ -81,12 +80,12 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableColumns(): array
     {
-        return app(ListGeoTickets::class)->getTableColumns();
+        return app(ListTickets::class)->getTableColumns();
     }
 
     protected function getTableFilters(): array
     {
-        return app(ListGeoTickets::class)->getTableFilters();
+        return app(ListTickets::class)->getTableFilters();
     }
 
     protected function getTableRecordAction(): ?string
@@ -121,7 +120,7 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableActions(): array
     {
-        return app(ListGeoTickets::class)->getTableActions();
+        return app(ListTickets::class)->getTableActions();
     }
 
     protected function getTableRecordsPerPageSelectOptions(): array
@@ -178,13 +177,13 @@ class TicketsMapTableWidget extends MapTableWidget
                     ->columns(3),
             ])
             ->record(function (array $arguments) {
-                return array_key_exists('model_id', $arguments) ? GeoTicket::find($arguments['model_id']) : null;
+                return array_key_exists('model_id', $arguments) ? Ticket::find($arguments['model_id']) : null;
             })
             ->modalSubmitAction(false);
     }
 
     public function getFormSchema(): array
     {
-        return GeoTicketResource::getFormSchema();
+        return TicketResource::getFormSchema();
     }
 }

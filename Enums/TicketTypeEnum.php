@@ -87,7 +87,7 @@ Colore: #ff5722 (Deep Orange)
 Icona: 🛡️ (Heroicons: Shield)
 */
 
-enum GeoTicketTypeEnum: string implements HasColor, HasIcon, HasLabel
+enum TicketTypeEnum: string implements HasColor, HasIcon, HasLabel
 {
     case ROAD_MAINTENANCE = 'road_maintenance';
     case PUBLIC_LIGHTING = 'public_lighting';

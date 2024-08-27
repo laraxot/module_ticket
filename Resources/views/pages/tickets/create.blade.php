@@ -19,7 +19,7 @@ new class extends Component
         <div class="w-full p-10" >
 
             <br/>
-            @livewire(\Modules\Ticket\Filament\Widgets\CreateGeoTicketWidget::class)
+            @livewire(\Modules\Ticket\Filament\Widgets\CreateTicketWidget::class)
 
         </div>
     </div>

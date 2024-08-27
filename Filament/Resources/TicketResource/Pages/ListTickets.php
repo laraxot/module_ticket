@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Ticket\Filament\Resources\GeoTicketResource\Pages;
+namespace Modules\Ticket\Filament\Resources\TicketResource\Pages;
 
 use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
 use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
@@ -15,15 +15,15 @@ use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Modules\Ticket\Enums\TicketStatusEnum;
 use Modules\Ticket\Filament\Actions\ChangeStatus;
-use Modules\Ticket\Filament\Resources\GeoTicketResource;
-use Modules\Ticket\Models\GeoTicket;
+use Modules\Ticket\Filament\Resources\TicketResource;
+use Modules\Ticket\Models\Ticket;
 use Modules\UI\Filament\Tables\Columns\GroupColumn;
 
-class ListGeoTickets extends ListRecords
+class ListTickets extends ListRecords
 {
-    protected static string $resource = GeoTicketResource::class;
+    protected static string $resource = TicketResource::class;
 
     // protected static ?string $heading = 'Location Map';
 
@@ -75,7 +75,7 @@ class ListGeoTickets extends ListRecords
                     return null;
                 }
 
-                return GeoTicketStatusEnum::from($status->name);
+                return TicketStatusEnum::from($status->name);
             }),
             */
             Tables\Columns\TextColumn::make('priority')
@@ -108,7 +108,7 @@ class ListGeoTickets extends ListRecords
     {
         return [
             Tables\Actions\ViewAction::make()
-                ->url(fn (GeoTicket $record): string => route('geo_ticket_slug.show', ['geo_ticket_slug' => $record->slug]))
+                ->url(fn (Ticket $record): string => route('geo_ticket_slug.show', ['geo_ticket_slug' => $record->slug]))
                 ->openUrlInNewTab(),
             Tables\Actions\EditAction::make()
                 ->form($this->getFormSchema()),
@@ -140,18 +140,18 @@ class ListGeoTickets extends ListRecords
 
     public function getTabs(): array
     {
-        foreach (GeoTicket::where('status', null)->get() as $item) {
+        foreach (Ticket::where('status', null)->get() as $item) {
             // $status = $item->status()?->name;
             $status = $item->status;
             if (null == $status) {
-                $status = GeoTicketStatusEnum::PENDING;
+                $status = TicketStatusEnum::PENDING;
                 $item->setStatus($status->value);
             }
             $item->status = $status;
             $item->save();
         }
 
-        $statuses = GeoTicketStatusEnum::cases();
+        $statuses = TicketStatusEnum::cases();
 
         $res = [];
 
@@ -159,7 +159,7 @@ class ListGeoTickets extends ListRecords
             $k = $status->value;
             $v = Tab::make($status->getLabel())
                 ->icon($status->getIcon())
-                ->badge(GeoTicket::where('status', $status)->count())
+                ->badge(Ticket::where('status', $status)->count())
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', $status));
             $res[$k] = $v;
         }
