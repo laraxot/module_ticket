@@ -4,12 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use Illuminate\Support\Str;
 use Modules\Ticket\Enums\GeoTicketStatusEnum;
-use Modules\Ticket\Enums\GeoTicketTypeEnum;
-use Modules\Ticket\Enums\TicketPriorityEnum;
-use Modules\Xot\Services\FileService;
-use Webmozart\Assert\Assert;
 
 /**
  * @property int                                                                                                        $id
@@ -116,44 +111,4 @@ use Webmozart\Assert\Assert;
 class GeoTicket extends Ticket
 {
     protected $table = 'tickets';
-
-    public function casts(): array
-    {
-        $data = parent::casts();
-        $my = [
-            'status' => GeoTicketStatusEnum::class,
-            'priority' => TicketPriorityEnum::class,
-            'type' => GeoTicketTypeEnum::class,
-        ];
-
-        $res = array_merge($data, $my);
-
-        return $res;
-    }
-
-    public function getIconData(): array
-    {
-        if (null == $this->type) {
-            return [];
-        }
-
-        Assert::isInstanceOf($this->type, GeoTicketTypeEnum::class, '['.__LINE__.']['.__FILE__.']');
-        $url = $this->type->getIcon();
-        $url = Str::of($url)->after('heroicon-o-')->append('.svg')->toString();
-        $url = FileService::asset('ui::svg/'.$url);
-
-        return [
-            'url' => $url,
-            'type' => 'svg',
-            'scale' => [35, 35],
-        ];
-    }
-
-    public static function getLatLngAttributes(): array
-    {
-        return [
-            'lat' => 'latitude',
-            'lng' => 'longitude',
-        ];
-    }
 }

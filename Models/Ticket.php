@@ -10,9 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Modules\Ticket\Enums\GeoTicketStatusEnum;
+use Modules\Ticket\Enums\GeoTicketTypeEnum;
+use Modules\Ticket\Enums\TicketPriorityEnum;
 use Modules\Ticket\Notifications\TicketCreated;
 use Modules\Ticket\Notifications\TicketStatusUpdated;
 use Modules\Xot\Datas\XotData;
+use Modules\Xot\Services\FileService;
 use Spatie\Comments\Models\Concerns\HasComments;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -76,6 +80,7 @@ use Webmozart\Assert\Assert;
  * @property mixed                                                                                                      $total_logged_in_hours
  * @property mixed                                                                                                      $total_logged_seconds
  * @property TicketType|null                                                                                            $type
+ *
  * @method static \Modules\Ticket\Database\Factories\TicketFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     newQuery()
@@ -106,18 +111,24 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket     withoutTrashed()
+ *
  * @property \Illuminate\Database\Eloquent\Collection<int, \Spatie\ModelStatus\Status> $statuses
  * @property int|null                                                                  $statuses_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket currentStatus(...$names)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket otherCurrentStatus(...$names)
+ *
  * @property \Modules\Fixcity\Models\Profile|null $creator
  * @property \Modules\Fixcity\Models\Profile|null $updater
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket wherePriority($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereType($value)
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Comments\Models\CommentNotificationSubscription> $notificationSubscriptions
- * @property-read int|null $notification_subscriptions_count
+ *
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Spatie\Comments\Models\CommentNotificationSubscription> $notificationSubscriptions
+ * @property int|null                                                                                               $notification_subscriptions_count
+ *
  * @mixin \Eloquent
  */
 class Ticket extends BaseModel implements HasMedia
@@ -147,6 +158,35 @@ class Ticket extends BaseModel implements HasMedia
         return [
             'estimationInSeconds' => 'int',
             'estimationProgress' => 'float',
+            'status' => GeoTicketStatusEnum::class,
+            'priority' => TicketPriorityEnum::class,
+            'type' => GeoTicketTypeEnum::class,
+        ];
+    }
+
+    public function getIconData(): array
+    {
+        if (null == $this->type) {
+            return [];
+        }
+
+        Assert::isInstanceOf($this->type, GeoTicketTypeEnum::class, '['.__LINE__.']['.__FILE__.']');
+        $url = $this->type->getIcon();
+        $url = Str::of($url)->after('heroicon-o-')->append('.svg')->toString();
+        $url = FileService::asset('ui::svg/'.$url);
+
+        return [
+            'url' => $url,
+            'type' => 'svg',
+            'scale' => [35, 35],
+        ];
+    }
+
+    public static function getLatLngAttributes(): array
+    {
+        return [
+            'lat' => 'latitude',
+            'lng' => 'longitude',
         ];
     }
 
@@ -250,15 +290,15 @@ class Ticket extends BaseModel implements HasMedia
         return $this->belongsTo(Project::class, 'project_id', 'id')->withTrashed();
     }
 
-    public function type(): BelongsTo
-    {
-        return $this->belongsTo(TicketType::class, 'type_id', 'id')->withTrashed();
-    }
+    // public function type(): BelongsTo
+    // {
+    //    return $this->belongsTo(TicketType::class, 'type_id', 'id')->withTrashed();
+    // }
 
-    public function priority(): BelongsTo
-    {
-        return $this->belongsTo(TicketPriority::class, 'priority_id', 'id')->withTrashed();
-    }
+    // public function priority(): BelongsTo
+    // {
+    //    return $this->belongsTo(TicketPriority::class, 'priority_id', 'id')->withTrashed();
+    // }
 
     public function activities(): HasMany
     {
