@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Listeners;
 
+use Modules\Ticket\Actions\ChangeStatus;
 use Modules\Ticket\Enums\TicketStatusEnum;
 use Modules\Ticket\Events\TicketCreatedEvent;
 
@@ -20,9 +21,11 @@ class TicketCreatedListener
     public function handle(TicketCreatedEvent $event): void
     {
         $status = TicketStatusEnum::PENDING;
-        $ticket = $event->ticket;
-        $ticket->setStatus($status->value, 'creazione nuovo ticket');
-        $ticket->save();
-        dddx($ticket);
+        app(ChangeStatus::class)->execute($event->ticket, $status->value, 'creazione nuovo ticket');
+
+        // $ticket = $event->ticket;
+        // $ticket->setStatus($status->value, 'creazione nuovo ticket');
+        // $ticket->status = $status;
+        // $ticket->save();
     }
 }
