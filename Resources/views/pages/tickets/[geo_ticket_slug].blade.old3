@@ -8,11 +8,12 @@ use Modules\Ticket\Enums\TicketPriorityEnum;
 use function Laravel\Folio\{withTrashed,middleware, name,render};
 
 withTrashed();
-name('geo_ticket_slug.show');
+name('ticket_slug.view');
 //middleware(['auth', 'verified']);
 
-render(function (View $view, string $geo_ticket_slug) {
-    $ticket = Ticket::firstWhere(['slug' => $geo_ticket_slug]);
+render(function (View $view, string $ticket_slug) {
+    dddx($ticket_slug);
+    $ticket = Ticket::firstWhere(['slug' => $ticket_slug]);
     $medias = $ticket->getMedia('ticket');
 
     //$statuses = TicketStatusEnum::getArrayValueLabelIcon();
@@ -28,7 +29,7 @@ render(function (View $view, string $geo_ticket_slug) {
     }
 
     $status=TicketStatusEnum::from($ticket->status);
-
+    dddx($ticket->statuses);
 
     return $view->with([
         'ticket' => $ticket,
@@ -111,7 +112,15 @@ render(function (View $view, string $geo_ticket_slug) {
                 <h2 class="text-2xl font-bold">Timeline</h2>
                 <div>
                     <ol class="relative border-gray-200 border-s dark:border-gray-700">
-                        <li class="mb-10 ms-4">
+                        @foreach($ticket->statuses)
+                            <li class="mb-10 ms-4">
+                                <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                                <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Jan 2024</time>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Odit unde aspernatur corporis recusandae.</h3>
+                                <p class="text-base font-normal text-gray-500 dark:text-gray-400"></p>
+                            </li>
+                        @endforeach
+                        {{-- <li class="mb-10 ms-4">
                             <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                             <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">March 2024</time>
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Expedita fugiat quos! Facere, maxime?</h3>
@@ -126,7 +135,7 @@ render(function (View $view, string $geo_ticket_slug) {
                             <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Jan 2024</time>
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Odit unde aspernatur corporis recusandae.</h3>
                             <p class="text-base font-normal text-gray-500 dark:text-gray-400">Obcaecati, unde nobis perspiciatis doloribus natus sed deleniti sapiente error suscipit voluptates esse dolor dicta non officia ipsa asperiores eum fugit repellat.</p>
-                        </li>
+                        </li> --}}
                     </ol>
                 </div>
             </section>

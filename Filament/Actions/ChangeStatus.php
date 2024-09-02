@@ -29,6 +29,7 @@ class ChangeStatus extends Action
                     ->required(),
                 TextInput::make('reason')
                     ->label('Per quale motivo stai modificando lo stato?')
+                    ->helperText('La motivazione verrà visualizzata nel dettaglio del ticket')
                     ->required(),
             ])
             ->label('Change Status')

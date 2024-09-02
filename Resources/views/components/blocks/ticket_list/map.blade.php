@@ -9,7 +9,7 @@
             href="{{ route('ticket.create', ['lang'=>$lang]) }}"
             tag="a"
             >
-            Click here to submit a new ticket
+            {{ __('ticket::txt.click-here-to-submit-a-new-ticket') }}
         </x-filament::button>
     </div>
 
