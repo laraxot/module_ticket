@@ -11,7 +11,7 @@
             type="submit"
             form="create"
         >
-        Click here to submit a new ticket
+        {{ __('ticket::txt.click-here-to-submit-a-new-ticket') }}
         </x-filament::button>
     </form>
 
