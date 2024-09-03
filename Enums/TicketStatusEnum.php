@@ -53,19 +53,19 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
 
     public function getLabel(): ?string
     {
-        return __('ticket::enums.'.$this->name.'.label');
+        // return __('ticket::enums.'.$this->name.'.label');
 
-        // return match ($this) {
-        //     // self::NEW => 'New',
-        //     self::PENDING => 'Pending',
-        //     self::IN_REVIEW => 'In Review',
-        //     self::IN_PROGRESS => 'In Progress',
-        //     self::ON_HOLD => 'On Hold',
-        //     self::RESOLVED => 'Resolved',
-        //     self::CLOSED => 'Closed',
-        //     self::REOPENED => 'Reopened',
-        //     // default => 'Unknown',
-        // };
+        return match ($this) {
+            // self::NEW => 'New',
+            self::PENDING => 'Pending',
+            self::IN_REVIEW => 'In Review',
+            self::IN_PROGRESS => 'In Progress',
+            self::ON_HOLD => 'On Hold',
+            self::RESOLVED => 'Resolved',
+            self::CLOSED => 'Closed',
+            self::REOPENED => 'Reopened',
+            // default => 'Unknown',
+        };
     }
 
     public static function canViewByAll(): array
