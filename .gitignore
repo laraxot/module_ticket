@@ -2,3 +2,5 @@ node_modules
 vendor
 vendor/
 build/
+docs/cache/
+cache/
