@@ -23,7 +23,7 @@ class CreateTicketWidget extends BaseWidget implements HasForms
 {
     use InteractsWithForms;
 
-    protected static string $view = 'ticket::filament.widgets.create-geo-ticket';
+    protected static string $view = 'ticket::filament.widgets.create-ticket';
 
     protected int|string|array $columnSpan = 'full';
 
