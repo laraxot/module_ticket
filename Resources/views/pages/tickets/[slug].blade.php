@@ -13,6 +13,11 @@ name('ticket.view');
 
 render(function (View $view, string $slug) {
     $ticket = Ticket::firstWhere(['slug' => $slug]);
+
+    if($ticket == null){
+      return view('pub_theme::404');
+    }
+
     $medias = $ticket->getMedia('ticket');
 
     //$statuses = TicketStatusEnum::getArrayValueLabelIcon();
