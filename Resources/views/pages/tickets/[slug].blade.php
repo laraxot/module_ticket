@@ -116,7 +116,7 @@ render(function (View $view, string $slug) {
                             <li class="mb-10 ms-4">
                                 <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                                 <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{{ $status->created_at->isoFormat('LLL') }}</time>
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ $status->name }}</h3>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ __('ticket::enums.'.$status->name.'.label') }}</h3>
                                 <p class="text-base font-normal text-gray-500 dark:text-gray-400">{{ $status->reason }}</p>
                             </li>
                         @endforeach
