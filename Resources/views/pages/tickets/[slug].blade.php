@@ -107,7 +107,7 @@ render(function (View $view, string $slug) {
                     <livewire:comments read-only :model="$ticket"/>
 
                     <p class="comments-no-comment-yet">
-                        {{ __('commment::txt.log-in-for-comment') }}
+                        {{ __('comment::txt.log-in-for-comment') }}
                     </p>
                 @endguest
 
