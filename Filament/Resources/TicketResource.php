@@ -16,7 +16,7 @@ use Filament\Forms\Set;
 use Filament\Pages\Page;
 use Filament\Pages\SubNavigationPosition;
 use Illuminate\Support\Str;
-use Modules\Geo\Rules\FilterCoordinatesInRadius;
+use Modules\Ticket\Rules\FilterCoordinatesInRadius;
 use Modules\Ticket\Enums\TicketTypeEnum;
 use Modules\Ticket\Enums\TicketPriorityEnum;
 use Modules\Ticket\Filament\Resources\TicketResource\Pages;
