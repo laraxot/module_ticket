@@ -41,21 +41,28 @@ class TicketResource extends XotBaseResource
                 ->schema([
                     // Ticket Name
                     TextInput::make('name')
-                        ->label(__('Ticket name'))
+                        ->label(__('ticket::ticket.title.label'))
                         ->columnSpanFull() // Occupa tutta la larghezza disponibile
                         ->required()
                         ->maxLength(255)
+                        ->afterStateUpdated(static function ($set, $get, $state) {
+                            if ($get('slug')) {
+                                return;
+                            }
+                            $set('slug', Str::slug($state));
+                        })
                         ->extraAttributes(['class' => 'max-w-full', 'style' => 'padding: 0; margin: 0;']), // Rimozione del padding e margini
     
                     // Slug
                     TextInput::make('slug')
                         ->columnSpanFull() // Anche lo slug occupa tutta la larghezza disponibile
                         ->required()
+                        ->hidden()
                         ->extraAttributes(['class' => 'max-w-full', 'style' => 'padding: 0; margin: 0;']), // Rimozione del padding e margini
     
                     // Ticket Type
                     Forms\Components\Select::make('type')
-                        ->label(__('Ticket type'))
+                        ->label(__('ticket::ticket.type.label'))
                         ->searchable()
                         ->options(TicketTypeEnum::class)
                         ->columnSpanFull()
@@ -63,7 +70,7 @@ class TicketResource extends XotBaseResource
     
                     // Ticket Priority
                     Forms\Components\Select::make('priority')
-                        ->label(__('Ticket priority'))
+                        ->label(__('ticket::ticket.priorities.label'))
                         ->searchable()
                         ->options(TicketPriorityEnum::class)
                         ->default(TicketPriorityEnum::default())
@@ -72,7 +79,7 @@ class TicketResource extends XotBaseResource
     
                     // Ticket Content (RichEditor)
                     Forms\Components\RichEditor::make('content')
-                        ->label(__('Ticket content'))
+                        ->label(__('ticket::ticket.content.label'))
                         ->required()
                         ->columnSpanFull()
                         ->extraAttributes(['class' => 'max-w-full', 'style' => 'padding: 0; margin: 0;']), // Rimozione del padding e margini
@@ -83,7 +90,7 @@ class TicketResource extends XotBaseResource
     
                     // Map Section
                     Map::make('location')
-                        ->label('Location')
+                        ->label(__('ticket::ticket.your-location'))
                         ->columnSpanFull() // Occupare l'intera larghezza disponibile
                         ->default([
                             'lat' => 40.4168,
@@ -113,11 +120,13 @@ class TicketResource extends XotBaseResource
     
                     // Image Upload
                     SpatieMediaLibraryFileUpload::make('images')
+                        ->label(__('ticket::ticket.insert-images'))
                         ->collection('ticket')
                         ->directory('ticket')
                         ->disk('uploads')
                         ->responsiveImages()
                         ->multiple()
+                        ->required()
                         ->columnSpanFull()
                         ->extraAttributes(['class' => 'max-w-full', 'style' => 'padding: 0; margin: 0;']),
                 ])

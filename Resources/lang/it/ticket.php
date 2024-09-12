@@ -5008,4 +5008,7 @@ return [
         'label' => 'L\'utente selezionato è già il proprietario del ticket.',
         'placeholder' => 'L\'utente selezionato è già il proprietario del ticket.',
     ],
+
+    'your-location' => 'La tua posizione',
+    'insert-images' => 'Carica immagini'
 ];
