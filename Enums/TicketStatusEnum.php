@@ -22,7 +22,7 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
     case CLOSED = 'closed';
     case REOPENED = 'reopened';
 
-    public function getColor(): string|array|null
+    public function getColor(): string
     {
         return match ($this) {
             // self::NEW => 'yellow',
@@ -36,7 +36,7 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getIcon(): ?string
+    public function getIcon(): string
     {
         return match ($this) {
             // self::NEW => 'heroicon-o-plus-circle',
@@ -51,7 +51,7 @@ enum TicketStatusEnum: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         // return __('ticket::enums.'.$this->name.'.label');
 

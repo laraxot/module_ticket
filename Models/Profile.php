@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Models;
 
-use GeneaLabs\LaravelModelCaching\CachedBuilder;
+// use GeneaLabs\LaravelModelCaching\CachedBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
-use Modules\Quaeris\Models\Customer;
 use Modules\RealEstate\Models\BaseModel;
 use Modules\User\Models\BaseProfile as UserBaseProfile;
 use Modules\User\Models\Permission;
@@ -24,37 +23,12 @@ use Modules\User\Models\SocialiteUser;
 /**
  * Modules\Ticket\Models\Profile.
  *
- * @property Collection<int, Customer> $customers
- * @property int|null $customers_count
  * @property string|null $full_name
  * @property Collection<int, Permission> $permissions
  * @property int|null $permissions_count
  * @property Collection<int, Role> $roles
  * @property int|null $roles_count
  * @property \Modules\Xot\Contracts\UserContract|null $user
- * @method static CachedBuilder|Profile all($columns = [])
- * @method static CachedBuilder|Profile avg($column)
- * @method static CachedBuilder|Profile cache(array $tags = [])
- * @method static CachedBuilder|Profile cachedValue(array $arguments, string $cacheKey)
- * @method static CachedBuilder|Profile count($columns = '*')
- * @method static CachedBuilder|BaseModel disableCache()
- * @method static CachedBuilder|Profile disableModelCaching()
- * @method static CachedBuilder|Profile exists()
- * @method static CachedBuilder|Profile flushCache(array $tags = [])
- * @method static CachedBuilder|Profile getModelCacheCooldown(Model $instance)
- * @method static CachedBuilder|Profile inRandomOrder($seed = '')
- * @method static CachedBuilder|Profile insert(array $values)
- * @method static CachedBuilder|Profile isCachable()
- * @method static CachedBuilder|Profile max($column)
- * @method static CachedBuilder|Profile min($column)
- * @method static CachedBuilder|Profile newModelQuery()
- * @method static CachedBuilder|Profile newQuery()
- * @method static CachedBuilder|Profile permission($permissions)
- * @method static CachedBuilder|Profile query()
- * @method static CachedBuilder|Profile role($roles, $guard = null)
- * @method static CachedBuilder|Profile sum($column)
- * @method static CachedBuilder|Profile truncate()
- * @method static CachedBuilder|BaseModel withCacheCooldownSeconds(?int $seconds = null)
  * @property int $id
  * @property string|null $first_name
  * @property string|null $last_name
@@ -69,14 +43,8 @@ use Modules\User\Models\SocialiteUser;
  * @method static Builder|Profile whereLastName($value)
  * @method static Builder|Profile whereUpdatedAt($value)
  * @method static Builder|Profile whereUpdatedBy($value)
- * @property Collection<int, Project> $favoriteProjects
- * @property int|null $favorite_projects_count
  * @property Collection<int, TicketHour> $hours
  * @property int|null $hours_count
- * @property Collection<int, Project> $projectsAffected
- * @property int|null $projects_affected_count
- * @property Collection<int, Project> $projectsOwning
- * @property int|null $projects_owning_count
  * @property Collection<int, SocialiteUser> $socials
  * @property int|null $socials_count
  * @property Collection<int, Ticket> $ticketsOwned
@@ -115,9 +83,9 @@ use Modules\User\Models\SocialiteUser;
  * @method static Builder|Profile whereExtra($value)
  * @method static Builder|Profile whereSlug($value)
  * @method static Builder|Profile whereUserId($value)
- * @method static Builder|BaseProfile withExtraAttributes()
- * @method static Builder|BaseProfile withoutPermission($permissions)
- * @method static Builder|BaseProfile withoutRole($roles, $guard = null)
+ * @method static Builder|\Modules\User\Models\BaseProfile withExtraAttributes()
+ * @method static Builder|\Modules\User\Models\BaseProfile withoutPermission($permissions)
+ * @method static Builder|\Modules\User\Models\BaseProfile withoutRole($roles, $guard = null)
  * @property \Modules\User\Models\DeviceUser $pivot
  * @property \Modules\User\Models\Membership $membership
  * @property-read \Modules\Fixcity\Models\Profile|null $creator
@@ -134,20 +102,20 @@ class Profile extends UserBaseProfile
 
     // ------- RELATIONSHIP ----------
 
-    public function projectsOwning(): HasMany
-    {
-        return $this->hasMany(Project::class, 'owner_id', 'user_id');
-    }
+    // public function projectsOwning(): HasMany
+    // {
+    //     return $this->hasMany(Project::class, 'owner_id', 'user_id');
+    // }
 
-    public function projectsAffected(): BelongsToMany
-    {
-        return $this->belongsToMany(Project::class, 'project_users', 'user_id', 'project_id')->withPivot(['role']);
-    }
+    // public function projectsAffected(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(Project::class, 'project_users', 'user_id', 'project_id')->withPivot(['role']);
+    // }
 
-    public function favoriteProjects(): BelongsToMany
-    {
-        return $this->belongsToMany(Project::class, 'project_favorites', 'user_id', 'project_id');
-    }
+    // public function favoriteProjects(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(Project::class, 'project_favorites', 'user_id', 'project_id');
+    // }
 
     public function ticketsOwned(): HasMany
     {

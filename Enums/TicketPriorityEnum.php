@@ -18,7 +18,7 @@ enum TicketPriorityEnum: string implements HasColor, HasIcon, HasLabel
     case HIGH = 'high';
     case CRITICAL = 'critical';
 
-    public function getColor(): string|array|null
+    public function getColor(): string
     {
         return match ($this) {
             self::LOW => 'green',
@@ -29,7 +29,7 @@ enum TicketPriorityEnum: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getTextColor(): string|array|null
+    public function getTextColor(): string
     {
         return match ($this) {
             self::LOW => 'text-green-500',
@@ -40,7 +40,7 @@ enum TicketPriorityEnum: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getBgColor(): string|array|null
+    public function getBgColor(): string
     {
         return match ($this) {
             self::LOW => 'bg-green-500',
@@ -51,7 +51,7 @@ enum TicketPriorityEnum: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getIcon(): ?string
+    public function getIcon(): string
     {
         return match ($this) {
             self::LOW => 'heroicon-o-arrow-down',
@@ -62,7 +62,7 @@ enum TicketPriorityEnum: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return match ($this) {
             self::LOW => 'Low',

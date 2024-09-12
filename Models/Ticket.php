@@ -57,7 +57,6 @@ use Webmozart\Assert\Assert;
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\TicketComment>                        $comments
  * @property int|null                                                                                                   $comments_count
  * @property mixed                                                                                                      $completude_percentage
- * @property Epic|null                                                                                                  $epic
  * @property mixed                                                                                                      $estimation_for_humans
  * @property mixed                                                                                                      $estimation_in_seconds
  * @property mixed                                                                                                      $estimation_progress
@@ -326,10 +325,10 @@ class Ticket extends BaseModel implements HasMedia
         return $this->hasMany(TicketHour::class, 'ticket_id', 'id');
     }
 
-    public function epic(): BelongsTo
-    {
-        return $this->belongsTo(Epic::class, 'epic_id', 'id');
-    }
+    // public function epic(): BelongsTo
+    // {
+    //     return $this->belongsTo(Epic::class, 'epic_id', 'id');
+    // }
 
     // public function sprint(): BelongsTo
     // {
@@ -358,25 +357,25 @@ class Ticket extends BaseModel implements HasMedia
     }
     */
 
-    public function totalLoggedHours(): Attribute
-    {
-        return new Attribute(
-            get: function () {
-                $seconds = $this->hours->sum('value') * 3600;
+    // public function totalLoggedHours(): Attribute
+    // {
+    //     return new Attribute(
+    //         get: function () {
+    //             $seconds = $this->hours->sum('value') * 3600;
 
-                return CarbonInterval::seconds($seconds)->cascade()->forHumans();
-            }
-        );
-    }
+    //             return CarbonInterval::seconds($seconds)->cascade()->forHumans();
+    //         }
+    //     );
+    // }
 
-    public function totalLoggedSeconds(): Attribute
-    {
-        return new Attribute(
-            get: function () {
-                return $this->hours->sum('value') * 3600;
-            }
-        );
-    }
+    // public function totalLoggedSeconds(): Attribute
+    // {
+    //     return new Attribute(
+    //         get: function () {
+    //             return $this->hours->sum('value') * 3600;
+    //         }
+    //     );
+    // }
 
     public function totalLoggedInHours(): Attribute
     {
