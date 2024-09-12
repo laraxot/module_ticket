@@ -67,12 +67,9 @@ use Webmozart\Assert\Assert;
  * @property int|null                                                                                                   $media_count
  * @property \Modules\User\Models\User|null                                                                             $owner
  * @property TicketPriorityEnum|null                                                                                    $priority
- * @property Project|null                                                                                               $project
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Ticket\Models\TicketRelation>                       $relations
  * @property int|null                                                                                                   $relations_count
  * @property \Modules\User\Models\User|null                                                                             $responsible
- * @property Sprint|null                                                                                                $sprint
- * @property Sprint|null                                                                                                $sprints
  * @property TicketStatusEnum|null                                                                                      $status
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User>                                   $subscribers
  * @property int|null                                                                                                   $subscribers_count
@@ -285,10 +282,10 @@ class Ticket extends BaseModel implements HasMedia
     //     return $this->belongsTo(TicketStatus::class, 'status_id', 'id')->withTrashed();
     // }
 
-    public function project(): BelongsTo
-    {
-        return $this->belongsTo(Project::class, 'project_id', 'id')->withTrashed();
-    }
+    // public function project(): BelongsTo
+    // {
+    //     return $this->belongsTo(Project::class, 'project_id', 'id')->withTrashed();
+    // }
 
     // public function type(): BelongsTo
     // {
@@ -334,15 +331,15 @@ class Ticket extends BaseModel implements HasMedia
         return $this->belongsTo(Epic::class, 'epic_id', 'id');
     }
 
-    public function sprint(): BelongsTo
-    {
-        return $this->belongsTo(Sprint::class, 'sprint_id', 'id');
-    }
+    // public function sprint(): BelongsTo
+    // {
+    //     return $this->belongsTo(Sprint::class, 'sprint_id', 'id');
+    // }
 
-    public function sprints(): BelongsTo
-    {
-        return $this->belongsTo(Sprint::class, 'sprint_id', 'id');
-    }
+    // public function sprints(): BelongsTo
+    // {
+    //     return $this->belongsTo(Sprint::class, 'sprint_id', 'id');
+    // }
 
     /*
     public function watchers(): Attribute

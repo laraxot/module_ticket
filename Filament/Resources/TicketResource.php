@@ -122,7 +122,7 @@ class TicketResource extends XotBaseResource
                         ->extraAttributes(['class' => 'max-w-full', 'style' => 'padding: 0; margin: 0;']),
                 ])
                 ->columns(1) // Imposta il layout su una colonna
-                ->extraAttributes(['class' => 'w-full max-w-full mx-auto', 'style' => 'padding: 0; margin: 0;']), // Rimozione padding e margine
+                ->extraAttributes(['class' => 'w-full max-w-full mx-auto', 'style' => 'padding: 0; margin: 0; !important;']), // Rimozione padding e margine
         ];
     }
     

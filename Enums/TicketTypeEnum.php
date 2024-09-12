@@ -100,7 +100,7 @@ enum TicketTypeEnum: string implements HasColor, HasIcon, HasLabel
     case URBAN_FURNITURE = 'urban_furniture';
     case PUBLIC_SAFETY = 'public_safety';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return match ($this) {
             self::ROAD_MAINTENANCE => 'Manutenzione Stradale',

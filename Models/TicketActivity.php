@@ -21,8 +21,6 @@ use Modules\Xot\Datas\XotData;
  * @property string|null $created_by
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property string|null $deleted_by
- * @property TicketStatus|null $newStatus
- * @property TicketStatus|null $oldStatus
  * @property Ticket|null $ticket
  * @property \Modules\User\Models\User|null $user
  * @method static \Modules\Ticket\Database\Factories\TicketActivityFactory factory($count = null, $state = [])
