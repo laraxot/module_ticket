@@ -76,7 +76,7 @@ render(function (View $view, string $slug) {
             <div class="space-y-6 lg:col-span-2">
                 <section class="flex flex-col justify-center space-y-2">
                     <div>
-                        <p>By <strong>Marco Xot</strong> at {{ $ticket->created_at->isoFormat('LLL') }}</p>
+                        <p>Di <strong>{{ $ticket->creator->name }}</strong> il {{ $ticket->created_at->isoFormat('LLL') }}</p>
                     </div>
                     <h1 class="text-4xl font-bold heading md:text-6xl dark:text-white md:leading-tight">
                         {{ $ticket->name }}

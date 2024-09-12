@@ -451,4 +451,11 @@ class Ticket extends BaseModel implements HasMedia
     {
         return '#';
     }
+
+    public function creator(): BelongsTo
+    {
+        $user_class = XotData::make()->getUserClass();
+
+        return $this->belongsTo($user_class, 'created_by', 'id');
+    }
 }
