@@ -82,8 +82,12 @@ class TicketResource extends XotBaseResource
                         ->extraAttributes(['class' => 'max-w-full', 'style' => 'padding: 0; margin: 0;']), // Rimozione del padding e margini
 
                     // Hidden Latitude and Longitude
-                    TextInput::make('latitude')->hidden()->readOnly(),
-                    TextInput::make('longitude')->hidden()->readOnly(),
+                    TextInput::make('latitude')
+                        // ->hidden()
+                        ->readOnly(),
+                    TextInput::make('longitude')
+                        // ->hidden()
+                        ->readOnly(),
 
                     // Map Section
                     Map::make('location')
