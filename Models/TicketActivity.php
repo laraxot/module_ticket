@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Xot\Datas\XotData;
 
 /**
- *
- *
  * @property int $id
  * @property int $ticket_id
  * @property int $old_status_id
@@ -23,6 +21,7 @@ use Modules\Xot\Datas\XotData;
  * @property string|null $deleted_by
  * @property Ticket|null $ticket
  * @property \Modules\User\Models\User|null $user
+ *
  * @method static \Modules\Ticket\Database\Factories\TicketActivityFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity newQuery()
@@ -41,8 +40,10 @@ use Modules\Xot\Datas\XotData;
  * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity withoutTrashed()
+ *
  * @property-read \Modules\Fixcity\Models\Profile|null $creator
  * @property-read \Modules\Fixcity\Models\Profile|null $updater
+ *
  * @mixin \Eloquent
  */
 class TicketActivity extends BaseModel

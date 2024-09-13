@@ -1545,5 +1545,5 @@ return [
     // update 21-12-2016
     'selected-user-is-already-the-owner' => 'L\'utente selezionato è già il proprietario del ticket.',
 
-    'click-here-to-submit-a-new-ticket' => 'Clicca qui per creare un ticket'
+    'click-here-to-submit-a-new-ticket' => 'Clicca qui per creare un ticket',
 ];

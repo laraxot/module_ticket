@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Xot\Datas\XotData;
 
 /**
- * 
- *
  * @property int $id
  * @property int $ticket_id
  * @property int $user_id
@@ -28,6 +26,7 @@ use Modules\Xot\Datas\XotData;
  * @property mixed $for_humans
  * @property Ticket|null $ticket
  * @property \Modules\User\Models\User|null $user
+ *
  * @method static \Modules\Ticket\Database\Factories\TicketHourFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|TicketHour newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketHour newQuery()
@@ -47,8 +46,10 @@ use Modules\Xot\Datas\XotData;
  * @method static \Illuminate\Database\Eloquent\Builder|TicketHour whereValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketHour withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketHour withoutTrashed()
+ *
  * @property-read \Modules\Fixcity\Models\Profile|null $creator
  * @property-read \Modules\Fixcity\Models\Profile|null $updater
+ *
  * @mixin \Eloquent
  */
 class TicketHour extends BaseModel

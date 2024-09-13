@@ -12,13 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
-use Modules\RealEstate\Models\BaseModel;
 use Modules\User\Models\BaseProfile as UserBaseProfile;
 use Modules\User\Models\Permission;
 // use Modules\Xot\Models\Traits\WidgetTrait;
 use Modules\User\Models\Role;
 use Modules\User\Models\SocialiteUser;
-
 
 /**
  * Modules\Ticket\Models\Profile.
@@ -36,6 +34,7 @@ use Modules\User\Models\SocialiteUser;
  * @property Carbon|null $updated_at
  * @property string|null $updated_by
  * @property string|null $created_by
+ *
  * @method static Builder|Profile whereCreatedAt($value)
  * @method static Builder|Profile whereCreatedBy($value)
  * @method static Builder|Profile whereFirstName($value)
@@ -43,6 +42,7 @@ use Modules\User\Models\SocialiteUser;
  * @method static Builder|Profile whereLastName($value)
  * @method static Builder|Profile whereUpdatedAt($value)
  * @method static Builder|Profile whereUpdatedBy($value)
+ *
  * @property Collection<int, TicketHour> $hours
  * @property int|null $hours_count
  * @property Collection<int, SocialiteUser> $socials
@@ -75,6 +75,7 @@ use Modules\User\Models\SocialiteUser;
  * @property Collection<int, \Modules\User\Models\Team> $teams
  * @property int|null $teams_count
  * @property string|null $user_name
+ *
  * @method static \Modules\Ticket\Database\Factories\ProfileFactory factory($count = null, $state = [])
  * @method static Builder|Profile whereCredits($value)
  * @method static Builder|Profile whereDeletedAt($value)
@@ -86,10 +87,12 @@ use Modules\User\Models\SocialiteUser;
  * @method static Builder|\Modules\User\Models\BaseProfile withExtraAttributes()
  * @method static Builder|\Modules\User\Models\BaseProfile withoutPermission($permissions)
  * @method static Builder|\Modules\User\Models\BaseProfile withoutRole($roles, $guard = null)
+ *
  * @property \Modules\User\Models\DeviceUser $pivot
  * @property \Modules\User\Models\Membership $membership
  * @property-read \Modules\Fixcity\Models\Profile|null $creator
  * @property-read \Modules\Fixcity\Models\Profile|null $updater
+ *
  * @mixin \Eloquent
  */
 class Profile extends UserBaseProfile

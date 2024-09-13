@@ -5010,5 +5010,5 @@ return [
     ],
 
     'your-location' => 'La tua posizione',
-    'insert-images' => 'Carica immagini'
+    'insert-images' => 'Carica immagini',
 ];

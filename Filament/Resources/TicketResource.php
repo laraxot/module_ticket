@@ -7,24 +7,21 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Forms\Set;
-use Filament\Forms\Form;
-use Filament\Pages\Page;
-use Illuminate\Support\Str;
 use Dotswan\MapPicker\Fields\Map;
-use Modules\Ticket\Models\Ticket;
-use Filament\Support\Enums\MaxWidth;
-use Modules\Ticket\Models\TicketType;
+use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
-use Modules\Ticket\Enums\TicketTypeEnum;
+use Filament\Forms\Form;
+use Filament\Forms\Set;
+use Filament\Pages\Page;
 use Filament\Pages\SubNavigationPosition;
-use Modules\Ticket\Models\TicketPriority;
+use Illuminate\Support\Str;
 use Modules\Ticket\Enums\TicketPriorityEnum;
+use Modules\Ticket\Enums\TicketTypeEnum;
+use Modules\Ticket\Filament\Resources\TicketResource\Pages;
+use Modules\Ticket\Models\Ticket;
 use Modules\Ticket\Rules\FilterCoordinatesInRadius;
 use Modules\Xot\Filament\Resources\XotBaseResource;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Modules\Ticket\Filament\Resources\TicketResource\Pages;
 
 class TicketResource extends XotBaseResource
 {
@@ -52,14 +49,14 @@ class TicketResource extends XotBaseResource
                             $set('slug', Str::slug($state));
                         })
                         ->extraAttributes(['class' => 'max-w-full', 'style' => 'padding: 0; margin: 0;']), // Rimozione del padding e margini
-    
+
                     // Slug
                     TextInput::make('slug')
                         ->columnSpanFull() // Anche lo slug occupa tutta la larghezza disponibile
                         ->required()
                         ->hidden()
                         ->extraAttributes(['class' => 'max-w-full', 'style' => 'padding: 0; margin: 0;']), // Rimozione del padding e margini
-    
+
                     // Ticket Type
                     Forms\Components\Select::make('type')
                         ->label(__('ticket::ticket.type.label'))
@@ -67,7 +64,7 @@ class TicketResource extends XotBaseResource
                         ->options(TicketTypeEnum::class)
                         ->columnSpanFull()
                         ->extraAttributes(['class' => 'max-w-full', 'style' => 'padding: 0; margin: 0;']), // Rimozione del padding e margini
-    
+
                     // Ticket Priority
                     Forms\Components\Select::make('priority')
                         ->label(__('ticket::ticket.priorities.label'))
@@ -76,18 +73,18 @@ class TicketResource extends XotBaseResource
                         ->default(TicketPriorityEnum::default())
                         ->columnSpanFull()
                         ->extraAttributes(['class' => 'max-w-full', 'style' => 'padding: 0; margin: 0;']), // Rimozione del padding e margini
-    
+
                     // Ticket Content (RichEditor)
                     Forms\Components\RichEditor::make('content')
                         ->label(__('ticket::ticket.content.label'))
                         ->required()
                         ->columnSpanFull()
                         ->extraAttributes(['class' => 'max-w-full', 'style' => 'padding: 0; margin: 0;']), // Rimozione del padding e margini
-    
+
                     // Hidden Latitude and Longitude
                     TextInput::make('latitude')->hidden()->readOnly(),
                     TextInput::make('longitude')->hidden()->readOnly(),
-    
+
                     // Map Section
                     Map::make('location')
                         ->label(__('ticket::ticket.your-location'))
@@ -117,7 +114,7 @@ class TicketResource extends XotBaseResource
                         ->detectRetina()
                         ->showMyLocationButton()
                         ->extraAttributes(['class' => 'max-w-full', 'style' => 'min-height: 300px; padding: 0; margin: 0;']),
-    
+
                     // Image Upload
                     SpatieMediaLibraryFileUpload::make('images')
                         ->label(__('ticket::ticket.insert-images'))
@@ -134,11 +131,6 @@ class TicketResource extends XotBaseResource
                 ->extraAttributes(['class' => 'w-full max-w-full mx-auto', 'style' => 'padding: 0; margin: 0; !important;']), // Rimozione padding e margine
         ];
     }
-    
-    
-    
-    
-    
 
     public static function form(Form $form): Form
     {
