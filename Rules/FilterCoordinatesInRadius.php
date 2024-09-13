@@ -16,7 +16,9 @@ class FilterCoordinatesInRadius implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         Assert::isArray($value);
-        $coordinatesArray = Ticket::select('id', 'latitude', 'longitude')->get()->toArray();
+        $coordinatesArray = Ticket::where('latitude', '!=', null)
+                    ->where('longitude', '!=', null)
+                    ->select('id', 'latitude', 'longitude')->get()->toArray();
         $ticket_vicini = app(CoordinatesFilter::class)->execute($value['lat'], $value['lng'], $coordinatesArray, 1);
 
         if (count($ticket_vicini) > 0) {
