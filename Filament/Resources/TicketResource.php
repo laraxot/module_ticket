@@ -7,21 +7,23 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Resources;
 
-use Dotswan\MapPicker\Fields\Map;
 use Filament\Forms;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Forms\Set;
+use Filament\Forms\Form;
 use Filament\Pages\Page;
-use Filament\Pages\SubNavigationPosition;
 use Illuminate\Support\Str;
-use Modules\Ticket\Enums\TicketPriorityEnum;
-use Modules\Ticket\Enums\TicketTypeEnum;
-use Modules\Ticket\Filament\Resources\TicketResource\Pages;
+use Webmozart\Assert\Assert;
+use Filament\Facades\Filament;
+use Dotswan\MapPicker\Fields\Map;
 use Modules\Ticket\Models\Ticket;
+use Filament\Forms\Components\TextInput;
+use Modules\Ticket\Enums\TicketTypeEnum;
+use Filament\Pages\SubNavigationPosition;
+use Modules\Ticket\Enums\TicketPriorityEnum;
 use Modules\Ticket\Rules\FilterCoordinatesInRadius;
 use Modules\Xot\Filament\Resources\XotBaseResource;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Modules\Ticket\Filament\Resources\TicketResource\Pages;
 
 class TicketResource extends XotBaseResource
 {
@@ -83,10 +85,22 @@ class TicketResource extends XotBaseResource
 
                     // Hidden Latitude and Longitude
                     TextInput::make('latitude')
-                        // ->hidden()
+                        ->hidden(
+                            function(){
+                                Assert::notNull(Filament::auth()->user());
+                                Assert::notNull(Filament::auth()->user()->profile);
+                                return Filament::auth()->user()->profile->isSuperAdmin() ? false : true;
+                            }
+                        )
                         ->readOnly(),
                     TextInput::make('longitude')
-                        // ->hidden()
+                        ->hidden(
+                            function(){
+                                Assert::notNull(Filament::auth()->user());
+                                Assert::notNull(Filament::auth()->user()->profile);
+                                return Filament::auth()->user()->profile->isSuperAdmin() ? false : true;
+                            }
+                        )
                         ->readOnly(),
 
                     // Map Section
