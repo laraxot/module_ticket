@@ -24,7 +24,7 @@ use Modules\Ticket\Models\Ticket;
  */
 class TicketsMapTableWidget extends MapTableWidget
 {
-    protected static ?string $heading = 'Location Map';
+    protected static ?string $heading = '';
 
     protected static ?int $sort = 1;
 
@@ -38,7 +38,7 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected static ?bool $filtered = true;
 
-    protected static bool $collapsible = true;
+    protected static bool $collapsible = false;
 
     public ?bool $mapIsFilter = false;
 

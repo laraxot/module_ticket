@@ -4,22 +4,24 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Resources\TicketResource\Pages;
 
-use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
-use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
-use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
-use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
+use Filament\Tables;
 use Filament\Actions;
+use Filament\Tables\Table;
+use Webmozart\Assert\Assert;
+use Filament\Facades\Filament;
+use Modules\Ticket\Models\Ticket;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
-use Filament\Tables;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
-use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Ticket\Enums\TicketStatusEnum;
 use Modules\Ticket\Filament\Actions\ChangeStatus;
-use Modules\Ticket\Filament\Resources\TicketResource;
-use Modules\Ticket\Models\Ticket;
 use Modules\UI\Filament\Tables\Columns\GroupColumn;
+use Modules\Ticket\Filament\Resources\TicketResource;
+use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
+use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
+use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
+use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class ListTickets extends ListRecords
 {
@@ -115,7 +117,13 @@ class ListTickets extends ListRecords
             GoToAction::make()
                 ->zoom(fn () => 14),
             RadiusAction::make('location'),
-            ChangeStatus::make(),
+            ChangeStatus::make()
+                ->visible(function(){
+                    Assert::notNull(Filament::auth()->user());
+                    Assert::notNull(Filament::auth()->user()->profile);
+                    return Filament::auth()->user()->profile->isSuperAdmin() ? false : true;
+                })
+                ,
         ];
     }
 
