@@ -122,7 +122,7 @@ class TicketResource extends XotBaseResource
                         })
                         ->rules([new FilterCoordinatesInRadius])
                         ->liveLocation()
-                        ->showMarker()
+                        ->showMarker(false) // https://github.com/dotswan/filament-map-picker/pull/51
                         ->markerColor('#22c55eff')
                         ->showFullscreenControl()
                         ->showZoomControl()
