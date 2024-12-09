@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Blocks;
 
-use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Builder\Block;
 use Modules\Xot\Actions\View\GetViewsSiblingsAndSelfAction;
+use Modules\Xot\Actions\Filament\Block\GetViewBlocksOptionsByTypeAction;
 
 class TicketListBlock
 {
@@ -15,8 +16,11 @@ class TicketListBlock
         string $name = 'ticket_list',
         string $context = 'form',
     ): Block {
-        $view = 'ticket::components.blocks.ticket_list.card';
-        $views = app(GetViewsSiblingsAndSelfAction::class)->execute($view);
+        // $view = 'ticket::components.blocks.ticket_list.card';
+        // $views = app(GetViewsSiblingsAndSelfAction::class)->execute($view);
+
+        $options = app(GetViewBlocksOptionsByTypeAction::class)
+            ->execute('ticket_list', false);
 
         return Block::make($name)
             ->schema([
@@ -47,9 +51,9 @@ class TicketListBlock
                     ->required(),
                 */
                 TextInput::make('limit'),
-                Select::make('_tpl')
+                Select::make('view')
                     ->label('layout')
-                    ->options($views)
+                    ->options($options)
                     ->default('v1')
                     ->required(),
             ])
