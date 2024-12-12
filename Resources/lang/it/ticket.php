@@ -10,7 +10,10 @@
   ),
   'fields' => 
   array (
-    'name' => 'Nome Area',
+    'name' => 
+    array (
+      'label' => 'Nome Area',
+    ),
     'parent' => 'Settore di appartenenza',
     'parent.name' => 'Settore di appartenenza',
     'parent_name' => 'Settore di appartenenza',
@@ -22,6 +25,54 @@
     'location' => 
     array (
       'label' => 'location',
+    ),
+    'id' => 
+    array (
+      'label' => 'id',
+    ),
+    'slug' => 
+    array (
+      'label' => 'slug',
+    ),
+    'priority' => 
+    array (
+      'label' => 'priority',
+    ),
+    'type' => 
+    array (
+      'label' => 'type',
+    ),
+    'map' => 
+    array (
+      'label' => 'map',
+    ),
+    'content' => 
+    array (
+      'label' => 'content',
+    ),
+    'latitude' => 
+    array (
+      'label' => 'latitude',
+    ),
+    'longitude' => 
+    array (
+      'label' => 'longitude',
+    ),
+    'view' => 
+    array (
+      'label' => 'view',
+    ),
+    'edit' => 
+    array (
+      'label' => 'edit',
+    ),
+    'setmapcenter' => 
+    array (
+      'label' => 'setmapcenter',
+    ),
+    'changeStatus' => 
+    array (
+      'label' => 'changeStatus',
     ),
   ),
   'actions' => 
