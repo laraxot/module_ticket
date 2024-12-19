@@ -63,7 +63,11 @@ class ListTickets extends ListRecords
                 ->searchable(),
             Tables\Columns\TextColumn::make('slug')
                 ->searchable()
-                ->default(fn ($record) => dddx($record->slug)),
+                // ->default(fn ($record) => dddx($record->slug)),
+                ->default(function($record){
+                    Assert::isInstanceOf($record, Ticket::class);
+                    return dddx($record->slug);
+                }),
 
             // Tables\Columns\TextColumn::make('priority.name')
             //    ->searchable(),

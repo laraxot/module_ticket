@@ -32,7 +32,17 @@ render(function (View $view, string $slug) {
 
     }
 
-    $status=TicketStatusEnum::from($ticket->status);
+    // $status=TicketStatusEnum::from($ticket->status);
+
+
+    $status = $ticket->status instanceof TicketStatusEnum 
+        ? $ticket->status 
+        : ($ticket->status !== null 
+            ? TicketStatusEnum::from($ticket->status) 
+            : TicketStatusEnum::PENDING);
+
+
+
     $statuses = $ticket->statuses;
 
     return $view->with([

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Database\Seeders;
 
+use Webmozart\Assert\Assert;
 use Illuminate\Database\Seeder;
 use Modules\Ticket\Models\Activity;
 
@@ -40,6 +41,10 @@ class ActivitySeeder extends Seeder
     public function run()
     {
         foreach ($this->data as $item) {
+
+            Assert::isArray($item);
+            Assert::allString(array_keys($item));
+            Assert::isMap($item);
             Activity::firstOrCreate($item);
         }
     }
