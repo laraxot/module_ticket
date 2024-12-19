@@ -15,8 +15,8 @@ use Modules\Ticket\Enums\TicketStatusEnum;
 use Modules\Ticket\Enums\TicketTypeEnum;
 use Modules\Ticket\Notifications\TicketCreated;
 use Modules\Ticket\Notifications\TicketStatusUpdated;
+use Modules\Xot\Actions\File\AssetAction;
 use Modules\Xot\Datas\XotData;
-use Modules\Xot\Services\FileService;
 use Spatie\Comments\Models\Concerns\HasComments;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -169,7 +169,7 @@ class Ticket extends BaseModel implements HasMedia
         Assert::isInstanceOf($this->type, TicketTypeEnum::class, '['.__LINE__.']['.__FILE__.']');
         $url = $this->type->getIcon();
         $url = Str::of((string) $url)->after('heroicon-o-')->append('.svg')->toString();
-        $url = FileService::asset('ui::svg/'.$url);
+        $url = app(AssetAction::class)->execute('ui::svg/'.$url);
 
         return [
             'url' => $url,
@@ -446,12 +446,5 @@ class Ticket extends BaseModel implements HasMedia
     public function commentUrl(): string
     {
         return '#';
-    }
-
-    public function creator(): BelongsTo
-    {
-        $user_class = XotData::make()->getUserClass();
-
-        return $this->belongsTo($user_class, 'created_by', 'id');
     }
 }
