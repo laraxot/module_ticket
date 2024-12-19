@@ -18,8 +18,8 @@ $base_middleware=[];
 name('prova');
 middleware(['guest']);
 
-new class extends LoginComponent {
-}
+// new class extends LoginComponent {
+// }
 
 
 ?>

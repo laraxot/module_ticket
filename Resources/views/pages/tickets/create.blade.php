@@ -6,9 +6,9 @@ use Livewire\Volt\Component;
 name('ticket.create');
 middleware(['auth']);
 
-new class extends Component
-{
-};
+// new class extends Component
+// {
+// };
 ?>
 
 <x-layouts.marketing>
