@@ -7,23 +7,24 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Forms\Set;
-use Filament\Forms\Form;
-use Filament\Pages\Page;
-use Illuminate\Support\Str;
-use Webmozart\Assert\Assert;
-use Filament\Facades\Filament;
 use Dotswan\MapPicker\Fields\Map;
-use Modules\Ticket\Models\Ticket;
+use Filament\Facades\Filament;
+use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
-use Modules\Ticket\Enums\TicketTypeEnum;
+use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
+use Filament\Pages\Page;
 use Filament\Pages\SubNavigationPosition;
+use Illuminate\Support\Str;
 use Modules\Ticket\Enums\TicketPriorityEnum;
+use Modules\Ticket\Enums\TicketTypeEnum;
+use Modules\Ticket\Filament\Resources\TicketResource\Pages;
+use Modules\Ticket\Models\Ticket;
 use Modules\Ticket\Rules\FilterCoordinatesInRadius;
 use Modules\Xot\Filament\Resources\XotBaseResource;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Modules\Ticket\Filament\Resources\TicketResource\Pages;
+use Webmozart\Assert\Assert;
 
 class TicketResource extends XotBaseResource
 {
@@ -44,7 +45,7 @@ class TicketResource extends XotBaseResource
                         ->columnSpanFull() // Occupa tutta la larghezza disponibile
                         ->required()
                         ->maxLength(255)
-                        ->afterStateUpdated(static function ($set, $get, $state) {
+                        ->afterStateUpdated(function (Set $set, Get $get, string $state) {
                             if ($get('slug')) {
                                 return;
                             }
@@ -86,18 +87,20 @@ class TicketResource extends XotBaseResource
                     // Hidden Latitude and Longitude
                     TextInput::make('latitude')
                         ->hidden(
-                            function(){
+                            function () {
                                 Assert::notNull(Filament::auth()->user());
                                 Assert::notNull(Filament::auth()->user()->profile);
+
                                 return Filament::auth()->user()->profile->isSuperAdmin() ? false : true;
                             }
                         )
                         ->readOnly(),
                     TextInput::make('longitude')
                         ->hidden(
-                            function(){
+                            function () {
                                 Assert::notNull(Filament::auth()->user());
                                 Assert::notNull(Filament::auth()->user()->profile);
+
                                 return Filament::auth()->user()->profile->isSuperAdmin() ? false : true;
                             }
                         )
@@ -120,7 +123,7 @@ class TicketResource extends XotBaseResource
                         ->afterStateHydrated(function ($state, $record, Set $set): void {
                             $set('location', ['lat' => $record?->latitude, 'lng' => $record?->longitude]);
                         })
-                        ->rules([new FilterCoordinatesInRadius])
+                        ->rules([new FilterCoordinatesInRadius()])
                         ->liveLocation()
                         ->showMarker(false) // https://github.com/dotswan/filament-map-picker/pull/51
                         ->markerColor('#22c55eff')
