@@ -31,7 +31,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\Ticket\\": "",
+            "Modules\\Ticket\\": "app/",
             "Modules\\Ticket\\Database\\Factories\\": "database/factories/",
             "Modules\\Ticket\\Database\\Seeders\\": "database/seeders/"
         }
