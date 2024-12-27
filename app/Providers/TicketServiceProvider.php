@@ -11,7 +11,7 @@ use Modules\Xot\Providers\XotBaseServiceProvider;
  */
 class TicketServiceProvider extends XotBaseServiceProvider
 {
-    public string $module_name = 'Ticket';
+    public string $name = 'Ticket';
 
     protected string $module_dir = __DIR__;
 
