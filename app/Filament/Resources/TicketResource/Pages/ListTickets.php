@@ -4,26 +4,25 @@ declare(strict_types=1);
 
 namespace Modules\Ticket\Filament\Resources\TicketResource\Pages;
 
-use Filament\Tables;
+use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
+use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
+use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
+use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
 use Filament\Actions;
-use Filament\Tables\Table;
-use Webmozart\Assert\Assert;
 use Filament\Facades\Filament;
-use Modules\Ticket\Models\Ticket;
 use Filament\Resources\Components\Tab;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Tables;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Ticket\Enums\TicketStatusEnum;
 use Modules\Ticket\Filament\Actions\ChangeStatus;
-use Modules\UI\Filament\Tables\Columns\GroupColumn;
 use Modules\Ticket\Filament\Resources\TicketResource;
-use Cheesegrits\FilamentGoogleMaps\Actions\GoToAction;
-use Cheesegrits\FilamentGoogleMaps\Filters\MapIsFilter;
-use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
-use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Modules\Ticket\Models\Ticket;
+use Modules\UI\Filament\Tables\Columns\GroupColumn;
+use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
+use Webmozart\Assert\Assert;
 
-class ListTickets extends ListRecords
+class ListTickets extends XotBaseListRecords
 {
     protected static string $resource = TicketResource::class;
 
@@ -54,7 +53,7 @@ class ListTickets extends ListRecords
         ];
     }
 
-    public function getTableColumns(): array
+    public function getListTableColumns(): array
     {
         return [
             Tables\Columns\TextColumn::make('id'),
@@ -64,8 +63,9 @@ class ListTickets extends ListRecords
             Tables\Columns\TextColumn::make('slug')
                 ->searchable()
                 // ->default(fn ($record) => dddx($record->slug)),
-                ->default(function($record){
+                ->default(function ($record) {
                     Assert::isInstanceOf($record, Ticket::class);
+
                     return dddx($record->slug);
                 }),
 
@@ -122,12 +122,12 @@ class ListTickets extends ListRecords
                 ->zoom(fn () => 14),
             RadiusAction::make('location'),
             ChangeStatus::make()
-                ->visible(function(){
+                ->visible(function () {
                     Assert::notNull(Filament::auth()->user());
                     Assert::notNull(Filament::auth()->user()->profile);
+
                     return Filament::auth()->user()->profile->isSuperAdmin() ? false : true;
-                })
-                ,
+                }),
         ];
     }
 
@@ -141,21 +141,12 @@ class ListTickets extends ListRecords
         ];
     }
 
-    public function table(Table $table): Table
-    {
-        return $table
-            ->columns($this->getTableColumns())
-            ->filters($this->getTableFilters())
-            ->actions($this->getTableActions());
-        // ->bulkActions()
-    }
-
     public function getTabs(): array
     {
         foreach (Ticket::where('status', null)->get() as $item) {
             // $status = $item->status()?->name;
             $status = $item->status;
-            if ($status == null) {
+            if (null == $status) {
                 $status = TicketStatusEnum::PENDING;
                 $item->setStatus($status->value);
             }
