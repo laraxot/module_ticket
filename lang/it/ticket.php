@@ -12,7 +12,7 @@
   array (
     'name' => 
     array (
-      'label' => 'Nome Area',
+      'label' => 'name',
     ),
     'parent' => 'Settore di appartenenza',
     'parent.name' => 'Settore di appartenenza',
