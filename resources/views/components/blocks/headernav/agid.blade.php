@@ -16,7 +16,7 @@
 						</details>
 					</li>
 					<li>
-						<a class="flex items-center space-x-1">
+						<a class="flex items-center space-x-1" href="{{ route('login') }}">
 							<x-heroicon-o-user class="size-4" />
 							<div class="hidden md:block">Accedi all'area personale</div>
 						</a>

@@ -7,4 +7,6 @@ namespace Modules\Ticket\View\Composers;
 /**
  * -----.
  */
-class ThemeComposer {}
+class ThemeComposer {
+
+}
