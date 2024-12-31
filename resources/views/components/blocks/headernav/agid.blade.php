@@ -6,7 +6,8 @@
 			</div>
 			<div class="flex-none">
 				<ul class="px-1 menu menu-horizontal">
-					<li>
+					<livewire:lang.switcher />
+					{{-- <li>
 						<details>
 							<summary>ITA</summary>
 							<ul class="p-2 !mt-0 bg-white text-gray-950 rounded">
@@ -14,7 +15,7 @@
 								<li><a>ENG</a></li>
 							</ul>
 						</details>
-					</li>
+					</li> --}}
 					<li>
 						<a class="flex items-center space-x-1" href="{{ route('login') }}">
 							<x-heroicon-o-user class="size-4" />
