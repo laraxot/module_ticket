@@ -80,7 +80,7 @@ class TicketsMapTableWidget extends MapTableWidget
 
     protected function getTableColumns(): array
     {
-        return app(ListTickets::class)->getTableColumns();
+        return app(ListTickets::class)->getListTableColumns();
     }
 
     protected function getTableFilters(): array
